@@ -1,6 +1,6 @@
 ---
 project: kata-containers
-stars: 8189
+stars: 8243
 description: |-
     Kata Containers is an open source project and community working to build a standard implementation of lightweight Virtual Machines (VMs) that feel and perform like containers, but provide the workload isolation and security advantages of VMs. https://katacontainers.io/
 url: https://github.com/kata-containers/kata-containers

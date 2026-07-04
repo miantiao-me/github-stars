@@ -1,6 +1,6 @@
 ---
 project: takumi
-stars: 2112
+stars: 2178
 description: |-
     Render JSX, HTML, and CSS to SVG or images without a headless browser. OG cards, animated GIFs, and video frames from Node.js, edge runtimes, browsers, or Rust. Drop-in next/og replacement.
 url: https://github.com/kane50613/takumi
@@ -27,11 +27,24 @@ Drop-in compatible with `next/og`.
 
 ## Why Takumi
 
-Takumi is a rendering pipeline built in Rust for one job: turning markup and CSS into pixels. It parses CSS, lays out the tree, shapes text, composites layers, and encodes the output inside a single binary. A headless-Chromium setup spends around 300 MB of RAM and a browser cold start on the same OG card; Takumi spends a function call.
+Takumi is a rendering pipeline built in Rust for one job: **turning markup and CSS into pixels**. It parses CSS, lays out the tree, shapes text, composites layers, and encodes the output inside a single binary. A headless-Chromium setup spends around **300 MB of RAM** and a browser cold start on the same OG card; Takumi spends **a function call**.
 
-One engine covers every deployment target. Node.js servers load the native binding, Cloudflare Workers and browsers load the WASM build, and Rust applications embed the `takumi` crate. Prebuilt binaries ship for macOS, Linux (glibc and musl), and Windows, on both x64 and ARM64.
+**One engine, every deployment target:**
 
-The CSS support reaches past the usual OG-image subset: CSS Grid, `::before` and `::after`, `:is()` and `:where()` selectors, masks and `clip-path`, `backdrop-filter`, `background-clip: text`, conic gradients, RTL text, and Tailwind v4 utilities including arbitrary values.
+- **Node.js** loads the native binding
+- **Cloudflare Workers and browsers** load the WASM build
+- **Rust applications** embed the `takumi` crate
+
+Prebuilt binaries ship for macOS, Linux (glibc and musl), and Windows, on x64 and ARM64.
+
+**CSS support reaches past the usual OG-image subset:**
+
+- CSS Grid, block, inline, float
+- `::before`, `::after`, `:is()`, `:where()`
+- masks, `clip-path`, `backdrop-filter`, blend modes
+- `background-clip: text`, conic gradients
+- RTL text
+- Tailwind v4 utilities, including arbitrary values
 
 ## Quick Start
 
@@ -142,6 +155,7 @@ Compare rendering output across providers at [image-bench.kane.tw](https://image
 - [TanStack](https://tanstack.com) renders OG images for its docs
 - [Fumadocs](https://fumadocs.dev) generates its docs OG images
 - [Nuxt OG Image](https://nuxtseo.com/docs/og-image/renderers/takumi) ships Takumi as a built-in renderer
+- [Luma](https://lu.ma) renders event share images
 - [shiki-image](https://github.com/pi0/shiki-image) turns syntax-highlighted code into images
 
 More projects in the [showcase](https://takumi.kane.tw/showcase). Takumi is part of the [Vercel OSS Program](https://vercel.com/oss).

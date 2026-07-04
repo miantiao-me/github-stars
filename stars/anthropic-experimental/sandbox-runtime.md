@@ -1,6 +1,6 @@
 ---
 project: sandbox-runtime
-stars: 4498
+stars: 4578
 description: |-
     A lightweight sandboxing tool for enforcing filesystem and network restrictions on arbitrary processes at the OS level, without requiring a container.
 url: https://github.com/anthropic-experimental/sandbox-runtime
@@ -300,6 +300,7 @@ Uses an **allow-only pattern** - all network access is denied by default.
 - `network.tlsTerminate.excludeDomains` - Domain patterns (same syntax as `allowedDomains`) that are **not** terminated. Matching CONNECTs are tunnelled opaquely instead: they are still subject to the domain allowlist, but the client inside the sandbox completes its own TLS handshake with the real upstream, and `filterRequest` / credential injection do not apply to their HTTPS traffic. Use this for the two cases TLS termination fundamentally breaks:
   - **mTLS upstreams** - only the in-sandbox client holds the client certificate, so the proxy cannot re-originate the connection on its behalf.
   - **Certificate-pinning clients** - clients that verify the upstream's identity themselves (custom CAs, SAN pinning) and reject the MITM certificate.
+- `network.tlsTerminate.extraCaCertPaths` - Paths to PEM CA certificate files appended to that trust bundle, after the MITM CA and the host's regular roots. Excluded (non-terminated) hosts are verified by the client inside the sandbox, and the trust env vars SRT sets (`SSL_CERT_FILE`, `GIT_SSL_CAINFO`, ...) _replace_ each tool's own trust configuration, so a site-local root (e.g. an internal mTLS CA) must be in the bundle or those hosts can never be verified. Only the `CERTIFICATE` blocks of each file are copied into the bundle (anything else, e.g. a private key in a combined PEM, is never exposed to the sandbox); files that are missing, unreadable, or contain no PEM `CERTIFICATE` block are skipped, so it is safe to list paths that exist on only some hosts.
 
 ```json
 {
@@ -307,7 +308,8 @@ Uses an **allow-only pattern** - all network access is denied by default.
     "allowedDomains": ["*.example.com", "internal-mtls.example.net"],
     "deniedDomains": [],
     "tlsTerminate": {
-      "excludeDomains": ["internal-mtls.example.net"]
+      "excludeDomains": ["internal-mtls.example.net"],
+      "extraCaCertPaths": ["/etc/internal-mtls-roots.pem"]
     }
   }
 }

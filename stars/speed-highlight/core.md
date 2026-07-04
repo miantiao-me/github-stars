@@ -1,6 +1,6 @@
 ---
 project: core
-stars: 381
+stars: 382
 description: |-
     Lightweight syntax highlighter library for the Web and the Terminal
 url: https://github.com/speed-highlight/core

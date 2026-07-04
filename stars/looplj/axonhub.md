@@ -1,6 +1,6 @@
 ---
 project: axonhub
-stars: 4445
+stars: 4551
 description: |-
     ⚡️ Open-source AI Gateway — Use any SDK to call 100+ LLMs. Built-in failover, load balancing, cost control & end-to-end tracing.
 url: https://github.com/looplj/axonhub

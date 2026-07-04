@@ -1,6 +1,6 @@
 ---
 project: liquid-dom
-stars: 2284
+stars: 2336
 description: |-
     Liquid Glass for the Web
 url: https://github.com/AndrewPrifer/liquid-dom

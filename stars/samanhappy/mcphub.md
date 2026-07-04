@@ -1,6 +1,6 @@
 ---
 project: mcphub
-stars: 2191
+stars: 2207
 description: |-
     A unified hub for centrally managing and dynamically orchestrating multiple MCP servers/APIs into separate endpoints with flexible routing strategies.
 url: https://github.com/samanhappy/mcphub
@@ -65,6 +65,13 @@ docker run -p 3000:3000 -v ./mcp_settings.json:/app/mcp_settings.json -v ./data:
 # Or run with default settings (also mount ./data so credentials and state survive restarts)
 docker run -p 3000:3000 -v ./data:/app/data samanhappy/mcphub
 ```
+
+Two image variants are published under `samanhappy/mcphub`:
+
+- **`latest`** — the default image. Includes Node.js/pnpm, Python, uv/uvx, Git, and build tools. Covers most MCP servers.
+- **`latest-full`** — the extended image. Adds Rust toolchain (Cargo/rustc), Docker Engine, and Playwright browsers (Chrome + Firefox, amd64 only). Use this for Rust-based servers or container-in-container workflows. Larger download.
+
+See [Docker Setup](https://docs.mcphub.app/configuration/docker-setup) for build options and Docker-in-Docker configuration.
 
 ### Access Dashboard
 
@@ -149,7 +156,7 @@ pnpm dev
 
 ## 👥 Contributing
 
-Contributions welcome! See our [Discord community](https://discord.gg/c8GKyzyFF) for discussions and support.
+Contributions welcome! See our [Discord community](https://discord.gg/2BJehJZVH5) for discussions and support.
 
 ## ❤️ Sponsor
 

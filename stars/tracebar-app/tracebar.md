@@ -1,6 +1,6 @@
 ---
 project: tracebar
-stars: 128
+stars: 129
 description: |-
     an mtr-like traceroute utility that lives in your MacOS menubar
 url: https://github.com/tracebar-app/tracebar

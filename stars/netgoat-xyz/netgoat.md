@@ -1,6 +1,6 @@
 ---
 project: netgoat
-stars: 881
+stars: 880
 description: |-
     A Cloudflare alternative for local and cloud use, can be used ontop of cloudflare for cloudflares paid features, but for free!
 url: https://github.com/netgoat-xyz/netgoat

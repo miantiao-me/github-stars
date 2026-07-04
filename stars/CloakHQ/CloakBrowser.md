@@ -1,6 +1,6 @@
 ---
 project: CloakBrowser
-stars: 27281
+stars: 27741
 description: |-
     Stealth Chromium that passes every bot detection test. Drop-in Playwright replacement with source-level fingerprint patches. 30/30 tests passed.
 url: https://github.com/CloakHQ/CloakBrowser
@@ -46,11 +46,11 @@ Same API, same code — just swap the import. <strong>3 lines of code, 30 second
 
 - **58 source-level C++ patches** — canvas, WebGL, audio, fonts, GPU, screen, WebRTC, network timing, automation signals, CDP input behavior
 - **`humanize=True`** — human-like mouse curves, keyboard timing, and scroll patterns. One flag, behavioral detection passes
-- **0.9 reCAPTCHA v3 score** — human-level, server-verified
+- **Pro: 0.9 reCAPTCHA v3 score** — human-level, server-verified
 - **Passes Cloudflare Turnstile**, FingerprintJS, BrowserScan — tested against 30+ detection sites
-- **Auto-updating binary** — background update checks, always on the latest stealth build
+- **Auto-downloads the right binary** — free or Pro based on your license
 - **`pip install cloakbrowser`** or **`npm install cloakbrowser`** — binary auto-downloads, zero config
-- **Free and open source** — no subscriptions, no usage limits
+- **Open-source wrappers** — free v146 binary, Pro for latest builds
 
 **Try it now** — no install needed:
 
@@ -158,7 +158,7 @@ page.goto("https://example.com")
 
 ---
 
-## Latest: v0.4.4 — Version pinning / rollback (Chromium 148.0.7778.215.3)
+## Latest: v0.4.7 — 59 source-level stealth patches, now on every platform (Chromium 148.0.7778.215.3)
 
 - **CloakBrowser Pro** — the latest binary (Chromium 148.0.7778.215.3, 59 source-level patches) is available to Pro subscribers, now on **all platforms including macOS** (Apple Silicon + Intel); v146 stays free forever. Set a `license_key` (`licenseKey` in JS) or the `CLOAKBROWSER_LICENSE_KEY` env var and the wrapper fetches the latest build automatically. See [CloakBrowser Pro](#cloakbrowser-pro)
 - **.NET 8 / C# client** — CloakBrowser now ships as a NuGet package (`CloakBrowser`), mirroring the Python and JS wrappers.
@@ -214,15 +214,15 @@ Pro plans → **[cloakbrowser.dev](https://cloakbrowser.dev)**
 
 ## Test Results
 
-All tests verified against live detection services. Last tested: Jun 2026 (Chromium 148).
+All tests verified against live detection services. Results below are for the latest Pro/current build unless noted. Last tested: Jul 2026 (Chromium 148).
 
 | Detection Service | Stock Playwright | CloakBrowser | Notes |
 |---|---|---|---|
-| **reCAPTCHA v3** | 0.1 (bot) | **0.9** (human) | Server-side verified |
+| **reCAPTCHA v3** | 0.1 (bot) | **0.9** (human) | Pro/current build; server-side verified |
 | **Cloudflare Turnstile** (non-interactive) | FAIL | **PASS** | Auto-resolve |
 | **Cloudflare Turnstile** (managed) | FAIL | **PASS** | Single click |
 | **ShieldSquare** | BLOCKED | **PASS** | Production site |
-| **FingerprintJS** bot detection | DETECTED | **PASS** | demo.fingerprint.com |
+| **FingerprintJS** bot detection | DETECTED | **PASS** | Pro/current build; demo.fingerprint.com |
 | **BrowserScan** bot detection | DETECTED | **NORMAL** (4/4) | browserscan.net |
 | **bot.incolumitas.com** | 13 fails | **1 fail** | WEBDRIVER spec only |
 | **deviceandbrowserinfo.com** | 6 true flags | **0 true flags** | `isBot: false` |
@@ -238,7 +238,7 @@ All tests verified against live detection services. Last tested: Jun 2026 (Chrom
 
 <p align="center">
 <img src="https://i.imgur.com/hvIQyMv.png" width="600" alt="reCAPTCHA v3 — Score 0.9">
-<br><em>reCAPTCHA v3 score 0.9 — server-side verified (human-level)</em>
+<br><em>Pro/latest build: reCAPTCHA v3 score 0.9 — server-side verified (human-level)</em>
 </p>
 
 <p align="center">
@@ -253,7 +253,7 @@ All tests verified against live detection services. Last tested: Jun 2026 (Chrom
 
 <p align="center">
 <img src="https://i.imgur.com/9n2C7tu.png" width="600" alt="FingerprintJS — Passed">
-<br><em>FingerprintJS web-scraping demo — data served, not blocked</em>
+<br><em>Pro/latest build: FingerprintJS web-scraping demo — data served, not blocked</em>
 </p>
 
 <p align="center">
@@ -265,7 +265,7 @@ All tests verified against live detection services. Last tested: Jun 2026 (Chrom
 
 | Feature | Playwright | playwright-stealth | undetected-chromedriver | Camoufox | CloakBrowser |
 |---|---|---|---|---|---|
-| reCAPTCHA v3 score | 0.1 | 0.3-0.5 | 0.3-0.7 | 0.7-0.9 | **0.9** |
+| reCAPTCHA v3 score (Pro/current) | 0.1 | 0.3-0.5 | 0.3-0.7 | 0.7-0.9 | **0.9** |
 | Cloudflare Turnstile | Fail | Sometimes | Sometimes | Pass | **Pass** |
 | Patch level | None | JS injection | Config patches | C++ (Firefox) | **C++ (Chromium)** |
 | Survives Chrome updates | N/A | Breaks often | Breaks often | Yes | **Yes** |
@@ -484,14 +484,16 @@ ctx = launch_persistent_context("./my-profile", headless=False)
 
 ### CLI
 
-Pre-download the binary or check installation status from the command line:
+Pre-download the binary, diagnose your setup, or manage the cache from the command line:
 
 ```bash
 python -m cloakbrowser install      # Download binary with progress output
-python -m cloakbrowser info         # Show version, path, platform
+python -m cloakbrowser info         # Diagnostics: binary that will launch, license tier, env checks
 python -m cloakbrowser update       # Check for and download newer binary
 python -m cloakbrowser clear-cache  # Remove cached binaries
 ```
+
+`info` reports the binary that will actually launch given your license, runs a quick launch test (and flags missing system libraries on Linux), shows your license tier, and checks fonts, GeoIP, and optional dependencies. Add `--quick` to skip the launch test or `--json` for machine-readable output. The same commands are available via `npx cloakbrowser <command>` (JS) and the `cloakbrowser` CLI (.NET).
 
 ### Utility Functions
 
@@ -1119,7 +1121,7 @@ FingerprintJS (`demo.fingerprint.com/playground`) checks multiple signals. Each 
 
 | Detection | Cause | Fix |
 |-----------|-------|-----|
-| **`nodriver` / bad bot** | Persistent profile without a Widevine CDM, or poor proxy IP reputation | Residential proxy; for **persistent** contexts add a Widevine CDM (Docker: `-e CLOAKBROWSER_FETCH_WIDEVINE=1`, otherwise sideload — see [Widevine / DRM](#widevine--drm)). Regular `launch()` doesn't need it. |
+| **`nodriver` / bad bot** | Stale binary/wrapper, missing current FPJS patches, or poor proxy IP reputation | Upgrade to the latest Pro binary (`148.0.7778.215.3+`), use a residential proxy with `geoip=True`, and use the config below. |
 | **Browser tampering** | Noise injection detected by ML | `--fingerprint-noise=false` |
 | **Browser tampering** (fonts) | Font metrics don't match the spoofed Windows platform | `--fingerprint-windows-font-metrics` (Chromium 148+ binary; requires [Windows fonts installed](#font-setup-on-linux)) |
 | **Virtual machine** | Screen dimensions don't match viewport | `--fingerprint-screen-width/height` matching viewport |
@@ -1152,7 +1154,7 @@ const browser = await launch({
 
 Requires a **Chromium 148+ binary** and **Windows fonts** installed (see [Font Setup on Linux](#font-setup-on-linux)); run with a **residential proxy** and `geoip=True`.
 
-**Persistent contexts** (`launch_persistent_context` / `launchPersistentContext`) need one extra piece beyond the `launch()` config above — a working **Widevine CDM** (Docker: `-e CLOAKBROWSER_FETCH_WIDEVINE=1`; otherwise sideload — see [Widevine / DRM](#widevine--drm)). Storage-quota tuning is unrelated to FingerprintJS here; it only affects detectors that infer incognito from quota, such as BrowserScan (see [storage quota](#launch_persistent_context)).
+**Persistent contexts** (`launch_persistent_context` / `launchPersistentContext`) use the same FPJS config on the latest Pro binary. Use a real `userDataDir`. Storage-quota tuning is unrelated to FingerprintJS here; it only affects detectors that infer incognito from quota, such as BrowserScan (see [storage quota](#launch_persistent_context)). For DRM/media playback, see [Widevine / DRM](#widevine--drm).
 
 ---
 

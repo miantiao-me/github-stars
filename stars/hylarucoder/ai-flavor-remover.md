@@ -1,6 +1,6 @@
 ---
 project: ai-flavor-remover
-stars: 1068
+stars: 1078
 description: |-
     AI 味去除 - 仅在 Gemini 2.5 Pro 上测试通过
 url: https://github.com/hylarucoder/ai-flavor-remover

@@ -1,6 +1,6 @@
 ---
 project: openchamber
-stars: 5844
+stars: 6058
 description: |-
     Desktop and web interface for OpenCode AI agent
 url: https://github.com/openchamber/openchamber
@@ -13,9 +13,6 @@ url: https://github.com/openchamber/openchamber
 [![Created with OpenCode](docs/references/badges/created-with-opencode.svg)](https://opencode.ai)
 [![Discord](https://img.shields.io/badge/Discord-join.svg?style=flat&labelColor=100F0F&color=8B7EC8&logo=discord&logoColor=FFFCF0)](https://discord.gg/ZYRSdnwwKA)
 [![Support the project](https://img.shields.io/badge/Support-Project-black?style=flat&labelColor=100F0F&color=EC8B49&logo=ko-fi&logoColor=FFFCF0)](https://ko-fi.com/G2G41SAWNS)
-
-> [!IMPORTANT]
-> 🏖️ I'm on vacation from 18 Jun to 28 Jun. All issues and PRs will continue being reviewed after that. Thanks for the patience.
 
 ## **OpenCode, everywhere.** Desktop. Browser. Phone.
 
@@ -97,7 +94,7 @@ url: https://github.com/openchamber/openchamber
 
 ## Quick Start
 
-> **Prerequisite:** [OpenCode CLI](https://opencode.ai) installed.
+> **Prerequisite:** Desktop bundles the matching OpenCode CLI. CLI/Web and VS Code use your installed [OpenCode CLI](https://opencode.ai).
 
 ### **Desktop (macOS + Windows)**
 Download from [Releases](https://github.com/btriapitsyn/openchamber/releases).

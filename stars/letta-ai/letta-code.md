@@ -1,6 +1,6 @@
 ---
 project: letta-code
-stars: 2771
+stars: 2803
 description: |-
     Stateful agents that are like people, with memory, identity, and the ability to learn and adapt
 url: https://github.com/letta-ai/letta-code

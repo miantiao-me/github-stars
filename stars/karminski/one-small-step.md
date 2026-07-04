@@ -1,6 +1,6 @@
 ---
 project: one-small-step
-stars: 6952
+stars: 6960
 description: |-
     这是一个简单的技术科普教程项目，主要聚焦于解释一些有趣的，前沿的技术概念和原理。每篇文章都力求在 5 分钟内阅读完成。
 url: https://github.com/karminski/one-small-step

@@ -1,6 +1,6 @@
 ---
 project: nhost
-stars: 9218
+stars: 9224
 description: |-
     The Open Source Firebase Alternative with GraphQL.
 url: https://github.com/nhost/nhost
@@ -70,6 +70,7 @@ Visit [https://docs.nhost.io](https://docs.nhost.io) for the complete documentat
 The Nhost CLI is the easiest way to start developing locally. It sets up a local environment that tracks database migrations and Hasura metadata.
 
 **Install the CLI:**
+
 - **macOS / Linux:** `brew install nhost/tap/nhost` or `curl -sSL https://raw.githubusercontent.com/nhost/nhost/main/cli/get.sh | bash`
 - **Nix:** `nix profile install github:nhost/nhost#cli`
 - **npm / pnpm / Yarn / Bun:** `npm install -D @nhost/cli`,
@@ -77,13 +78,14 @@ The Nhost CLI is the easiest way to start developing locally. It sets up a local
   `bun add -d @nhost/cli`
 
 **Start building:**
+
 ```bash
 nhost login
 nhost init
 nhost up
 ```
 
-Read the full [CLI Quickstart guide](https://docs.nhost.io/getting-started/quickstart/cli).
+Read the full [CLI Quickstart guide](https://docs.nhost.io/getting-started/local-development/cli).
 
 ## Option 3: Self-hosting
 

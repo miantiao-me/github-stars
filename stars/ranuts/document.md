@@ -1,6 +1,6 @@
 ---
 project: document
-stars: 1782
+stars: 1784
 description: |-
     Perform common file preview and editing via the web.
 url: https://github.com/ranuts/document
@@ -40,19 +40,12 @@ A privacy-first, browser-based document editor powered by OnlyOffice. Edit DOCX,
 - 📦 **PWA support** — install and use offline
 - 🌍 **Multi-language** — English, Chinese, and more
 - 🧩 **Embeddable** — full postMessage API for iframe integration
-- 🈳 **CJK support** — Chinese, Japanese, and Korean text renders and exports correctly
-- 🆕 **OnlyOffice v9 beta** — try the latest OnlyOffice 9.3.0 engine alongside the stable v7
 
 ---
 
 ## 🚀 Quick Start
 
 **Try it online:** [ranuts.github.io/document](https://ranuts.github.io/document/)
-
-| Version | Engine           | Status | URL                                        |
-| ------- | ---------------- | ------ | ------------------------------------------ |
-| v7      | OnlyOffice 7.x   | Stable | `https://ranuts.github.io/document/`       |
-| v9      | OnlyOffice 9.3.0 | Beta   | `https://ranuts.github.io/document/9.3.0/` |
 
 **Run with Docker:**
 
@@ -182,8 +175,6 @@ docker run -d --name document -p 443:443 \
 ## 🔤 Fonts
 
 This project does not include proprietary fonts (Arial, Times New Roman, etc.) to comply with open-source licensing. Font name references are preserved for document compatibility.
-
-CJK text (Chinese, Japanese, Korean) is supported out of the box using [Noto Sans](https://fonts.google.com/noto) open-source fonts bundled with the editor.
 
 → **[Font management guide](docs/fonts.md)** — how to add fonts by index.
 

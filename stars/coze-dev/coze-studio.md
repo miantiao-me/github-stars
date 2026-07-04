@@ -1,6 +1,6 @@
 ---
 project: coze-studio
-stars: 21064
+stars: 21108
 description: |-
     An AI agent development platform with all-in-one visual tools, simplifying agent creation, debugging, and deployment like never before. Coze your way to AI Agent creation.
 url: https://github.com/coze-dev/coze-studio

@@ -1,6 +1,6 @@
 ---
 project: aigc-weekly
-stars: 543
+stars: 544
 description: |-
     Agili 的 AIGC 周刊 - 一个由 Agentic AI Agent 驱动的 AIGC（人工智能生成内容）精选周刊。
 url: https://github.com/miantiao-me/aigc-weekly

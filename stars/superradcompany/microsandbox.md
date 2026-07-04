@@ -1,6 +1,6 @@
 ---
 project: microsandbox
-stars: 6703
+stars: 6825
 description: |-
     🧱 easy, fast and local-first microVM runtime
 url: https://github.com/superradcompany/microsandbox
@@ -96,10 +96,6 @@ url: https://github.com/superradcompany/microsandbox
 >
 > ```sh
 > brew install superradcompany/tap/microsandbox
-> ```
->
-> ```sh
-> winget install SuperRadCompany.Microsandbox
 > ```
 >
 > ```sh

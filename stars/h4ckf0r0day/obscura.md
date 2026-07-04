@@ -1,6 +1,6 @@
 ---
 project: obscura
-stars: 16261
+stars: 17604
 description: |-
     The headless browser for AI agents and web scraping
 url: https://github.com/h4ckf0r0day/obscura
@@ -130,6 +130,21 @@ HTTP, HTTPS & SOCKS5 support<br><br>
       No KYC required<br>
       Cashback on traffic — earn up to 10% back<br><br></b>
       🎁 Use code <b>OBSCURA35</b> for 35% off Mobile & Residential, or <b>OBSCURA40</b> for 40% off ISP (Static) proxies.
+    </td>
+  </tr>
+  <tr>
+    <td width="200" align="center" valign="middle">
+      <a href="https://www.rapidproxy.io/?ref=obscura" target="_blank">
+        <img alt="Rapidproxy" src="assets/sponsors/rapidproxy.png" width="180"/>
+      </a>
+    </td>
+    <td valign="middle">
+      <a href="https://www.rapidproxy.io/?ref=obscura"><b>Rapidproxy</b></a> — A residential proxy platform with 90M+ real IPs across 200+ countries. It supports rotation, geo-targeting, and high concurrency to improve scraping success. Start your free trial today!<br><br>
+      <b>Flexible pricing starting from $0.65/GB<br>
+      Traffic that never expires<br>
+      Supports HTTP / HTTPS / SOCKS5 protocols<br>
+      High-speed, low-latency network built for scale<br><br>
+      🎁 Use discount code <b>RAPID10</b> to get <b>10% off</b>.<br><br></b>
     </td>
   </tr>
 </table>
@@ -461,6 +476,10 @@ Optional flags (both transports):
 | `browser_network_requests` | List network requests made by the current page |
 | `browser_console_messages` | Return console messages logged by the page |
 | `browser_close` | Close the page and reset browser state |
+
+## Integrations
+
+- **[Hermes agent plugin](https://github.com/SGavrl/hermes-plugin-obscura)**: run [Hermes](https://github.com/NousResearch/hermes-agent) agent browser tasks on Obscura. The plugin spawns `obscura serve` per session (or connects to an already running server) and drives it over CDP, with optional `--stealth`.
 
 ## License
 

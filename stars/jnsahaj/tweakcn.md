@@ -1,6 +1,6 @@
 ---
 project: tweakcn
-stars: 10085
+stars: 10113
 description: |-
     A visual no-code theme editor for shadcn/ui components
 url: https://github.com/jnsahaj/tweakcn

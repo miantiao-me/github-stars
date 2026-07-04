@@ -431,6 +431,7 @@ const Composer = () => {
 | `Backspace`     | Delete character before cursor |
 | `Delete`        | Delete character before cursor (same as `Backspace`) |
 | `Opt+Backspace` | Delete word before cursor      |
+| `Cmd+Backspace` | Delete to start of line (same as `Ctrl+U`; gated by the `Ctrl+U` toggle) |
 | `Ctrl+Z`        | Undo (up to 128 steps)         |
 
 > On macOS, `Alt` chords are pressed via the **Option** (`⌥`) key.

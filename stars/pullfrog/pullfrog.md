@@ -1,6 +1,6 @@
 ---
 project: pullfrog
-stars: 792
+stars: 805
 description: |-
     Open-source model-agnostic BYOK GitHub bot that runs in GitHub Actions
 url: https://github.com/pullfrog/pullfrog
@@ -109,6 +109,8 @@ jobs:
 
 ```
 
+To gate merges on Pullfrog with branch protection, add `status_checks: enabled` under `with:`. Each PR run then posts a `pullfrog` check (run completion — success when the run finishes, failure on error/timeout) and a `pullfrog-approval` check (whether Pullfrog would approve the PR), both requireable as status checks. See [PR reviews → Required status checks](https://docs.pullfrog.dev/pr-reviews#required-status-checks-branch-protection).
+
 #### 2. Create `triggers.yml`
 
 Create a file at `.github/workflows/triggers.yml`. This workflow listens for GitHub events and calls the `pullfrog.yml` workflow with the event data.
@@ -194,11 +196,25 @@ jobs:
           NOTES: ${{ steps.notes.outputs.result }}
 ```
 
+### Example: Prompt from a file
+
+For longer prompts you want to version and reuse, commit the prompt text to the repo and pass its path with `prompt_file` instead of inlining it. The path is resolved relative to `GITHUB_WORKSPACE`, and it is mutually exclusive with `prompt` — set exactly one.
+
+```yaml
+# .github/workflows/triage.yml
+- uses: actions/checkout@v4
+- uses: pullfrog/pullfrog@v0
+  with:
+    prompt_file: .github/pullfrog/triage.md
+  env:
+    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+```
+
 ### Example: Structured Output with Zod Schema
 
 You can force the agent to return structured JSON output by providing a JSON schema. This allows you to reliably parse and use the agent's response in subsequent workflow steps.
 
-You can define your JSON schema directly or uou can use any validation library that converts to JSON Schema. Here's an example using [Zod](https://zod.dev):
+You can define your JSON schema directly or you can use any validation library that converts to JSON Schema. Here's an example using [Zod](https://zod.dev):
 
 ```yaml
 name: Release Check

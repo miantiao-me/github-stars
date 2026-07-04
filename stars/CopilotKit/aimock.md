@@ -1,6 +1,6 @@
 ---
 project: aimock
-stars: 637
+stars: 640
 description: |-
     Mock everything your AI app talks to — LLM APIs, MCP, A2A, AG-UI, vector DBs, search. One package, one port, zero dependencies.
 url: https://github.com/CopilotKit/aimock
@@ -60,7 +60,7 @@ Run them all on one port with `npx @copilotkit/aimock --config aimock.json`, or 
 - **Timing-aware recording and replay** — Recorded fixtures capture per-frame arrival timestamps; replay uses recorded timings for approximate timing reproduction based on recorded TTFT and inter-frame cadence (replay chunk count may differ from recording — TTFT and average pace are preserved, not per-token fidelity) with configurable `--replay-speed` multiplier
 - **[Multi-turn Conversations](https://aimock.copilotkit.dev/multi-turn)** — Record and replay multi-turn traces with tool rounds; match distinct turns via `turnIndex`, `hasToolResult`, `toolCallId`, `sequenceIndex`, `systemMessage` (gate on host-supplied agent context), or custom predicates
 - **[12 providers across 14 API surfaces](https://aimock.copilotkit.dev/docs)** — OpenAI Chat, OpenAI Responses, OpenAI Realtime (GA + Beta shim), Claude, Gemini (REST + embedContent), Gemini Live, Gemini Interactions, Azure, Bedrock, Vertex AI, Ollama (chat + embeddings), Cohere (chat + embed), ElevenLabs TTS — full streaming support
-- **Multimedia APIs** — [image generation](https://aimock.copilotkit.dev/images) (DALL-E, Imagen), [image editing](https://aimock.copilotkit.dev/images) (/v1/images/edits), [text-to-speech](https://aimock.copilotkit.dev/speech) (OpenAI + ElevenLabs), [audio transcription](https://aimock.copilotkit.dev/transcription), [audio translation](https://aimock.copilotkit.dev/transcription) (/v1/audio/translations), [video generation](https://aimock.copilotkit.dev/video), [OpenRouter video generation](https://aimock.copilotkit.dev/openrouter-video) (/api/v1/videos with async job lifecycle), [fal.ai](https://aimock.copilotkit.dev/fal-ai) (image / video / audio with queue lifecycle)
+- **Multimedia APIs** — [image generation](https://aimock.copilotkit.dev/images) (DALL-E, Imagen), [image editing](https://aimock.copilotkit.dev/images) (/v1/images/edits), [text-to-speech](https://aimock.copilotkit.dev/speech) (OpenAI + ElevenLabs), [audio transcription](https://aimock.copilotkit.dev/transcription), [audio translation](https://aimock.copilotkit.dev/transcription) (/v1/audio/translations), [video generation](https://aimock.copilotkit.dev/video), [OpenRouter video generation](https://aimock.copilotkit.dev/openrouter-video) (/api/v1/videos with async job lifecycle), [Google Veo video generation](https://aimock.copilotkit.dev/veo-video) (:predictLongRunning + /v1beta/operations async lifecycle), [Grok Imagine video generation](https://aimock.copilotkit.dev/grok-video) (/v1/videos/generations with async job lifecycle), [fal.ai](https://aimock.copilotkit.dev/fal-ai) (image / video / audio with queue lifecycle)
 - **[MCP](https://aimock.copilotkit.dev/mcp-mock) / [A2A](https://aimock.copilotkit.dev/a2a-mock) / [AG-UI](https://aimock.copilotkit.dev/agui-mock) / [Vector](https://aimock.copilotkit.dev/vector-mock)** — Mock every protocol your AI agents use
 - **[Chaos Testing](https://aimock.copilotkit.dev/chaos-testing)** — 500 errors, malformed JSON, mid-stream disconnects at any probability
 - **Per-Request Strict Mode** — `X-AIMock-Strict` header overrides the server-level `--strict` flag per request (`true`/`1` = strict, `false`/`0` = lenient)
@@ -72,6 +72,7 @@ Run them all on one port with `npx @copilotkit/aimock --config aimock.json`, or 
 - **[Docker + Helm](https://aimock.copilotkit.dev/docker)** — Container image and Helm chart for CI/CD
 - **[Vitest & Jest Plugins](https://aimock.copilotkit.dev/test-plugins)** — Zero-config `useAimock()` with auto lifecycle and env patching
 - **[Response Overrides](https://aimock.copilotkit.dev/fixtures)** — Control `id`, `model`, `usage`, `finishReason` in fixture responses
+- **[Ordered Blocks](https://aimock.copilotkit.dev/fixtures#ordered-blocks)** — A `blocks` array streams text and tool calls in any order (tool-first or interleaved); blocks-only fixtures are first-class, and the recorder captures order from genuinely tool-first/interleaved streams
 - **[Streaming Usage Chunks](https://aimock.copilotkit.dev/streaming-physics)** — `stream_options.include_usage` support emits a final chunk with token counts, matching OpenAI's streaming usage protocol
 - **[Rate Limiting Headers](https://aimock.copilotkit.dev/chaos-testing)** — `x-ratelimit-*` headers on every response and `Retry-After` on 429 errors for testing retry/backoff logic
 - **Zero dependencies** — Everything from Node.js builtins

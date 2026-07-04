@@ -1,6 +1,6 @@
 ---
 project: upyo
-stars: 522
+stars: 529
 description: |-
     Upyo is a simple and cross-runtime library for sending email messages using SMTP and various email providers.  It works on Node.js, Deno, Bun, and edge functions.
 url: https://github.com/dahlia/upyo
@@ -15,9 +15,9 @@ Upyo
 
 Upyo is a cross-runtime email library that provides a unified, type-safe API
 for sending emails across Node.js, Deno, Bun, and edge functions. Switch
-between SMTP and HTTP-based providers (Lettermint, Mailgun, Resend, SendGrid,
-Amazon SES) without changing your application code, while enjoying full
-TypeScript support, consistent error handling, and built-in testing
+between SMTP and HTTP-based providers (Lettermint, Maileroo, Mailgun, Resend,
+SendGrid, Amazon SES) without changing your application code, while enjoying
+full TypeScript support, consistent error handling, and built-in testing
 capabilities with mock transports across all runtimes.
 
 Here's a quick demo of sending an email using the Mailgun transport:
@@ -78,11 +78,13 @@ sending messages.  The following is a list of the available packages:
 | [@upyo/smtp](/packages/smtp/)                   | [JSR][jsr:@upyo/smtp]          | [npm][npm:@upyo/smtp]          | SMTP transport                                     |
 | [@upyo/jmap](/packages/jmap/)                   | [JSR][jsr:@upyo/jmap]          | [npm][npm:@upyo/jmap]          | [JMAP] transport (RFC 8620/8621)                   |
 | [@upyo/lettermint](/packages/lettermint/)       | [JSR][jsr:@upyo/lettermint]    | [npm][npm:@upyo/lettermint]    | [Lettermint] transport                             |
+| [@upyo/maileroo](/packages/maileroo/)           | [JSR][jsr:@upyo/maileroo]      | [npm][npm:@upyo/maileroo]      | [Maileroo] transport                               |
 | [@upyo/mailgun](/packages/mailgun/)             | [JSR][jsr:@upyo/mailgun]       | [npm][npm:@upyo/mailgun]       | [Mailgun] transport                                |
 | [@upyo/plunk](/packages/plunk/)                 | [JSR][jsr:@upyo/plunk]         | [npm][npm:@upyo/plunk]         | [Plunk] transport                                  |
 | [@upyo/resend](/packages/resend/)               | [JSR][jsr:@upyo/resend]        | [npm][npm:@upyo/resend]        | [Resend] transport                                 |
 | [@upyo/sendgrid](/packages/sendgrid/)           | [JSR][jsr:@upyo/sendgrid]      | [npm][npm:@upyo/sendgrid]      | [SendGrid] transport                               |
 | [@upyo/ses](/packages/ses/)                     | [JSR][jsr:@upyo/ses]           | [npm][npm:@upyo/ses]           | [Amazon SES] transport                             |
+| [@upyo/retry](/packages/retry/)                 | [JSR][jsr:@upyo/retry]         | [npm][npm:@upyo/retry]         | Retry and backoff decorator for transports         |
 | [@upyo/opentelemetry](/packages/opentelemetry/) | [JSR][jsr:@upyo/opentelemetry] | [npm][npm:@upyo/opentelemetry] | [OpenTelemetry] observability  for Upyo transports |
 | [@upyo/mock](/packages/mock/)                   | [JSR][jsr:@upyo/mock]          | [npm][npm:@upyo/mock]          | Mock transport for testing                         |
 
@@ -96,6 +98,9 @@ sending messages.  The following is a list of the available packages:
 [jsr:@upyo/lettermint]: https://jsr.io/@upyo/lettermint
 [npm:@upyo/lettermint]: https://www.npmjs.com/package/@upyo/lettermint
 [Lettermint]: https://lettermint.co/
+[jsr:@upyo/maileroo]: https://jsr.io/@upyo/maileroo
+[npm:@upyo/maileroo]: https://www.npmjs.com/package/@upyo/maileroo
+[Maileroo]: https://maileroo.com/
 [jsr:@upyo/mailgun]: https://jsr.io/@upyo/mailgun
 [npm:@upyo/mailgun]: https://www.npmjs.com/package/@upyo/mailgun
 [Mailgun]: https://www.mailgun.com/
@@ -111,6 +116,8 @@ sending messages.  The following is a list of the available packages:
 [jsr:@upyo/ses]: https://jsr.io/@upyo/ses
 [npm:@upyo/ses]: https://www.npmjs.com/package/@upyo/ses
 [Amazon SES]: https://aws.amazon.com/ses/
+[jsr:@upyo/retry]: https://jsr.io/@upyo/retry
+[npm:@upyo/retry]: https://www.npmjs.com/package/@upyo/retry
 [jsr:@upyo/opentelemetry]: https://jsr.io/@upyo/opentelemetry
 [npm:@upyo/opentelemetry]: https://www.npmjs.com/package/@upyo/opentelemetry
 [OpenTelemetry]: https://opentelemetry.io/

@@ -1,8 +1,8 @@
 ---
 project: transitions.dev
-stars: 1753
+stars: 1855
 description: |-
-    Collection of the most essential transitions for web apps including product motion skill
+    Collection of the most essential transitions for web apps, skill for agents and Refine tool for agents
 url: https://github.com/Jakubantalik/transitions.dev
 ---
 

@@ -1,6 +1,6 @@
 ---
 project: s3mini
-stars: 1349
+stars: 1348
 description: |-
     ⚠️  Moved to Codeberg: https://codeberg.org/thinking_tools/s3mini - Tiny S3 client. Edge computing ready. No-dep. In Typescript.
 url: https://github.com/good-lly/s3mini

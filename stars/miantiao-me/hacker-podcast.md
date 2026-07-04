@@ -1,6 +1,6 @@
 ---
 project: hacker-podcast
-stars: 2548
+stars: 2558
 description: |-
     一个基于 AI 的 Hacker News 中文播客项目，每天自动抓取 Hacker News 热门文章，通过 AI 生成中文总结并转换为播客内容。
 url: https://github.com/miantiao-me/hacker-podcast

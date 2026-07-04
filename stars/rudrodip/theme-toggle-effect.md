@@ -1,6 +1,6 @@
 ---
 project: theme-toggle-effect
-stars: 723
+stars: 737
 description: |-
     theme toggle effect using view transitions api
 url: https://github.com/rudrodip/theme-toggle-effect
