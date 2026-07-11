@@ -1,6 +1,6 @@
 ---
 project: astro-theme-retypeset
-stars: 675
+stars: 677
 description: |-
     Revive the beauty of typography.
 url: https://github.com/radishzzz/astro-theme-retypeset

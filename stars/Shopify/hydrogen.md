@@ -1,6 +1,6 @@
 ---
 project: hydrogen
-stars: 2044
+stars: 2060
 description: |-
     Hydrogen lets you build faster headless storefronts in less time, on Shopify.
 url: https://github.com/Shopify/hydrogen

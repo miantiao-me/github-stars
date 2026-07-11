@@ -1,6 +1,6 @@
 ---
 project: domain-monitor
-stars: 250
+stars: 253
 description: |-
     A self-hosted PHP domain expiration monitoring tool that tracks domain expiry dates, RDAP/WHOIS data, and SSL certificate validity. Supports alerts, multi-user setup, and cron automation. Built for developers, hosting providers, and IT admins who want full control without third-party services.
 url: https://github.com/Hosteroid/domain-monitor

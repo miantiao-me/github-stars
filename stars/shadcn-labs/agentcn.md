@@ -1,6 +1,6 @@
 ---
 project: agentcn
-stars: 321
+stars: 355
 description: |-
     shadcn/ui, but for building agents. 🤖
 url: https://github.com/shadcn-labs/agentcn
@@ -50,6 +50,7 @@ Consider showcasing your work on:
 - [awesome-eve-agents](https://github.com/shadcn-labs/awesome-eve-agents) — Curated list of awesome resources and AI agents built with Eve
 - [awesome-flue-agents](https://github.com/shadcn-labs/awesome-flue-agents) — Curated list of awesome resources and AI agents built with Flue
 - [awesome-mastra-agents](https://github.com/shadcn-labs/awesome-mastra-agents) — Curated list of awesome resources and AI agents built with Mastra
+- [awesome-langgraph-agents](https://github.com/shadcn-labs/awesome-langgraph-agents) — Curated list of awesome resources and AI agents built with LangGraph
 
 ## Contributing
 

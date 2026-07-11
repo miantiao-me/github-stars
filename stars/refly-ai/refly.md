@@ -1,6 +1,6 @@
 ---
 project: refly
-stars: 7419
+stars: 7428
 description: |-
     The first open-source agent skills builder. Define skills by vibe workflow, run on Claude Code, Cursor, Codex & more. Build Clawdbot 🦞· APIs for Lovable · Bots for Slack & Lark/Feishu · Skills are infrastructure, not prompts.
 url: https://github.com/refly-ai/refly

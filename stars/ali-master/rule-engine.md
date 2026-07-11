@@ -1,6 +1,6 @@
 ---
 project: rule-engine
-stars: 358
+stars: 357
 description: |-
     The ultimate JSON-based rule engine that turns complex business logic into declarative configurations. Built for developers who believe code should be expressive, not repetitive.
 url: https://github.com/ali-master/rule-engine

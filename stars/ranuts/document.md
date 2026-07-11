@@ -1,6 +1,6 @@
 ---
 project: document
-stars: 1784
+stars: 1791
 description: |-
     Perform common file preview and editing via the web.
 url: https://github.com/ranuts/document
@@ -18,7 +18,7 @@ url: https://github.com/ranuts/document
   <a href="https://github.com/ranuts/document/releases">
     <img src="https://img.shields.io/github/v/release/ranuts/document" alt="Version">
   </a>
-  <a href="https://ranuts.github.io/document/">
+  <a href="https://edit.chaxus.com/">
     <img src="https://img.shields.io/badge/Live-Demo-brightgreen" alt="Live Demo">
   </a>
 </p>
@@ -45,7 +45,7 @@ A privacy-first, browser-based document editor powered by OnlyOffice. Edit DOCX,
 
 ## 🚀 Quick Start
 
-**Try it online:** [ranuts.github.io/document](https://ranuts.github.io/document/)
+**Try it online:** [edit.chaxus.com](https://edit.chaxus.com/)
 
 **Run with Docker:**
 

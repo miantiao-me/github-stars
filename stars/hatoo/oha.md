@@ -1,6 +1,6 @@
 ---
 project: oha
-stars: 10359
+stars: 10394
 description: |-
     Ohayou(おはよう), HTTP load generator, inspired by rakyll/hey with tui animation.
 url: https://github.com/hatoo/oha
@@ -202,7 +202,7 @@ Options:
       --disable-compression
           Disable compression.
   -r, --redirect <REDIRECT>
-          Limit for number of Redirect. Set 0 for no redirection. Redirection isn't supported for HTTP/2. [default: 10]
+          Limit for number of Redirect. Set 0 for no redirection. Redirection isn't supported for HTTP/2. [default: 0]
       --disable-keepalive
           Disable keep-alive, prevents re-use of TCP connections between different HTTP requests. This isn't supported for HTTP/2.
       --no-pre-lookup

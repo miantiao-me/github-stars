@@ -1,6 +1,6 @@
 ---
 project: remocn
-stars: 849
+stars: 941
 description: |-
     Production-ready animations, transitions, backgrounds, and scenes for Remotion
 url: https://github.com/Remocn/remocn

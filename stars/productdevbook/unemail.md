@@ -1,6 +1,6 @@
 ---
 project: unemail
-stars: 232
+stars: 233
 description: |-
     One unified email API across 18 providers (SMTP, Resend, SES, Postmark, SendGrid, Mailgun, …). Zero deps, RFC 8058 + DKIM ready, edge-first, strict TypeScript.
 url: https://github.com/productdevbook/unemail

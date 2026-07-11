@@ -1,6 +1,6 @@
 ---
 project: native-feel-skill
-stars: 1821
+stars: 1834
 description: |-
     An Agent Skill for designing cross-platform desktop apps that feel native — distilled from Raycast's 2.0 deep-dive and reverse engineering of Raycast Beta.app. Eight architectural tenets, four-layer architecture, WebKit/WebView2 survival guide, 75-item ship audit.
 url: https://github.com/yetone/native-feel-skill

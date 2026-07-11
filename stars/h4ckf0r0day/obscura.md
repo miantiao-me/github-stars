@@ -1,6 +1,6 @@
 ---
 project: obscura
-stars: 17604
+stars: 18753
 description: |-
     The headless browser for AI agents and web scraping
 url: https://github.com/h4ckf0r0day/obscura
@@ -61,19 +61,24 @@ Want to sponsor? Email [hello@obscura.sh](mailto:hello@obscura.sh).
 <table>
   <tr>
     <td width="200" align="center" valign="middle">
-      <a href="https://www.swiftproxy.net/?ref=obscura" target="_blank">
-        <img alt="Swiftproxy" src="assets/sponsors/swiftproxy2.png" width="180"/>
+      <a href="https://sx.org/?c=40h-N7" target="_blank">
+        <img alt="SX.org" src="assets/sponsors/sxproxy.png" width="180"/>
       </a>
     </td>
     <td valign="middle">
-      <a href="https://www.swiftproxy.net/?ref=obscura"><b>Swiftproxy</b></a>  — Premium residential proxies built for privacy, automation, and scale.<br><br>
-<b>80M+ residential IPs in 190+ countries<br>
-Rotating & sticky sessions<br>
-Non-expiring traffic<br>
-Free trial available<br>
-Country, state & city targeting<br>
-HTTP, HTTPS & SOCKS5 support<br><br>
-🎁 Use code <b>PROXY90</b> for <b>10% off</b>.<br><br></b>
+      🚀 <b>Obscura × SX.org</b><br>
+      Using Obscura for AI agents, browser automation, or web scraping? Power your workflow with stable proxies from <a href="https://sx.org/?c=40h-N7"><b>SX.org</b></a>.<br><br>
+      <b>🌍 12M+ IPs across 235 countries<br>
+      🏠 7M+ residential IPs<br>
+      📱 4M+ mobile IPs<br>
+      🏢 1M+ corporate proxies<br>
+      🔁 Rotating & sticky sessions<br>
+      📍 Flexible geo setup<br>
+      🌐 HTTP, HTTPS & SOCKS5 support<br>
+      ⚡ Up to 99.97% connection success<br>
+      🛟 24/7 support<br><br>
+      🎁 Use code <b>Obscura3gb</b> to get a <b>free 3GB trial</b>.<br><br></b>
+      Stable proxies. Fewer blocks. Most reliable Obscura automation.
     </td>
   </tr>
   <tr>
@@ -366,10 +371,13 @@ Obscura implements the Chrome DevTools Protocol for Puppeteer/Playwright compati
 | **Runtime** | evaluate, callFunctionOn, getProperties, addBinding |
 | **DOM** | getDocument, querySelector, querySelectorAll, getOuterHTML, resolveNode |
 | **Network** | enable, setCookies, getCookies, setExtraHTTPHeaders, setUserAgentOverride |
-| **Fetch** | enable, continueRequest, fulfillRequest, failRequest (live interception) |
+| **Fetch** | enable, continueRequest, fulfillRequest, failRequest (live interception), takeResponseBodyAsStream |
+| **IO** | read, close (stream a large response body in chunks) |
 | **Storage** | getCookies, setCookies, deleteCookies |
 | **Input** | dispatchMouseEvent, dispatchKeyEvent |
 | **LP** | getMarkdown (DOM-to-Markdown conversion) |
+
+To download a large resource without one giant `Network.getResponseBody` blob, call `Fetch.takeResponseBodyAsStream` then read it in chunks with `IO.read` / `IO.close`. Response bodies over the cache limit (`OBSCURA_NETWORK_BODY_BUFFER_BYTES`, default 2 MiB) are not retained, so raise that limit when you intend to stream large downloads.
 ## CLI Reference
 
 ### Tuning V8
@@ -378,6 +386,14 @@ Obscura embeds V8 directly. Use `--v8-flags` to pass raw flags through to V8, sa
 
 ```bash
 obscura --v8-flags "--max-old-space-size=4096" fetch <url>
+```
+
+### Heavy SPAs (script execution budget)
+
+Obscura caps the page's script-execution phase so one slow or hung page cannot stall a worker. The default budget is 30s; pages that finish sooner return immediately, so the cap only affects pages that keep running. A very heavy React/Vue/Angular SPA on a slow network can need more time to boot before it fires its data requests. Raise the budget with `OBSCURA_SCRIPT_DEADLINE_MS` (milliseconds), and pair it with a matching navigation timeout in your CDP client:
+
+```bash
+OBSCURA_SCRIPT_DEADLINE_MS=60000 obscura serve --port 9222
 ```
 
 ### `obscura serve`

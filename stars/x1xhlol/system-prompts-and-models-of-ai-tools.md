@@ -1,6 +1,6 @@
 ---
 project: system-prompts-and-models-of-ai-tools
-stars: 141523
+stars: 141796
 description: |-
     FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models
 url: https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools
@@ -18,8 +18,8 @@ url: https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools
 
 <div align="center" markdown="1">
 
-### [Issue Tracking for AI Agents](https://github.com/latitude-dev/latitude-llm)  
-[Open Source Monitoring platform](https://github.com/latitude-dev/latitude-llm)
+### [Make your AI agents self-healing](https://github.com/latitude-dev/latitude-llm)  
+[Open Source.](https://github.com/latitude-dev/latitude-llm)
 
 </div>
 

@@ -1,6 +1,6 @@
 ---
 project: mvpblocks
-stars: 827
+stars: 828
 description: |-
     MVPBlocks is an open-source component library for developers to copy, customize, and launch MVPs lightning-fast—no installations, just pure productivity.
 url: https://github.com/subhadeeproy3902/mvpblocks

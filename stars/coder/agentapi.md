@@ -1,6 +1,6 @@
 ---
 project: agentapi
-stars: 1443
+stars: 1450
 description: |-
     HTTP API for Claude Code, Goose, Aider, Gemini, Amp, and Codex
 url: https://github.com/coder/agentapi

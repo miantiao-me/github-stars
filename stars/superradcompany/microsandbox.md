@@ -1,6 +1,6 @@
 ---
 project: microsandbox
-stars: 6825
+stars: 6891
 description: |-
     🧱 easy, fast and local-first microVM runtime
 url: https://github.com/superradcompany/microsandbox

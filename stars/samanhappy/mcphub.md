@@ -1,6 +1,6 @@
 ---
 project: mcphub
-stars: 2207
+stars: 2222
 description: |-
     A unified hub for centrally managing and dynamically orchestrating multiple MCP servers/APIs into separate endpoints with flexible routing strategies.
 url: https://github.com/samanhappy/mcphub
@@ -141,6 +141,8 @@ cd mcphub
 pnpm install
 pnpm dev
 ```
+
+Local development uses `admin` / `admin123` and stores its writable settings copy at `data/mcp_settings.dev.json`, so the repository `mcp_settings.json` stays credential-free.
 
 > For Windows users, start backend and frontend separately: `pnpm backend:dev`, `pnpm frontend:dev`
 

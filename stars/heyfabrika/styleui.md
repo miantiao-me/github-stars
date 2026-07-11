@@ -1,6 +1,6 @@
 ---
 project: styleui
-stars: 59
+stars: 62
 description: |-
     null
 url: https://github.com/heyfabrika/styleui

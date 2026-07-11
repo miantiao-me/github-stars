@@ -1,8 +1,8 @@
 ---
 project: takumi
-stars: 2178
+stars: 2301
 description: |-
-    Render JSX, HTML, and CSS to SVG or images without a headless browser. OG cards, animated GIFs, and video frames from Node.js, edge runtimes, browsers, or Rust. Drop-in next/og replacement.
+    Render JSX, HTML, and CSS to SVG or images. Drop-in next/og replacement.
 url: https://github.com/kane50613/takumi
 ---
 

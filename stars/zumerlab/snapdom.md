@@ -1,6 +1,6 @@
 ---
 project: snapdom
-stars: 7918
+stars: 7926
 description: |-
     High-performance engine for capturing, modifying, and converting DOM elements into any format.
 url: https://github.com/zumerlab/snapdom
@@ -86,6 +86,7 @@ await result.download({ format: 'jpg', filename: 'card.jpg' });
 
 - [Quick Start](#quick-start)
 - [Features](#features)
+- [Website & Live Demos](#website--live-demos)
 - [Installation](#installation)
 - [Build Outputs](#build-outputs)
 - [Usage](#usage)
@@ -95,6 +96,8 @@ await result.download({ format: 'jpg', filename: 'card.jpg' });
 - [Development](#development)
 - [Contributors](#contributors)
 - [Sponsors](#sponsors)
+- [Show your support](#show-your-support)
+- [Star History](#star-history)
 - [License](#license)
 
 ## Installation
@@ -336,6 +339,35 @@ For detailed guidelines, see [CONTRIBUTING](https://github.com/zumerlab/snapdom/
 Special thanks to [@megaphonecolin](https://github.com/megaphonecolin), [@sdraper69](https://github.com/sdraper69), [@reynaldichernando](https://github.com/reynaldichernando), [@gamma-app](https://github.com/gamma-app), [@jrjohnson](https://github.com/jrjohnson), and [@ryanander](https://github.com/ryanander) for supporting this project!
 
 If you'd like to support this project too, you can [become a sponsor](https://github.com/sponsors/tinchox5).
+
+## Show your support
+
+If snapDOM saved you time, a ⭐ on GitHub helps other developers find it — that's the whole ask.
+
+Shipping something built with snapDOM? Add the badge to your README:
+
+[![Built with snapDOM](https://img.shields.io/badge/built%20with-snapDOM-blue)](https://snapdom.dev)
+
+```md
+[![Built with snapDOM](https://img.shields.io/badge/built%20with-snapDOM-blue)](https://snapdom.dev)
+```
+
+### Projects using snapDOM
+
+snapDOM runs in production across 290+ public repositories ([GitHub dependents graph](https://github.com/zumerlab/snapdom/network/dependents)). A few notable ones, each verified from its own `package.json`:
+
+- [LobeHub](https://github.com/lobehub/lobehub) — platform for operating AI agents
+- [Trilium Notes](https://github.com/TriliumNext/Trilium) — hierarchical personal knowledge base
+- [Sealos](https://github.com/labring/sealos) — AI-native cloud operating system
+- [Tencent tmagic-editor](https://github.com/Tencent/tmagic-editor) — low-code page editor
+- [Playroom](https://github.com/seek-oss/playroom) — JSX design tool by SEEK
+- [GPT-Vis](https://github.com/antvis/GPT-Vis) — AI-friendly data viz by Ant Group's AntV
+- [Rabby Wallet](https://github.com/RabbyHub/Rabby) — browser wallet for EVM chains
+- [uMap](https://github.com/umap-project/umap) — OpenStreetMap map builder
+- [ListenBrainz](https://github.com/metabrainz/listenbrainz-server) — music tracker by MetaBrainz
+- [SnapDIFF](https://zumerlab.com/snapdiff/) — in-browser visual regression testing *(by Zumerlab)*
+
+See the full gallery at **[snapdom.dev/made-with](https://snapdom.dev/made-with/)**. Shipping snapDOM? [Open a PR](https://github.com/zumerlab/snapdom/pulls) to add your project — real, verifiable projects only.
 
 ## Star History
 

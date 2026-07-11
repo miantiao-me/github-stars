@@ -1,6 +1,6 @@
 ---
 project: taste-skill
-stars: 56451
+stars: 61972
 description: |-
     Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop 
 url: https://github.com/Leonxlnx/taste-skill

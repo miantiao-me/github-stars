@@ -1,6 +1,6 @@
 ---
 project: openchamber
-stars: 6058
+stars: 6278
 description: |-
     Desktop and web interface for OpenCode AI agent
 url: https://github.com/openchamber/openchamber
