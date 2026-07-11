@@ -1,5 +1,18 @@
+allowBuilds:
+  core-js-pure: true
+  esbuild: true
+  sharp: true
+  simple-git-hooks: true
+  workerd: true
+minimumReleaseAgeExclude:
+  - eslint@10.7.0
+shellEmulator: true
+
+trustPolicy: no-downgrade
+
 onlyBuiltDependencies:
   - core-js-pure
   - esbuild
+  - sharp
   - simple-git-hooks
   - workerd
