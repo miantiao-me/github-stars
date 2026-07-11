@@ -1,6 +1,6 @@
 ---
 project: kill-ai-slop
-stars: 205
+stars: 228
 description: |-
     A field guide to the visual & copy tics of AI-generated products — and an Agent Skill that scans your project and strips them out. https://killaislop.com
 url: https://github.com/yetone/kill-ai-slop
@@ -18,7 +18,7 @@ so common you've stopped seeing it.
 **Kill AI Slop** is two things:
 
 1. **A website**, a multilingual field guide (English, Chinese, Japanese, and
-   Korean) that catalogues 23 AI-slop tells, each with an interactive
+   Korean) that catalogues 32 AI-slop tells, each with an interactive
    before→after demo showing the clean fix. The site is itself built as a
    rebuttal to everything it catalogues.
 2. **An Agent Skill**, `kill-ai-slop`, which turns that catalogue into action:

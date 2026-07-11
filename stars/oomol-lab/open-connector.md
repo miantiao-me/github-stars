@@ -1,6 +1,6 @@
 ---
 project: open-connector
-stars: 1309
+stars: 1384
 description: |-
     Open-source auth gateway connecting 1000+ SaaS providers to AI agents through SDK, CLI, MCP, HTTP, and OpenAPI.
 url: https://github.com/oomol-lab/open-connector

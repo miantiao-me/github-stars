@@ -1,6 +1,6 @@
 ---
 project: openclaw
-stars: 382565
+stars: 382620
 description: |-
     Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 
 url: https://github.com/openclaw/openclaw

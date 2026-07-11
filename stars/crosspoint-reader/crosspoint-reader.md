@@ -1,6 +1,6 @@
 ---
 project: crosspoint-reader
-stars: 5910
+stars: 5921
 description: |-
     Firmware for the Xteink X3 and X4 e-readers
 url: https://github.com/crosspoint-reader/crosspoint-reader

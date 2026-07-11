@@ -1,6 +1,6 @@
 ---
 project: guizang-social-card-skill
-stars: 4914
+stars: 4930
 description: |-
     🪧 Claude Code / Codex skill — generate Xiaohongshu carousels & WeChat 21:9+1:1 cover pairs. Editorial × Swiss visual systems, 28 layouts, 10 themes, single-file HTML → PNG. 小红书图文 + 公众号封面对
 url: https://github.com/op7418/guizang-social-card-skill

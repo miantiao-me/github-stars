@@ -433,6 +433,7 @@ const Composer = () => {
 | `Opt+Backspace` | Delete word before cursor      |
 | `Cmd+Backspace` | Delete to start of line (same as `Ctrl+U`; gated by the `Ctrl+U` toggle) |
 | `Ctrl+Z`        | Undo (up to 128 steps)         |
+| `Ctrl+Y`        | Redo                           |
 
 > On macOS, `Alt` chords are pressed via the **Option** (`⌥`) key.
 
@@ -476,6 +477,7 @@ The full chord catalog (every key is a `TKeybinding`):
 | `Delete`         | Delete grapheme before cursor     |
 | `Alt+Backspace`  | Delete word before cursor         |
 | `Ctrl+Z`         | Undo                              |
+| `Ctrl+Y`         | Redo                              |
 
 `disableArrowNavigation: true` additionally forces all nav chords (`Up`, `Down`, `Left`, `Right`, `Alt+B`, `Alt+F`, `Ctrl+A`, `Ctrl+E`) off regardless of the map.
 
@@ -525,7 +527,7 @@ Things to know before shipping. Most are intrinsic to running a rich editor insi
 
 - **Time-grouped, not semantic.** Edits within `undoGroupDelay` (default 2.5 s) collapse into one step. On a slow machine the boundary may land mid-word.
 - **Bounded by `maxUndo`** (default 128). Older history is dropped silently.
-- **No redo.** `Ctrl+Y` / `Ctrl+Shift+Z` are not bound. Add yourself if needed.
+- **Redo is `Ctrl+Y`.** `Ctrl+Shift+Z` is not bound — terminals can't distinguish it from `Ctrl+Z` (control chars carry no shift bit). Any fresh edit after an undo clears the redo history.
 
 </details>
 

@@ -1,6 +1,6 @@
 ---
 project: oh-my-opencode-slim
-stars: 6791
+stars: 6804
 description: |-
     Lean, fine tuned Opencode multi agent suite · Mix any models · Auto delegate tasks
 url: https://github.com/alvinunreal/oh-my-opencode-slim
