@@ -11,21 +11,5 @@
   },
   "observability": {
     "enabled": true
-  },
-  "migrations": [
-    {
-      "new_sqlite_classes": [
-        "GitHubStarsMCP"
-      ],
-      "tag": "v1"
-    }
-  ],
-  "durable_objects": {
-    "bindings": [
-      {
-        "class_name": "GitHubStarsMCP",
-        "name": "MCP_OBJECT"
-      }
-    ]
   }
 }
