@@ -1,6 +1,6 @@
 ---
 project: recorder
-stars: 520
+stars: 519
 description: |-
     📹 Record is an open-source web app to record screen and camera directly in your browser | No installation required | No tracking | Fully local
 url: https://github.com/addyosmani/recorder

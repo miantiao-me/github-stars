@@ -1,6 +1,6 @@
 ---
 project: ai-global
-stars: 70
+stars: 71
 description: |-
     Unified Config Manager for AI Coding Tools
 url: https://github.com/nanxiaobei/ai-global

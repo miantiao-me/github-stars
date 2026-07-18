@@ -1,6 +1,6 @@
 ---
 project: Yohaku
-stars: 143
+stars: 148
 description: |-
     余白 / Yohaku — A typographic design system for written content. One accent, three neutral tiers, the rest is whitespace.
 url: https://github.com/Innei/Yohaku

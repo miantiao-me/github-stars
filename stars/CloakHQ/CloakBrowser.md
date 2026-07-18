@@ -1,6 +1,6 @@
 ---
 project: CloakBrowser
-stars: 28072
+stars: 28587
 description: |-
     Stealth Chromium that passes every bot detection test. Drop-in Playwright replacement with source-level fingerprint patches. 30/30 tests passed.
 url: https://github.com/CloakHQ/CloakBrowser
@@ -44,7 +44,7 @@ Drop-in Playwright/Puppeteer replacement for Python and JavaScript.<br>
 Same API, same code — just swap the import. <strong>3 lines of code, 30 seconds to unblock.</strong>
 </p>
 
-- **66 source-level C++ patches** — canvas, WebGL, audio, fonts, GPU, screen, WebRTC, network timing, automation signals, CDP input behavior
+- **71 source-level C++ patches** — canvas, WebGL, audio, fonts, GPU, screen, WebRTC, network timing, automation signals, CDP input behavior
 - **`humanize=True`** — human-like mouse curves, keyboard timing, and scroll patterns. One flag, behavioral detection passes
 - **Pro: 0.9 reCAPTCHA v3 score** — human-level, server-verified
 - **Passes Cloudflare Turnstile**, FingerprintJS, BrowserScan — tested against 30+ detection sites
@@ -158,11 +158,11 @@ page.goto("https://example.com")
 
 ---
 
-## Latest: v0.4.10 — 66 source-level stealth patches (Chromium 148.0.7778.215.5 — Windows + Linux; macOS follows)
+## Latest: v0.4.12 — 71 source-level stealth patches (Chromium 150.0.7871.114.3 — all platforms)
 
-- **CloakBrowser Pro** — the latest binary (Chromium 148.0.7778.215.5, 66 source-level patches) is available to Pro subscribers on **Windows and Linux** (macOS is on 148.0.7778.215.3, next build follows). Set a `license_key` (`licenseKey` in JS) or the `CLOAKBROWSER_LICENSE_KEY` env var and the wrapper fetches the latest build automatically. See [CloakBrowser Pro](#cloakbrowser-pro)
+- **CloakBrowser Pro** — the latest binary (Chromium 150.0.7871.114.3, 71 source-level patches) is available to Pro subscribers on **Linux, Windows, and macOS**. Set a `license_key` (`licenseKey` in JS) or the `CLOAKBROWSER_LICENSE_KEY` env var and the wrapper fetches the latest build automatically. See [CloakBrowser Pro](#cloakbrowser-pro)
 - **.NET 8 / C# client** — CloakBrowser now ships as a NuGet package (`CloakBrowser`), mirroring the Python and JS wrappers.
-- **66 fingerprint patches** — rendering consistency improvements across Linux and Windows, corrected GPU/display/graphics parameters to match stock Chrome profiles
+- **71 fingerprint patches** — rendering consistency improvements across Linux and Windows, corrected GPU/display/graphics parameters to match stock Chrome profiles
 - **Windows native GPU passthrough** — real hardware values pass through directly instead of being spoofed, matching real browser behavior
 - **HTTP proxy inline credentials** — new network-layer support for proxies with inline authentication
 - **`extension_paths`** — load Chrome extensions in all launch functions
@@ -196,7 +196,7 @@ The wrapper (Python + JS) is MIT, free forever. The binary uses a delayed
 free-release model:
 
 - **Free (v146)** — the previous binary, on [GitHub Releases](https://github.com/CloakHQ/cloakbrowser/releases). Goes stale within weeks as detection evolves.
-- **Pro (latest, Chromium 148.0.7778.215.5)** — the newest patches and Chromium upgrades first, so the [results below](#test-results) stay green as anti-bot systems change. Linux, Windows, and macOS (Apple Silicon + Intel).
+- **Pro (latest, Chromium 150.0.7871.114.3)** — the newest patches and Chromium upgrades first, so the [results below](#test-results) stay green as anti-bot systems change. Linux, Windows, and macOS (Apple Silicon + Intel).
 
 Anti-bot detection updates constantly, and an older binary degrades fast.
 Pro keeps you on the build that's actively maintained against it.
@@ -204,7 +204,7 @@ Pro keeps you on the build that's actively maintained against it.
 Use Pro if CloakBrowser is part of production scraping, QA, monitoring, or
 automation where stale browser fingerprints cost you time or blocked runs.
 
-**New: try the latest Pro binary (Chromium 148) free for 7 days** — see how it
+**New: try the latest Pro binary (Chromium 150) free for 7 days** — see how it
 performs against your targets. Cancel anytime.
 
 Activate with your license key (env var, `license_key=` param, or `~/.cloakbrowser/license.key`):
@@ -217,7 +217,7 @@ Pro plans & free trial → **[cloakbrowser.dev](https://cloakbrowser.dev)**
 
 ## Test Results
 
-All tests verified against live detection services. Results below are for the latest Pro/current build unless noted. Last tested: Jul 2026 (Chromium 148).
+All tests verified against live detection services. Results below are for the latest Pro/current build unless noted. Last tested: Jul 2026 (Chromium 150).
 
 | Detection Service | Stock Playwright | CloakBrowser | Notes |
 |---|---|---|---|
@@ -285,7 +285,7 @@ CloakBrowser is a thin wrapper (Python + JavaScript) around a custom-built Chrom
 3. **Every launch** → Playwright or Puppeteer starts with our binary + stealth args
 4. **You write code** → standard Playwright/Puppeteer API, nothing new to learn
 
-The binary includes 66 source-level patches covering canvas, WebGL, audio, fonts, GPU, screen properties, WebRTC, network timing, hardware reporting, automation signal removal, and CDP input behavior mimicking.
+The binary includes 71 source-level patches covering canvas, WebGL, audio, fonts, GPU, screen properties, WebRTC, network timing, hardware reporting, automation signal removal, and CDP input behavior mimicking.
 
 These are compiled into the Chromium binary — not injected via JavaScript, not set via flags.
 
@@ -741,6 +741,7 @@ Supported by the binary but **not set by default** — pass via `args` to custom
 | `--fingerprint-noise=false` | Disable noise injection (canvas, WebGL, audio, client rects) while keeping the deterministic fingerprint seed active |
 | `--fingerprint=off` | **Chromium 148+ binary only.** Pass-through debug mode — turns spoofing off and presents the machine's **real native fingerprint** (keeps only the baseline any Chrome needs). The binary strips the injected seed *and* `--fingerprint-platform`, so there's no mixed OS profile. Most useful on a genuine Windows machine to check whether an issue is our spoofing or the environment. Accepts `off`/`false`/`0`/`disable`/`disabled`. For a *pure* pass-through don't combine it with `geoip=True` / explicit timezone / locale — those stay applied. |
 | `--fingerprint-allow-3p-cookies` | **Chromium 148+ binary only.** Re-enable third-party cookies for embedded flows that need them (reCAPTCHA v3, SSO, some payment challenges). Off by default; turn on only where a login/payment/embedded challenge loads but never finishes. |
+| `--fingerprint-sapi-voices=false` | **Chromium 150+ binary only.** Opt out of the Windows speech-voice tables when spoofing Windows. On by default (the voice set matches a real Chrome install); turn off only if a target reacts badly to the Windows voice list. |
 | `--license-through-proxy` | **Chromium 148+ binary only, Linux only for now.** Route the Pro license/session calls through your `--proxy-server` instead of direct to cloakbrowser.dev. Off by default (these calls go direct, so they never spend proxy bandwidth or touch your scraping session). |
 | `--enable-blink-features=FakeShadowRoot` | Access closed shadow DOM elements |
 
@@ -854,11 +855,11 @@ browser = await launch_async(args=["--remote-debugging-port=9242"])
 
 | Platform | Free | Pro | Status |
 |---|---|---|---|
-| Linux x86_64 | Chromium 146 (58 patches) | Chromium 148 (66 patches) | ✅ |
-| Linux arm64 (RPi, Graviton) | Chromium 146 (58 patches) | Chromium 148 (66 patches) | ✅ |
-| macOS arm64 (Apple Silicon) | Chromium 145 (26 patches) | Chromium 148 (66 patches) | ✅ |
-| macOS x86_64 (Intel) | Chromium 145 (26 patches) | Chromium 148 (66 patches) | ✅ |
-| Windows x86_64 | Chromium 146 (58 patches) | Chromium 148 (66 patches) | ✅ |
+| Linux x86_64 | Chromium 146 (58 patches) | Chromium 150 (71 patches) | ✅ |
+| Linux arm64 (RPi, Graviton) | Chromium 146 (58 patches) | Chromium 150 (71 patches) | ✅ |
+| macOS arm64 (Apple Silicon) | Chromium 145 (26 patches) | Chromium 150 (71 patches) | ✅ |
+| macOS x86_64 (Intel) | Chromium 145 (26 patches) | Chromium 150 (71 patches) | ✅ |
+| Windows x86_64 | Chromium 146 (58 patches) | Chromium 150 (71 patches) | ✅ |
 
 The wrapper auto-downloads the correct binary for your platform.
 
@@ -1127,7 +1128,7 @@ FingerprintJS (`demo.fingerprint.com/playground`) checks multiple signals. Each 
 
 | Detection | Cause | Fix |
 |-----------|-------|-----|
-| **`nodriver` / bad bot** | Stale binary/wrapper, missing current FPJS patches, or poor proxy IP reputation | Upgrade to the latest Pro binary (`148.0.7778.215.5+`), use a residential proxy with `geoip=True`, and use the config below. |
+| **`nodriver` / bad bot** | Stale binary/wrapper, missing current FPJS patches, or poor proxy IP reputation | Upgrade to the latest Pro binary (`150.0.7871.114.3+`), use a residential proxy with `geoip=True`, and use the config below. |
 | **Browser tampering** | Noise injection detected by ML | `--fingerprint-noise=false` |
 | **Browser tampering** (fonts) | Font metrics don't match the spoofed Windows platform | `--fingerprint-windows-font-metrics` (Chromium 148+ binary; requires [Windows fonts installed](#font-setup-on-linux)) |
 | **Virtual machine** | Screen dimensions don't match viewport | `--fingerprint-screen-width/height` matching viewport |
@@ -1386,7 +1387,7 @@ cosign verify \
 - **Wrapper code** (this repository) — MIT. See [LICENSE](https://github.com/CloakHQ/CloakBrowser/blob/main/LICENSE).
 - **CloakBrowser binary** (compiled Chromium):
   - **v146 and earlier** — free for personal and commercial use, no redistribution (OEM/SaaS license required to serve third parties).
-  - **v148+ (latest)** — requires an active [CloakBrowser Pro](https://cloakbrowser.dev) subscription to download.
+  - **v148 and later** — requires an active [CloakBrowser Pro](https://cloakbrowser.dev) subscription to download.
   - See [BINARY-LICENSE.md](https://github.com/CloakHQ/CloakBrowser/blob/main/BINARY-LICENSE.md) for full terms.
 
 ## Contributing

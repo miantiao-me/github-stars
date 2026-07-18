@@ -1,8 +1,8 @@
 ---
 project: takumi
-stars: 2302
+stars: 2390
 description: |-
-    Render JSX, HTML, and CSS to SVG or images. Drop-in next/og replacement.
+    Render JSX & HTML to SVG or images. Support 160+ CSS properties. Drop-in next/og replacement.
 url: https://github.com/kane50613/takumi
 ---
 
@@ -67,6 +67,35 @@ const image = await render(
 
 await writeFile("./output.png", image);
 ```
+
+### Fonts
+
+Only a last-resort Latin font ships built in. Load the rest through `fonts`: a URL, raw bytes, or `googleFonts`. A weight range or an `axes` entry loads the variable font, so `font-variation-settings` drives its axes:
+
+```tsx
+import { render } from "takumi-js";
+import { googleFonts } from "takumi-js/helpers";
+
+const image = await render(
+  <div
+    tw="w-full h-full flex items-center justify-center"
+    style={{
+      fontSize: 72,
+      fontFamily: "Fraunces",
+      fontVariationSettings: "'opsz' 72, 'wght' 700",
+    }}
+  >
+    Hello from Takumi
+  </div>,
+  {
+    width: 1200,
+    height: 630,
+    fonts: googleFonts([{ name: "Fraunces", weight: "100..900", axes: { opsz: "9..144" } }]),
+  },
+);
+```
+
+Rendering many images? Register the fonts once on a `Renderer` and reuse it. See [Typography & Fonts](https://takumi.kane.tw/docs/typography-and-fonts).
 
 ### API route (`next/og`-compatible)
 

@@ -1,6 +1,6 @@
 ---
 project: mcp-proxy
-stars: 709
+stars: 711
 description: |-
     An MCP proxy server that aggregates and serves multiple MCP resource servers through a single HTTP server.
 url: https://github.com/tbxark/mcp-proxy
@@ -15,6 +15,7 @@ An MCP proxy that aggregates multiple MCP servers behind a single HTTP entrypoin
 - Proxy multiple MCP clients: aggregate tools, prompts, and resources from many servers.
 - SSE and streamable HTTP: serve via Server‑Sent Events or streamable HTTP.
 - Flexible config: supports `stdio`, `sse`, and `streamable-http` client types.
+- OAuth client support: authorize once against downstream servers that require interactive OAuth (e.g. Notion), then let the proxy hold and refresh the token for every caller.
 
 ## Documentation
 

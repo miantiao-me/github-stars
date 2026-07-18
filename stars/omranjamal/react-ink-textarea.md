@@ -1,6 +1,6 @@
 ---
 project: react-ink-textarea
-stars: 27
+stars: 28
 description: |-
     A full-featured CLI textarea component for React Ink — Implement beautiful multi-line text input on the CLI
 url: https://github.com/omranjamal/react-ink-textarea

@@ -1,6 +1,6 @@
 ---
 project: winboat
-stars: 21907
+stars: 21971
 description: |-
     Run Windows apps on 🐧 Linux with ✨ seamless integration
 url: https://github.com/TibixDev/winboat
@@ -24,9 +24,9 @@ url: https://github.com/TibixDev/winboat
 ## Screenshots
 
 <div align="center">
-  <img src="gh-assets/features/feat_dash.png" alt="WinBoat Dashboard" width="45%">
-  <img src="gh-assets/features/feat_apps.png" alt="WinBoat Apps" width="45%">
-  <img src="gh-assets/features/feat_native.png" alt="Native Windows" width="45%">
+  <img src="gh_assets/features/feat_dash.png" alt="WinBoat Dashboard" width="45%">
+  <img src="gh_assets/features/feat_apps.png" alt="WinBoat Apps" width="45%">
+  <img src="gh_assets/features/feat_native.png" alt="Native Windows" width="45%">
 </div>
 
 ## ⚠️ Work in Progress ⚠️
@@ -71,7 +71,7 @@ Before running WinBoat, ensure your system meets the following requirements:
       - [Installation Guide](https://github.com/containers/podman-compose?tab=readme-ov-file#installation)
 - **FreeRDP**: Required for remote desktop connection (Please make sure you have **Version 3.x.x** with sound support included)
     - [Installation Guide](https://github.com/FreeRDP/FreeRDP/wiki/PreBuilds)
-- [OPTIONAL] **Kernel Modules**: The `iptables` / `nftables` and `iptable_nat` kernel modules can be loaded for network autodiscovery and better shared filesystem performance, but this is not obligatory in newer versions of WinBoat
+- [OPTIONAL] **Kernel Modules**: The `iptables` / `nftables` kernel modules can be loaded for better network performance, but this is not obligatory in newer versions of WinBoat
     - [Module loading instructions](https://rentry.org/rmfq2e5e)
 
 ## Downloading
@@ -153,11 +153,11 @@ They're awesome and you should check them out:
 
 ## Star History
 
-<a href="https://www.star-history.com/#tibixdev/winboat&Date">
+<a href="https://www.star-history.com/?repos=tibixdev%2Fwinboat&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=tibixdev/winboat&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=tibixdev/winboat&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=tibixdev/winboat&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=tibixdev/winboat&type=date&theme=dark&legend=top-left&sealed_token=zAULDxizn0P-jCXSLfkaIJCa-OhtmdFRKaZ3CfYqpk2L4um_02jxxY0_CVY_IrvpAJk8hph0kK0oyrlD0exFSrs4VDF86zOvTw3K0FVjggjuVR_v2gre9koLhhy8vTSR3UrY1xcINMWrbDurLh9Uiej8ZD2tsDDeksYZKnJMtaDSDp0zh2zJDGGrXBx4" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=tibixdev/winboat&type=date&legend=top-left&sealed_token=zAULDxizn0P-jCXSLfkaIJCa-OhtmdFRKaZ3CfYqpk2L4um_02jxxY0_CVY_IrvpAJk8hph0kK0oyrlD0exFSrs4VDF86zOvTw3K0FVjggjuVR_v2gre9koLhhy8vTSR3UrY1xcINMWrbDurLh9Uiej8ZD2tsDDeksYZKnJMtaDSDp0zh2zJDGGrXBx4" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=tibixdev/winboat&type=date&legend=top-left&sealed_token=zAULDxizn0P-jCXSLfkaIJCa-OhtmdFRKaZ3CfYqpk2L4um_02jxxY0_CVY_IrvpAJk8hph0kK0oyrlD0exFSrs4VDF86zOvTw3K0FVjggjuVR_v2gre9koLhhy8vTSR3UrY1xcINMWrbDurLh9Uiej8ZD2tsDDeksYZKnJMtaDSDp0zh2zJDGGrXBx4" />
  </picture>
 </a>
 

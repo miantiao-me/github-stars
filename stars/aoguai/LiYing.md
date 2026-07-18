@@ -1,6 +1,6 @@
 ---
 project: LiYing
-stars: 3237
+stars: 3241
 description: |-
     LiYing is an automated photo processing program designed for automating the post-processing workflow of ID photos in general photo studios. | LiYing 是一套适用于自动化 完成一般照相馆后期证件照处理流程的照片自动处理的程序。
 url: https://github.com/aoguai/LiYing

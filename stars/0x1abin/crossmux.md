@@ -1,6 +1,6 @@
 ---
 project: crossmux
-stars: 62
+stars: 69
 description: |-
     CrossMux is a community fork of CrossPoint Reader that turns the device into more than a reader — it adds an Apps hub of mini-games and tools, richer standby faces, and a first-class Simplified Chinese build.
 url: https://github.com/0x1abin/crossmux
@@ -12,7 +12,7 @@ url: https://github.com/0x1abin/crossmux
 
 **CrossMux** is a community fork of [CrossPoint Reader](https://github.com/crosspoint-reader/crosspoint-reader) that turns the device into more than a reader — it adds an Apps hub of mini-games and tools, richer standby faces, and a first-class Simplified Chinese build.
 
-**Version:** CrossMux 1.4.0 (based on CrossPoint Reader 1.4.0)
+**Version:** CrossMux 1.4.1 (based on CrossPoint Reader 1.4.1 plus upstream `develop` through `c5787d1c`)
 
 **Now running on:** ESP32C3-based Xteink [X4](https://www.xteink.com/products/xteink-x4) and [X3](https://www.xteink.com/products/xteink-x3).
 
@@ -20,7 +20,7 @@ url: https://github.com/0x1abin/crossmux
 
 What CrossMux adds on top of upstream:
 
-- **Apps hub** (the `Apps` menu): 2048, Minesweeper, Sudoku, Gomoku (五子棋), Chinese Chess / Xiangqi (象棋), Conway's Game of Life, and a procedural "Ugly Avatar" generator. The menu paginates with page dots once the apps overflow a single screen.
+- **Apps hub** (the `Apps` menu): 2048, Minesweeper, Sudoku, Gomoku (五子棋), Chinese Chess / Xiangqi (象棋), and a procedural "Ugly Avatar" generator. The menu paginates with page dots once the apps overflow a single screen.
 - **WeRead Copilot** (微信读书): browse your shelf, notes, and reviews with an SD-backed offline cache and bulk sync.
 - **Reading analytics**: reading stats, a monthly reading heatmap, a reading profile, and achievements — backed by an SD-stored JSON history.
 - **Standby faces**: a hand-drawn "sloppy" clock and a Chinese almanac/calendar face (老黄历), plus **AirPage** — a cloud-backed face that shows a QR code to its upload page and fetches a cloud-rendered image over Wi-Fi (manual or live MQTT push), shown full-screen in 4-level grayscale and cached on SD. Optional 4-level grayscale and inverse display modes throughout.
@@ -32,6 +32,8 @@ What CrossMux adds on top of upstream:
 [![Fund contributors](https://img.shields.io/badge/%F0%9F%91%91_Fund_contributors-royalty.dev-BB953A?style=for-the-badge&labelColor=1a1a1a)](https://app.royalty.dev/crosspoint-reader/crosspoint-reader)
 
 CrossPoint is open-source e-reader firmware - community-built, fully hackable, free forever. It's maintained by a growing community of developers and readers who believe your device should do what you want - not what a manufacturer decided for you.
+
+> If you're planning to buy an Xteink device, consider purchasing an **X3/X4 Developer Edition** through https://crosspointreader.com. CrossPoint receives a small share of each sale, helping fund development costs.
 
 ## What can CrossPoint do?
 
@@ -92,10 +94,6 @@ USB port or browser before assuming the device is locked. Only reach for the unl
 > Flashing any other firmware on a USB-locked device may **permanently brick the device** or leave it **permanently
 > stuck on that firmware with no recovery path**. Once USB flashing is re-locked, your only way back is via OTA, and if
 > the firmware you flashed doesn't support OTA, **there is no way out**.
-> 
-> **The Papyrix fork has removed OTA update support from its code.** If you flash Papyrix onto a
-> USB-locked unit, you will have **zero update or recovery path** and will be stuck on it forever. **Do not flash
-> Papyrix (or any other unsupported firmware) on a locked device.**
 
 ## Install firmware
 
@@ -292,7 +290,7 @@ One of the best things about open source is that anyone can take the code in a d
 
 - [papyrix-reader](https://github.com/bigbag/papyrix-reader) — Adds FB2 and MD format support. Actively maintained with Arabic script support. Custom themes via SD card.
 
-- [crosspet](https://github.com/trilwu/crosspet) — A Vietnamese fork that adds a Tamagotchi-style virtual chicken that grows based on your reading milestones (pages read, streaks, care). Also: Flashcards, Weather, Pomodoro timer, and mini-games.
+- ~~[crosspet](https://github.com/trilwu/crosspet) — A Vietnamese fork that adds a Tamagotchi-style virtual chicken that grows based on your reading milestones (pages read, streaks, care). Also: Flashcards, Weather, Pomodoro timer, and mini-games.~~ (Unmaintained)
 
 - [crosspoint-reader-cjk](https://github.com/aBER0724/crosspoint-reader-cjk) — Purpose-built for Chinese, Japanese, and Korean reading.
 

@@ -1,6 +1,6 @@
 ---
 project: obscura
-stars: 18835
+stars: 19414
 description: |-
     The headless browser for AI agents and web scraping
 url: https://github.com/h4ckf0r0day/obscura
@@ -99,18 +99,6 @@ Want to sponsor? Email [hello@obscura.sh](mailto:hello@obscura.sh).
       Better proxies. Fewer blocks. More scalable automation.
     </td>
   </tr>
-  <tr>
-    <td width="200" align="center" valign="middle">
-      <a href="https://mangoproxy.com/?utm_source=github&utm_medium=partner&utm_campaign=h4ckf0r0day" target="_blank">
-        <img alt="MangoProxy" src="assets/sponsors/mangoproxy.png" width="180"/>
-      </a>
-    </td>
-    <td valign="middle">
-      <a href="https://mangoproxy.com/?utm_source=github&utm_medium=partner&utm_campaign=h4ckf0r0day"><b>MangoProxy</b></a> provides residential, ISP, datacenter, and mobile proxies in 200+ countries. Trusted by businesses worldwide for stable connections, fast response times, and scalable proxy infrastructure.<br>
-      Use Promo code <b>OBSCURA</b> for 8% off Static ISP Proxies.
-    </td>
-  </tr>
-    <tr>
       <td width="200" align="center" valign="middle">
         <a href="https://9proxy.com/?utm_source=Github&utm_campaign=obscura" target="_blank">
           <img alt="9Proxy" src="assets/sponsors/9proxy.png" width="180"/>

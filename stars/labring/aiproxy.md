@@ -1,6 +1,6 @@
 ---
 project: aiproxy
-stars: 504
+stars: 510
 description: |-
     AI Proxy is a high performance AI gateway using OpenAI / Claude / Gemini protocol as the entry point. It features intelligent error handling, multi-channel management, and comprehensive monitoring. With support for multiple models, rate limiting, and multi-tenant isolation.
 url: https://github.com/labring/aiproxy

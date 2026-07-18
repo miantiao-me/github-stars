@@ -1,6 +1,6 @@
 ---
 project: vcard
-stars: 315
+stars: 316
 description: |-
     null
 url: https://github.com/1chooo/vcard

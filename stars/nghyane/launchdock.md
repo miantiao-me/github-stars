@@ -1,6 +1,6 @@
 ---
 project: launchdock
-stars: 331
+stars: 330
 description: |-
     Use Claude and GPT through one local gateway with OpenAI-compatible and Claude-native APIs.
 url: https://github.com/nghyane/launchdock

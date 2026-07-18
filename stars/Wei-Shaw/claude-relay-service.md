@@ -1,6 +1,6 @@
 ---
 project: claude-relay-service
-stars: 12345
+stars: 12379
 description: |-
     CRS-自建Claude Code镜像，一站式开源中转服务，让 Claude、OpenAI、Gemini、Droid 订阅统一接入，支持拼车共享，更高效分摊成本，原生工具无缝使用。
 url: https://github.com/Wei-Shaw/claude-relay-service

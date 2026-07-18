@@ -1,6 +1,6 @@
 ---
 project: system-prompts-and-models-of-ai-tools
-stars: 141810
+stars: 142057
 description: |-
     FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models
 url: https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools
@@ -38,6 +38,15 @@ url: https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools
 
 ---
 
+## Security Notice for AI Startups
+
+> **Warning:** If you're an AI startup, make sure your data is secure. Exposed prompts or AI models can easily become a target for hackers.
+
+> **Important:** Interested in securing your AI systems?  
+> Check out **[ZeroLeaks](https://zeroleaks.ai/)**, a service designed to help startups **identify and secure** prompt injection and system prompt extraction risks.
+
+---
+
 ## Support the Project
 
 If you find this collection valuable and appreciate the effort involved in obtaining and sharing these insights, please consider supporting the project.
@@ -55,15 +64,6 @@ Thank you for your support!
 
 ---
 
-## Security Notice for AI Startups
-
-> **Warning:** If you're an AI startup, make sure your data is secure. Exposed prompts or AI models can easily become a target for hackers.
-
-> **Important:** Interested in securing your AI systems?  
-> Check out **[ZeroLeaks](https://zeroleaks.ai/)**, a service designed to help startups **identify and secure** prompt injection and system prompt extraction risks.
-
----
-
 # Sponsors
 
 Sponsor the most comprehensive repository of AI system prompts and reach thousands of developers.
@@ -76,7 +76,7 @@ Sponsor the most comprehensive repository of AI system prompts and reach thousan
 
 > Open an issue.
 
-> **Latest Update:** 10/05/2026
+> **Latest Update:** 12/07/2026
 
 ---
 
@@ -84,18 +84,7 @@ Sponsor the most comprehensive repository of AI system prompts and reach thousan
 
 - **X:** [Lucknite](https://x.com/Lucknite)
 - **Discord**: `x1xhlol`
-- **Email**: `lucasvalbuena@pm.me`
-
-
-## Star History
-
-<a href="https://www.star-history.com/#x1xhlol/system-prompts-and-models-of-ai-tools&Date">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=x1xhlol/system-prompts-and-models-of-ai-tools&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=x1xhlol/system-prompts-and-models-of-ai-tools&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=x1xhlol/system-prompts-and-models-of-ai-tools&type=Date" />
-  </picture>
-</a>
+- **Email**: `lucasvalbuena@pm.me
 
 **Drop a star if you find this useful!**
 

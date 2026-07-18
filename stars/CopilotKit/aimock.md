@@ -1,6 +1,6 @@
 ---
 project: aimock
-stars: 643
+stars: 650
 description: |-
     Mock everything your AI app talks to — LLM APIs, MCP, A2A, AG-UI, vector DBs, search. One package, one port, zero dependencies.
 url: https://github.com/CopilotKit/aimock
@@ -58,7 +58,7 @@ Run them all on one port with `npx @copilotkit/aimock --config aimock.json`, or 
 
 - **[Record & Replay](https://aimock.copilotkit.dev/record-replay)** — Proxy real APIs, save as fixtures, replay deterministically forever
 - **Timing-aware recording and replay** — Recorded fixtures capture per-frame arrival timestamps; replay uses recorded timings for approximate timing reproduction based on recorded TTFT and inter-frame cadence (replay chunk count may differ from recording — TTFT and average pace are preserved, not per-token fidelity) with configurable `--replay-speed` multiplier
-- **[Multi-turn Conversations](https://aimock.copilotkit.dev/multi-turn)** — Record and replay multi-turn traces with tool rounds; match distinct turns via `turnIndex`, `hasToolResult`, `toolCallId`, `sequenceIndex`, `systemMessage` (gate on host-supplied agent context), or custom predicates
+- **[Multi-turn Conversations](https://aimock.copilotkit.dev/multi-turn)** — Record and replay multi-turn traces with tool rounds; match distinct turns via `turnIndex`, `hasToolResult`, `toolCallId`, `toolResultContains` (gate on the tool-result payload), `sequenceIndex`, `systemMessage` (gate on host-supplied agent context), or custom predicates
 - **[12 providers across 14 API surfaces](https://aimock.copilotkit.dev/docs)** — OpenAI Chat, OpenAI Responses, OpenAI Realtime (GA + Beta shim), Claude, Gemini (REST + embedContent), Gemini Live, Gemini Interactions, Azure, Bedrock, Vertex AI, Ollama (chat + embeddings), Cohere (chat + embed), ElevenLabs TTS — full streaming support
 - **Multimedia APIs** — [image generation](https://aimock.copilotkit.dev/images) (DALL-E, Imagen), [image editing](https://aimock.copilotkit.dev/images) (/v1/images/edits), [text-to-speech](https://aimock.copilotkit.dev/speech) (OpenAI + ElevenLabs), [audio transcription](https://aimock.copilotkit.dev/transcription), [audio translation](https://aimock.copilotkit.dev/transcription) (/v1/audio/translations), [video generation](https://aimock.copilotkit.dev/video), [OpenRouter video generation](https://aimock.copilotkit.dev/openrouter-video) (/api/v1/videos with async job lifecycle), [Google Veo video generation](https://aimock.copilotkit.dev/veo-video) (:predictLongRunning + /v1beta/operations async lifecycle), [Grok Imagine video generation](https://aimock.copilotkit.dev/grok-video) (/v1/videos/generations with async job lifecycle), [fal.ai](https://aimock.copilotkit.dev/fal-ai) (image / video / audio with queue lifecycle)
 - **[MCP](https://aimock.copilotkit.dev/mcp-mock) / [A2A](https://aimock.copilotkit.dev/a2a-mock) / [AG-UI](https://aimock.copilotkit.dev/agui-mock) / [Vector](https://aimock.copilotkit.dev/vector-mock)** — Mock every protocol your AI agents use
@@ -134,6 +134,28 @@ Private and link-local addresses (loopback, RFC1918, CGNAT, cloud metadata, ULA,
 ### Replay matching & `AIMOCK_STRICT_TURN_INDEX`
 
 On replay, `turnIndex` is a non-fatal disambiguator, not a hard reject gate: a content-matching fixture is served even when its scripted `turnIndex` differs from the request's assistant-message count. This kills false "no fixture matched" misses for multi-bubble agent runs (multi-step agents emit several assistant bubbles per logical turn). When a served fixture diverges from its scripted `turnIndex`, the match diagnostic carries `turnIndexRelaxed: true` and aimock logs a one-shot warning (at the `warn` log level — silent by default). To restore the legacy strict behavior where a defined `turnIndex` must equal the assistant count exactly, set `AIMOCK_STRICT_TURN_INDEX=1`. The record path is always strict regardless of this flag.
+
+### aimock-owned upstream keys — `AIMOCK_PROVIDER_*_KEY`
+
+In record or `--proxy-only` mode, aimock forwards the caller's auth header to the real provider unchanged. If your tests can only send a dummy placeholder key (e.g. an SDK that refuses to start without a non-empty API key), aimock can inject its own configured upstream key on a fixture-miss passthrough so the proxied call actually authenticates. Each provider has an independent env var, and the key is applied with the provider-correct wire scheme:
+
+| Env var                          | Provider                         | Injected header               |
+| -------------------------------- | -------------------------------- | ----------------------------- |
+| `AIMOCK_PROVIDER_OPENAI_KEY`     | OpenAI                           | `Authorization: Bearer <key>` |
+| `AIMOCK_PROVIDER_OPENROUTER_KEY` | OpenRouter                       | `Authorization: Bearer <key>` |
+| `AIMOCK_PROVIDER_COHERE_KEY`     | Cohere                           | `Authorization: Bearer <key>` |
+| `AIMOCK_PROVIDER_GROK_KEY`       | Grok (xAI)                       | `Authorization: Bearer <key>` |
+| `AIMOCK_PROVIDER_OLLAMA_KEY`     | Ollama (Cloud / bearer-gated)    | `Authorization: Bearer <key>` |
+| `AIMOCK_PROVIDER_ANTHROPIC_KEY`  | Anthropic                        | `x-api-key: <key>`            |
+| `AIMOCK_PROVIDER_GEMINI_KEY`     | Gemini (and Gemini Interactions) | `x-goog-api-key: <key>`       |
+| `AIMOCK_PROVIDER_VEO_KEY`        | Veo                              | `x-goog-api-key: <key>`       |
+| `AIMOCK_PROVIDER_AZURE_KEY`      | Azure OpenAI                     | `api-key: <key>`              |
+| `AIMOCK_PROVIDER_ELEVENLABS_KEY` | ElevenLabs                       | `xi-api-key: <key>`           |
+| `AIMOCK_PROVIDER_FAL_KEY`        | fal.ai                           | `Authorization: Key <key>`    |
+
+The Gemini interactions provider mode reuses `AIMOCK_PROVIDER_GEMINI_KEY` (same upstream API as Gemini). An empty-string value is treated as unset.
+
+This is opt-in and backward-compatible: with no key configured the feature is inert and the caller's header passes through as-is. Injection fires only when the caller sent no credential **or** a dummy credential prefixed with `sk-aimock-` (overridable via `AIMOCK_DUMMY_KEY_MARKER`); a real caller key never starting with that marker is always forwarded verbatim, so the caller overrides aimock. Signed and exchanged credentials — AWS Bedrock (SigV4) and Vertex AI (OAuth) — are never rewritten and always forwarded unchanged. (Azure's static `api-key` is injected; a real Microsoft Entra ID `Authorization: Bearer` token from the caller is never dummy-prefixed, so it too passes through verbatim.)
 
 ## Framework Guides
 

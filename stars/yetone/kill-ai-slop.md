@@ -1,6 +1,6 @@
 ---
 project: kill-ai-slop
-stars: 228
+stars: 623
 description: |-
     A field guide to the visual & copy tics of AI-generated products — and an Agent Skill that scans your project and strips them out. https://killaislop.com
 url: https://github.com/yetone/kill-ai-slop
@@ -18,7 +18,7 @@ so common you've stopped seeing it.
 **Kill AI Slop** is two things:
 
 1. **A website**, a multilingual field guide (English, Chinese, Japanese, and
-   Korean) that catalogues 32 AI-slop tells, each with an interactive
+   Korean) that catalogues 33 AI-slop tells, each with an interactive
    before→after demo showing the clean fix. The site is itself built as a
    rebuttal to everything it catalogues.
 2. **An Agent Skill**, `kill-ai-slop`, which turns that catalogue into action:
@@ -86,6 +86,15 @@ You can also run the scanner directly. Point it at any web project:
 node skill/scripts/scan.mjs path/to/project          # grouped report
 node skill/scripts/scan.mjs path/to/project --json    # machine-readable
 ```
+
+`--only=` / `--skip=` filter by tell id, `--exclude=` drops paths,
+`--rules=extra.mjs` loads your own language- or stack-specific tells, and
+`deslop-ignore` comment directives suppress hits you've confirmed as
+intentional — see `skill/README.md`.
+
+## License
+
+[Apache-2.0](LICENSE).
 
 The scanner is dependency-free and never edits files. In an Agent-Skills host
 (e.g. Claude Code), invoke the skill and it will scan, triage, report, then fix,

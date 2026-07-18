@@ -1,6 +1,6 @@
 ---
 project: transitions.dev
-stars: 1978
+stars: 2160
 description: |-
     Collection of the most essential transitions for web apps, skill for agents and Refine tool for agents
 url: https://github.com/Jakubantalik/transitions.dev
@@ -31,9 +31,27 @@ Live site: https://transitions.dev/
 
 Each card has a copy button that emits a self-contained CSS snippet: semantic CSS custom properties on `:root`, the transition rules namespaced under `t-*` classes, and a `@media (prefers-reduced-motion: reduce)` guard — so you can paste the snippet into any project and apply it to any component without pulling in demo-specific markup or sizing.
 
+## Install with the CLI (npm)
+
+Pull any transition into your project from the terminal — no manual copy:
+
+```bash
+npx transitions-pro add card-resize      # free — no account needed
+npx transitions-pro list                 # see everything available
+```
+
+Pro transitions unlock after a passwordless browser sign-in (device flow — no API key in your terminal):
+
+```bash
+npx transitions-pro login                # opens the browser to confirm a code
+npx transitions-pro add confetti-burst    # pulls the Pro CSS + React
+```
+
+CLI source: [`cli/`](./cli) (published as the public `transitions-pro` package — it holds no premium source; Pro recipes are fetched from the authenticated API).
+
 ## Use as an agent skill
 
-The same eighteen transitions are packaged as an installable agent skill so AI coding tools (Cursor, Claude Code, Codex, …) can apply them directly inside your project.
+The same transitions are packaged as an installable agent skill so AI coding tools (Cursor, Claude Code, Codex, …) can apply them directly inside your project.
 
 ```bash
 npx skills add Jakubantalik/transitions.dev
