@@ -1,6 +1,6 @@
 ---
 project: impeccable
-stars: 72364
+stars: 75266
 description: |-
     The design language that makes your AI harness better at design.
 url: https://github.com/pbakaus/impeccable

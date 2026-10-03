@@ -1,6 +1,6 @@
 ---
 project: v-maplibre
-stars: 70
+stars: 71
 description: |-
     50+ Vue 3 components for MapLibre GL — deck.gl, LiDAR, COG, spatial indexing, and more
 url: https://github.com/geoql/v-maplibre

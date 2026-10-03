@@ -1,6 +1,6 @@
 ---
 project: crosspoint-reader
-stars: 8113
+stars: 8169
 description: |-
     Open-source e-reader firmware
 url: https://github.com/crosspoint-reader/crosspoint-reader

@@ -1,6 +1,6 @@
 ---
 project: signoz
-stars: 32246
+stars: 32269
 description: |-
     SigNoz is an open-source, OpenTelemetry-native observability platform for your team and their AI agents. Get logs, metrics, and traces in one tool with features like APM, distributed tracing, log management, infra monitoring, etc. Combined with SigNoz MCP and a native AI teammate (in SigNoz Cloud) it helps you build more resilient apps.
 url: https://github.com/SigNoz/signoz

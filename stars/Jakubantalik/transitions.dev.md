@@ -1,8 +1,8 @@
 ---
 project: transitions.dev
-stars: 4386
+stars: 4531
 description: |-
-    Collection of the most essential transitions for web apps, skill for agents and Refine tool for agents
+    UI montion AI agent, a library of 43+ crafted transitions, a skill that fits your workflow.
 url: https://github.com/Jakubantalik/transitions.dev
 ---
 
@@ -104,4 +104,8 @@ python3 -m http.server 8765
 ```
 
 Then open http://127.0.0.1:8765/.
+
+## License
+
+You (and any coding agent working for you) may use the transitions and skills in unlimited personal and commercial projects, modify them, and ship them to your users. The only restriction: don't redistribute the library itself as a competing transitions library or kit. The tooling (CLI, agent, Refine) is MIT. See [LICENSE](LICENSE) and the [full terms](https://transitions.dev/terms.html).
 

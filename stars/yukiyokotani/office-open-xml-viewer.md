@@ -1,6 +1,6 @@
 ---
 project: office-open-xml-viewer
-stars: 817
+stars: 818
 description: |-
     A browser-based viewer for Office Open XML documents that renders to an HTML Canvas element.
 url: https://github.com/yukiyokotani/office-open-xml-viewer
@@ -953,6 +953,7 @@ file without uploading it.
 | | Multi-column text body (`numCol` / `spcCol` — balanced flow) | ✅ |
 | | Theme object defaults (`<a:objectDefaults>`) treated as new-object templates only, as PowerPoint does | ✅ |
 | **Tables** | Cells, rows, columns | ✅ |
+| | Table background (`a:tblBg`, beneath cell fills; optional `TableElement.background: Fill` in parsed models) | ✅ |
 | | Cell merges (horizontal / vertical) | ✅ |
 | | Cell borders | ✅ |
 | | Cell fills (solid / gradient) | ✅ |

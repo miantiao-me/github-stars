@@ -1,6 +1,6 @@
 ---
 project: Gewechat
-stars: 3495
+stars: 3498
 description: |-
     微信机器人框架，个人微信二次开发，企业微信二次开发，最简单易用的免费二开框架,RPA技术（非HOOK破解桌面端）
 url: https://github.com/Devo919/Gewechat

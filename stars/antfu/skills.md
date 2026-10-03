@@ -1,6 +1,6 @@
 ---
 project: skills
-stars: 5930
+stars: 5938
 description: |-
     Anthony Fu's curated collection of agent skills.
 url: https://github.com/antfu/skills
@@ -41,7 +41,10 @@ Manually maintained by Anthony Fu with his preferred tools, setup conventions, a
 | Skill | Description |
 |-------|-------------|
 | [antfu](skills/antfu) | Anthony Fu's preferences and best practices for app/library projects (eslint, pnpm, vitest, vue, etc.) |
-| [antfu-design](skills/antfu-design) | UnoCSS-centered design principles, semantic tokens, and UI presentation patterns from Anthony Fu's tooling UIs |
+| [antfu-create-pr](skills/antfu-create-pr) | Open reviewable PRs: Conventional Commits title, evidence-based body, before/after screenshots via `gh --attach` (adapted from [moeru-ai/airi](https://github.com/moeru-ai/airi/blob/main/.agents/skills/create-pr/SKILL.md)) |
+
+> [!TIP]
+> For design, see [antfu/design](https://github.com/antfu/design), which ships the `antfu-design` skill alongside the `@antfu/design` package.
 
 ### Skills Generated from Official Documentation
 

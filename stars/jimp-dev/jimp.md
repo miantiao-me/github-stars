@@ -1,6 +1,6 @@
 ---
 project: jimp
-stars: 14662
+stars: 14664
 description: |-
     An image processing library written entirely in JavaScript for Node, with zero external or native dependencies.
 url: https://github.com/jimp-dev/jimp

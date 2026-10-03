@@ -1,6 +1,6 @@
 ---
 project: computer
-stars: 9318
+stars: 9462
 description: |-
     Give your agent a computer 👾
 url: https://github.com/cloudflare/computer
@@ -60,8 +60,13 @@ The [`examples/`](examples) directory holds runnable consumers of the
 public surface. Each is a Worker workspace with its own README.
 
 - [`examples/container`](examples/container) — runs `computerd` inside a
-  container, mounts a workspace, and talks to a Durable Object over
-  capnweb. A `write` / `read` / `exec` HTTP surface.
+  container the Durable Object schedules itself, mounts a workspace, and
+  talks to the object over capnweb. A `write` / `read` / `exec` HTTP
+  surface. The launch names the image and the instance size, because
+  `scheduling_policy: "durable_object"` moves both out of the config.
+- [`examples/container-legacy`](examples/container-legacy) — the same
+  surface against a container the platform schedules and sizes from the
+  `containers` block.
 - [`examples/worker-shell`](examples/worker-shell) — same HTTP surface as the
   container example, but the shell runs [just-bash](https://github.com/vercel-labs/just-bash)
   in a Dynamic Worker loaded through `env.LOADER`. No container.
@@ -77,6 +82,11 @@ public surface. Each is a Worker workspace with its own README.
 - [`examples/rlm`](examples/rlm) — shows how generated JavaScript can read long
   context from a Computer Workspace, call bounded model workers, and reduce their
   structured results with code.
+- [`examples/pi-ai`](examples/pi-ai) — a one-shot [pi](https://github.com/earendil-works/pi)
+  agent. Its loop asks the model, runs the workspace tools it asked for,
+  and repeats until the model stops asking.
+- [`examples/tanstack-ai`](examples/tanstack-ai) — the same one-shot agent on
+  [TanStack AI](https://tanstack.com/ai), where `chat()` runs the loop.
 - [`examples/think`](examples/think) — a [`@cloudflare/think`](https://www.npmjs.com/package/@cloudflare/think)
   chat agent that uses the workspace as its working directory, reachable
   from a terminal.

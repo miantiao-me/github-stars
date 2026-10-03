@@ -1,6 +1,6 @@
 ---
 project: typescript-sdk
-stars: 13486
+stars: 13507
 description: |-
     The official TypeScript SDK for Model Context Protocol servers and clients
 url: https://github.com/modelcontextprotocol/typescript-sdk
@@ -23,7 +23,7 @@ url: https://github.com/modelcontextprotocol/typescript-sdk
 > [Issues](https://github.com/modelcontextprotocol/typescript-sdk/issues/new?template=v2-feedback.yml) are the most useful feedback right now — we'll reopen PRs as v2 stabilizes.
 
 [![NPM Version - Server](https://img.shields.io/npm/v/%40modelcontextprotocol%2Fserver?label=%40modelcontextprotocol%2Fserver)](https://www.npmjs.com/package/@modelcontextprotocol/server)
-[![NPM Version - Client](https://img.shields.io/npm/v/%40modelcontextprotocol%2Fclient?label=%40modelcontextprotocol%2Fclient)](https://www.npmjs.com/package/@modelcontextprotocol/client) ![MIT licensed](https://img.shields.io/npm/l/%40modelcontextprotocol%2Fserver)
+[![NPM Version - Client](https://img.shields.io/npm/v/%40modelcontextprotocol%2Fclient?label=%40modelcontextprotocol%2Fclient)](https://www.npmjs.com/package/@modelcontextprotocol/client) ![Apache-2.0 licensed](https://img.shields.io/npm/l/%40modelcontextprotocol%2Fserver)
 
 <details>
 <summary>Table of Contents</summary>

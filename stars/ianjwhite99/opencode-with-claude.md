@@ -1,6 +1,6 @@
 ---
 project: opencode-with-claude
-stars: 591
+stars: 597
 description: |-
     OpenCode plugin to use your Claude Max/Pro subscription with OpenCode via Meridian
 url: https://github.com/ianjwhite99/opencode-with-claude
@@ -202,9 +202,47 @@ For parity with the `meridian` CLI:
 
 - `MERIDIAN_PROFILES` — JSON array of profile objects; wins over `profiles.json`.
 - `MERIDIAN_DEFAULT_PROFILE` — profile id; wins over `settings.activeProfile`.
+- `MERIDIAN_PATH` — run your own Meridian build instead of the bundled one
+  (see [Using your own Meridian build](#using-your-own-meridian-build)).
 
 Malformed or missing files never crash the plugin; all parse/IO failures are
 logged via OpenCode's plugin log and the plugin falls back to no-profile mode.
+
+## Using your own Meridian build
+
+Each plugin release pins one exact `@rynfar/meridian` version, and Meridian
+ships faster than this plugin does. Set `MERIDIAN_PATH` to follow Meridian's
+releases without waiting for a plugin release:
+
+```bash
+npm install -g @rynfar/meridian
+MERIDIAN_PATH="$(npm root -g)" opencode
+```
+
+`MERIDIAN_PATH` accepts any of:
+
+- the Meridian package root — `.../node_modules/@rynfar/meridian`
+- any directory Node can resolve `@rynfar/meridian` from — a global
+  `node_modules`, or a project that depends on it
+- the entry file itself — `.../@rynfar/meridian/dist/server.js`
+
+Auth, profiles, and the session cache already live on disk
+(`~/.config/meridian`, `~/.cache/meridian`), so an external build shares all of
+them with the `meridian` CLI; only the code version changes.
+
+The bundled copy stays the fallback. A path that does not exist, is not a
+Meridian install, or exposes no `startProxyServer` logs a warning and changes
+nothing else. Either way the plugin logs which build it is running, so a bug
+report can name it:
+
+```
+meridian 1.79.0 (bundled)
+meridian 1.80.0 (external: /opt/homebrew/lib/node_modules/@rynfar/meridian)
+```
+
+A swapped build has to keep the surface the plugin uses: `startProxyServer`
+returning `{ server, config.port, close() }`, and a `/health` response carrying
+`status`, `error`, `version`, and `auth.{daysUntilRenewal,renewalRequiredSoon}`.
 
 ### Switching profiles at runtime
 
@@ -266,6 +304,7 @@ opencode-with-claude/
 │   ├── index.ts           # Plugin entry point: v1 server() + v2 setup()
 │   ├── headers.ts         # Meridian request-identity headers (shared)
 │   ├── proxy.ts           # Proxy lifecycle management
+│   ├── meridian-source.ts # Picks the Meridian build (bundled or MERIDIAN_PATH)
 │   ├── meridian-config.ts # Reads Meridian's profiles/settings files
 │   └── logger.ts          # Plugin loggers
 ├── test/
@@ -301,8 +340,11 @@ directory, for example `"plugins": ["/path/to/opencode-with-claude/dist"]`.
 `dist/index.js` has a single default export with `id`, `server()` and
 `setup()`. OpenCode 1.x calls `server()` and uses the returned hooks
 (`config`, `chat.headers`, ...). OpenCode 2 calls `setup(ctx)` and the plugin
-registers `session.hook("model.request")` (base URL and Meridian headers) and
-the system-prompt hooks on the context. The module deliberately has no other
+registers `session.hook("model.request")` (base URL and Meridian headers),
+`session.hook("http.request")` (drops the `anthropic-beta` header OpenCode's
+Anthropic transport re-adds after `model.request` — Meridian talks to the
+Claude Agent SDK, which refuses custom betas on subscription auth), and the
+system-prompt hooks on the context. The module deliberately has no other
 exports: OpenCode 1.17 and 1.18 load every export as a plugin, so a second one
 would start a second proxy.
 

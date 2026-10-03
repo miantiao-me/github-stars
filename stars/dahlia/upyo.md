@@ -1,6 +1,6 @@
 ---
 project: upyo
-stars: 585
+stars: 586
 description: |-
     Upyo is a simple and cross-runtime library for sending email messages using SMTP and various email providers.  It works on Node.js, Deno, Bun, and edge functions.
 url: https://github.com/dahlia/upyo

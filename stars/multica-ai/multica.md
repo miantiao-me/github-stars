@@ -1,6 +1,6 @@
 ---
 project: multica
-stars: 51662
+stars: 51893
 description: |-
     Make humans and AI agents work as one team — open-source and self-hostable.
 url: https://github.com/multica-ai/multica

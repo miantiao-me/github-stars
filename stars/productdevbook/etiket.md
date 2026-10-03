@@ -1,6 +1,6 @@
 ---
 project: etiket
-stars: 459
+stars: 458
 description: |-
     Zero-dependency barcode & QR code SVG, PNG generator. 40+ formats, styled QR codes, tree-shakeable. Pure TypeScript.
 url: https://github.com/productdevbook/etiket

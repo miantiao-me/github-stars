@@ -1,6 +1,6 @@
 ---
 project: awesome-tuis
-stars: 20765
+stars: 20801
 description: |-
     List of projects that provide terminal user interfaces
 url: https://github.com/rothgar/awesome-tuis
@@ -188,6 +188,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [opcilloscope](https://github.com/SquareWaveSystems/opcilloscope) OPC UA client TUI with real-time oscilloscope view for industrial automation
 - [opencode](https://github.com/sst/opencode) AI coding agent, built for the terminal
 - [play](https://github.com/paololazzari/play) A TUI playground to experiment with your favorite programs, such as grep, sed, awk, jq and yq
+- [postbear](https://github.com/carban/postbear) Postbear is a high-speed and lightweight API client. The Postman alternative in your terminal
 - [posting](https://github.com/darrenburns/posting) A powerful HTTP client that lives in your terminal
 - [pproftui](https://github.com/Oloruntobi1/pproftui) A terminal-based UI for Go's pprof that makes profiling interactive
 - [proxelar](https://github.com/emanuele-em/proxelar) Scriptable MITM proxy TUI to inspect, intercept, replay, and rewrite HTTP(S) and WebSocket traffic
@@ -259,6 +260,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [lazycontainer](https://github.com/andreybleme/lazycontainer) TUI for managing Apple containers
 - [lazydocker](https://github.com/jesseduffield/lazydocker) The lazier way to manage everything docker
 - [lazytrivy](https://github.com/owenrumney/lazytrivy) The lazier way to scan images, k8s and the filesytem with Trivy
+- [lfk](https://github.com/janosmiko/lfk) Keyboard-focused, yazi-inspired Kubernetes navigator with a Miller columns layout and an owner-based resource hierarchy
 - [oxker](https://github.com/mrjackwills/oxker) A simple tui to view & control docker containers
 - [Pocker](https://github.com/pommee/Pocker) TUI based application for docker related tasks.
 - [Podman-tui](https://github.com/containers/podman-tui) TUI for Podman containers
@@ -350,6 +352,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [GitType](https://github.com/unhappychoice/gittype) A CLI code-typing game that turns your source code into typing challenges
 - [go-life](https://github.com/sachaos/go-life) Terminal based Conway's Game of Life
 - [gokemon](https://github.com/nathanieltooley/gokemon) A terminal based Pokemon battle simulator
+- [Gravitype](https://github.com/kanakOS01/gravitype) A terminal typing game where words fall from the sky
 - [Greed](https://gitlab.com/esr/greed) A game of consumption. Eat as much as you can before munching yourself into a corner!
 - [LeTrain](https://github.com/antoniovazquezaraujo/LeTrain) - Open-source procedural train simulator using Java 17, LibGDX and Lanterna.
 - [Maze](https://github.com/itchyny/maze) Simple maze game written in Go.
@@ -563,6 +566,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [diskonaut](https://github.com/imsnif/diskonaut) Terminal disk space navigator
 - [dua-cli](https://github.com/byron/dua-cli) View disk space usage and delete unwanted data, fast.
 - [distrobox-tui](https://github.com/phanirithvij/distrobox-tui) TUI for managing distrobox containers
+- [dtflow](https://github.com/KenyonY/dtflow) Terminal browser for LLM training data (SFT/DPO/agent JSONL): samples rendered as conversations, full-file search, Python-expression filters, mouse support, windowed loading for large files.
 - [dupster](https://github.com/karimz1/dupster) The lazy way to find duplicates in your Terminal. Easily find duplicates, preview them and delete them.
 - [ec2-instance-selector](https://github.com/aws/amazon-ec2-instance-selector) A CLI tool and go library which recommends instance types based on resource criteria like vcpus and memory
 - [emu2](https://github.com/dmsc/emu2) A simple DOS emulator for the Linux text console, supporting basic DOS system calls and console I/O.
@@ -665,6 +669,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [manga-tui](https://github.com/josueBarretogit/manga-tui) Terminal-based manga reader and downloader with image rendering support
 - [marstui-audio](https://github.com/schooldanlp6/marstui-rustio) A nice audio management Interface, similar to pavucontrol with the benefit of customizing everything
 - [mps-youtube](https://github.com/mps-youtube/mps-youtube) Terminal based YouTube player and downloader
+- [mpv-music](https://github.com/FurqanHun/mpv-music) Cross-platform CLI/TUI music player and library browser written in Rust that lets you filter and select what you want to play and gets out of your way, with no background daemons.
 - [mpvc](https://github.com/gmt4/mpvc) A mpc-like control interface for mpv
 - [nap](https://nap.sourceforge.net/) Linux napster client
 - [ncspot](https://github.com/hrkfdn/ncspot) Cross-platform ncurses Spotify client written in Rust
@@ -809,6 +814,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 <details open><summary><h2>Screensavers</h2></summary>
 
 - [astroterm](https://github.com/da-luce/astroterm) A planetarium for your terminal! Explore stars, planets, constellations, and more
+- [cbirds](https://github.com/clainstone/cbirds) A flock of boids in your terminal, in C99 with zero dependencies: braille anywhere, sprites in Kitty and Ghostty
 - [gitlogue](https://github.com/unhappychoice/gitlogue) A TUI screensaver that visualizes Git commit history in your terminal
 - [neo](https://github.com/st3w/neo) Simulates the digital rain from "The Matrix"
 - [pond](https://gitlab.com/alice-lefebvre/pond) A soothing in-terminal idle screen that simulates a little pond.

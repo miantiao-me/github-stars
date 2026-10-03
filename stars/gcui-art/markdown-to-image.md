@@ -1,6 +1,6 @@
 ---
 project: markdown-to-image
-stars: 1992
+stars: 1989
 description: |-
     This React component is used to render Markdown into a beautiful poster image, with support for copying as an image. Md to Poster/Image/Quote/Card/Instagram/Twitter/Facebook...
 url: https://github.com/gcui-art/markdown-to-image

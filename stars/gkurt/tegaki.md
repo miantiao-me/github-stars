@@ -1,6 +1,6 @@
 ---
 project: tegaki
-stars: 3113
+stars: 3118
 description: |-
     Handwriting animation for the web. Supports any font or text.
 url: https://github.com/gkurt/tegaki
@@ -13,7 +13,7 @@ url: https://github.com/gkurt/tegaki
 Tegaki (手書き) turns any font into animated handwriting.
 No manual path authoring. No native dependencies. Just pick a font.
 
-**[Website & docs](https://gkurt.com/tegaki/)** · **[Try it in the studio](https://gkurt.com/tegaki/studio/)**
+**[Website & docs](https://tegaki.ink/)** · **[Try it in the studio](https://tegaki.ink/studio/)**
 
 [![npm](https://img.shields.io/npm/v/tegaki)](https://www.npmjs.com/package/tegaki)
 [![license](https://img.shields.io/npm/l/tegaki)](https://github.com/gkurt/tegaki/blob/main/LICENSE)
@@ -65,10 +65,10 @@ This writes a self-drawing, looping `tegaki-is-awesome.svg` — drop it into a R
 npx tegaki "Hello World" --font tangerine --mode once -o hello.svg
 npx tegaki "ABC" --stagger 80% --size 140 --color "#222"
 npx tegaki "مرحبا بالعالم" --font amiri --stroke-easing ease-in-out-cubic
-npx tegaki "Glow" --effects '{"glow":{"radius":10,"color":"#f0a"}}'
+npx tegaki "Glow" --plugins '[["glow", {"radius": 0.12, "color": "#f0a"}], "taper"]'
 ```
 
-`--mode` is `loop` (repeats forever, the default), `once` (draws itself a single time), or `static` (finished artwork). The CLI shapes text with harfbuzz (bundled as WASM) the way the renderer does, so ligatures, Arabic joining, Devanagari and right-to-left text come out right, and it clips strokes to the letter outlines as the studio does. Run `npx tegaki --help` for every option and `--list-fonts` for the bundled fonts. The CLI emits SVG only — for PNG, GIF, or WebM use the [interactive studio](https://gkurt.com/tegaki/studio/).
+`--mode` is `loop` (repeats forever, the default), `once` (draws itself a single time), or `static` (finished artwork). The CLI shapes text with harfbuzz (bundled as WASM) the way the renderer does, so ligatures, Arabic joining, Devanagari and right-to-left text come out right, and it clips strokes to the letter outlines as the studio does. Run `npx tegaki --help` for every option and `--list-fonts` for the bundled fonts. The CLI emits SVG only — for PNG, GIF, or WebM use the [interactive studio](https://tegaki.ink/studio/).
 
 ## Framework Support
 
@@ -107,17 +107,19 @@ Several handwriting fonts are bundled and ready to use:
 - **Nanum Pen Script** — `tegaki/fonts/nanum-pen-script` _(Korean: Hangul syllables + jamo + Latin)_
 - **Atma** — `tegaki/fonts/atma` _(Bengali + Latin)_
 - **LXGW WenKai** — `tegaki/fonts/lxgw-wenkai` _(Simplified Chinese: the 1000 most frequent hanzi + Latin)_
+- **Hershey Script** — `tegaki/fonts/hershey-script` _(Latin, single-line: a plotter font drawn in its own pen strokes)_
+- **EMS Allure** — `tegaki/fonts/ems-allure` _(Latin, single-line: Evil Mad Scientist's stroke version of Allura)_
 
-For other fonts, use the [interactive studio](https://gkurt.com/tegaki/studio/) to create a custom bundle.
+For other fonts, use the [interactive studio](https://tegaki.ink/studio/) to create a custom bundle.
 
 ## Documentation
 
-Visit **[gkurt.com/tegaki](https://gkurt.com/tegaki)** for full documentation:
+Visit **[tegaki.ink](https://tegaki.ink)** for full documentation:
 
-- [Getting Started](https://gkurt.com/tegaki/getting-started/)
-- [Framework Guides](https://gkurt.com/tegaki/frameworks/react/) (React, Svelte, Vue, SolidJS, Astro, Web Components, Vanilla)
-- [Generating Fonts](https://gkurt.com/tegaki/guides/generating/)
-- [API Reference](https://gkurt.com/tegaki/api/renderer/)
+- [Getting Started](https://tegaki.ink/getting-started/)
+- [Framework Guides](https://tegaki.ink/frameworks/react/) (React, Svelte, Vue, SolidJS, Astro, Web Components, Vanilla)
+- [Generating Fonts](https://tegaki.ink/guides/generating/)
+- [API Reference](https://tegaki.ink/api/renderer/)
 
 ## Integrations
 

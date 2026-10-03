@@ -1,6 +1,6 @@
 ---
 project: developer-portfolio-v2
-stars: 271
+stars: 270
 description: |-
     Awesome porfolio design for developers or designers, with easy configuration. Inspired by a code editor and with a snake game on homepage.
 url: https://github.com/alexdeploy/developer-portfolio-v2

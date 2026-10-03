@@ -1,6 +1,6 @@
 ---
 project: caddy-defender
-stars: 583
+stars: 585
 description: |-
     Caddy module to block or manipulate requests originating from AIs or cloud services trying to train on your websites
 url: https://github.com/JasonLovesDoggo/caddy-defender

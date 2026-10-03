@@ -1,6 +1,6 @@
 ---
 project: document
-stars: 1952
+stars: 1955
 description: |-
     Edit DOCX/XLSX/PPTX in your browser — client-side, no server, works offline (OnlyOffice + WebAssembly)
 url: https://github.com/ranuts/document

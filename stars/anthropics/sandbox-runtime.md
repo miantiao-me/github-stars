@@ -1,6 +1,6 @@
 ---
 project: sandbox-runtime
-stars: 5384
+stars: 5432
 description: |-
     A lightweight sandboxing tool for enforcing filesystem and network restrictions on arbitrary processes at the OS level, without requiring a container.
 url: https://github.com/anthropics/sandbox-runtime
@@ -567,6 +567,8 @@ Watchman accesses files outside the sandbox boundaries, which will trigger permi
   - Fedora: `dnf install ripgrep`
   - Arch: `pacman -S ripgrep`
 
+**Supported bubblewrap versions:** 0.4.0 and later, except that two things need 0.5.0 or newer, both of them changes to how bubblewrap prepares the mount point for a file bind: a `denyRead` entry or credential mask naming a path that is not a regular file — a fifo, a socket, a device node — cannot be applied on an older bubblewrap, which creates a file at the destination instead of binding over what is there (that fails on a read-only mount and blocks on a fifo); and a mount point left behind by an interrupted sandbox (see "Write denies on paths that do not exist yet" below) is created with write bits there, so the next wrap does not recognise it as a leftover and leaves it on the host. `checkDependencies()` runs `bwrap --version` (keeping the answer for the life of the process) and returns a warning naming the version it found when bubblewrap is older than 0.5.0; it is a warning, not a refusal. CI runs the whole suite against the bubblewrap Ubuntu ships and against 0.12.0, and the Linux mount-plan suites against 0.4.1 as well.
+
 **Ubuntu 24.04+ note:** These releases enable `kernel.apparmor_restrict_unprivileged_userns` by default, which allows `unshare(CLONE_NEWUSER)` but strips capabilities from the resulting namespace. Both bubblewrap and the seccomp isolation layer need capability-bearing user namespaces. Disable the restriction with:
 
 ```bash
@@ -795,7 +797,7 @@ With `allowWrite: ["/"]` the pins reach every ancestor, including any other allo
 
 A wrap that carries no write restrictions at all — `filesystem.disabled` with credential masks still in force, or a library caller passing no write config while a `denyRead` entry or a mask still seeds a pin — is the same shape: the whole tree is bound writable, so it gets the same pins and the same top-level covers, and the same `EXDEV` boundary applies there too.
 
-**Linux search depth:** On Linux, the sandbox uses `ripgrep` to scan for dangerous files in subdirectories within allowed write paths. By default, it searches up to 3 levels deep for performance. You can configure this with `mandatoryDenySearchDepth`:
+**Linux search depth:** On Linux, the sandbox uses `ripgrep` to scan for dangerous files in subdirectories within allowed write paths. By default, it searches up to 3 levels deep for performance: a dangerous file is found down to `a/b/.bashrc`, and a dangerous directory, or the hooks and config of a repository, one level higher up (`a/.vscode`, `a/.claude/commands`, `a/.git/hooks`). Ignore files (`.gitignore`, `.ignore`) do not hide anything from it, and a directory of the user's own that it cannot read is denied whole. A dangerous directory other than a repository's hooks is only seen if it holds a file directly: below the working directory, one that is empty or does not exist yet can be filled. A repository that has no `hooks` directory has an empty file in its place while a command runs, which stops `git init` from being run again there and a hook from being installed. You can configure this with `mandatoryDenySearchDepth`:
 
 ```json
 {

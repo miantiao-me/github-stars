@@ -1,6 +1,6 @@
 ---
 project: toolhive
-stars: 2224
+stars: 2234
 description: |-
     ToolHive is an enterprise-grade platform for running and managing Model Context Protocol (MCP) servers.
 url: https://github.com/stacklok/toolhive
