@@ -1,6 +1,6 @@
 ---
 project: eslint
-stars: 167
+stars: 168
 description: |-
     ESLint module for Nuxt.js
 url: https://github.com/nuxt-modules/eslint

@@ -1,6 +1,6 @@
 ---
 project: ServerBox
-stars: 213
+stars: 257
 description: |-
     ServerBox: turn a used Android phone into a Linux server, no root required. Alpine, Arch, Debian, Kali and Ubuntu with an always-on SSH server.
 url: https://github.com/madeye/ServerBox

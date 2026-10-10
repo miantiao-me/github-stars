@@ -1,12 +1,20 @@
 ---
 project: player
-stars: 3685
+stars: 3689
 description: |-
-    UI components and hooks for building video/audio players on the web. Robust, customizable, and accessible. Modern alternative to JW Player and Video.js.
+    Deprecated in favour of Video.js 10; security fixes only until January 2028. UI components and hooks for building video and audio players on the web.
 url: https://github.com/vidstack/player
 ---
 
 # Vidstack Player
+
+> [!IMPORTANT]
+> **Vidstack is in security-only maintenance.** We'll merge priority security patches into 1.x until January 2028, and nothing else. The teams behind Vidstack, Plyr, Media Chrome, and Video.js now focus their work on [Video.js 10](https://videojs.org?utm_source=vidstack).
+>
+> - **Migrate:** [React guide](https://videojs.org/docs/framework/react/guides/migrate-from-vidstack?utm_source=vidstack) · [Web components and other frameworks](https://videojs.org/docs/framework/html/guides/migrate-from-vidstack?utm_source=vidstack)
+> - **With a coding agent:** paste the prompt from the guide's AI Quickstart section into your agent: [React](https://videojs.org/docs/framework/react/guides/migrate-from-vidstack?utm_source=vidstack#ai-quickstart) · [Web components and other frameworks](https://videojs.org/docs/framework/html/guides/migrate-from-vidstack?utm_source=vidstack#ai-quickstart)
+> - **Questions:** [videojs/video.js discussions](https://github.com/videojs/video.js/discussions)
+> - **Security reports:** [SECURITY.md](./SECURITY.md)
 
 [![package-badge]][package]
 [![react-package-badge]][react-package]

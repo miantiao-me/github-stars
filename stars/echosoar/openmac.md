@@ -1,6 +1,6 @@
 ---
 project: openmac
-stars: 127
+stars: 128
 description: |-
     OpenMac runs a local HTTP server and provides APIs for image OCR recognition, multilingual translation, web page content retrieval, face and facial location recognition, QR code/barcode recognition in images, and text-to-speech (TTS) capabilities. 
 url: https://github.com/echosoar/openmac

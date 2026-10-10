@@ -1,6 +1,6 @@
 ---
 project: loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo.ong
-stars: 268
+stars: 269
 description: |-
     Make your URL looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooonger
 url: https://github.com/miantiao-me/loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo.ong

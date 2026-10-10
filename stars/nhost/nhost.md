@@ -1,6 +1,6 @@
 ---
 project: nhost
-stars: 9333
+stars: 9350
 description: |-
     The Open Source Firebase Alternative with GraphQL.
 url: https://github.com/nhost/nhost
@@ -45,6 +45,7 @@ Nhost consists of open source software:
 - Storage: [Storage](https://github.com/nhost/nhost/tree/main/services/storage)
 - Serverless Functions: Node.js (JavaScript and TypeScript)
 - [Nhost CLI](https://github.com/nhost/nhost/tree/main/cli) for local development
+- [MCP server](https://github.com/nhost/nhost/tree/main/cli/mcp) built into the CLI, for AI coding assistants
 
 ## Architecture of Nhost
 
@@ -86,6 +87,16 @@ nhost up
 ```
 
 Read the full [CLI Quickstart guide](https://docs.nhost.io/getting-started/local-development/cli).
+
+**Connect your AI assistant (MCP):**
+
+The CLI ships with a Model Context Protocol (MCP) server. Your assistant can read the GraphQL schema, run the queries and mutations you allow, update Nhost Cloud project configuration, search the Nhost docs, and in local development manage metadata, permissions, and migrations. Works with Claude Code, Codex, Gemini CLI, Cursor, and other MCP clients.
+
+```bash
+claude mcp add nhost nhost mcp start
+```
+
+See the [MCP Server docs](https://docs.nhost.io/platform/cli/mcp) for other clients and access settings.
 
 ## Option 3: Self-hosting
 
@@ -137,6 +148,7 @@ Nhost is frontend agnostic, which means Nhost works with all frontend frameworks
 # Resources
 
 - Start developing locally with the [Nhost CLI](https://docs.nhost.io/platform/cli/local-development)
+- Connect AI assistants to your projects with the [Nhost MCP server](https://docs.nhost.io/platform/cli/mcp)
 
 ## Nhost Clients
 

@@ -1,6 +1,6 @@
 ---
 project: better-notify
-stars: 313
+stars: 314
 description: |-
     All your notifications from one library. For Node.js and Bun.
 url: https://github.com/better-notify/better-notify

@@ -1,6 +1,6 @@
 ---
 project: omawrite
-stars: 259
+stars: 262
 description: |-
     The essence of writing
 url: https://github.com/omacom/omawrite

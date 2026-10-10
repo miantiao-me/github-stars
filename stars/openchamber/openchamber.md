@@ -1,6 +1,6 @@
 ---
 project: openchamber
-stars: 11076
+stars: 11406
 description: |-
     Agentic Development Environment based on OpenCode AI agent
 url: https://github.com/openchamber/openchamber
@@ -104,7 +104,7 @@ Install [OpenChamber from the Visual Studio Marketplace](https://marketplace.vis
 
 ### CLI for Web and PWA
 
-Requires Node.js 22+. CLI/Web and VS Code use your installed [OpenCode CLI](https://opencode.ai).
+Requires Node.js 24.14+. CLI/Web and VS Code use your installed [OpenCode CLI](https://opencode.ai).
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/openchamber/openchamber/main/scripts/install.sh | bash

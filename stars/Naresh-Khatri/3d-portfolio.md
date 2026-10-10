@@ -1,6 +1,6 @@
 ---
 project: 3d-portfolio
-stars: 1300
+stars: 1310
 description: |-
     Interactive 3D developer portfolio with a keyboard where every keycap is a skill. Built with Next.js, React, TypeScript, GSAP & Motion. Free to use!
 url: https://github.com/Naresh-Khatri/3d-portfolio
@@ -18,7 +18,7 @@ A jaw-dropping developer portfolio packed with interactive 3D animations, butter
 
 ## ✨ Features
 
-- **Interactive 3D Keyboard** — Custom Spline keyboard where each keycap represents a skill, revealing titles and descriptions on hover/press
+- **Interactive 3D Keyboard** — Programmatically generated Chibi keyboard where each keycap represents a skill, revealing titles and descriptions on hover/press
 - **Buttery Animations** — GSAP + Framer Motion powered scroll, hover, and reveal animations
 - **Space Theme** — Floating particles on a dark canvas for a cosmic vibe
 - **Light & Dark Mode** — Full theme support with cheeky disclaimer toasts
@@ -33,7 +33,7 @@ A jaw-dropping developer portfolio packed with interactive 3D animations, butter
 | **Framework** | Next.js 16.2.2, React 19.2.4, TypeScript |
 | **Styling** | Tailwind CSS, Shadcn UI, Aceternity UI |
 | **Animation** | GSAP, Framer Motion |
-| **3D** | Spline Runtime |
+| **3D** | @chibi3d/runtime, Three.js, React Three Fiber |
 | **Email** | Resend |
 | **Misc** | Lenis (smooth scroll), Zod, next-themes |
 
@@ -145,27 +145,15 @@ Other files you'll want to customize:
 
 ## ⌨️ Updating the 3D Keyboard Skills
 
-The 3D keyboard keycaps are baked into a Spline file. To update the skills displayed on the keyboard:
+The keyboard is generated from `SKILLS` in `src/data/constants.ts`.
+Optional `keyboardIcon`, `keyboardColor`, and `shortcut` fields customize each key.
+Local models and artwork live under `public/assets/keyboard/`. The converted
+Archivo Black font at `public/fonts/helvetiker_regular.typeface.json` renders
+the 3D headings; `src/components/keyboard/heading-metrics.json` positions them.
+Keep the font license alongside the converted font.
 
-1. **Import** the `public/assets/skills-keyboard.spline` file into [Spline](https://spline.design/)
-2. **Unhide** the keycap objects you want to edit
-3. **Update** the logo images on each keycap to your new skill icons
-4. **Rename** each keycap object to match the skill's `name` field in `src/data/constants.ts` (e.g. `js`, `react`, `docker`)
-5. **Hide** all keycap objects again
-6. **Export** the scene and overwrite `public/assets/skills-keyboard.spline`
-
-After updating the Spline file, make sure `src/data/constants.ts` has matching entries for every skill on the keyboard:
-
-```ts
-// Each keycap object name in Spline must match a key in SKILLS
-export const SKILLS: Record<SkillNames, Skill> = {
-  js: { name: "js", label: "JavaScript", shortDescription: "...", ... },
-  react: { name: "react", label: "React", shortDescription: "...", ... },
-  // ... add/remove entries to match your keyboard
-};
-```
-
-The `SkillNames` enum, `SKILLS` record, and the Spline keycap names must all stay in sync for the keyboard interactions to work correctly.
+Chibi renders the scene, while Portfolio handles GSAP motion, input, and audio.
+Reduced motion, Data Saver, and scene failures keep the HTML skills grid visible.
 
 ---
 
@@ -176,6 +164,7 @@ The portfolio supports optional realtime features powered by a **separate backen
 - 🖱️ **Live cursors** — See other visitors' cursors in realtime
 - 👥 **Online presence** — Shows who's currently on the site
 - 💬 **Chat** — Live chat between visitors
+- **Zombie Survival** with multiplayer and leaderboards on the live site.
 
 These features activate automatically when the `NEXT_PUBLIC_WS_URL` environment variable is set. Without it, the portfolio works perfectly fine as a static site — no realtime features, no backend dependency.
 

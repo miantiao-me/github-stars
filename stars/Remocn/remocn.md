@@ -1,6 +1,6 @@
 ---
 project: remocn
-stars: 1560
+stars: 1589
 description: |-
     Production-ready animations, transitions, backgrounds, and scenes for Remotion
 url: https://github.com/Remocn/remocn
@@ -15,6 +15,8 @@ url: https://github.com/Remocn/remocn
 # Remocn
 
 remocn is a copy-paste component library for building videos in Remotion. Instead of writing every fade, wipe, and kinetic title from scratch, you `npx shadcn add` a polished primitive into your project and own the code. Built for solo builders and small teams who need a product demo video shipped today, not next week.
+
+Rather direct the video than write it? [Remocn Studio](https://remocn.studio) is a free, open-source macOS app where your own coding agent (Claude Code, Codex, GitHub Copilot or Grok) builds the video from remocn components while you watch the live preview.
 
 ## Why remocn
 
@@ -42,6 +44,16 @@ Set up a new Remotion video project in this folder, then install the remocn agen
 ```
 
 When a browser tab opens with an empty video player, you're ready. Pick a [guide](https://remocn.dev/docs/guides) and make it yours.
+
+## Plugin for Claude Code and Codex
+
+The [remocn plugin](https://remocn.dev/docs/getting-started/plugin) bundles the skill with a `/remocn:video` workflow: brief → storyboard → install → compose → visual check → open in [Remocn Studio](https://remocn.studio).
+
+```text
+/plugin install remocn --marketplace Remocn/remocn
+```
+
+In Codex: `codex plugin marketplace add Remocn/remocn`, then `codex plugin add remocn@remocn`.
 
 ## Sponsors
 

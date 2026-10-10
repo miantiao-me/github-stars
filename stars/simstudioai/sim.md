@@ -1,6 +1,6 @@
 ---
 project: sim
-stars: 29765
+stars: 29803
 description: |-
     Sim is the collaborative workspace to build, deploy, and monitor AI agents and workflows. Used by 100,000+ builders.
 url: https://github.com/simstudioai/sim

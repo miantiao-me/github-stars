@@ -1,6 +1,6 @@
 ---
 project: jaaz
-stars: 6688
+stars: 6699
 description: |-
     The world's first open-source multimodal creative assistant  This is a substitute for Canva and Manus that prioritizes privacy and is usable locally.
 url: https://github.com/11cafe/jaaz

@@ -1,9 +1,9 @@
 ---
 project: hazel
-stars: 725
+stars: 726
 description: |-
     null
-url: https://github.com/HazelChat/hazel
+url: https://github.com/MapleTechLabs/hazel
 ---
 
 # Hazel Chat

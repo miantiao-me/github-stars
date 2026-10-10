@@ -1,6 +1,6 @@
 ---
 project: mainline-nextjs-template
-stars: 361
+stars: 364
 description: |-
     Mainline Next.js template built with shadcn/ui, Tailwind 4 & Next.js
 url: https://github.com/shadcnblocks/mainline-nextjs-template

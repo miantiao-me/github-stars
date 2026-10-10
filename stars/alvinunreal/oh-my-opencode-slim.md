@@ -1,6 +1,6 @@
 ---
 project: oh-my-opencode-slim
-stars: 9251
+stars: 9440
 description: |-
     Lean, fine tuned Opencode multi agent suite · Mix any models · Auto delegate tasks
 url: https://github.com/alvinunreal/oh-my-opencode-slim
@@ -20,6 +20,11 @@ url: https://github.com/alvinunreal/oh-my-opencode-slim
     <a href="https://boringdystopia.ai/"><img src="https://img.shields.io/badge/boringdystopia.ai-111111?style=for-the-badge&logo=vercel&logoColor=white" alt="boringdystopia.ai"></a>&nbsp;
     <a href="https://x.com/alvinunreal"><img src="https://img.shields.io/badge/X-@alvinunreal-000000?style=for-the-badge&logo=x&logoColor=white" alt="X @alvinunreal"></a>&nbsp;
     <a href="https://t.me/boringdystopiadevelopment"><img src="https://img.shields.io/badge/Telegram-Join%20channel-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Join channel"></a>&nbsp;
+  </p>
+
+  <p>
+    <a href="https://svgdiagram.ai"><img src="img/svgdiagram-logo.svg" alt="svgdiagram.ai" width="40" height="28" align="absmiddle"></a>&nbsp;
+    <a href="https://svgdiagram.ai"><b>svgdiagram.ai</b></a> <sub>· Turn your notes into clean, editable SVG diagrams</sub>
   </p>
 
   <p>
@@ -200,6 +205,15 @@ example and precedence rules.
 
 ### Preset Docs
 
+Project settings in `.opencode/oh-my-opencode-slim.json[c]` are inherited from
+ancestor directories, matching the host's discovery: v2 walks to the filesystem
+root; v1 stops at the Git worktree boundary. `OPENCODE_DISABLE_PROJECT_CONFIG`
+disables the project walk.
+Closer settings override matching fields. Prompt files and the optional
+`skills_include_local` grants also search ancestor `.opencode` directories,
+following OpenCode's directory discovery. See
+[Configuration](docs/configuration.md#config-files) for precedence and trust boundaries.
+
 Consider presets as guidelines as they are often outdated.
 
 - **[OpenAI Preset](docs/openai-preset.md)** — the default generated preset; runs all agents on OpenAI models.
@@ -364,7 +378,7 @@ If any agent fails to respond, check your provider authentication and config fil
 ### 04. Council: The Chorus of Minds
 
 > [!NOTE]
-> **Why doesn't Orchestrator auto-call Council more often?** This is intentional. Council runs multiple models at once, so automatic delegation is kept strict because it is usually the highest-cost path in the system. In practice, ask for it in your message — mentioning `council`, `@council`, `consensus`, or `共识` injects the Council Mode procedure into that turn and the orchestrator dispatches every councillor seat in parallel, for example: <code>run a council on these two architectures</code>. The full procedure is never carried statically: sessions that never ask for a council pay zero tokens for it, and the injection can be turned off entirely with <code>disabled_hooks: ["council-inject"]</code>.
+> **Why doesn't Orchestrator auto-call Council more often?** This is intentional. Council runs multiple models at once, so automatic delegation is kept strict because it is usually the highest-cost path in the system. In practice, ask for it in your message — mentioning `council`, `@council`, `consensus`, `共识`, or another trigger word injects the Council Mode procedure once per session (at the first trigger; later triggers don't re-inject it) and the orchestrator dispatches every councillor seat in parallel, for example: <code>run a council on these two architectures</code>. The full procedure is never carried statically: sessions that never ask for a council pay zero tokens for it, and the injection can be turned off entirely with <code>disabled_hooks: ["council-inject"]</code>.
 
 <table>
   <tr>
@@ -538,7 +552,10 @@ If any agent fails to respond, check your provider authentication and config fil
 ### Observer: The Silent Witness
 
 > [!NOTE]
-> **Why a separate agent?** If your Orchestrator model is not multimodal, enable Observer to handle images, screenshots, and other visual files. Observer is disabled by default and gives the Orchestrator a dedicated multimodal reader without forcing you to change your main reasoning model. Set `disabled_agents: []` and an `observer` model in your configuration. The bundled `opencode-go` install preset does this automatically because its GLM Orchestrator is not multimodal. Omitting `image_routing` preserves existing conditional Observer behavior. `"auto"` saves attachments under `.opencode/images/<session>/` and delegates by path; `"direct"` keeps image parts inline for native vision. Saved workspace images are not automatically deleted. Remove the whole `.opencode/images/` directory or a single session subdirectory manually when no longer needed (references in old conversations then stop resolving); images from session-less messages are saved at the top level.
+> **Why a separate agent?** If your Orchestrator model is not multimodal, enable Observer to handle images, screenshots, and other visual files. Observer is disabled by default and gives the Orchestrator a dedicated multimodal reader without forcing you to change your main reasoning model. Set `disabled_agents: []` and an `observer` model in your configuration. The bundled `opencode-go` install preset does this automatically because its GLM Orchestrator is not multimodal. Omitting `image_routing` preserves existing conditional Observer behavior. `"auto"` is capability-aware: models that accept image input keep attachments inline for native vision; non-vision chains get attachments saved under `.opencode/images/<session>/` with a delegation nudge by path. `"direct"` always keeps image parts inline. Saved workspace images are not automatically deleted. Remove the whole `.opencode/images/` directory or a single session subdirectory manually when no longer needed (references in old conversations then stop resolving); images from session-less messages are saved at the top level.
+
+> [!TIP]
+> **Subagents reading images.** Advisory subagents (explorer, librarian, oracle, designer, councillors) can dispatch `@observer` themselves for image files on disk. On OpenCode v2 hosts this needs one extra hop of nesting, which the host denies by default — set `"experimental": { "subagent_depth": 2 }` in your opencode config to enable it. Fixer, observer itself, and the council synthesizer stay non-spawning by design.
 
 <table>
   <tr>
@@ -552,7 +569,7 @@ If any agent fails to respond, check your provider authentication and config fil
 
 - Images, screenshots, diagrams → `read` tool (native image support)
 - PDFs and binary documents → `read` tool (text + structure extraction)
-- **Disabled by default** - enable with `"disabled_agents": []` and configure a vision-capable model; installing with `--preset=opencode-go` enables it with `opencode-go/mimo-v2.5`. In `"auto"`, attachments are saved as workspace assets and routed to Observer by path; set `"image_routing": "direct"` to keep them inline for the Orchestrator.
+- **Disabled by default** - enable with `"disabled_agents": []` and configure a vision-capable model; installing with `--preset=opencode-go` enables it with `opencode-go/mimo-v2.5`. In `"auto"`, attachments ride the turn model's capabilities: vision-capable models read them inline, non-vision chains get them saved as workspace assets and routed to Observer by path; set `"image_routing": "direct"` to always keep them inline.
 
     </td>
   </tr>
@@ -657,7 +674,7 @@ Use this section as a map: start with installation, then jump to features, confi
 | **[Clonedeps](docs/clonedeps.md)** | Clone selected dependency source into an ignored local workspace for inspection |
 | **[Worktrees](docs/worktrees.md)** | Use `.slim/worktrees/` lanes for isolated parallel or risky coding work |
 | **[Preset Switching](docs/preset-switching.md)** | Switch agent model presets at runtime with `/preset` |
-| **[Interview](docs/interview.md)** | Turn rough ideas into a structured markdown spec through a browser-based Q&A flow |
+| **[Interview](docs/interview.md)** | Turn rough ideas into a structured markdown spec through a browser-based Q&A flow, then implement it with `/implement` |
 | **[Companion](docs/companion.md)** | Floating window companion for parsing, help, and types |
 
 ### ⚙️ Config & Reference
@@ -684,7 +701,7 @@ Use this section as a map: start with installation, then jump to features, confi
   <p><sub>Every merged contribution leaves a mark on the realm.</sub></p>
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-131-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-134-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </div>
 
@@ -869,6 +886,11 @@ Use this section as a map: start with installation, then jump to features, confi
       <td align="center" valign="top" width="16.66%"><a href="https://rclb.dev/"><img src="https://avatars.githubusercontent.com/u/856570?v=4?s=100" width="100px;" alt="Rodrigo Belem"/><br /><sub><b>Rodrigo Belem</b></sub></a><br /><a href="https://github.com/alvinunreal/oh-my-opencode-slim/commits?author=rbelem" title="Code">💻</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://mustbethecode.com/"><img src="https://avatars.githubusercontent.com/u/42842700?v=4?s=100" width="100px;" alt="GWA"/><br /><sub><b>GWA</b></sub></a><br /><a href="https://github.com/alvinunreal/oh-my-opencode-slim/commits?author=mustbethecode" title="Code">💻</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/lancew"><img src="https://avatars.githubusercontent.com/u/11627?v=4?s=100" width="100px;" alt="Lance Wicks"/><br /><sub><b>Lance Wicks</b></sub></a><br /><a href="https://github.com/alvinunreal/oh-my-opencode-slim/commits?author=lancew" title="Code">💻</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://incerry.cnblogs.com/"><img src="https://avatars.githubusercontent.com/u/36690780?v=4?s=100" width="100px;" alt="InCerryGit"/><br /><sub><b>InCerryGit</b></sub></a><br /><a href="https://github.com/alvinunreal/oh-my-opencode-slim/commits?author=InCerryGit" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/doublepi123"><img src="https://avatars.githubusercontent.com/u/54027436?v=4?s=100" width="100px;" alt="doublepi123"/><br /><sub><b>doublepi123</b></sub></a><br /><a href="https://github.com/alvinunreal/oh-my-opencode-slim/commits?author=doublepi123" title="Code">💻</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/timothy-cloudopsguy"><img src="https://avatars.githubusercontent.com/u/96697196?v=4?s=100" width="100px;" alt="Timothy"/><br /><sub><b>Timothy</b></sub></a><br /><a href="https://github.com/alvinunreal/oh-my-opencode-slim/commits?author=timothy-cloudopsguy" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

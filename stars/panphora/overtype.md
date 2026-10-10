@@ -1,6 +1,6 @@
 ---
 project: overtype
-stars: 3706
+stars: 3708
 description: |-
     The markdown editor that's just a textarea https://overtype.dev
 url: https://github.com/panphora/overtype
@@ -8,7 +8,7 @@ url: https://github.com/panphora/overtype
 
 # OverType
 
-A lightweight markdown editor library with perfect WYSIWYG alignment using an invisible textarea overlay technique. Includes optional toolbar. ~132KB minified with all features.
+A lightweight markdown editor library with perfect WYSIWYG alignment using an invisible textarea overlay technique. Includes optional toolbar. ~134KB minified with all features.
 
 ## Live Examples
 
@@ -27,7 +27,7 @@ A lightweight markdown editor library with perfect WYSIWYG alignment using an in
 - ⌨️ **Keyboard shortcuts** - Common markdown shortcuts (Cmd/Ctrl+B for bold, etc.)
 - 📱 **Mobile optimized** - Responsive design with mobile-specific styles
 - 🔄 **DOM persistence aware** - Recovers from existing DOM (perfect for HyperClay and similar platforms)
-- 🚀 **Lightweight** - ~132KB minified
+- 🚀 **Lightweight** - ~134KB minified
 - 🎯 **Optional toolbar** - Clean, minimal toolbar with all essential formatting
 - ✨ **Smart shortcuts** - Keyboard shortcuts with selection preservation
 - 📝 **Smart list continuation** - GitHub-style automatic list continuation on Enter
@@ -43,7 +43,7 @@ We overlap an invisible textarea on top of styled output, giving the illusion of
 
 | Feature | OverType | HyperMD | Milkdown | TUI Editor | EasyMDE |
 |---------|----------|---------|----------|------------|---------|
-| **Size** | ~132KB | 364.02 KB | 344.51 KB | 560.99 KB | 323.69 KB |
+| **Size** | ~134KB | 364.02 KB | 344.51 KB | 560.99 KB | 323.69 KB |
 | **Dependencies** | Bundled | CodeMirror | ProseMirror + plugins | Multiple libs | CodeMirror |
 | **Setup** | Single file | Complex config | Build step required | Complex config | Moderate |
 | **Approach** | Invisible textarea | ContentEditable | ContentEditable | ContentEditable | CodeMirror |
@@ -569,6 +569,9 @@ new OverType(target, options)
   // Smart lists
   smartLists: true,       // Enable GitHub-style list continuation on Enter
 
+  // Task toggling
+  clickToToggleTasks: false,  // Click a task checkbox marker to toggle its state
+
   // Spellcheck
   spellcheck: false,      // Enable browser spellcheck (disabled by default)
 
@@ -796,7 +799,7 @@ With `persist`, the saved file holds only the text:
 </div>
 ```
 
-The textarea gets ClayJS's `persist` attribute, and the style tag, toolbar, tooltip, stats bar, placeholder and preview are marked `clay="editor-ui"`, so they are never saved and never trigger an autosave. `destroy()` leaves the container, wrapper and textarea in place, so the editor can be resumed later.
+The textarea gets ClayJS's `persist` attribute, and the style tag, toolbar, tooltip, stats bar, placeholder and preview are marked `clay="editor-ui"`, so they are never saved and never trigger an autosave. `destroy()` leaves the container, wrapper and textarea in place, so the editor can be resumed later. When ClayJS live sync merges a change into the textarea, OverType redraws on `clay:sync-applied`, so collaborators' and agents' edits show without a reload. With `autoResize`, OverType registers a ClayJS snapshot hook that keeps the editor's inline heights out of the saved file.
 
 ## Examples
 

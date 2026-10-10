@@ -1,8 +1,8 @@
 ---
 project: llm-gateway
-stars: 7551
+stars: 7566
 description: |-
-    Connect Your Agents And Harnesses With Any Provider 🦚
+    Open Source LLM Gateway 🦚
 url: https://github.com/mnfst/llm-gateway
 ---
 

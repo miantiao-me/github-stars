@@ -1,6 +1,6 @@
 ---
 project: taste-skill
-stars: 92320
+stars: 94403
 description: |-
     Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop 
 url: https://github.com/Leonxlnx/taste-skill
@@ -17,25 +17,23 @@ url: https://github.com/Leonxlnx/taste-skill
 </p>
 
 <p align="center" style="margin-bottom: 8px;">
-  <a href="https://tasteskill.dev" title="Visit tasteskill.dev"><img src="assets/readme-buttons/btn-site.webp" alt="Visit tasteskill.dev" height="56" /></a>
+  <a href="https://tasteskill.dev" title="Visit tasteskill.dev"><img src="https://img.shields.io/badge/website-tasteskill.dev-24292f?style=flat" alt="Visit tasteskill.dev" /></a>
+  &nbsp;
+  <a href="https://tastecode.dev" title="Visit tastecode.dev"><img src="https://img.shields.io/badge/new-TasteCode-ff6b00?style=flat" alt="New: TasteCode" /></a>
 </p>
 
 <p align="center">
-  <a href="https://platform.kimi.ai?track_id=track-20f0d64bcaba419bb425a3e8c306f65d&aff=taste-skill">
-    <img src="https://gcdn.moonshot.cn/growth-cdn/sponsor/kimi-en.png" alt="Kimi K3" width="100%" />
-  </a>
+  <a href="https://tastecode.dev"><img src="assets/readme-tastecode.webp" alt="TasteCode is here. A new home for your coding agents, with a design agent built in. Visit tastecode.dev" width="100%" /></a>
 </p>
 
-<p>Thanks to <strong>Kimi (Moonshot AI)</strong>, our Open Source Friend, for supporting taste-skill! With 2.8T parameters, native vision, and a 1-million-token context window, <strong>Kimi K3</strong> delivers frontier performance across long-horizon coding, knowledge work, and reasoning.</p>
-
-<p><a href="https://platform.kimi.ai?track_id=track-20f0d64bcaba419bb425a3e8c306f65d&aff=taste-skill"><strong>Get a Kimi API key</strong></a>. Taste-skill users get <strong>10% bonus API credits</strong> on their first purchase.</p>
+<p align="center"><sub>From the Taste Skill team: <a href="https://tastecode.dev"><strong>TasteCode</strong></a>, a local desktop workspace for Codex, Claude Code and Grok with a design agent that briefs, builds and visually reviews your UI. <a href="https://github.com/Leonxlnx/tastecode">Source on GitHub</a>.</sub></p>
 
 <h3 align="center">Sponsors</h3>
 
 <table align="center">
   <tr>
-    <td align="center" width="104"><a href="https://fluxionai.world/register?source=github&amp;campaign=tasteskill&amp;promo=TASTESKILL"><img src="assets/sponsors/fluxion-ai.png" alt="Fluxion AI" width="80" height="80" /></a></td>
-    <td><sub><a href="https://fluxionai.world/register?source=github&amp;campaign=tasteskill&amp;promo=TASTESKILL"><strong>Fluxion AI</strong></a> provides reliable, cost-efficient access to GPT, Claude, and other leading AI models through one unified API.<br />Save up to 70% compared with official API pricing and get $3 in API credits when you sign up through this link.</sub></td>
+    <td align="center" width="104"><a href="https://fluxionai.space/register?source=github&amp;campaign=github-tasteskill&amp;promo=TASTESKILL"><img src="assets/sponsors/sidrune-ai.png" alt="Sidrune AI" width="80" height="80" /></a></td>
+    <td><sub><a href="https://fluxionai.space/register?source=github&amp;campaign=github-tasteskill&amp;promo=TASTESKILL"><strong>Sidrune AI</strong></a>: one API for GPT, Claude, and other leading AI models.<br />Sign up through this link and get $3 in API credit.</sub></td>
   </tr>
   <tr>
     <td align="center" width="104">
@@ -71,13 +69,13 @@ url: https://github.com/Leonxlnx/taste-skill
 Portable **Agent Skills** that upgrade AI-built interfaces: stronger layout, typography, motion, and spacing instead of boilerplate-looking UIs. This repo also includes **image-generation skills** for reference boards (web, mobile, brand kits). Pair them with **ChatGPT Images** or similar generators, then hand the frames to Codex, Cursor, or Claude Code for implementation.
 
 <p align="center">
-  <a href="LICENSE"><img src="assets/readme-buttons/btn-mit.webp" alt="MIT License" height="45" valign="middle" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-24292f?style=flat&amp;logo=github&amp;logoColor=white" alt="MIT License" /></a>
   &nbsp;
-  <a href="https://github.com/vercel-labs/agent-skills"><img src="assets/readme-buttons/btn-agent-skills.webp" alt="Agent Skills compatible" height="45" valign="middle" /></a>
+  <a href="https://github.com/vercel-labs/agent-skills"><img src="https://img.shields.io/badge/Agent_Skills-compatible-24292f?style=flat&amp;logo=github&amp;logoColor=white" alt="Agent Skills compatible" /></a>
   &nbsp;
-  <a href="#installing"><img src="assets/readme-buttons/btn-tools.webp" alt="Codex, Cursor, Claude" height="45" valign="middle" /></a>
+  <a href="#installing"><img src="https://img.shields.io/badge/Codex_%2F_Cursor_%2F_Claude-install-24292f?style=flat" alt="Codex, Cursor, Claude" /></a>
   &nbsp;
-  <a href="https://www.tasteskill.dev/changelog"><img src="assets/readme-buttons/btn-changelog.webp" alt="Changelog" height="45" valign="middle" /></a>
+  <a href="https://www.tasteskill.dev/changelog"><img src="https://img.shields.io/badge/changelog-view-24292f?style=flat" alt="Changelog" /></a>
 </p>
 
 ## Disclaimer
@@ -204,7 +202,7 @@ If Taste Skill helps you, consider sponsoring:
 <table align="center">
   <tr>
     <td align="center" width="104"><a href="https://www.kimi.com"><img src="assets/sponsors/kimi-icon.png" alt="Kimi" width="52" height="52" /></a></td>
-    <td><a href="https://www.kimi.com"><picture><source media="(prefers-color-scheme: dark)" srcset="https://kimi-file.moonshot.cn/prod-chat-kimi/kfs/4/1/2026-06-05/1d8h69mt3v89kkekg24gg" /><img alt="Kimi Open Source Friends" src="https://kimi-file.moonshot.cn/prod-chat-kimi/kfs/4/1/2026-06-05/1d8h69fudcmosb3pipls0" height="42" /></picture></a></td>
+    <td><a href="https://www.kimi.com"><picture><source media="(prefers-color-scheme: dark)" srcset="https://kimi-file.moonshot.cn/prod-chat-kimi/kfs/4/1/2026-06-05/1d8h69mt3v89kkekg24gg" /><img alt="Kimi Open Source Friends" src="https://kimi-file.moonshot.cn/prod-chat-kimi/kfs/4/1/2026-06-05/1d8h69fudcmosb3pipls0" height="42" /></picture></a><br /><sub><a href="https://platform.kimi.ai?track_id=track-20f0d64bcaba419bb425a3e8c306f65d&aff=taste-skill"><strong>Get a Kimi API key</strong></a>: taste-skill users get 10% bonus API credits on their first purchase.</sub></td>
   </tr>
   <tr>
     <td align="center" width="104"><a href="https://vercel.com/open-source-program"><img src="assets/sponsors/vercel-logo.svg" alt="Vercel" width="52" height="52" /></a></td>
@@ -235,6 +233,7 @@ If Taste Skill helps you, consider sponsoring:
 <a href="https://github.com/KANA-33"><img src="https://github.com/KANA-33.png" width="40" height="40" style="border-radius:50%" alt="KANA-33" title="KANA-33" /></a>
 <a href="https://github.com/emilkowalski"><img src="https://github.com/emilkowalski.png" width="40" height="40" style="border-radius:50%" alt="emilkowalski" title="emilkowalski" /></a>
 <a href="https://github.com/AnthonyLiuVa"><img src="https://github.com/AnthonyLiuVa.png" width="40" height="40" style="border-radius:50%" alt="AnthonyLiuVa" title="AnthonyLiuVa" /></a>
+<a href="https://github.com/Wolfy18"><img src="https://github.com/Wolfy18.png" width="40" height="40" style="border-radius:50%" alt="Wolfy18" title="Wolfy18" /></a>
 
 <p align="center">
  <a href="https://www.star-history.com/leonxlnx/taste-skill">

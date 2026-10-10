@@ -1,6 +1,6 @@
 ---
 project: office-open-xml-viewer
-stars: 818
+stars: 829
 description: |-
     A browser-based viewer for Office Open XML documents that renders to an HTML Canvas element.
 url: https://github.com/yukiyokotani/office-open-xml-viewer
@@ -211,6 +211,32 @@ constructor or the `.load()` options — and every render reuses it; it is never
 per-render argument. (Excel stores "Insert > Equation" as OMML inside the shared
 DrawingML `<xdr:txBody>` grammar, so `XlsxViewer` renders equations embedded in
 shapes / text boxes the same way.)
+
+### Experimental legacy DOC, XLS, and PPT sources
+
+Legacy binary Office files can be read directly into the ordinary document,
+workbook and presentation models through **model sources**, a format-generic
+`modelSources` load option. The legacy readers are separate opt-in entries, one
+per format; each returns a model source for the matching loader or viewer:
+
+```typescript
+import { DocxViewer } from '@silurus/ooxml/docx';
+import { legacyDocSource } from '@silurus/ooxml/legacy-doc';
+
+const canvas = document.querySelector('canvas') as HTMLCanvasElement;
+const viewer = new DocxViewer(canvas, { modelSources: [legacyDocSource()] });
+await viewer.load(docOrDocxBytes);
+```
+
+`legacyXlsSource()` (`@silurus/ooxml/legacy-xls`) and `legacyPptSource()`
+(`@silurus/ooxml/legacy-ppt`) work the same way for XLSX and PPTX. A source
+claims only its own binary family; every other input takes the unchanged OOXML
+path, and without a source a legacy file still rejects with the typed
+`legacy-binary-format` error. Creating a source fetches nothing: its
+self-contained source module and WASM load in the parser worker (or in Node)
+only when a claimed file is opened, and no OOXML package is generated. The
+readers are narrow and experimental and reject unsupported content rather than
+guessing; see [Experimental legacy Office sources](docs/legacy-office-conversion.md).
 
 ### Optional rendering modules
 
@@ -847,7 +873,7 @@ file without uploading it.
 | | Chart manual layout (`<c:title><c:layout>` and `<c:plotArea><c:layout>`) | ✅ |
 | | Sparklines (`x14:sparklineGroup` — line / column / win-loss, with markers and high/low/first/last/negative highlights) | ✅ |
 | **Advanced** | Conditional formatting (`cellIs`, `colorScale`, `dataBar`, `iconSet`, `top10`, `aboveAverage`) | ✅ |
-| | Conditional-formatting formulas (`expression`, text / blanks / errors rules — partial evaluator over cached values; complete evaluation tracked in [#1547](https://github.com/yukiyokotani/office-open-xml-viewer/issues/1547)) | ⚠️ Partial |
+| | Conditional-formatting formulas (`expression`, text / blanks / errors rules — partial evaluator over cached values; complete evaluation tracked in [#1547](https://github.com/yukiyokotani/office-open-xml-viewer/issues/1547)). A rule the evaluator cannot evaluate neither formats nor stops lower rules; the last completed render's boundary is available from `XlsxWorkbook.getLastConditionalFormattingDiagnostics()` and the Viewer shows a status notice | ⚠️ Partial |
 | | Slicers (static, Office 2010 extension) | ✅ |
 | | Pivot tables (saved worksheet output renders unchanged; read-only metadata is exposed. Refresh, recalculation, filtering, restructuring, and interactivity are unsupported) | ⚠️ Partial |
 | | Cell comments / notes (classic `xl/commentsN.xml` + Office-365 threaded comments — red triangle indicator + author / text via the worksheet model; pointer or keyboard users can open the popup, with a polite screen-reader status) | ✅ |
@@ -1132,7 +1158,6 @@ try {
   `maxArchiveEntryBytes` applies to every XML, text, image, media, and other package part that the parser reads. `maxTotalInflatedBytes` counts the largest amount actually read from each distinct part during the lifetime of the loaded package; reading the same part again does not consume that budget twice. `maxArchiveEntries` bounds central-directory entries before the ZIP library allocates its owned index. Set an individual field to `null` to disable that configurable budget. Internal hard safety ceilings still apply, so disabling a budget does not make arbitrary archives acceptable. Values other than `null` must be positive safe integers; byte fields are expressed in bytes and the entry field is a count.
 
   A violation rejects with `OoxmlResourceLimitError` (`code === 'ooxml-resource-limit'`). Its structured `details.violation` reports the resource, metric, limit, observed value, usage snapshot, and part name when a particular part caused the failure. The deprecated `maxZipEntryBytes` option remains as a compatibility alias for `resourceLimits.maxArchiveEntryBytes`, but is scheduled for removal in a future breaking release; new code should use `resourceLimits`.
-
   Applications can collect the same data as a machine-readable `OoxmlResourceMetrics` report without enabling console output. This is useful for choosing limits from representative files in the application's own domain:
   ```ts
   new DocxViewer(canvas, {
@@ -1174,6 +1199,22 @@ try {
   The package counters and raster-image guards are deterministic admission limits, not exact JavaScript/WASM process-memory accounting. XML trees, document models, canvas backing stores, browser decoder overhead, renderer state, and browser-managed SVG/vector parse or decoded storage can still require several times the measured input. SVG has no portable decoded-byte measure or explicit browser release primitive; the library count-bounds its cache and revokes owned object URLs, but cannot charge it as RGBA bytes. The defaults therefore reduce risk but cannot promise that an OOM is impossible on every device. Running parse and render work in `mode: 'worker'` can contain many failures away from the main UI thread, but a Worker is not a separate operating-system process or a strict memory sandbox.
 
   A measured limit crossing is reported as `OoxmlResourceLimitError`. A residual WASM failure that reaches a recognized trap-shaped boundary is reported conservatively as `parser-crashed`, not `parser-oom`: with the current aborting Rust/WASM boundary, panic, allocation failure, explicit `unreachable`, and stack overflow can lose their distinct causes and converge on the same generic runtime error. Inferring OOM from an exception class or message would misclassify some parser defects as large-file failures. Reliable OOM classification would require preserving a structured cause before the trap across every relevant allocation path; it cannot be recovered from the generic trap afterward. The WebAssembly JavaScript embedding also permits implementation-defined stack/OOM failures, including an indistinguishable plain `Error` or process termination, so converting and poisoning every engine-level failure cannot be guaranteed.
+- **Bounded XLSX worksheets.** Each XLSX worksheet model is checked against logical budgets. The defaults are 100,000 rows, 250,000 cell records, 32 MiB of owned UTF-8 string content, and 64 MiB of structural JSON. Override them with `xlsxWorksheetLimits` on `XlsxViewer`, `XlsxSheetViewer`, or `XlsxWorkbook.load(...)`:
+  ```ts
+  new XlsxViewer(container, {
+    xlsxWorksheetLimits: { maxRows: 110000, maxCells: 300000 },
+  });
+  ```
+  An omitted or `undefined` option, an empty object, and any omitted field use the defaults. Supplied fields (`maxRows`, `maxCells`, `maxOwnedUtf8Bytes`, `maxJsonBytes`) must be positive safe integers no greater than `Number.MAX_SAFE_INTEGER - 1`. `null` is invalid. The option is validated before any load effects and is snapshotted for each load. DOCX and PPTX ignore it.
+
+  Row and cell budgets count retained records. They do not count grid coordinates or unique indexes. `maxOwnedUtf8Bytes` counts every string owned by `Cell.value`, including typed-value discriminators and rich-text and phonetic strings, plus formula text. Shared strings are charged per cell after resolution.
+
+  `maxJsonBytes` covers the worksheet model and its covered ancillary data. Browser and Node builds measure the UTF-8 length of `JSON.stringify` over the assembled structure. The native Rust path measures its complete `serde_json` UTF-8 output, which is a separately documented boundary.
+
+  For each dimension, the aggregate derived worksheet cache uses the larger of its default and the worksheet limit. The cache defaults are 200,000 rows, 500,000 cells, 64 MiB owned, and 128 MiB JSON. Each renderer coordinate index independently allows `max(250000, maxCells)` entries, charged per unique key. Delimited-text parsing counts every parsed field, including blanks, against `maxCells`; its fixed 64 MiB input limit is separate. The non-retaining Node `worksheetRows` path keeps streaming semantics, so cumulative budgets apply only to models it materializes.
+
+  ZIP, input, wire, representation, and copy limits remain independent. Raising these budgets does not promise that a whole 251,000-cell selection can be copied to the clipboard. The budgets are logical counters, not physical memory measurements. Increasing them accepts additional out-of-memory risk; the library does not guarantee that an allocation failure can be caught. With unchanged defaults no migration is needed. The one exception: errors from these adjustable guards now report `configurable: true`, whether the default or an override applied. Hard-ceiling errors remain `configurable: false`.
+
 - **No network by default.** The library does not send telemetry or analytics, and does not contact third-party services unless you ask it to. In particular, theme webfonts, Office font metric substitutes (Carlito/Caladea), and the script fallback fonts are **not** loaded from Google Fonts unless you pass `useGoogleFonts: true` to the relevant `Viewer` / `load(...)` options — supported uniformly by `DocxViewer`, `PptxViewer`, `XlsxViewer`, and `XlsxSheetViewer`. When enabled, fonts for non-Latin scripts are supplied on demand from Noto families so text does not fall back to tofu: Arabic (Noto Naskh/Sans Arabic), CJK (Noto Sans/Serif KR · SC · TC · JP, plus Noto Sans HK, picked per document language so shared Han glyphs take the right shapes), Cyrillic (Noto Sans/Serif), Hebrew (Noto Sans/Serif Hebrew, RTL), Thai (Noto Sans Thai) and Devanagari (Noto Sans Devanagari). No font binaries ship in the bundle. This sends the end-user's IP and User-Agent to `fonts.googleapis.com`, which may have GDPR implications.
 - **XML parsing.** Uses `roxmltree`, which does not resolve external entities (XXE-safe by default).
 - **Encrypted OOXML ([MS-OFFCRYPTO] Agile Encryption).** Password-protected `.docx` / `.xlsx` / `.pptx` files are OLE2/CFB containers, not ZIPs. Pass `password` to `load(...)` and the file is decrypted **client-side** via WebCrypto — no bytes and no password leave the browser:

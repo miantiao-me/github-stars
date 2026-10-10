@@ -1,6 +1,6 @@
 ---
 project: data-table-filters
-stars: 2270
+stars: 2276
 description: |-
     React data tables for shadcn/ui: faceted filters, sorting, infinite scroll. Filtering, faceted counts and cursor pagination can run in SQL with Drizzle.
 url: https://github.com/openstatusHQ/data-table-filters

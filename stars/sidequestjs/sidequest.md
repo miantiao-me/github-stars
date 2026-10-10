@@ -1,6 +1,6 @@
 ---
 project: sidequest
-stars: 1016
+stars: 1017
 description: |-
     Redis-free background jobs for Node.js. Persist jobs in your existing Postgres, MySQL, SQLite, or MongoDB. A distributed, durable BullMQ alternative with a built-in dashboard.
 url: https://github.com/sidequestjs/sidequest

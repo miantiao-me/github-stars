@@ -1,6 +1,6 @@
 ---
 project: ClashBar
-stars: 1504
+stars: 1556
 description: |-
     原生 macOS 菜单栏代理客户端，基于 SwiftUI + AppKit，由 mihomo 驱动。 轻量、稳定，在菜单栏完成配置、节点、规则、连接与系统代理管理。
 url: https://github.com/Sitoi/ClashBar

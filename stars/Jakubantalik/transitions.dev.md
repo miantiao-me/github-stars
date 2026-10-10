@@ -1,6 +1,6 @@
 ---
 project: transitions.dev
-stars: 4531
+stars: 4632
 description: |-
     UI montion AI agent, a library of 43+ crafted transitions, a skill that fits your workflow.
 url: https://github.com/Jakubantalik/transitions.dev

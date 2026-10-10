@@ -1,6 +1,6 @@
 ---
 project: firecrawl
-stars: 188275
+stars: 190215
 description: |-
     Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥
 url: https://github.com/firecrawl/firecrawl

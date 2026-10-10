@@ -1,6 +1,6 @@
 ---
 project: terrae
-stars: 245
+stars: 244
 description: |-
     Composable and animated components that replace imperative layers with simple props. The perfect companion for shadcn/ui.
 url: https://github.com/alamenai/terrae

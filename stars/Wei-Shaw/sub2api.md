@@ -1,6 +1,6 @@
 ---
 project: sub2api
-stars: 43250
+stars: 43650
 description: |-
     Sub2API 一站式开源中转服务，让 Claude、Openai 、Gemini、Grok订阅统一接入，支持拼车共享，更高效分摊成本，原生工具无缝使用。
 url: https://github.com/Wei-Shaw/sub2api
@@ -362,8 +362,10 @@ JWT_SECRET=your_jwt_secret_here
 TOTP_ENCRYPTION_KEY=your_totp_key_here
 
 # Optional: Admin account
-ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=your_admin_password
+# Leave empty to auto-generate a random email (login username) and password, shown in logs on first startup.
+# Avoid guessable values such as admin@example.com: they are brute-force targets.
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
 
 # Optional: Custom port
 SERVER_PORT=8080
@@ -412,9 +414,9 @@ docker compose -f docker-compose.local.yml logs -f sub2api
 
 Open `http://YOUR_SERVER_IP:8080` in your browser.
 
-If admin password was auto-generated, find it in logs:
+If the admin email (login username) or password was auto-generated, find them in logs:
 ```bash
-docker compose -f docker-compose.local.yml logs sub2api | grep "admin password"
+docker compose -f docker-compose.local.yml logs sub2api | grep "Generated admin"
 ```
 
 #### Upgrade

@@ -1,6 +1,6 @@
 ---
 project: Spark-TTS
-stars: 10995
+stars: 10990
 description: |-
     Spark-TTS Inference Code
 url: https://github.com/SparkAudio/Spark-TTS

@@ -1,6 +1,6 @@
 ---
 project: obscura
-stars: 28290
+stars: 28750
 description: |-
     The headless browser for AI agents and web scraping
 url: https://github.com/h4ckf0r0day/obscura
@@ -483,6 +483,11 @@ Start a CDP WebSocket server.
 | `--font-dir` | — | Recursively load fonts once per worker (repeatable; render build) |
 | `--obey-robots` | off | Respect robots.txt |
 
+With multiple workers, exited children are reaped and restarted. New connections
+use ready workers only; if none are ready, the balancer returns HTTP 503. A crash
+still closes that worker's existing sessions, which clients must reconnect.
+Worker errors remain visible on stderr.
+
 ### `obscura fetch <URL>`
 
 Fetch and render a single page.
@@ -538,6 +543,7 @@ Optional flags (both transports):
 |------|-------------|
 | `--proxy <URL>` | HTTP/SOCKS5 proxy |
 | `--user-agent <UA>` | Custom User-Agent string |
+| `--font-dir <DIR>` | Load additional fonts before rendering (repeatable; render build) |
 | `--stealth` | Enable anti-detection mode |
 
 ### Claude Desktop config

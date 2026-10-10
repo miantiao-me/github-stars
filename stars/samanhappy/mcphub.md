@@ -1,6 +1,6 @@
 ---
 project: mcphub
-stars: 2493
+stars: 2513
 description: |-
     Self-hosted MCP gateway and control plane for connecting, controlling, and operating MCP servers.
 url: https://github.com/samanhappy/mcphub
@@ -193,6 +193,10 @@ Contributions welcome! See our [Discord community](https://discord.gg/2BJehJZVH5
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/samanhappy)
 
 Chinese users can also support via WeChat Pay — see [中文版](README.zh.md).
+
+## Acknowledgements
+
+- [AtomGit](https://atomgit.com/samanhappy/mcphub): Hosts MCPHub in China, making the project easier to access for users in mainland China.
 
 ## 🌟 Star History
 

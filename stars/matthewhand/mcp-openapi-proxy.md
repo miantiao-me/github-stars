@@ -1,6 +1,6 @@
 ---
 project: mcp-openapi-proxy
-stars: 156
+stars: 157
 description: |-
     MCP server that dynamically exposes REST APIs defined by OpenAPI specs. Dual-stack MCP 1.x/2.x with native Streamable HTTP.
 url: https://github.com/matthewhand/mcp-openapi-proxy

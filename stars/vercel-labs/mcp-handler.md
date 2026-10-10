@@ -1,6 +1,6 @@
 ---
 project: mcp-handler
-stars: 679
+stars: 683
 description: |-
     Easily spin up an MCP Server on Next.js, Nuxt, Svelte, and more
 url: https://github.com/vercel-labs/mcp-handler
@@ -125,6 +125,7 @@ See [Authorization](docs/AUTHORIZATION.md) for wiring details.
 - [Authorization](docs/AUTHORIZATION.md) - OAuth and token verification
 - [Advanced Usage](docs/ADVANCED.md) - Dynamic routing, Nuxt, configuration options
 - [WebMCP Bridge](docs/WEBMCP.md) - Expose allowlisted tools to in-page agents (experimental)
+- [MCP Events](docs/MCP_EVENTS.md) - Register draft webhook subscription methods with application-owned storage and delivery (experimental)
 
 ## Features
 

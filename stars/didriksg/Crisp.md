@@ -1,6 +1,6 @@
 ---
 project: Crisp
-stars: 1956
+stars: 2047
 description: |-
     Every display control macOS hides, in one menu bar app: sharp HiDPI/Retina scaling (no more blurry or tiny text), DDC brightness and volume, Extra Brightness past 100%, presets, virtual displays. Free and open source, a no-cost alternative to BetterDisplay and Lunar.
 url: https://github.com/didriksg/Crisp
@@ -49,12 +49,14 @@ Installed from `didriksg/tap` earlier? `brew upgrade` moves you to the main cask
 
 - **Sharp, Retina-quality scaling on any display**: HiDPI resolutions that make external monitors crisp instead of blurry or tiny, set up automatically for 1440p and larger, always at the panel's full refresh rate (no more 1080p stuck at 50Hz on a 144Hz monitor)
 - **Smooth scaling**: set how large everything looks in small steps, far beyond the few sizes macOS offers
-- **Brightness everywhere**: the real backlight of external monitors over DDC, software dimming where that isn't supported and below the hardware minimum, and brightness keys that follow the pointer, all displays, or a chosen few
+- **Brightness everywhere**: the real backlight of external monitors over DDC, software dimming where that isn't supported and below the hardware minimum, and brightness keys that follow the pointer, all displays, or a chosen few, or shortcuts of your own
 - **Extra Brightness**: push XDR MacBook panels and HDR monitors past 100% into their HDR headroom; one toggle per display, then the slider and keys reach further. It draws more power, and HDR video can look overblown while it's on
 - **Volume**: monitor speaker volume over DDC, with a slider per display and the volume keys mapped to the monitor when it's your audio output
-- **Presets**: save resolution, brightness and arrangement under a name and icon, and apply them with one click
-- **Display arrangement**: drag-to-arrange canvas, main display switching
-- **Disconnect displays**: turn physical displays off and back on from the menu, remembered across sleep/wake (Apple Silicon)
+- **Presets**: save resolution, brightness, arrangement, image adjustment and HDR under a name and icon, and apply them with one click, from Shortcuts, or from crispctl
+- **Shortcuts**: apply a preset, set brightness, HDR, Extra Brightness, image adjustment or a monitor's input, and disconnect or reconnect a display, as actions in the Shortcuts app, so an automation can switch your displays between a day and a night setup
+- **Display arrangement**: drag-to-arrange canvas, main display switching, and a pointer that crosses edges where displays of different sizes don't line up
+- **Disconnect displays**: turn physical displays off and back on from the menu, remembered across sleep and reboot, and keep the built-in off while you're docked (Apple Silicon)
+- **Input switching**: switch a monitor to another input over DDC, a second computer on HDMI for instance, and back from the menu
 - **System toggles**: Dark Mode, Night Shift, and True Tone, one click from the menu bar
 - **Color**: ICC profile switching, XDR reference presets, HDR on/off per display, and image adjustment (gamma, contrast, gain, invert colors)
 - **Virtual displays**: create HiDPI virtual screens
@@ -102,13 +104,16 @@ To keep Keep Awake off on company Macs, push a configuration profile for the `co
 
 ## Automation
 
-Crisp ships with `crispctl`, a command line tool for the same controls: list displays, read and set brightness, switch Extra Brightness and HDR, and disconnect or reconnect a display. The Command Line Tool switch in Settings links it into `/usr/local/bin` (the Homebrew cask does this on install); it also lives inside the app at `Crisp.app/Contents/MacOS/crispctl`. Crisp must be running.
+Crisp ships with `crispctl`, a command line tool for the same controls: list displays, read and set brightness, switch Extra Brightness and HDR, change image adjustment, apply a preset, switch a monitor's input, and disconnect or reconnect a display. The Command Line Tool switch in Settings links it into `/usr/local/bin` (the Homebrew cask does this on install); it also lives inside the app at `Crisp.app/Contents/MacOS/crispctl`. Crisp must be running.
 
 ```sh
 crispctl display list                  # JSON, with each display's id and uuid
 crispctl brightness set <display> 40
 crispctl display toggle <display>      # for a KVM desk or a button
+crispctl preset apply Night
 ```
+
+The same controls are actions in the Shortcuts app: Apply Crisp Preset, Set and Get Display Brightness, Set Extra Brightness, Set Display HDR, Set Display Input, Disconnect and Reconnect Display, and Set and Reset Image Adjustment. A Time of Day automation that runs Apply Crisp Preset switches your displays between a day and a night setup.
 
 `crispctl help` lists every command, and `--help` on any command gives its details. To let an AI agent drive it, `crispctl skill install claude` or `crispctl skill install codex` adds a skill for Claude Code or Codex; for another agent, `crispctl skill show` prints it. Run the install again after updating Crisp.
 

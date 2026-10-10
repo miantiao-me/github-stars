@@ -1,6 +1,6 @@
 ---
 project: crossmux
-stars: 226
+stars: 243
 description: |-
     A CJK-optimized open-source ESP32 e-ink reader with EPUB support, lightweight apps, reading analytics, and multi-device support.  面向中文用户与 CJK 阅读体验深度优化的开源 ESP32 墨水屏阅读器，支持 EPUB、轻量应用、阅读统计及多设备适配。
 url: https://github.com/0x1abin/crossmux

@@ -1,6 +1,6 @@
 ---
 project: tutti
-stars: 111
+stars: 110
 description: |-
     Multi-output audio and display control for Mac — one panel for every output, app, and screen.
 url: https://github.com/BarryBarrywu/tutti

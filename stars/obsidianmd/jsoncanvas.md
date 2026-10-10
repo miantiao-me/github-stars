@@ -1,6 +1,6 @@
 ---
 project: jsoncanvas
-stars: 3711
+stars: 3715
 description: |-
     An open file format for infinite canvas data.
 url: https://github.com/obsidianmd/jsoncanvas

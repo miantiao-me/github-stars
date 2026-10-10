@@ -1,6 +1,6 @@
 ---
 project: Zero
-stars: 10842
+stars: 10846
 description: |-
     Experience email the way you want with Mail0 – the first open source email app that puts your privacy and safety first. Join the discord: https://mail0.link/discord
 url: https://github.com/Mail-0/Zero

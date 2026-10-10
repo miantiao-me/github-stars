@@ -1,8 +1,8 @@
 ---
 project: react-bits
-stars: 48458
+stars: 48848
 description: |-
-    An open source collection of animated, interactive & fully customizable React components for building memorable websites.
+    The largest open-source library of animated, interactive, and customizable React & Next.js components for building standout web products and experiences. Built for humans and AI agents.
 url: https://github.com/DavidHDev/react-bits
 ---
 
@@ -35,6 +35,12 @@ url: https://github.com/DavidHDev/react-bits
 </div>
 
 <br />
+
+## React Bits Pro
+
+React Bits Pro adds premium components, page blocks, app UI, and complete templates for your next project.
+
+[![React Bits Pro previews: ASCII Ripple, Radial Liquid, Hero 12, and Dashboard 12](public/assets/readme/react-bits-pro.webp)](https://pro.reactbits.dev/?utm_source=github&utm_medium=readme&utm_campaign=pro-conversion&utm_content=readme-pro)
 
 ## ✨ Why React Bits?
 
@@ -90,6 +96,14 @@ React Bits is proudly supported by these amazing sponsors:
     <source media="(prefers-color-scheme: dark)" srcset="public/assets/sponsors/shadcnblocks.svg">
     <source media="(prefers-color-scheme: light)" srcset="public/assets/sponsors/shadcnblocks-lightmode.svg">
     <img src="public/assets/sponsors/shadcnblocks.svg" alt="shadcnblocks.com" style="height: 50px;">
+  </picture>
+</a>
+
+<a href="https://shaders.com/?utm_source=reactbits&utm_medium=sponsor&utm_campaign=diamond&ref=reactbits" target="_blank">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/assets/sponsors/shaders.svg">
+    <source media="(prefers-color-scheme: light)" srcset="public/assets/sponsors/shaders-lightmode.svg">
+    <img src="public/assets/sponsors/shaders.svg" alt="shaders.com" style="height: 50px;">
   </picture>
 </a>
 

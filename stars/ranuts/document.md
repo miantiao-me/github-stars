@@ -1,6 +1,6 @@
 ---
 project: document
-stars: 1955
+stars: 1978
 description: |-
     Edit DOCX/XLSX/PPTX in your browser — client-side, no server, works offline (OnlyOffice + WebAssembly)
 url: https://github.com/ranuts/document
@@ -42,13 +42,26 @@ device, so documents are never uploaded, and no account is involved.
 
 ---
 
+## AI document assistant
+
+Select a passage to rewrite, summarize or translate. Review the result before adding it to your document. Off by default · This browser only.
+
+Choose how to use the assistant after enabling it. You start the first download and can cancel at any time.
+
+- **Use on this computer**: Text is processed on this device. First-time setup downloads files and may slow your computer; you can cancel.
+- **Use your own AI service**: Text you send goes to the selected service. Your own service details are required; service fees may apply.
+
+Compare the original with the result, then confirm to replace the selection. You can also copy it. Use editor Undo if needed; changed selections require a new proposal.
+
+[How to use it](https://edit.chaxus.com/ai-document-assistant)
+
 ## ✨ Features
 
 - 🔒 **Nothing is uploaded** — every conversion, edit and export happens in the tab
 - 📝 **Real editing, not preview** — DOCX, XLSX, PPTX and CSV, plus ODF, RTF, TXT and the legacy binary formats; PDFs open and can be annotated
 - 💾 **Saves into your own file** — pick it once, every save after writes back to it (Chromium; elsewhere it downloads as before)
-- 🕓 **Nothing is lost if you close the tab** — edits autosave into your own browser, kept for 7 days, deletable any time ([details](#-your-data-stays-on-your-device))
-- 📴 **Works offline** — installable as a PWA; after the first visit no network is needed
+- 🕓 **Nothing is lost if you close the tab** — edits autosave into your own browser, kept for 7 days, deletable any time ([details](#-local-editing-and-data-handling))
+- 📴 **Works offline** — installable as a PWA; cached editor resources can be reused offline; uncached assets and remote files still require a network
 - 🌍 **Multi-language** — 7 languages end to end (English, 中文, 日本語, Deutsch, Español, 한국어, Português): the pages, the app UI and the editor all follow the one you pick; the editor itself ships 45
 - 🧩 **Embeddable** — full postMessage API for iframe integration
 - 🤖 **Agent-ready** — exposes WebMCP tools so a browser AI agent can open, convert and read documents
@@ -114,9 +127,9 @@ Parameters on `/editor`:
 
 ---
 
-## 🔐 Your data stays on your device
+## 🔐 Local editing and data handling
 
-Documents are never sent anywhere. Where the browser allows it, saving writes
+Editing and conversion run locally. Where the browser allows it, saving writes
 straight back into the file you picked, so the document lives in your own file
 system and not in a downloads folder. Two things are kept in the browser
 itself, and both are yours to remove:
@@ -133,6 +146,8 @@ itself, and both are yours to remove:
 delete on every row, a delete-all, and a switch to turn autosave off entirely.
 Deleting there takes effect immediately. On a shared machine, that is the page
 to visit.
+
+Off by default · This browser only. Selected text goes to the destination you choose. In embed mode, exported files are returned to the parent application, which controls subsequent uploads.
 
 ---
 
@@ -280,12 +295,22 @@ Cloudflare Pages semantics, and the production Docker image).
 
 [AGPL-3.0](LICENSE).
 
-This is a derivative work of ONLYOFFICE (sdkjs and web-apps, (c) Ascensio System SIA),
-distributed under the AGPL with additional terms under its Section 7: the original
-product logo must be retained, and no rights under trademark law are granted. The
-editor therefore keeps the ONLYOFFICE logo in its header and its About pane. See
-[NOTICE](NOTICE) for the full text, the vendor version and every change made to it.
+This project is a modified version of the ONLYOFFICE editors (sdkjs and web-apps,
+copyright Ascensio System SIA). Its interface uses neutral descriptions without
+product logos or promotional branding. Copyright, license, modification and
+source information remain available in the editor's About pane and in
+[NOTICE](NOTICE). Third-party GUI assets and fonts retain their respective
+licenses; removing product marks does not change those licenses.
+
+The decision to omit product logos follows the FSF's published interpretation
+of AGPLv3 Section 7. It is not described as a court ruling or a guarantee of
+legal compliance; the upstream position and the rationale are recorded in NOTICE.
 
 ONLYOFFICE is a trademark of Ascensio System SIA. This project is not an official
-ONLYOFFICE product and is not affiliated with or endorsed by Ascensio System SIA.
+ONLYOFFICE product and is not affiliated with, sponsored by or endorsed by
+Ascensio System SIA. Names in legal notices and source references identify the
+upstream technology, not this project's brand.
+
+PWA installation and browser tabs use an independently drawn, neutral document
+icon. It contains no upstream logo, trademark or project initials.
 

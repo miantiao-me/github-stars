@@ -1,6 +1,6 @@
 ---
 project: tegaki
-stars: 3118
+stars: 3135
 description: |-
     Handwriting animation for the web. Supports any font or text.
 url: https://github.com/gkurt/tegaki
@@ -21,7 +21,7 @@ No manual path authoring. No native dependencies. Just pick a font.
 <br clear="both" />
 
 <p align="center">
-  <img src="media/hello-world.svg" alt="Tegaki is awesome handwriting animation" width="560" />
+  <img src="media/hello-world.svg" alt="Written by hand. — handwriting animation" width="560" />
 </p>
 
 ---

@@ -1,6 +1,6 @@
 ---
 project: kill-ai-slop
-stars: 1311
+stars: 1333
 description: |-
     A field guide to the visual & copy tics of AI-generated products — and an Agent Skill that scans your project and strips them out. https://killaislop.com
 url: https://github.com/yetone/kill-ai-slop

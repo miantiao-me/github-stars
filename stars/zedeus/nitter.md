@@ -1,6 +1,6 @@
 ---
 project: nitter
-stars: 14487
+stars: 14478
 description: |-
     Alternative Twitter front-end
 url: https://github.com/zedeus/nitter
@@ -10,7 +10,7 @@ url: https://github.com/zedeus/nitter
 
 > [!NOTE]
 > On 24 August 2026, cease and desist letters were sent by X Corp. demanding a permanent takedown of Nitter instances and the project's repository. \
-> **UPDATE:** Following legal advice, the Nitter project will continue. More details will be announced soon.
+> **UPDATE 10 October 2026:** I'm seeking funding and legal help. See [nitter.net](https://nitter.net) for more details.
 
 A free and open source alternative Twitter front-end focused on privacy and
 performance. \
@@ -220,6 +220,4 @@ lines). If you're running the Docker image, you can do this:
 
 Feel free to join our [Matrix channel](https://matrix.to/#/#nitter:matrix.org).
 You can email me at zedeus@pm.me if you wish to contact me personally.
-
-For legal inquiries and DMCA requests, contact legal@poast.org
 

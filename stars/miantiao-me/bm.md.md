@@ -1,6 +1,6 @@
 ---
 project: bm.md
-stars: 618
+stars: 617
 description: |-
     更好用的 Markdown 排版助手｜专为微信公众号与多平台排版设计，支持富文本复制、图片生成与矢量 PDF 导出。
 url: https://github.com/miantiao-me/bm.md

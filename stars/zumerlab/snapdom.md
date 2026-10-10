@@ -1,6 +1,6 @@
 ---
 project: snapdom
-stars: 8170
+stars: 8182
 description: |-
     High-performance engine for capturing, modifying, and converting DOM elements into any format.
 url: https://github.com/zumerlab/snapdom
@@ -11,7 +11,6 @@ url: https://github.com/zumerlab/snapdom
     <img src="https://raw.githubusercontent.com/zumerlab/snapdom/main/docs/assets/newhero.png" width="80%">
   </a>
 </p>
-
 <p align="center">
  <a href="https://snapdom.dev">
     <img alt="Website" src="https://img.shields.io/badge/Website-snapdom.dev-2ea44f?style=flat-square">
@@ -50,7 +49,7 @@ Export images and canvas with the core. Use plugins for self-contained HTML, pag
 
 [Documentation and demos](https://snapdom.dev/) · [Technical features](FEATURES.md) · [Official plugins](packages/plugins/README.md) · [简体中文](README_CN.md)
 
-This checkout documents **v3.x.x**. The migration guide below compares it with **v2.x.x**. The [v2 source](https://github.com/zumerlab/snapdom/tree/v2) and [v2 documentation](https://snapdom.dev/v2/) remain available.
+This checkout documents **v3.x.x**. The migration guide below compares it with **v2.x.x**. The [v2 source](https://github.com/zumerlab/snapdom/tree/v2) remains available.
 
 ## What you can build
 
@@ -60,7 +59,8 @@ This checkout documents **v3.x.x**. The migration guide below compares it with *
 | Reuse a capture in a texture, overlay or transition | Canvas plus capture geometry | Core |
 | Save a page fragment for later display | HTML with captured styles and fonts | `html-export` plugin |
 | Give an agent or a log a view of page content | Text/JSON context, or an image with an element map | `context-export` / `agent-map` plugins |
-| Download a document or record changing content | Image-based PDF, animated GIF or browser-encoded video | `pdf-image` / `gif-export` / `video-export` plugins |
+| Download a document or record changing content | Searchable, paginated PDF, animated GIF or browser-encoded video | `pdf` / `gif-export` / `video-export` plugins |
+| Export editable artwork or paste into Figma | Native SVG shapes and text, or a Figma clipboard payload | `vector` plugin |
 
 Image, HTML and context exports use the captured state. GIF and video plugins record the live element over time.
 
@@ -89,11 +89,13 @@ The result keeps that capture even if the source element later changes. Call `sn
 
 ## Installation
 
-Install the core and, when you need them, the official plugins; use matching major versions:
+Install the core and, when you need them, the official plugins; choose a core supported by the plugins’ peer dependency:
 
 ```sh
 npm i @zumer/snapdom@latest @zumer/snapdom-plugins@latest
 ```
+
+Plugins 4.x in this checkout require core 3.x. The full PDF and Vector exporters are open source under MIT here, but have not been published to npm; the `@latest` command above does not install these new exporters. Run `npm run compile` and `npm run site` to try them against the local build.
 
 Or load it in a browser:
 
@@ -221,7 +223,7 @@ for (let y = 0; y < h0; y += pieceHeight) {
 
 ### Export HTML or structured context
 
-Official plugins are published separately as `@zumer/snapdom-plugins` and must match the core major version; they declare a peer dependency on a v3 core. Their sources live in `packages/plugins/` in this checkout.
+Official plugins are published separately as `@zumer/snapdom-plugins`. Plugins 4.x in this checkout require core 3.x and include the full PDF and Vector exporters under MIT. Their sources live in `packages/plugins/`.
 
 ```js
 import { htmlExport, contextExport } from '@zumer/snapdom-plugins';
@@ -235,6 +237,25 @@ const context = await result.toContext();
 ```
 
 The same plugin system supports overlays, redaction and custom exporters. Local plugins override global plugins by name. See the [official plugin reference](packages/plugins/README.md) and [plugin specification](PLUGIN_SPEC.md).
+
+### Export PDF and editable vectors
+
+These examples use plugins 4.x from this checkout. PDF returns a `Blob` with searchable, selectable text, links, pagination and optional form fields. Vector returns an SVG string without `<foreignObject>`, preserving supported shapes and editable text.
+
+```js
+import { snapdom } from '@zumer/snapdom';
+import { pdf } from '@zumer/snapdom-plugins/pdf';
+import { vector } from '@zumer/snapdom-plugins/vector';
+
+const documentCapture = await snapdom(element, { plugins: [pdf()] });
+const blob = await documentCapture.toPdf({ page: 'a4', margin: 36 });
+
+const artwork = await snapdom(element, { plugins: [vector()] });
+const svg = await artwork.toVector();
+copyButton.addEventListener('click', () => artwork.toFigma());
+```
+
+Pass PDF capture settings to `pdf()` and paper, margin and download settings to `toPdf()`. `toFigma()` returns `Promise<void>` and needs the async clipboard API on HTTPS or localhost, called from a user action. Vector requires a connected source element; unsupported paint is diagnosed by the engine. See the [PDF reference](packages/plugins/pdf/REFERENCE.md) and [Vector contract](packages/plugins/vector/CONTRACT.md).
 
 ### Capture HTML strings
 
@@ -355,7 +376,8 @@ For a useful comparison, use the same scene, output format, scale and DPR. Compa
 
 ## Documentation
 
-- [Archived v2 documentation](https://snapdom.dev/v2/) and [v2 source](https://github.com/zumerlab/snapdom/tree/v2)
+- [Interactive Playground](https://snapdom.dev/playground/), [PDF demos](https://snapdom.dev/pro/pdf/) and [Vector demos](https://snapdom.dev/pro/vector/)
+- [v2 source](https://github.com/zumerlab/snapdom/tree/v2)
 - [API](https://snapdom.dev/docs/api/) and [options](https://snapdom.dev/docs/options/)
 - [Framework guides](https://snapdom.dev/guides/) and [how-to examples](https://snapdom.dev/how-to/)
 - [Official plugins](packages/plugins/README.md), [plugin specification](PLUGIN_SPEC.md) and [contributing plugins](CONTRIBUTING_PLUGINS.md)

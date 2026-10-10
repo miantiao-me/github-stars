@@ -1,6 +1,6 @@
 ---
 project: PraisonAI
-stars: 9130
+stars: 9220
 description: |-
     PraisonAI 🦞 — Hire a 24/7 AI Workforce. Stop writing boilerplate and start shipping autonomous self-improving agents that research, plan, code, and execute tasks. Deployed in 5 lines of code with built-in memory, RAG, and support for 100+ LLMs.
 url: https://github.com/MervinPraison/PraisonAI
