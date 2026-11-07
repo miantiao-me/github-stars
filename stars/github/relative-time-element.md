@@ -1,6 +1,6 @@
 ---
 project: relative-time-element
-stars: 4042
+stars: 4043
 description: |-
     Web component extensions to the standard <time> element.
 url: https://github.com/github/relative-time-element
@@ -143,6 +143,14 @@ The `duration` format will display the time remaining (or elapsed time) from the
 - `4 hours, 2 minutes, 30 seconds`
 - `4 hours`
 - `8 days, 30 minutes, 1 second`
+
+The `duration` and `elapsed` formats render with `font-variant-numeric: tabular-nums`, keeping every digit the same width so a ticking timer doesn't visibly jump around as it counts. To opt out, override the `root` part:
+
+```css
+relative-time::part(root) {
+  font-variant-numeric: normal !important;
+}
+```
 
 ##### time-zone (`string`)
 

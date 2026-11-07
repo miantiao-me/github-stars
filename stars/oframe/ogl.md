@@ -1,6 +1,6 @@
 ---
 project: ogl
-stars: 4743
+stars: 4750
 description: |-
     Minimal WebGL Library
 url: https://github.com/oframe/ogl

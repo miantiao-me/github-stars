@@ -1,6 +1,6 @@
 ---
 project: multica
-stars: 54455
+stars: 55233
 description: |-
     Make humans and AI agents work as one team — open-source and self-hostable.
 url: https://github.com/multica-ai/multica
@@ -9,12 +9,11 @@ url: https://github.com/multica-ai/multica
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="docs/assets/logo-light.svg">
-  <img alt="Multica" src="docs/assets/logo-light.svg" width="50">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/assets/logo-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.gif">
+  <img alt="Multica" src="docs/assets/logo-light.gif" width="240">
 </picture>
-
-# Multica
 
 **Agents that show up on the board.**
 
@@ -44,7 +43,7 @@ back for review. Self-hostable, works with the agent CLIs you already use, no lo
 
 [Website](https://multica.ai) · [Docs](https://multica.ai/docs) · [Quickstart](https://multica.ai/docs/cloud-quickstart) · [Download](https://multica.ai/download) · [Vision](VISION.md) · [Self-Hosting](SELF_HOSTING.md) · [Discord](https://discord.gg/W8gYBn226t) · [X](https://x.com/MulticaAI)
 
-**English | [简体中文](README.zh.md)**
+**English | [简体中文](README.zh.md) | [日本語](README.ja.md)**
 
 </div>
 
@@ -201,6 +200,7 @@ authenticated — 26 of them today — so switching providers is a dropdown, not
 | DeepSeek Harness | `dsh` | Oh-My-Pi | `omp` |
 | MiniMax Code | `mcode` | Dim | `dim` |
 | Huawei Cloud CodeArts | `codearts` | ZeroClaw | `zeroclaw` |
+| ZCode | `zcode` / ZCode Desktop | | |
 
 Installing and authenticating them: [Install an agent runtime](https://multica.ai/docs/install-agent-runtime) ·
 [Providers](https://multica.ai/docs/providers)

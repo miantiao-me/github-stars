@@ -1,6 +1,6 @@
 ---
 project: novel
-stars: 16463
+stars: 16464
 description: |-
     Notion-style WYSIWYG editor with AI-powered autocompletion.
 url: https://github.com/steven-tey/novel

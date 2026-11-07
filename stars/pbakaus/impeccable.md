@@ -1,6 +1,6 @@
 ---
 project: impeccable
-stars: 98193
+stars: 105480
 description: |-
     The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships.
 url: https://github.com/pbakaus/impeccable
@@ -76,6 +76,8 @@ On Codex, open `/skills` or type `$impeccable` instead of the slash command.
 `/impeccable live` opens your running dev server with an overlay. Select an element, pick a direction, and Impeccable hot-swaps variants in place. Accept one and it is written back to your source. It works with Vite, Next, SvelteKit, Astro, Nuxt, and plain HTML. [Iterate in the browser](https://impeccable.style/tutorials/iterate-live).
 
 Live mode edits a local checkout only; don't inject it into a deployed site or weaken a production CSP to make it work. Applying copy edits runs your `package.json`'s optional `impeccable:manual-edit-validate` script with your permissions, so review it before using live mode in an unfamiliar repo.
+
+Apply sends staged copy edits to your chat agent while a live session is polling. If none has polled in the last minute, it runs the `codex` CLI from your PATH instead (or `claude` when codex is missing), with approvals, permission checks, and sandboxing off (`--dangerously-bypass-approvals-and-sandbox` or `--permission-mode bypassPermissions`) and your environment inherited. Its prompt carries the staged edits, the edited elements' HTML and nearby text, the page URL, and candidate source paths. Set `IMPECCABLE_LIVE_COPY_AGENT=chat` in the environment that starts live mode to keep Apply in your chat session, or `off` to disable Apply. The server reads it once at startup.
 
 ## Three ways to run the detector
 

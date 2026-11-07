@@ -1,6 +1,6 @@
 ---
 project: KittenTTS
-stars: 16734
+stars: 16809
 description: |-
     Open-source State-of-the-art TTS model which runs on a CPU 😻 
 url: https://github.com/KittenML/KittenTTS

@@ -1,6 +1,6 @@
 ---
 project: luci-app-bandix
-stars: 1004
+stars: 1007
 description: |-
     A network traffic monitoring application for OpenWrt
 url: https://github.com/timsaya/luci-app-bandix

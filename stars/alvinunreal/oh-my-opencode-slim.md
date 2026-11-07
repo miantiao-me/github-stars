@@ -1,6 +1,6 @@
 ---
 project: oh-my-opencode-slim
-stars: 10038
+stars: 10148
 description: |-
     Lean, fine tuned Opencode multi agent suite · Mix any models · Auto delegate tasks
 url: https://github.com/alvinunreal/oh-my-opencode-slim
@@ -191,6 +191,7 @@ Then:
    ```bash
    opencode models --refresh
    ```
+   On OpenCode v2, use `opencode models` instead.
 3. **Open your plugin config** at `~/.config/opencode/oh-my-opencode-slim.json`
 
 4. **Update the models you want for each agent**
@@ -221,12 +222,16 @@ The default generated configuration includes both `openai` and `opencode-go` pre
 
 Presets can inherit from one base preset with `extends`: a `design` preset can
 extend `base` and override only its designer model. On v2, `/preset` lets you
-apply subagent inference settings to **Current session** or change the
-**Global default**. `/preset <name>` applies the preset to the session you are
+apply subagent inference settings to **Current session**, start an empty
+**New session** bound to a preset, or change the **Global default**.
+`/preset <name>` applies the preset to the session you are
 in — no restart — while manual configuration edits change the default for
 future sessions; existing work and its future subagents retain their saved
 configuration until you explicitly reapply a preset to that session.
-Already-created children keep their own configuration. Main-session models,
+After reapplying, explicitly continuing a bound child with the same agent
+adopts the parent's updated inference settings while retaining its ID and
+history. This is best-effort: a failed continuation can leave the native
+model changed without saving the new team snapshot. Main-session models,
 prompts, tools, skills and MCPs are not switched by the session action.
 The sidebar shows the current session's saved team models and variants;
 `/preset` marks its bound preset separately from the global default.
@@ -288,6 +293,11 @@ If any agent fails to respond, check your provider authentication and config fil
 <a id="meet-the-pantheon"></a>
 
 ## 🏛️ Meet the Pantheon
+
+> [!TIP]
+> **The Pantheon has a saga.** *The Chronicle of the Pantheon* tells where
+> these agents came from, starting in the emptiness before the world.
+> Read it at [ohmyopencodeslim.com/lore](https://ohmyopencodeslim.com/lore).
 
 ### 01. Orchestrator: The Embodiment Of Order
 
@@ -795,7 +805,7 @@ Use this section as a map: start with installation, then jump to features, confi
   <p><sub>Every merged contribution leaves a mark on the realm.</sub></p>
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-146-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-148-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </div>
 
@@ -1001,6 +1011,8 @@ Use this section as a map: start with installation, then jump to features, confi
     <tr>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/niheaven"><img src="https://avatars.githubusercontent.com/u/5832170?v=4?s=100" width="100px;" alt="Hsiao-nan Cheung"/><br /><sub><b>Hsiao-nan Cheung</b></sub></a><br /><a href="https://github.com/alvinunreal/oh-my-opencode-slim/commits?author=niheaven" title="Code">💻</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/akrhin"><img src="https://avatars.githubusercontent.com/u/17483152?v=4?s=100" width="100px;" alt="akrhin"/><br /><sub><b>akrhin</b></sub></a><br /><a href="https://github.com/alvinunreal/oh-my-opencode-slim/commits?author=akrhin" title="Code">💻</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/NowOne"><img src="https://avatars.githubusercontent.com/u/843357?v=4?s=100" width="100px;" alt="NowOne"/><br /><sub><b>NowOne</b></sub></a><br /><a href="https://github.com/alvinunreal/oh-my-opencode-slim/commits?author=NowOne" title="Code">💻</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/wsmajt"><img src="https://avatars.githubusercontent.com/u/70204246?v=4?s=100" width="100px;" alt="Kacper Muszyński"/><br /><sub><b>Kacper Muszyński</b></sub></a><br /><a href="https://github.com/alvinunreal/oh-my-opencode-slim/commits?author=wsmajt" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

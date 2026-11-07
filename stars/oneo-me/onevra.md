@@ -1,67 +1,52 @@
 ---
 project: onevra
-stars: 261
+stars: 281
 description: |-
      Native desktop UI components for Go, built on MyGo. Themed controls, window shells, Lucide icons, plus chat, Markdown, code highlighting, charts and a command palette. Also includes a standalone packager for macOS, Windows and Linux.
 url: https://github.com/oneo-me/onevra
 ---
 
-# Onevra
+<p align="center">
+  <img src="source/assets/icon.png" alt="Onevra" width="128">
+</p>
 
-**English** | [简体中文](README.zh-CN.md)
+<h1 align="center">Onevra</h1>
 
-Onevra is a Go component library for native desktop applications, built on [MyGo](https://github.com/egoist/mygo). It provides themed controls, window shells, Lucide icons and complex components. The name combines `One` from **ONEO** with the coined ending `vra`.
+<p align="center">
+  <strong>English</strong> |
+  <a href="README.zh-CN.md">简体中文</a>
+</p>
 
-![Onevra Gallery main interface with sidebar navigation and the Welcome page](docs/images/gallery.png)
+<p align="center">
+  <a href="https://github.com/oneo-me"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-oneo--me-181717?logo=github&logoColor=white"></a>
+  <a href="https://oneo.me"><img alt="Blog" src="https://img.shields.io/badge/Blog-oneo.me-0969da"></a>
+  <a href="https://x.com/oneo666"><img alt="X" src="https://img.shields.io/badge/X-%40oneo666-000000?logo=x&logoColor=white"></a>
+  <a href="https://github.com/sponsors/oneo-me"><img alt="GitHub Sponsors" src="https://img.shields.io/badge/GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white"></a>
+</p>
 
-## Design principles
+<p align="center">
+  <a href="https://awesomemygo.dev/ui"><img alt="Listed on Awesome MyGo" src="https://awesomemygo.dev/badge.svg"></a>
+</p>
 
-Onevra builds on MyGo rather than replacing it:
+<p align="center">
+  Onevra is a Go component library for native desktop applications, built on <a href="https://github.com/egoist/mygo">MyGo</a>. It provides themed controls, window shells, Lucide icons and complex components.
+</p>
 
-- **Refine built-in components**: adjust the styling of MyGo's built-in components, and merge and simplify them into a smaller, consistent API.
-- **Fill the gaps**: provide components that MyGo does not officially support.
-- **Defer to upstream**: when MyGo officially provides a feature or component that Onevra already offers, Onevra may remove its own version and switch to MyGo's.
+<p align="center">
+  <img src="docs/images/gallery.png" alt="Onevra Gallery main interface with sidebar navigation and the Welcome page">
+</p>
 
-## Additional components
+## Install
 
-Building on MyGo's native UI capabilities, Onevra adds composed components for common application scenarios:
-
-- **Conversation interfaces**: bring message turns, tool activity, folded summaries and attachment input together into a complete chat interface.
-
-- **Lucide icons**: provide SVG icons for MyGo through named accessors, loaded on demand with configurable sizing and inherited text color.
-
-## Examples
-
-Follow [MyGo’s official requirements](https://mygo.egoist.dev/docs) for the development environment and system dependencies.
-
-From the repository root, start the interactive Gallery:
-
-```sh
-cd source
-go run ./examples/gallery
-```
-
-Append `-theme light` or `-theme dark` to preview an appearance. Five smaller applications are also available; run these commands from `source/`:
-
-| Example | Purpose | Command |
-| --- | --- | --- |
-| Desktop | A main window with settings | `go run ./examples/desktop` |
-| Menu bar | A tray application with a quick-note panel | `go run ./examples/menubar` |
-| Launcher | A Spotlight-style panel that searches and opens installed apps | `go run ./examples/launcher` |
-| Documents | A document-based notes editor | `go run ./examples/documents` |
-| Lawn defense | A pixel-art tower-defense game | `go run ./examples/games/lawn` |
-
-Each template includes localization and its own packaging configuration; all but the document editor and the game keep preferences. See [starter applications](docs/build.md#starter-applications) for copying and adapting one. Windows and Linux still require their own [native review](docs/build.md#native-review).
-
-## Getting started
-
-Install **0.2026.16** in your application module with:
+Onevra requires Go 1.27.3 or later. Install **0.2026.18** in your application module:
 
 ```sh
-go get github.com/oneo-me/onevra/source@v0.2026.16
+go get github.com/oneo-me/onevra/source@v0.2026.18
 ```
 
-Save this minimal application as `main.go` and run `go run .` from your application module:
+## Usage
+
+Save this minimal application as `main.go` and run `go run .`:
 
 ```go
 package main
@@ -95,83 +80,39 @@ func main() {
 }
 ```
 
-Create windows after MyGo is ready. Build content with Onevra controls and MyGo layout primitives; your application owns state, persistence and asynchronous work.
+Create windows after MyGo is ready. Build content with Onevra controls and MyGo layout primitives; the application owns state, persistence and asynchronous work. See the [component contract](source/components/doc.go) and the [Shells](source/shells/plain/shell.go) used here.
 
-## Packaging
+## Documentation
 
-Package applications with MyGo's own CLI; Onevra adds no packager. To run or package Gallery, execute these commands from `source/`:
-
-```sh
-go tool mygo dev
-go tool mygo build
-```
-
-`dev` builds and launches the host application with live reload; `build` packages it for the host, or for the targets given with `-platform`. Configuration lives in `mygo.json`. See [packaging the Gallery](docs/build.md#app-bundles) and MyGo's [distribution guide](https://mygo.egoist.dev/docs/distribution).
-
-## Shells
-
-Shells create native windows while leaving application lifecycle, business state and the theme to the caller.
-
-| Package | Layout |
+| Topic | Document |
 | --- | --- |
-| [`shells/plain`](source/shells/plain/shell.go) | A single content area with automatic clearance for window controls and the window title shown in its header; used in the example above |
-| [`shells/sidebar`](source/shells/sidebar/shell.go) | A collapsible, resizable sidebar with a content area, header actions and replaceable pages |
+| Guides and every component | [oneo-me.github.io/onevra](https://oneo-me.github.io/onevra/) |
+| Component contract | [source/components/doc.go](source/components/doc.go) |
+| Window shells | [plain](source/shells/plain/shell.go), [sidebar](source/shells/sidebar/shell.go) |
+| Theme | [source/theme/doc.go](source/theme/doc.go) |
+| Lucide icons | [source/icons/lucide/doc.go](source/icons/lucide/doc.go) |
+| Component design | [docs/architecture/components.md](docs/architecture/components.md) |
+| Architecture | [ARCHITECTURE.md](ARCHITECTURE.md) |
+| Development guide | [docs/build.md](docs/build.md) |
 
-Import either package under `github.com/oneo-me/onevra/source/`. Their `Theme` option installs the application's theme before each frame: pass `theme.Onevra` for Onevra's palettes, your own function returning a `*ui.Theme`, or nothing to keep MyGo's theme. Choose light, dark or system appearance with `mygo.Theme.SetSource`; see the [theme package](source/theme/doc.go). For Sidebar, use `sidebar.HeaderHeight(c)` when content needs to clear the floating header; see [layout guidance](docs/architecture/components.md#page-container-and-layout).
+## Development
 
-## Icons
-
-The [Lucide package](source/icons/lucide/doc.go) provides named SVG accessors. Import `github.com/oneo-me/onevra/source/icons/lucide` alongside `components`, then use them in a content builder:
-
-```go
-components.Icon(c, lucide.Search).Size(20, 20)
-```
-
-Icons are parsed on first use and reused. They inherit text color, and the Icon component also accepts a parsed MyGo SVG.
-
-## Components
-
-Import `github.com/oneo-me/onevra/source/components` for themed inputs, selection, navigation, collections and overlays. Inside a content builder, use retained application state such as `agreed` and `wifi`:
-
-```go
-if components.Button(c, "Save", components.ButtonPrimary).Clicked() {
-    // Save application state.
-}
-components.Checkbox(c, &agreed, "I agree")
-components.Switch(c, &wifi, "Wi-Fi")
-```
-
-Components read the frame theme and work independently of Shell; a standalone window installs its theme with `c.SetTheme` or `theme.Apply` at the top of its builder. See the [component contract](source/components/doc.go) and [theme usage](source/theme/doc.go). Complex components each have a separate package under `components/`: `chart`, `graph`, `treemap`, `flow`, `gesture`, `command` and `chat`. See [complex component composition](docs/architecture/components.md#complex-component-composition).
-
-## Contributing
-
-Read [AGENTS.md](AGENTS.md) and the [architecture overview](ARCHITECTURE.md) before making changes. From `source/`, run:
+Run these from `source/` to check a change:
 
 ```sh
 gofmt -l .
 GOWORK=off go test ./...
-GOWORK=off go test -race ./...
 GOWORK=off go vet ./...
 GOWORK=off go build ./...
 ```
 
-Formatting should produce no output. See [development checks](docs/build.md#development-checks) and [native review](docs/build.md#native-review) for verification. Keep both READMEs equivalent and record consumer-visible changes in [CHANGELOG.md](CHANGELOG.md). Versioning and release procedures are in [Publication](docs/build.md#publication).
+- Preview all components with the Gallery: `go run ./examples/gallery`; append `-theme light` or `-theme dark` to choose an appearance.
+- Package an application with MyGo's CLI: `go tool mygo dev` or `go tool mygo build`. See [app bundles](docs/build.md#app-bundles).
+- Run one of the five starter applications under `source/examples/`; see [starter applications](docs/build.md#starter-applications).
+- Work on the documentation site with `cd website && bun install && bun run dev`; see [website/README.md](website/README.md).
+- Read [AGENTS.md](AGENTS.md) before changing code.
 
-## Website
-
-The documentation site lives in [website/](website): guides and a page for every component, whose live examples are Go compiled to WebAssembly. The [Website workflow](.github/workflows/website.yml) deploys it to GitHub Pages. It needs Bun and Go 1.27.3 or later:
-
-```sh
-cd website
-bun install
-bun run dev
-```
-
-See [website/README.md](website/README.md) for adding pages and examples.
-
-## Author
-
-[Blog](https://oneo.me) · [X @oneo666](https://x.com/oneo666)
+Consumer-visible changes are recorded in [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

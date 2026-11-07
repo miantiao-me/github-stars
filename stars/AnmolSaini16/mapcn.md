@@ -1,6 +1,6 @@
 ---
 project: mapcn
-stars: 12352
+stars: 12370
 description: |-
     Beautiful map components. 100% Free, Zero config, one command setup.
 url: https://github.com/AnmolSaini16/mapcn
@@ -36,14 +36,14 @@ url: https://github.com/AnmolSaini16/mapcn
 
 ## Features
 
-- 🎨 **Theme-aware** — Automatically adapts to light/dark mode
-- 🎯 **Zero config** — Works out of the box with sensible defaults
-- 📦 **shadcn/ui compatible** — Uses the same patterns and styling conventions
-- 🗺️ **MapLibre GL powered** — Full access to MapLibre's powerful mapping capabilities
-- 🧩 **Composable** — Build complex map UIs with simple, declarative components
-- 📍 **Markers & Popups** — Rich marker system with popups, tooltips, and labels
-- 🛤️ **Routes** — Draw routes and paths on your maps
-- 🎮 **Controls** — Zoom, compass, locate, and fullscreen controls
+- **Theme-aware** — Automatically adapts to light/dark mode
+- **Zero config** — Works out of the box with sensible defaults
+- **shadcn/ui compatible** — Uses the same patterns and styling conventions
+- **MapLibre GL powered** — Full access to MapLibre's powerful mapping capabilities
+- **Composable** — Build complex map UIs with simple, declarative components
+- **Markers & Popups** — Rich marker system with popups, tooltips, and labels
+- **Routes** — Draw routes and paths on your maps
+- **Controls** — Zoom, compass, locate, and fullscreen controls
 
 ## Agent Skill
 
@@ -54,6 +54,26 @@ npx skills add AnmolSaini16/mapcn
 ```
 
 Then ask for a map, or ask where one would fit in your app. See [mapcn.dev/docs/skill](https://mapcn.dev/docs/skill).
+
+## Sponsors
+
+mapcn is free and open source, supported by sponsors.
+[Become a sponsor](https://mapcn.dev/sponsors).
+
+<table>
+<tr>
+<td align="center" width="340">
+  <a href="https://links.codedthemes.com/Bcozd" rel="sponsored">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="public/sponsors/uiable-dark.svg" />
+      <img src="public/sponsors/uiable.svg" alt="UIAble" width="200" />
+    </picture>
+  </a>
+  <br />
+  <sub>50% off with code <code>MAP50</code> until December 5, 2026</sub>
+</td>
+</tr>
+</table>
 
 ## Basemap Terms of Service
 
@@ -69,10 +89,6 @@ CARTO offers free tiers for commercial and non-commercial usage, subject to mont
 For production applications, review [CARTO's terms](https://carto.com/legal/basemap-terms/) and configure your own basemap provider or API key as needed.
 
 mapcn is built on MapLibre and supports alternative MapLibre-compatible basemap providers.
-
-## Sponsors
-
-mapcn is free and open source, kept going by its sponsors. Want your logo here? See [mapcn.dev/sponsors](https://mapcn.dev/sponsors).
 
 ## Contributing
 

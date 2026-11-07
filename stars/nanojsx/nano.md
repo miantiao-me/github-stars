@@ -1,6 +1,6 @@
 ---
 project: nano
-stars: 1627
+stars: 1626
 description: |-
     🎯 SSR first, lightweight 1kB JSX library.
 url: https://github.com/nanojsx/nano

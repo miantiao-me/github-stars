@@ -1,6 +1,6 @@
 ---
 project: loupe
-stars: 1566
+stars: 1573
 description: |-
     A privacy-focused iOS app that raises awareness about what native apps can see
 url: https://github.com/mysk-research/loupe

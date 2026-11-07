@@ -1,6 +1,6 @@
 ---
 project: office-open-xml-viewer
-stars: 864
+stars: 872
 description: |-
     A browser-based viewer for Office Open XML documents that renders to an HTML Canvas element.
 url: https://github.com/yukiyokotani/office-open-xml-viewer

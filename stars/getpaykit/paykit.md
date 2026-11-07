@@ -1,6 +1,6 @@
 ---
 project: paykit
-stars: 1077
+stars: 1076
 description: |-
     Build Stripe billing without the glue code. Products in code, webhooks handled, billing state in your app.
 url: https://github.com/getpaykit/paykit

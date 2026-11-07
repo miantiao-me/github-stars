@@ -1,6 +1,6 @@
 ---
 project: itshover
-stars: 2708
+stars: 2713
 description: |-
     Icons that move with intent
 url: https://github.com/itshover/itshover
@@ -119,6 +119,18 @@ Contributions welcome. Each icon follows this pattern:
 ## Creator
 
 Built by [@abhijitwt](https://x.com/abhijitwt)
+
+## Partners
+
+Cloud Infrastructure partner
+
+<a href="https://www.vultr.com">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/assets/vultr-white.png" />
+    <source media="(prefers-color-scheme: light)" srcset="public/assets/vultr.png" />
+    <img alt="Vultr" src="public/assets/vultr.png" height="32" />
+  </picture>
+</a>
 
 ## Code of Conduct
 

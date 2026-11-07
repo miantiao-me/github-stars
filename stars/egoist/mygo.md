@@ -1,6 +1,6 @@
 ---
 project: mygo
-stars: 3831
+stars: 5174
 description: |-
     Develop desktop apps with native UI or web frontend in Go
 url: https://github.com/egoist/mygo

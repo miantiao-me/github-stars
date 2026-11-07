@@ -1,6 +1,6 @@
 ---
 project: kero
-stars: 1311
+stars: 1445
 description: |-
     A cross-platform native terminal app optimized for agents
 url: https://github.com/egoist/kero

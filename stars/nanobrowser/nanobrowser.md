@@ -1,6 +1,6 @@
 ---
 project: nanobrowser
-stars: 14210
+stars: 14260
 description: |-
     Open-source AI agent for web automation. Use your real, logged-in browser to automate daily tasks.
 url: https://github.com/nanobrowser/nanobrowser

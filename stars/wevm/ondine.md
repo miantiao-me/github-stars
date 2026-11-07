@@ -1,6 +1,6 @@
 ---
 project: ondine
-stars: 439
+stars: 447
 description: |-
     Fast and simple diagrams.
 url: https://github.com/wevm/ondine

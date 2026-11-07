@@ -1,6 +1,6 @@
 ---
 project: pullfrog
-stars: 1408
+stars: 1437
 description: |-
     Open-source model-agnostic BYOK GitHub bot that runs in GitHub Actions
 url: https://github.com/pullfrog/pullfrog

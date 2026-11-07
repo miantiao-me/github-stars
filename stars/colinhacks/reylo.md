@@ -1,6 +1,6 @@
 ---
 project: reylo
-stars: 1443
+stars: 1538
 description: |-
     Import .sql files into TypeScript with full type inference and zero codegen.
 url: https://github.com/colinhacks/reylo
@@ -66,7 +66,7 @@ Reylo is the perfect option for the agent era:
 - 🌵 **DRY** — no redundant hand-written types
 - 🎯 **Checked against your database** — a misspelled column is a type error
 - 🤖 **Agent-friendly** — DRY code is more maintainable for agents
-- 🧩 **Postgres, MySQL, SQLite and DuckDB** — Neon, PlanetScale, Cloudflare D1, Turso and more
+- 🧩 **Postgres, MySQL, SQLite and DuckDB** (preview) — Neon, PlanetScale, Cloudflare D1, Turso and more
 - 🔌 **Bring your own driver** — `pg`, postgres.js, `mysql2`, `better-sqlite3` and [more](#supported-drivers)
 - ⚡ **No codegen** — no generated files, no watcher
 
@@ -78,11 +78,10 @@ To install Reylo, you'll need:
 - **Node 24 or later.**
 - **A running dev database.** Postgres, MySQL 8.0.22 or later, or a SQLite or DuckDB file: Reylo reads your current schema from it.
 
-Install Reylo, the engine for your database and TypeScript 7.1:
+Install Reylo, which brings its engine for your machine, and TypeScript 7.1:
 
 ```sh
 npm install reylo
-npm install -D @reylosql/postgres  # or mysql, sqlite, duckdb
 npm install -D typescript@beta
 ```
 
@@ -123,6 +122,12 @@ node --env-file=.env --import reylo/register main.ts
 ```
 
 For Bun, Nub, Vite, Next.js, esbuild, webpack, Rspack, Cloudflare Workers and Jest, add [the plugin for your setup](https://reylo.dev/#plugins), or copy its complete [example project](https://github.com/colinhacks/reylo/tree/main/examples). To see the types as you type, set up [your editor](https://reylo.dev/#editors).
+
+To give your coding agent Reylo's rules for writing and running queries, install its skill:
+
+```sh
+npx skills add colinhacks/reylo --skill using-reylo
+```
 
 ## Usage
 
@@ -175,7 +180,7 @@ Reylo is bring-your-own-driver. Pass `.run()` a client from any of these, or a D
 
 ## Documentation
 
-[reylo.dev](https://reylo.dev) covers the rest: every plugin and editor, configuration, errors, each database's data types and edge cases, and advanced examples. Agents can read it all as Markdown at [reylo.dev/llms.txt](https://reylo.dev/llms.txt).
+[reylo.dev](https://reylo.dev) covers the rest: every plugin and editor, configuration, errors, each database's data types and edge cases, and advanced examples. Agents can read it all as Markdown at [reylo.dev/llms.txt](https://reylo.dev/llms.txt). To move a Prisma project's queries to Reylo, see [Migrating from Prisma](https://reylo.dev/prisma).
 
 ## License
 

@@ -1,6 +1,6 @@
 ---
 project: taste-skill
-stars: 106988
+stars: 111626
 description: |-
     Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages
 url: https://github.com/Leonxlnx/taste-skill
@@ -66,9 +66,9 @@ url: https://github.com/Leonxlnx/taste-skill
 
 <p align="center"><sub><a href="https://github.com/sponsors/Leonxlnx">Become a sponsor</a></sub></p>
 
-**Taste Skill** is an Agent Skill that makes coding agents design websites and app screens instead of assembling the average landing page. It gives the agent an art direction, real pictures and a way to check its own work in a real browser.
+**Taste Skill** (`tasteskill 2.5.1`) is an Agent Skill that makes coding agents build professional company websites at the `figma.com` and `x.ai` level instead of assembling a generic landing page. Every build uses plain copy, one design system, one section per screen, equal left and right edges, real photographs (licensed stand-ins when the client has none), real brand icons and real product UI, a hero entrance and one or two dealt moments on every page, quiet micro-interactions, and shader effects and scroll scenes kept strictly for tech, gaming and software pages, all verified in a real browser by a checker and a finish gate that enforce the rules.
 
-Pages it has built, each from one brief:
+Pages built from a single brief in earlier v2 runs:
 
 <table>
   <tr>
@@ -91,7 +91,7 @@ npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-fro
 
 That installs the skill with the [`npx skills`](https://github.com/vercel-labs/agent-skills) CLI.
 
-The skill runs its scripts with **Node 22+** and an installed **Chrome, Edge or Chromium**. It installs nothing and needs no API keys. Finding pictures needs network access.
+The skill runs its scripts with **Node 22+** and an installed **Chrome, Edge or Chromium** (set `CHROME_PATH` if it is in a non-standard place). Optional: **ffmpeg** on the PATH, for WebP output and the phone crop of a hero photograph in `photos.mjs`. It installs nothing and needs no API keys. Bundled Wikimedia Commons photographs work offline; fetching additional photographs or icons uses network access.
 
 <details>
 <summary>Claude Code plugin</summary>
@@ -122,28 +122,40 @@ Start a new Codex session afterwards so the skill is loaded.
 <details>
 <summary>From a clone, linked instead of copied</summary>
 
-`./install.sh` symlinks the skill into Claude Code (`--codex` for Codex, `--all-agents` for both), so a `git pull` updates it in place.
+`./install.sh` symlinks the skill into Claude Code (`--codex` for Codex, `--all-agents` for both), so a `git pull` updates it in place. On Windows (Git Bash) it makes a real link, or a directory junction when symlinks are not allowed, and it reports an older copied folder instead of skipping it silently.
 
 </details>
 
 Already have the skill? Run the install command again; the install name did not change. Looking for one of the older skills? See [Moved skills](#moved-skills).
 
-## How v2 works
+## How 2.5 works
 
-The skill is built from a study of 247 curated sites. A build runs in six steps:
+Use it by asking your agent to build or redesign a company site; the agent loads the skill, copies `assets/` into the project, starts from `assets/starter.html` and runs the checker before it hands the page over. Every build starts by classifying the client's business (`software`, `gaming`, `tech`, `product`, `service` or `place`) and planning the page screen by screen before writing markup:
 
-1. Reads the brief and lists what only this client has.
-2. A script deals three of 20 researched directions and the agent picks one.
-3. Finds the idea: one sentence tying the client's own material to that direction.
-4. Builds with real pictures and footage from open collections, credited.
-5. Checks the page in a real browser at three widths and fails it on slop.
-6. Looks at its own screenshots and fixes the top three problems, up to three rounds.
+1. **Deal tokens and layout.** `scripts/start.mjs` deals a palette made for the trade and a Google Fonts pairing for the page kind (`library/palettes.json`, `library/type.json`), and `assets/layout/deal.mjs` deals a hero layout (`split`, `centred`, `product`, `photo`, `place`, `collage`, `editorial`, `word`, `film`, `statement` or `triptych`).
+2. **Start from one system.** `assets/starter.html`, `assets/system.css` and `assets/layout/layout.css` enforce one section per screen at desktop (`1440x900`), equal left and right content edges, a fixed navigation bar and a single-screen closing footer (`footer.closing`).
+3. **Show real product UI and real photographs.** Software and tech pages populate lit feature cards (`assets/ui/cards.css`) with rewritten HTML UI fragments (`assets/ui/`) and node-and-line diagrams (`assets/diagrams/`), with real brand and interface SVGs resolved locally by `scripts/icons.mjs`. Place, shop, hospitality and non-technical product pages lead with curated photographs (`scripts/photos.mjs`, `assets/photos/`), typography and flat colour, crediting sources in one expandable footer line with no captions under images.
+4. **Keep effects for tech and gaming pages.** Shader grounds (`scripts/effects.mjs`), scroll scenes (`assets/scenes/`) and procedural 3D prints (`assets/objects/`) are dealt only on `software`, `tech` and `gaming` pages within a four-context WebGL cap, with static fallbacks for phones and reduced motion. Every page gets a hero entrance and one or two moments from `scripts/moments.mjs`; cafes, hotels, shops, studios and services get only the photo- and type-led ones, and zero WebGL.
+5. **Check in a real browser over HTTP.** `scripts/consistency.mjs`, `assets/layout/check.mjs`, `scripts/perf.mjs` and `scripts/shoot.mjs` render the built page in headless Chrome across `1440`, `1024`, `768` and `390`, catching empty visuals, broken shaders, contrast drops, misaligned columns, section-height drift, placeholder text, invented street numbers and slow-network image gaps before the build ships. `scripts/gate.mjs` then holds the finish until no fixable FAIL is left, three rounds at most.
 
-A build takes roughly 30 to 45 minutes and a few hundred thousand tokens. Details are in the [changelog](CHANGELOG.md) and the [study](skills/taste-skill/references/research.md).
+Details of what changed from `2.1.x` are in the [changelog](CHANGELOG.md).
 
-Dashboards and app screens (v2.1) take their own route: the skill deals one of the app styles distilled from real product screens, builds the shell, the data, the charts and the tables to those numbers, and checks the result with app rules: quiet panels, aligned figures, colour spent on data, a phone layout where the navigation folds away. A product's landing page builds the app it shows the same way, so its screenshots look like a working product.
+## The tools
 
-v2.1 also checks the frame of every page (a clear title on the first screen, equal margins, no section shoved to one side, no random blank stretches) and moves the way strong award sites do, measured on the latest 100 Awwwards Sites of the Day.
+Everything is a plain Node 22+ script in the skill folder; none installs anything.
+
+| Tool | What it does |
+| --- | --- |
+| `scripts/start.mjs` | Deals a palette and a Google Fonts pairing for the page kind and prints the `<head>` links and `:root` tokens. |
+| `assets/layout/deal.mjs` | Deals one of eleven tested hero layouts; `assets/layout/check.mjs` checks it with long-headline stress tests. |
+| `scripts/photos.mjs` | Deals vetted photographs by trade, enforces image weight and writes the one footer credit line. |
+| `scripts/icons.mjs` | Resolves real brand and interface icons into local SVG files. |
+| `scripts/effects.mjs`, `scripts/moments.mjs` | Deal shader grounds for tech, gaming and software pages, and the moments for every kind. |
+| `scripts/gate.mjs`, `scripts/copy-lint.mjs` | The finish gate (also a Stop hook) and the copy linter it runs. |
+| `scripts/consistency.mjs` | The checker: renders the page in headless Chrome over HTTP at `1440`, `1024`, `820`, `768` and `390` and prints PASS, WARN or FAIL per rule. |
+| `scripts/perf.mjs`, `scripts/shoot.mjs` | Page weight and speed, and full-page and per-section screenshots. |
+
+First run, from the project folder (a deal also arms the finish gate there): `node scripts/start.mjs deal --page software` (kinds: `software`, `gaming`, `tech`, `product`, `service`, `place`). Check a built page with `node scripts/consistency.mjs <url or file> --page <kind>`.
 
 ## Moved skills
 
@@ -165,16 +177,16 @@ npx skills add https://github.com/Leonxlnx/taste-skill-classics --skill "high-en
 ## Common Questions
 
 **What does the skill need?**  
-Node 22 or newer and Chrome, Edge or Chromium. It installs nothing and uses no API keys. It needs the internet only to find pictures.
+Node 22 or newer and Chrome, Edge or Chromium; ffmpeg is optional (WebP photographs and the phone crop of a hero photograph). It installs nothing and uses no API keys. Bundled Commons photographs are stored locally; network access is used only when downloading additional photographs, Google Fonts or brand icons.
 
 **Where do the pictures come from, and can I use them?**  
-From open collections such as Wikimedia Commons, Openverse and the Met. Only public domain, CC0, CC BY and CC BY-SA files are offered, and the skill puts the credits on the page. Replace them with your own when you have them.
+From the skill's vetted photograph library (`assets/photos/photos.json`, including bundled Wikimedia Commons WebP sets and Unsplash photographs) dealt by `scripts/photos.mjs`. Library frames are used for trade and material details (or marked explicitly as draft stand-ins when the client has no photographs yet), never passed off as the client's own room, staff or product, and credited in one expandable footer line (`photos.mjs credits`).
 
 **Does it work with React, Vue, Svelte, plain HTML?**  
-Yes. The rules are about design, not a framework.
+An empty folder gets a static page from `assets/starter.html`. An existing React, Vue, Svelte, Astro or Tailwind project is built in its own stack, with the kit served from its public folder; a Next.js brief is built as a static export. The browser checks run on the served or built page.
 
-**Is it for dashboards and app screens?**  
-Yes, since v2.1. The skill tells a page from an app screen and builds a dashboard, an admin view or a settings screen with its own run: a style dealt from a study of real product screens, quiet panels, honest data and charts, and its own checks (`inspect.mjs --app`).
+**When does a page get shaders or scroll effects?**  
+Shaders only on `software`, `tech` (technical hardware) and `gaming` pages, and always within a four-context WebGL budget with static phone and reduced-motion fallbacks. Places, shops, cafes, hotels, studios, services and everyday physical products stay calm: photographs, sharp typography and flat colour, with a hero entrance and one or two photo- or type-led moments in their own sections.
 
 ## Support the project
 

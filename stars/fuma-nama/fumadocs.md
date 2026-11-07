@@ -1,6 +1,6 @@
 ---
 project: fumadocs
-stars: 13521
+stars: 13569
 description: |-
     The beautiful & flexible React.js docs framework.
 url: https://github.com/fuma-nama/fumadocs

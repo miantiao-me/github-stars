@@ -1,6 +1,6 @@
 ---
 project: design-playful-app-icons
-stars: 177
+stars: 614
 description: |-
     null
 url: https://github.com/chunkithwang/design-playful-app-icons

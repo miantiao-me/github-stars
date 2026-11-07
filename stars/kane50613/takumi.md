@@ -1,6 +1,6 @@
 ---
 project: takumi
-stars: 3165
+stars: 3181
 description: |-
     One layout engine for JSX, HTML, and CSS. Render images, SVG, PDFs, or a paint tree. No headless browser.
 url: https://github.com/kane50613/takumi

@@ -1,6 +1,6 @@
 ---
 project: sim-use
-stars: 1516
+stars: 1532
 description: |-
     Give your AI agent eyes and hands on iOS Simulator and Android emulator/devices.
 url: https://github.com/lycorp-jp/sim-use

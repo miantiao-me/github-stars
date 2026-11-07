@@ -1,6 +1,6 @@
 ---
 project: letta-code
-stars: 3749
+stars: 3798
 description: |-
     Agents that self-improve with experience
 url: https://github.com/letta-ai/letta-code

@@ -1,6 +1,6 @@
 ---
 project: awesome-mcp-servers
-stars: 97132
+stars: 97438
 description: |-
     A collection of MCP servers.
 url: https://github.com/punkpeye/awesome-mcp-servers
@@ -842,6 +842,7 @@ Code execution servers. Allow LLMs to execute code in a secure environment, e.g.
 - [ly8427/mcp-review-board](https://github.com/ly8427/mcp-review-board) [![ly8427/mcp-review-board MCP server](https://glama.ai/mcp/servers/ly8427/mcp-review-board/badges/score.svg)](https://glama.ai/mcp/servers/ly8427/mcp-review-board) 🐍 🏠 🍎 🪟 🐧 - Localhost review board where different coding agents (Claude Code, Codex, OpenCode, Trae, ZCode) review each other's work: objections must state flip conditions, revisions clear all verdicts, resolution requires the whole active quorum, and every vote is append-only audited. Ships its own audited self-review history as evidence. Install: `pipx install mcp-review-board`.
 Full coding agents that enable LLMs to read, edit, and execute code and solve general programming tasks completely autonomously.
 
+- [Arkz-Deepak/neurocode](https://github.com/Arkz-Deepak/neurocode) [![Arkz-Deepak/neurocode MCP server](https://glama.ai/mcp/servers/Arkz-Deepak/neurocode/badges/score.svg)](https://glama.ai/mcp/servers/Arkz-Deepak/neurocode) 🐍 🏠 🍎 🪟 🐧 - In-memory Code Property Graph context slicer for local models (Ollama, Cursor, Claude Desktop): extracts sub-1,200 token reachability closures for autonomous repository bug repair on consumer edge hardware (4GB–8GB VRAM) without cloud API dependency.
 - [abnegate/magents](https://github.com/abnegate/magents) [![abnegate/magents MCP server](https://glama.ai/mcp/servers/abnegate/magents/badges/score.svg)](https://glama.ai/mcp/servers/abnegate/magents) 🦀 🏠 🍎 🐧 - Shared session bus for coding agents such as Claude Code, Codex and Grok: list, read, hand off, message and spawn live agent sessions via MCP or CLI.
 - [5dive-ai/5dive-mcp](https://github.com/5dive-ai/5dive-mcp) [![5dive-mcp MCP server](https://glama.ai/mcp/servers/5dive-ai/5dive-mcp/badges/score.svg)](https://glama.ai/mcp/servers/5dive-ai/5dive-mcp) 📇 🏠 🍎 🪟 🐧 - Manage a 5dive agent fleet: file tasks, message and inspect agents, and read the fleet digest.
 - [agent-blueprint/mcp-server](https://github.com/agent-blueprint/mcp-server) [![agent-blueprint/mcp-server MCP server](https://glama.ai/mcp/servers/agent-blueprint/mcp-server/badges/score.svg)](https://glama.ai/mcp/servers/agent-blueprint/mcp-server) 📇 ☁️ - Explore and download AI agent blueprints: list them, get summaries and download full Agent Skills directories for coding agents to implement.
@@ -1698,5 +1699,4 @@ Tools and integrations that enhance the development workflow and environment man
 - [izzzzzi/codewiki-mcp](https://github.com/izzzzzi/codewiki-mcp) [![codewiki-mcp MCP server](https://glama.ai/mcp/servers/izzzzzi/codewiki-mcp/badges/score.svg)](https://glama.ai/mcp/servers/izzzzzi/codewiki-mcp) 📇 ☁️ - Search repos, fetch AI-generated wiki docs and ask questions about any open-source repository via codewiki.google.
 - [j4c0bs/mcp-server-sql-analyzer](https://github.com/j4c0bs/mcp-server-sql-analyzer) 🐍 - SQL analysis, linting and dialect conversion using SQLGlot.
 - [jaggernaut007/Nexus-MCP](https://github.com/jaggernaut007/Nexus-MCP) [![jaggernaut007/Nexus-MCP MCP server](https://glama.ai/mcp/servers/jaggernaut007/Nexus-MCP/badges/score.svg)](https://glama.ai/mcp/servers/jaggernaut007/Nexus-MCP) 🐍 🏠 🍎 🪟 🐧 - Local hybrid code search (vector, BM25 and code graph) with structural code graph analysis and persistent semantic memory.
-- [jaimenbell/mcp-factory](https://github.com/jaimenbell/mcp-factory) [![jaimenbell/mcp-factory MCP server](https://glama.ai/mcp/servers/jaimenbell/mcp-factory/badges/score.svg)](https://glama.ai/mcp/servers/jaimenbell/mcp-factory) 🐍 🏠 - Manifest-driven MCP server scaffolder: generate MCP servers from YAML manifests, with batch registration and a live routing hub.
-- [jamalkamaladdin/pixelpact](https://github.com/jamalkamaladdin/pixelpact) [![jamalkamaladdin/pixelpact MCP server](https://glama.ai/mcp/servers/jamalkamaladdin/pixelpact/badges/score.svg)](https://glama.ai/mcp/servers/jamalkamaladdin/pixelpact) 📇 🏠 🍎 🪟 🐧 - Extracts a visual contract from a live page or Figma frame and measures a UI impleme
+- [jaimenbell/mcp-factory](https://github.com/jaimenbell/mcp-factory) [![jaimenbell/mcp-factory MCP server](https://glama.ai/mcp/servers/jaimenbell/mcp-factory/badges/score.svg)](https://glama.ai/mcp/servers/jaimenbell/mcp-f

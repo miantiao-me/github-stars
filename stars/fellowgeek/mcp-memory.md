@@ -1,6 +1,6 @@
 ---
 project: mcp-memory
-stars: 221
+stars: 222
 description: |-
     An OKF-backed Model Context Protocol (MCP) server delivering persistent long-term memory and SQLite FTS5 search for AI agents.
 url: https://github.com/fellowgeek/mcp-memory

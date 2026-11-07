@@ -1,6 +1,6 @@
 ---
 project: leonsansfont
-stars: 164
+stars: 172
 description: |-
     null
 url: https://github.com/cmiscm/leonsansfont

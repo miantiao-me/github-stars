@@ -1,6 +1,6 @@
 ---
 project: omarchy-a
-stars: 126
+stars: 159
 description: |-
     Experimental Omarchy desktop for Apple A-series devices.
 url: https://github.com/OrchardLinux/omarchy-a
@@ -18,16 +18,17 @@ This repository is the distribution: desktop, root filesystem and release. The
 hardware support and the `orchard` tool live in
 [orchard](https://github.com/OrchardLinux/orchard); put its launcher on your PATH
 once (see its [README](https://github.com/OrchardLinux/orchard#develop)). Here,
-`orchard` runs orchard's `main` by default. To work against your own orchard
-checkout, e.g. a branch with a driver you need, name it in `orchard.local.toml`,
-which is never committed:
+`orchard` runs orchard's newest nightly, whose kernels, m1n1, Pongo and tools this
+build then takes as they are. To work against your own orchard checkout, e.g. a
+branch with a driver you need, run that checkout's launcher instead
+(`../orchard-installer/bin/orchard build`). A gitignored `orchard.local.toml` may
+hold your board:
 
 ```toml
-orchard = "../orchard-installer"
 device = "j71b"
 ```
 
-`distro.toml` makes this checkout an orchard distribution:
+`orchard.toml` (its `[release]` table) makes this checkout an orchard distribution:
 
 ```sh
 orchard build        # every component that changed, then a release in out/releases/dev-DATE-TIME

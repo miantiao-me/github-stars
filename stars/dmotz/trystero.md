@@ -1,6 +1,6 @@
 ---
 project: trystero
-stars: 2821
+stars: 2830
 description: |-
     ✨🤝✨ Build instant multiplayer webapps, no server required — Magic WebRTC matchmaking over BitTorrent, Nostr, MQTT, IPFS, Supabase, and Firebase
 url: https://github.com/dmotz/trystero

@@ -1,6 +1,6 @@
 ---
 project: mcphub
-stars: 2610
+stars: 2643
 description: |-
     Self-hosted MCP gateway and control plane for connecting, controlling, and operating MCP servers.
 url: https://github.com/samanhappy/mcphub
@@ -57,6 +57,7 @@ It works with MCP clients such as Claude Code, Cursor, Cherry Studio, OpenWebUI,
 - **MCP Apps Proxy** - Transparently forward interactive MCP Apps on single-server routes ([Learn more](https://docs.mcphub.app/features/mcp-apps))
 - **Tool Result Compression** - Transparently reduce large text tool outputs before they reach clients
 - **Database Mode** - Store configuration in PostgreSQL for production environments ([Learn more](https://docs.mcphub.app/configuration/database-configuration))
+- **Multiple Replicas** - Share PostgreSQL configuration with explicit session affinity and reconnect boundaries ([Deployment guide](https://docs.mcphub.app/configuration/replicas))
 - **Docker-Ready** - Deploy instantly with containerized setup
 
 ## 🔧 Quick Start
@@ -109,6 +110,11 @@ Two image variants are published under `samanhappy/mcphub`:
 - **`latest-full`** — the extended image. Adds Rust toolchain (Cargo/rustc), Docker Engine, and Playwright browsers (Chrome + Firefox, amd64 only). Use this for Rust-based servers or container-in-container workflows. Larger download.
 
 See [Docker Setup](https://docs.mcphub.app/configuration/docker-setup) for build options and Docker-in-Docker configuration.
+
+### One-Click Deploy
+
+<a href="https://repocloud.io/details/MCPHub/"><img src="https://d16t0pc4846x52.cloudfront.net/deploylobe.svg" alt="Deploy on RepoCloud" height="42"></a>
+<a href="https://railway.com/deploy/mcphub"><img src="https://railway.com/button.svg" alt="Deploy on Railway" height="42"></a>
 
 ### Upgrading deployments with personal credentials
 

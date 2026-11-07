@@ -1,6 +1,6 @@
 ---
 project: ai-global
-stars: 72
+stars: 73
 description: |-
     Unified Config Manager for AI Coding Tools
 url: https://github.com/nanxiaobei/ai-global
@@ -14,9 +14,7 @@ English · [简体中文](README_CN.md) · [繁體中文](README_TW.md) · [日�
 
 **Unified Config Manager for AI Coding Tools.**
 
-Edit one file, sync to all your AI tools.
-
-Works both **System Mode** & **Project Mode**.
+Edit one file, sync across all your AI tools. Works in both **System Mode** and **Project Mode**.
 
 ## Supported Tools
 
@@ -25,8 +23,8 @@ Works both **System Mode** & **Project Mode**.
 | [Claude Code](https://claude.com/product/claude-code) | `claude`      |     ✓     |       |    ✓     |   ✓    |
 | [OpenAI Codex](https://openai.com/codex/)             | `codex`       |     ✓     |   ✓   |          |   ✓    |
 | [Cursor](https://cursor.com/)                         | `cursor`      |     ✓     |   ✓   |    ✓     |   ✓    |
-| [Factory Droid](https://factory.ai/)                  | `droid`       |     ✓     |   ✓   |    ✓     |   ✓    |
-| [Amp](https://ampcode.com/)                           | `amp`         |     ✓     |   ✓   |    ✓     |   ✓    |
+| [Factory Droid](https://factory.com/)                 | `droid`       |     ✓     |   ✓   |    ✓     |   ✓    |
+| [Amp](https://ampcode.com/)                           | `amp`         |     ✓     |   ✓   |          |   ✓    |
 | [Antigravity](https://antigravity.google/)            | `antigravity` |     ✓     |       |          |   ✓    |
 | [Gemini CLI](https://geminicli.com/)                  | `gemini`      |     ✓     |       |          |   ✓    |
 | [Kiro](https://kiro.dev/)                             | `kiro`        |     ✓     |   ✓   |          |   ✓    |
@@ -34,17 +32,13 @@ Works both **System Mode** & **Project Mode**.
 | [Qoder](https://qoder.com/)                           | `qoder`       |     ✓     |   ✓   |    ✓     |   ✓    |
 | [Qodo](https://www.qodo.ai/)                          | `qodo`        |     ✓     |       |          |        |
 | [GitHub Copilot](https://github.com/features/copilot) | `copilot`     |     ✓     |       |          |   ✓    |
-| [Continue](https://www.continue.dev/)                 | `continue`    |     ✓     |   ✓   |          |        |
-| [Windsurf](https://windsurf.com/)                     | `windsurf`    |     ✓     |   ✓   |          |   ✓    |
-| [Roo Code](https://roocode.com/)                      | `roo`         |     ✓     |   ✓   |    ✓     |   ✓    |
+| [Devin Desktop](https://devin.ai/desktop)             | `devin`       |     ✓     |   ✓   |          |   ✓    |
 | [Cline](https://cline.bot/)                           | `cline`       |     ✓     |   ✓   |          |   ✓    |
 | [Blackbox AI](https://www.blackbox.ai/)               | `blackbox`    |           |       |          |   ✓    |
-| [Goose AI](https://goose.ai/)                         | `goose`       |     ✓     |       |          |   ✓    |
-| [Augment](https://www.augmentcode.com/)               | `augment`     |     ✓     |   ✓   |    ✓     |        |
+| [Goose](https://goose-docs.ai/)                       | `goose`       |     ✓     |       |          |   ✓    |
 | [OpenClaw](https://openclaw.ai/)                      | `openclaw`    |     ✓     |       |          |   ✓    |
-| [Command Code](https://commandcode.ai/)               | `commandcode` |     ✓     |       |    ✓     |   ✓    |
+| [Command Code](https://commandcode.ai/)               | `commandcode` |     ✓     |       |          |   ✓    |
 | [Kilo Code](https://kilo.ai/)                         | `kilocode`    |     ✓     |   ✓   |    ✓     |   ✓    |
-| [Neovate](https://neovateai.dev/)                     | `neovate`     |     ✓     |       |    ✓     |   ✓    |
 | [OpenHands](https://openhands.dev/)                   | `openhands`   |     ✓     |       |          |   ✓    |
 | [TRAE](https://www.trae.ai/)                          | `trae`        |     ✓     |   ✓   |          |   ✓    |
 | [Zencoder](https://zencoder.ai/)                      | `zencoder`    |     ✓     |   ✓   |          |   ✓    |
@@ -84,7 +78,7 @@ This will:
 1. Detect the current directory context (system or project)
 2. Scan for installed AI tools
 3. Back up original configs to `.ai-global/backups`
-4. Merge `AGENTS.md` `skills` `rules` `commands` from detected tools to `.ai-global` shared configs
+4. Merge `AGENTS.md` `skills` `rules` `commands` from detected tools to `.ai-global` shared configs (can be restored)
 5. Create symlinks from each tool to `.ai-global` shared configs
 
 ### Context
@@ -100,7 +94,7 @@ ai-global status            # Show symlinks status
 ai-global list              # List all supported AI tools
 ai-global backups           # List available backups
 ai-global unlink <key>      # Restore a tool's original config
-ai-global unlink all        # Restore all tools
+ai-global unlink all        # Restore all tools' original configs
 ai-global add <user/repo>   # Add skills from GitHub repo
 ai-global upgrade           # Upgrade to latest version
 ai-global uninstall         # Completely remove ai-global
@@ -131,12 +125,7 @@ Skills will be added to your `.ai-global/skills`, and automatically shared to ea
 ├── commands/        <- System shared commands
 └── backups/         <- Original tool configs' backups
 
-~/.claude/
-├── CLAUDE.md -> ~/.ai-global/AGENTS.md        (symlink)
-├── skills/   -> ~/.ai-global/skills/          (symlink)
-└── commands/ -> ~/.ai-global/commands/        (symlink)
-
-~/.cursor/
+~/.codex/
 ├── AGENTS.md -> ~/.ai-global/AGENTS.md        (symlink)
 └── skills/   -> ~/.ai-global/skills/          (symlink)
 
@@ -153,7 +142,7 @@ my-project/
 │   ├── rules/           <- Project shared rules
 │   ├── commands/        <- Project shared commands
 │   └── backups/         <- Original tool configs' backups
-└── .cursor/
+└── .codex/
     ├── AGENTS.md -> ../.ai-global/AGENTS.md   (symlink)
     └── skills/   -> ../.ai-global/skills/     (symlink)
 

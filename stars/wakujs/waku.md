@@ -1,6 +1,6 @@
 ---
 project: waku
-stars: 6480
+stars: 6485
 description: |-
     ⛩️ The minimal React framework
 url: https://github.com/wakujs/waku
@@ -1588,7 +1588,7 @@ export default adapter(fsRouter(import.meta.glob('./pages/**/*.{tsx,ts}')));
 ```
 
 ```sh
-npm run build
+bun run --bun build
 ```
 
 ### AWS Lambda (experimental)

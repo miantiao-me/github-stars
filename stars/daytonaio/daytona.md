@@ -1,6 +1,6 @@
 ---
 project: daytona
-stars: 71415
+stars: 71354
 description: |-
     Daytona is a Secure and Elastic Infrastructure for Running AI-Generated Code
 url: https://github.com/daytonaio/daytona

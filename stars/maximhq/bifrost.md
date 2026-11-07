@@ -1,6 +1,6 @@
 ---
 project: bifrost
-stars: 9251
+stars: 9425
 description: |-
     Open-source, high-performance AI gateway that works as your LLM gateway, MCP gateway and agent gateway. One OpenAI-compatible API for 10,000+ models, with failover, load balancing, semantic caching, virtual keys, budgets and MCP Code Mode. Works with any SDK or agent and adds under 200µs of overhead at 5k RPS.
 url: https://github.com/maximhq/bifrost

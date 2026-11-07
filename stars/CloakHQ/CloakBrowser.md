@@ -1,6 +1,6 @@
 ---
 project: CloakBrowser
-stars: 32654
+stars: 32774
 description: |-
     Stealth Chromium that passes every bot detection test. Drop-in Playwright replacement with source-level fingerprint patches. 50+ tests passed.
 url: https://github.com/CloakHQ/CloakBrowser
@@ -48,14 +48,14 @@ Same API, same code — just swap the import. <strong>3 lines of code, 30 second
 - **`humanize=True`** — human-like mouse curves, keyboard timing, and scroll patterns. One flag, behavioral detection passes
 - **Pro: 0.9 reCAPTCHA v3 score** — human-level, server-verified
 - **Passes Cloudflare Turnstile**, FingerprintJS, BrowserScan — tested against 50+ detection sites
-- **Auto-downloads the right binary** — free or Pro based on your license
+- **Auto-downloads the right binary** — the latest build for your platform
 - **`pip install cloakbrowser`** or **`npm install cloakbrowser`** — binary auto-downloads, zero config
-- **Latest binary, free to try** — [sign in with GitHub](https://cloakbrowser.dev/free), point the newest build at your hardest target, scale to thousands of sessions on Pro
+- **Latest binary, free to try** — [get a free key with your email](https://cloakbrowser.dev/free) (or just launch: the first run asks), point the newest build at your hardest target, scale to thousands of sessions on Pro
 
-**Try it now** — no install needed:
+**Try it now** — no install needed. The first run asks for a key: get one free with your email, or paste yours:
 
 ```bash
-docker run --rm cloakhq/cloakbrowser cloaktest
+docker run --rm -it cloakhq/cloakbrowser cloaktest
 ```
 
 **Python:**
@@ -134,6 +134,8 @@ dotnet add package CloakBrowser
 
 On first run, the stealth Chromium binary is automatically downloaded (~200MB, cached locally).
 
+**License key:** every launch needs one, and a free key takes one email. The first launch in a terminal asks: get a free key (opens the signup page and continues once you confirm your email) or paste a key you have. In CI, Docker, or any run without a terminal, set `CLOAKBROWSER_LICENSE_KEY` (get one with `cloakbrowser login` or at [cloakbrowser.dev/free](https://cloakbrowser.dev/free)).
+
 **Optional:** Auto-detect timezone/locale from proxy IP:
 
 ```bash
@@ -158,11 +160,11 @@ page.goto("https://example.com")
 
 ---
 
-## Latest: v0.6.5 — 87 source-level stealth patches (Chromium 155.0.8059.39.1)
+## Latest: v0.7.0 — 87 source-level stealth patches (Chromium 156.0.8078.47.1)
 
-- **CloakBrowser Pro Stable** — Chromium `155.0.8059.39.1` on Linux x64, Linux ARM64, Windows x64, and macOS (Apple Silicon and Intel). Set a `license_key` (`licenseKey` in JS) or the `CLOAKBROWSER_LICENSE_KEY` env var and the wrapper fetches the latest Stable build for your platform automatically. See [CloakBrowser Pro](#cloakbrowser-pro)
+- **CloakBrowser Pro Stable** — Chromium `156.0.8078.47.1` on Linux x64, Linux ARM64, Windows x64, and macOS (Apple Silicon and Intel). Set a `license_key` (`licenseKey` in JS) or the `CLOAKBROWSER_LICENSE_KEY` env var and the wrapper fetches the latest Stable build for your platform automatically. See [CloakBrowser Pro](#cloakbrowser-pro)
 - **.NET 8 / C# client** — CloakBrowser now ships as a NuGet package (`CloakBrowser`), mirroring the Python and JS wrappers.
-- **Chromium 155 upgrade** — rebased the full patch set onto Chromium 155 on every platform
+- **Chromium 156 upgrade** — rebased the full patch set onto Chromium 156 on every platform
 - **87 fingerprint patches** — rendering consistency improvements across Linux and Windows, corrected GPU/display/graphics parameters to match stock Chrome profiles
 - **Windows native GPU passthrough** — real hardware values pass through directly instead of being spoofed, matching real browser behavior
 - **HTTP proxy inline credentials** — new network-layer support for proxies with inline authentication
@@ -194,12 +196,11 @@ CloakBrowser doesn't solve CAPTCHAs — it prevents them from appearing. No CAPT
 
 Anti-bot systems change every week and an older binary quietly degrades. The latest build is the one that keeps passing. **Try it free, then upgrade when you're running for real.**
 
-- **Free, latest build (Chromium 156)** — the newest binary, the exact one that stays [green against live detection](#test-results). Free with a GitHub sign-in, one concurrent session. [Grab your key](https://cloakbrowser.dev/free) or run `cloakbrowser login`, then throw it at your hardest target.
+- **Free, latest build (Chromium 156)** — the newest binary, the exact one that stays [green against live detection](#test-results). Free with your email, one concurrent session. Just launch (the first run asks), run `cloakbrowser login`, or [grab your key](https://cloakbrowser.dev/free), then throw it at your hardest target.
 - **Pro** — when it's part of production scraping, QA, monitoring, or automation: scale to **5, 20, 200, 2,000, or more concurrent sessions**, always first on the newest patches, with hands-on support. Linux, Windows, macOS. **[See plans and pricing →](https://cloakbrowser.dev)**
-- **v146** — the older build stays free on [GitHub Releases](https://github.com/CloakHQ/cloakbrowser/releases). A quick first look, but it ages fast as detection evolves.
 
 ```bash
-cloakbrowser login          # GitHub sign-in for a free key, or paste a paid key
+cloakbrowser login          # get a free key by email, or paste a key you have
 # ...or set it directly (env var, license_key= param, or ~/.cloakbrowser/license.key):
 export CLOAKBROWSER_LICENSE_KEY=cb_xxxxxxxx
 ```
@@ -216,7 +217,7 @@ Every profile is a genuinely separate computer: its own fingerprint, GPU, screen
 - **Native desktop app** — profiles open as normal windows on Windows and macOS. On a Linux server they run in Docker and stream to your browser.
 - **The real engine** — most profile managers inject JavaScript into a stock browser. Every profile here runs the patched Chromium binary this repo ships.
 - **Automate what you can see** — every running profile exposes a CDP endpoint. Drive it with Playwright or Puppeteer while you watch the exact same window live.
-- **One key, both products** — your CloakBrowser key works in the Manager too. Free with a GitHub sign-in for one profile at a time.
+- **One key, both products** — your CloakBrowser key works in the Manager too. Free with your email for one profile at a time.
 
 It's also the fastest way to try the browser without writing any code: download, create a profile, click **Launch**.
 
@@ -224,7 +225,7 @@ It's also the fastest way to try the browser without writing any code: download,
 
 ## Test Results
 
-All tests verified against live detection services. Results below are for the latest Pro/current build unless noted. Last tested: Oct 2026 (Chromium 156).
+All tests verified against live detection services. Results below are for the latest Pro/current build unless noted. Last tested: Nov 2026 (Chromium 156).
 
 | Detection Service | Stock Playwright | CloakBrowser | Notes |
 |---|---|---|---|
@@ -289,7 +290,7 @@ All tests verified against live detection services. Results below are for the la
 CloakBrowser is a thin wrapper (Python + JavaScript) around a custom-built Chromium binary:
 
 1. **You install** → `pip install cloakbrowser` or `npm install cloakbrowser`
-2. **First launch** → binary auto-downloads for your platform (latest build with a free or Pro key, the older v146 without one)
+2. **First launch** → asks for a license key if you have none (free by email), then the latest build auto-downloads for your platform
 3. **Every launch** → Playwright or Puppeteer starts with our binary + stealth args
 4. **You write code** → standard Playwright/Puppeteer API, nothing new to learn
 
@@ -312,7 +313,7 @@ browser = launch()
 # Headed mode (see the browser window)
 browser = launch(headless=False)
 
-# Latest binary — pass a key (free via `cloakbrowser login`, or paid) or set CLOAKBROWSER_LICENSE_KEY
+# Pass a key explicitly (free via `cloakbrowser login`, or paid); otherwise the env var or saved key is used
 browser = launch(license_key="cb_xxxxxxxx")
 
 # With proxy (HTTP or SOCKS5)
@@ -455,15 +456,15 @@ Async version: `launch_persistent_context_async()`.
 Pre-download the binary, diagnose your setup, or manage the cache from the command line:
 
 ```bash
-python -m cloakbrowser login        # Get a free key via GitHub, or save a paid key
-python -m cloakbrowser logout        # Remove the saved key (revert to the free binary)
+python -m cloakbrowser login        # Get a free key by email, or save a key you have
+python -m cloakbrowser logout       # Remove the saved key
 python -m cloakbrowser install      # Download binary with progress output
 python -m cloakbrowser info         # Diagnostics: binary that will launch, license tier, env checks
 python -m cloakbrowser update       # Check for and download newer binary
 python -m cloakbrowser clear-cache  # Remove cached binaries
 ```
 
-`login` with no argument prompts you to paste a license key or press Enter to get a free key via a GitHub sign-in; `login <key>` saves a key directly. Both validate the key, then store it at `~/.cloakbrowser/license.key` so every launch picks it up.
+`login` with no argument shows the same menu as a first launch without a key: **1)** get a free key (opens the signup page in your browser, then waits until you confirm your email) or **2)** paste a key you have. `login <key>` saves a key directly. Keys are validated, then stored at `~/.cloakbrowser/license.key` (readable by you only) so every launch picks them up.
 
 `info` reports the binary that will actually launch given your license, runs a quick launch test (and flags missing system libraries on Linux), shows your license tier, and checks fonts, GeoIP, and optional dependencies. Add `--quick` to skip the launch test or `--json` for machine-readable output. Add `--proxy <url>` to resolve the exit IP, timezone, and locale a launch would apply through that proxy (the same `geoip=True` resolution; downloads the GeoIP DB if not cached) — useful for confirming a proxy hands you a timezone/locale that matches its exit IP.
 
@@ -478,12 +479,13 @@ from cloakbrowser import binary_info, clear_cache, ensure_binary
 
 # Check binary installation status
 print(binary_info())
-# {'version': '146.0.7680.177.5', 'platform': 'linux-x64', 'installed': True, ...}
+# {'version': '156.0.8078.47.1', 'platform': 'linux-x64', 'installed': True, ...}
+# ('version' is None until a build has been downloaded)
 
 # Force re-download
 clear_cache()
 
-# Pre-download binary (e.g., during Docker build)
+# Pre-download binary (e.g., during Docker build; needs CLOAKBROWSER_LICENSE_KEY set)
 ensure_binary()
 ```
 
@@ -650,13 +652,12 @@ For an arbitrary expression, `page._stealth_world.evaluate("…")` evaluates it 
 
 | Env Variable | Default | Description |
 |---|---|---|
-| `CLOAKBROWSER_BINARY_PATH` | — | Skip download, use a local Chromium binary. Set `CLOAKBROWSER_VERSION` (or `browser_version=`) to that binary's exact version too, or proxy auth and headless viewport fall back to safe defaults |
+| `CLOAKBROWSER_LICENSE_KEY` | — | Your license key (free or paid). Overrides `~/.cloakbrowser/license.key`. Required wherever there is no terminal to ask (CI, Docker) |
+| `CLOAKBROWSER_BINARY_PATH` | — | Skip download, use a local Chromium binary |
 | `CLOAKBROWSER_CACHE_DIR` | `~/.cloakbrowser` | Binary cache directory |
-| `CLOAKBROWSER_DOWNLOAD_URL` | `cloakbrowser.dev` | Custom download URL for binary |
-| `CLOAKBROWSER_AUTO_UPDATE` | `true` | Set to `false` to disable background update checks |
-| `CLOAKBROWSER_SKIP_CHECKSUM` | `false` | Only applies to a custom `CLOAKBROWSER_DOWNLOAD_URL`: set to `true` to skip its checksum check. Signature verification on the official download path is mandatory and cannot be skipped. |
+| `CLOAKBROWSER_AUTO_UPDATE` | `true` | Set to `false` to keep the cached build and skip update checks |
 | `CLOAKBROWSER_GEOIP_TIMEOUT_SECONDS` | `5` | Max seconds for GeoIP resolution before continuing without it |
-| `CLOAKBROWSER_VERSION` | — | Pin to an exact Chromium version for rollback (e.g. `154.0.8037.57.1`). Paid Pro key only |
+| `CLOAKBROWSER_VERSION` | — | Pin to an exact Chromium version for rollback (e.g. `155.0.8059.39.1`). Paid Pro key only |
 | `CLOAKBROWSER_RELEASE_CHANNEL` | `stable` | Set to `preview` to opt into the Preview binary channel |
 
 ## Fingerprint Management
@@ -714,14 +715,16 @@ Supported by the binary but **not set by default** — pass via `args` to custom
 | `--fingerprint-taskbar-height` | Override taskbar height (binary defaults: Win=48, Mac=95, Linux=0) |
 | `--fingerprint-webrtc-ip` | WebRTC ICE candidate IP replacement. Use `auto` to resolve from proxy exit IP (makes an HTTP call through the proxy), or pass an explicit IP. Auto-injected when `geoip=True` |
 | `--fingerprint-noise=false` | Disable noise injection (canvas, WebGL, audio) while keeping the deterministic fingerprint seed active |
-| `--fingerprint=off` | **Chromium 148+ binary only.** Pass-through debug mode — turns spoofing off and presents the machine's **real native fingerprint** (keeps only the baseline any Chrome needs). The binary strips the injected seed *and* `--fingerprint-platform`, so there's no mixed OS profile. Most useful on a genuine Windows machine to check whether an issue is our spoofing or the environment. Accepts `off`/`false`/`0`/`disable`/`disabled`. For a *pure* pass-through don't combine it with `geoip=True` / explicit timezone / locale — those stay applied. |
-| `--fingerprint-allow-3p-cookies` | **Chromium 148+ binary only.** Re-enable third-party cookies for embedded flows that need them (reCAPTCHA v3, SSO, some payment challenges). Off by default; turn on only where a login/payment/embedded challenge loads but never finishes. |
-| `--fingerprint-sapi-voices=false` | **Chromium 150+ binary only.** Opt out of the Windows speech-voice tables when spoofing Windows. On by default (the voice set matches a real Chrome install); turn off only if a target reacts badly to the Windows voice list. |
-| `--license-route=auto\|direct\|proxy` | **Chromium 154.0.8037.57.2+ on Linux, 155+ on all platforms.** How the Pro license and session calls leave the browser. `auto` (default): direct to cloakbrowser.dev first, and one retry through your `--proxy-server` if direct can't reach it. `direct`: never through the proxy. `proxy`: only through the proxy (needs `--proxy-server`). |
-| `--license-through-proxy` | **Chromium 148+ binary only (all platforms).** Route the Pro license/session calls through your `--proxy-server` instead of direct to cloakbrowser.dev. Off by default (these calls go direct, so they never spend proxy bandwidth or touch your scraping session). On `154.0.8037.57.2` and newer, use `--license-route=proxy`; this older spelling still works. |
-| `--fingerprint-transparent-proxy` | **Chromium 151+ binary only.** A stronger way of connecting through your `--proxy-server`, for sites and providers that block every proxy you try. Off by default; enable it alongside `--proxy-server`. |
-| `--fingerprint-transparent-proxy-dns=<url>\|local` | **Chromium 155.0.8059.39.1+ binary only, Linux and Windows.** DNS for `--fingerprint-transparent-proxy` mode. By default sites are resolved with Cloudflare's DNS over HTTPS, sent through your proxy. Pass your own DNS over HTTPS address, or `local` to resolve on your own machine as before. |
-| `--fingerprint-portable-cookies` | **Chromium 151+ binary only.** Encrypt cookies with a machine-independent key so a copied profile keeps its logins across machines. Turn it on from the first launch — it changes how cookies are written, so a cookie is only portable if this was set when it was saved. |
+| `--fingerprint=off` | Pass-through debug mode — turns spoofing off and presents the machine's **real native fingerprint** (keeps only the baseline any Chrome needs). The binary strips the injected seed *and* `--fingerprint-platform`, so there's no mixed OS profile. Most useful on a genuine Windows machine to check whether an issue is our spoofing or the environment. Accepts `off`/`false`/`0`/`disable`/`disabled`. For a *pure* pass-through don't combine it with `geoip=True` / explicit timezone / locale — those stay applied. |
+| `--fingerprint-allow-3p-cookies` | Re-enable third-party cookies for embedded flows that need them (reCAPTCHA v3, SSO, some payment challenges). Off by default; turn on only where a login/payment/embedded challenge loads but never finishes. |
+| `--fingerprint-sapi-voices=false` | Opt out of the Windows speech-voice tables when spoofing Windows. On by default (the voice set matches a real Chrome install); turn off only if a target reacts badly to the Windows voice list. |
+| `--fingerprint-max-touch-points=<N>` | Report a touch screen with `N` touch points, like a Windows touch laptop. Default `0` (no touch). 156+ |
+| `--fingerprint-search-engine=google\|bing\|duckduckgo\|none` | Default search engine when you use the browser directly. Default `google`; you can also pass your own search URL. 155.0.8059.39.2+ on Linux, 156+ on all platforms |
+| `--license-route=auto\|direct\|proxy` | How the Pro license and session calls leave the browser. `auto` (default): direct to cloakbrowser.dev first, and one retry through your `--proxy-server` if direct can't reach it. `direct`: never through the proxy. `proxy`: only through the proxy (needs `--proxy-server`). |
+| `--license-through-proxy` | Older spelling of `--license-route=proxy`: route the Pro license/session calls through your `--proxy-server` instead of direct to cloakbrowser.dev. Still works; prefer `--license-route=proxy`. |
+| `--fingerprint-transparent-proxy` | A stronger way of connecting through your `--proxy-server`, for sites and providers that block every proxy you try. Off by default; enable it alongside `--proxy-server`. |
+| `--fingerprint-transparent-proxy-dns=<url>\|local` | **Linux and Windows.** DNS for `--fingerprint-transparent-proxy` mode. By default sites are resolved with Cloudflare's DNS over HTTPS, sent through your proxy. Pass your own DNS over HTTPS address, or `local` to resolve on your own machine as before. |
+| `--fingerprint-portable-cookies` | Encrypt cookies with a machine-independent key so a copied profile keeps its logins across machines. Turn it on from the first launch — it changes how cookies are written, so a cookie is only portable if this was set when it was saved. |
 | `--enable-blink-features=FakeShadowRoot` | Access closed shadow DOM elements |
 
 > **Note:** All stealth tests were verified with the default fingerprint config above. Changing these flags may affect detection results — test your configuration before using in production.
@@ -801,7 +804,7 @@ browser = launch(args=[
 - [`basic.py`](examples/basic.py) — Launch and load a page
 - [`persistent_context.py`](examples/persistent_context.py) — Persistent profile with cookie/localStorage persistence
 - [`recaptcha_score.py`](examples/recaptcha_score.py) — Check your reCAPTCHA v3 score
-- [`stealth_test.py`](examples/stealth_test.py) — Run against 6 detection sites
+- [`stealth_test.py`](examples/stealth_test.py) — Run against 7 detection sites
 - [`fingerprint_scan_test.py`](examples/fingerprint_scan_test.py) — Test against fingerprint-scan.com and CreepJS
 
 **JavaScript** — see [`js/examples/`](js/examples/):
@@ -855,15 +858,15 @@ browser = await launch_async(args=["--remote-debugging-port=9242"])
 
 ## Platforms
 
-| Platform | Free | Pro | Status |
-|---|---|---|---|
-| Linux x86_64 | Chromium 146 (58 patches) | Chromium 155 (87 patches) | ✅ |
-| Linux arm64 (RPi, Graviton) | Chromium 146 (58 patches) | Chromium 155 (87 patches) | ✅ |
-| macOS arm64 (Apple Silicon) | Chromium 145 (26 patches) | Chromium 155 (87 patches) | ✅ |
-| macOS x86_64 (Intel) | Chromium 145 (26 patches) | Chromium 155 (87 patches) | ✅ |
-| Windows x86_64 | Chromium 146 (58 patches) | Chromium 155 (87 patches) | ✅ |
+| Platform | Binary | Status |
+|---|---|---|
+| Linux x86_64 | Chromium 156 (87 patches) | ✅ |
+| Linux arm64 (RPi, Graviton) | Chromium 156 (87 patches) | ✅ |
+| macOS arm64 (Apple Silicon) | Chromium 156 (87 patches) | ✅ |
+| macOS x86_64 (Intel) | Chromium 156 (87 patches) | ✅ |
+| Windows x86_64 | Chromium 156 (87 patches) | ✅ |
 
-The wrapper auto-downloads the correct binary for your platform.
+The wrapper auto-downloads the correct binary for your platform. Free and Pro keys get the same build; Pro raises the number of concurrent sessions.
 
 **macOS first launch:** The binary is ad-hoc signed. On first run, macOS Gatekeeper will block it. Right-click the app → **Open** → click **Open** in the dialog. This is only needed once.
 
@@ -871,19 +874,23 @@ The wrapper auto-downloads the correct binary for your platform.
 
 Pre-built image on Docker Hub — no install, no setup.
 
-> **Pro:** the image ships with the free binary. Set `CLOAKBROWSER_LICENSE_KEY` (e.g. `-e CLOAKBROWSER_LICENSE_KEY=cb_xxx`, or in Compose) and the latest binary downloads at runtime.
+> **License key:** the image has no binary inside; the latest build downloads on the first launch with your key. Run with `-it` and the first launch asks for one, as in the quick test below (the key and binary live in the container, so `--rm` discards them). For scripts, servers and Compose, pass the key instead: `export CLOAKBROWSER_LICENSE_KEY=cb_xxx` on the host, then `-e CLOAKBROWSER_LICENSE_KEY` (as below), or set it in Compose. A free key takes one email: `cloakbrowser login` or [cloakbrowser.dev/free](https://cloakbrowser.dev/free).
 
 ### Quick test
 
 ```bash
-docker run --rm cloakhq/cloakbrowser cloaktest
+# Interactive: asks for a key (free by email, or paste yours)
+docker run --rm -it cloakhq/cloakbrowser cloaktest
+
+# With your key in the environment (scripts, CI)
+docker run --rm -e CLOAKBROWSER_LICENSE_KEY cloakhq/cloakbrowser cloaktest
 ```
 
 ### Run a script
 
 ```bash
 # Inline script
-docker run --rm cloakhq/cloakbrowser python -c "
+docker run --rm -e CLOAKBROWSER_LICENSE_KEY cloakhq/cloakbrowser python -c "
 from cloakbrowser import launch
 browser = launch()
 page = browser.new_page()
@@ -893,10 +900,10 @@ browser.close()
 "
 
 # Mount your own script
-docker run --rm -v ./my_script.py:/app/my_script.py cloakhq/cloakbrowser python my_script.py
+docker run --rm -e CLOAKBROWSER_LICENSE_KEY -v ./my_script.py:/app/my_script.py cloakhq/cloakbrowser python my_script.py
 
 # With a proxy
-docker run --rm cloakhq/cloakbrowser python -c "
+docker run --rm -e CLOAKBROWSER_LICENSE_KEY cloakhq/cloakbrowser python -c "
 from cloakbrowser import launch
 browser = launch(proxy='http://user:pass@proxy:8080', geoip=True)
 page = browser.new_page()
@@ -911,7 +918,7 @@ browser.close()
 Start a persistent stealth browser and connect to it remotely via Chrome DevTools Protocol:
 
 ```bash
-docker run -d --name cloak -p 127.0.0.1:9222:9222 cloakhq/cloakbrowser cloakserve
+docker run -d --name cloak -e CLOAKBROWSER_LICENSE_KEY -p 127.0.0.1:9222:9222 cloakhq/cloakbrowser cloakserve
 ```
 
 Then connect from your host machine:
@@ -957,23 +964,23 @@ Pass extra flags to the browser:
 
 ```bash
 # With proxy
-docker run -d --name cloak -p 127.0.0.1:9222:9222 cloakhq/cloakbrowser \
+docker run -d --name cloak -e CLOAKBROWSER_LICENSE_KEY -p 127.0.0.1:9222:9222 cloakhq/cloakbrowser \
   cloakserve --proxy-server=http://proxy:8080
 
 # Headed mode (renders to Xvfb inside container)
-docker run -d --name cloak -p 127.0.0.1:9222:9222 cloakhq/cloakbrowser \
+docker run -d --name cloak -e CLOAKBROWSER_LICENSE_KEY -p 127.0.0.1:9222:9222 cloakhq/cloakbrowser \
   cloakserve --headless=false
 
 # Reap disconnected per-seed browser processes after 5 minutes
-docker run -d --name cloak -p 127.0.0.1:9222:9222 cloakhq/cloakbrowser \
+docker run -d --name cloak -e CLOAKBROWSER_LICENSE_KEY -p 127.0.0.1:9222:9222 cloakhq/cloakbrowser \
   cloakserve --idle-timeout=300
 
 # Keep per-seed profiles (cookies, logins) across idle cleanup and container restarts
-docker run -d --name cloak -p 127.0.0.1:9222:9222 -v ./cloak-profiles:/profiles cloakhq/cloakbrowser \
+docker run -d --name cloak -e CLOAKBROWSER_LICENSE_KEY -p 127.0.0.1:9222:9222 -v ./cloak-profiles:/profiles cloakhq/cloakbrowser \
   cloakserve --idle-timeout=300 --data-dir=/profiles --keep-profiles
 
 # Per-job container: reap Chrome 60s after disconnect, exit (status 0) after 5 minutes with no connections
-docker run --rm --name cloak -p 127.0.0.1:9222:9222 cloakhq/cloakbrowser \
+docker run --rm --name cloak -e CLOAKBROWSER_LICENSE_KEY -p 127.0.0.1:9222:9222 cloakhq/cloakbrowser \
   cloakserve --idle-timeout=60 --exit-after-idle=300
 ```
 
@@ -995,6 +1002,8 @@ services:
     image: cloakhq/cloakbrowser
     command: cloakserve
     restart: unless-stopped
+    environment:
+      - CLOAKBROWSER_LICENSE_KEY   # passed through from the host
     ports:
       - "127.0.0.1:9222:9222"
     healthcheck:
@@ -1028,7 +1037,7 @@ For a server that runs one job and goes away (e.g. a per-job container), set `--
 **Persistent profiles** — mount a volume to keep cookies and sessions across container restarts:
 
 ```bash
-docker run --rm -v ./my-profile:/profile cloakhq/cloakbrowser python -c "
+docker run --rm -e CLOAKBROWSER_LICENSE_KEY -v ./my-profile:/profile cloakhq/cloakbrowser python -c "
 from cloakbrowser import launch_persistent_context
 ctx = launch_persistent_context('/profile')
 page = ctx.new_page()
@@ -1207,18 +1216,18 @@ Preview availability is platform-specific. Preview always selects the newest bui
 
 Two ways to go back to a working version:
 
-**Pin the binary** (keep current wrapper, just use an older Chromium) — paid Pro key only. A free GitHub key cannot pin: it ignores the pin and always gets the latest build.
+**Pin the binary** (keep current wrapper, just use an older Chromium) — paid Pro key only. A free key cannot pin: it ignores the pin and always gets the latest build.
 
 ```python
-browser = launch(license_key="cb_xxxxxxxx", browser_version="154.0.8037.57.1")
+browser = launch(license_key="cb_xxxxxxxx", browser_version="155.0.8059.39.1")
 ```
 
 ```bash
-export CLOAKBROWSER_VERSION=154.0.8037.57.1   # env var for all launches
+export CLOAKBROWSER_VERSION=155.0.8059.39.1   # env var for all launches
 ```
 
 ```javascript
-const browser = await launch({ licenseKey: 'cb_xxxxxxxx', browserVersion: '154.0.8037.57.1' });
+const browser = await launch({ licenseKey: 'cb_xxxxxxxx', browserVersion: '155.0.8059.39.1' });
 ```
 
 The pin is never sticky — unpinned launches always use the latest available version.
@@ -1237,7 +1246,6 @@ Use a local binary:
 
 ```bash
 export CLOAKBROWSER_BINARY_PATH=/path/to/your/chrome
-export CLOAKBROWSER_VERSION=155.0.8059.39.2   # that binary's exact version
 ```
 
 ### macOS: "App is damaged" or Gatekeeper blocks launch
@@ -1313,10 +1321,13 @@ Other tips for maximizing reCAPTCHA scores:
 A: CloakBrowser is a browser built on open-source Chromium. We do not condone illegal use. Automating systems without authorization, credential stuffing, and account creation abuse are expressly prohibited. See [BINARY-LICENSE.md](https://github.com/CloakHQ/CloakBrowser/blob/main/BINARY-LICENSE.md) for full terms.
 
 **Q: Is CloakBrowser free?**
-A: Yes. The wrappers (Python, JS, .NET) are MIT and free forever. For the binary: the **latest build is free** with a GitHub sign-in at one concurrent session ([cloakbrowser.dev/free](https://cloakbrowser.dev/free)); **Pro** adds more concurrent sessions ([cloakbrowser.dev](https://cloakbrowser.dev)); and the older **v146** build stays free on [GitHub Releases](https://github.com/CloakHQ/cloakbrowser/releases). We refresh the free build from time to time as the project moves forward.
+A: Yes. The wrappers (Python, JS, .NET) are MIT and free forever. For the binary: the **latest build is free** with your email at one concurrent session ([cloakbrowser.dev/free](https://cloakbrowser.dev/free)); **Pro** adds more concurrent sessions ([cloakbrowser.dev](https://cloakbrowser.dev)).
 
 **Q: Do I need a license key for the free version?**
-A: For the latest build, a free key from a GitHub sign-in (`cloakbrowser login`, or [cloakbrowser.dev/free](https://cloakbrowser.dev/free)) gives you one concurrent session, and a paid key raises the limit. The older v146 build runs with no key.
+A: Yes, a free one. The first launch in a terminal asks for it and gets it for you by email (or run `cloakbrowser login`, or visit [cloakbrowser.dev/free](https://cloakbrowser.dev/free)). It gives you one concurrent session; a paid key raises the limit.
+
+**Q: Can I still use the old keyless v146 build?**
+A: Yes, through the last wrapper release that runs without a key: `pip install "cloakbrowser<0.7"`, `npm install cloakbrowser@0.6`, or `dotnet add package CloakBrowser --version 0.6.5`, or the Docker image `cloakhq/cloakbrowser:0.6.5`. It downloads the old v146 build (v145 on macOS) from [GitHub Releases](https://github.com/CloakHQ/cloakbrowser/releases), with no key. It is no longer updated and ages fast as detection evolves, so the free key on the latest build is the better choice.
 
 **Q: Will detection sites eventually catch this?**
 A: Possibly. Bot detection is an arms race. Source-level patches are harder to detect than config-level patches, but not impossible. We actively monitor and update when detection evolves.
@@ -1342,7 +1353,7 @@ The wrapper automatically verifies every binary download against a pinned Ed2551
 ```bash
 # Verify GPG signature (binary release tag)
 gpg --keyserver keyserver.ubuntu.com --recv-keys C60C0DDC9D0DE2DD
-git verify-tag chromium-v146.0.7680.177.5
+git verify-tag chromium-v156.0.8078.47.1-pro
 
 # Verify GitHub binary attestation (Sigstore)
 gh attestation verify cloakbrowser-linux-x64.tar.gz --repo CloakHQ/cloakbrowser
@@ -1357,10 +1368,7 @@ cosign verify \
 ## License
 
 - **Wrapper code** (this repository) — MIT. See [LICENSE](https://github.com/CloakHQ/CloakBrowser/blob/main/LICENSE).
-- **CloakBrowser binary** (compiled Chromium):
-  - **v146 and earlier** — free for personal and commercial use, no redistribution (OEM/SaaS license required to serve third parties).
-  - **v148 and later** — requires a license key: free with a GitHub sign-in (one concurrent session), or a paid [CloakBrowser Pro](https://cloakbrowser.dev) subscription.
-  - See [BINARY-LICENSE.md](https://github.com/CloakHQ/CloakBrowser/blob/main/BINARY-LICENSE.md) for full terms.
+- **CloakBrowser binary** (compiled Chromium) — requires a license key: free with your email (one concurrent session), or a paid [CloakBrowser Pro](https://cloakbrowser.dev) subscription. Free for personal and commercial use, no redistribution (OEM/SaaS license required to serve third parties). See [BINARY-LICENSE.md](https://github.com/CloakHQ/CloakBrowser/blob/main/BINARY-LICENSE.md) for full terms.
 
 ## Contributing
 
@@ -1394,6 +1402,7 @@ Issues and PRs welcome. If something isn't working, [open an issue](https://gith
 - [@pujitha24](https://github.com/pujitha24) — cloakserve WebSocket heartbeat for vanished clients
 - [@w21180239](https://github.com/w21180239) — Playwright-compatible `context.close(reason=...)`
 - [@alkaz-nodemaven](https://github.com/alkaz-nodemaven) — GeoIP private proxy address fix
+- [@mvanhorn](https://github.com/mvanhorn) — Python `build_launch_options()` for your own Playwright instance
 
 ## Star History
 

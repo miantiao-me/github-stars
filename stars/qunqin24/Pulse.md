@@ -1,6 +1,6 @@
 ---
 project: Pulse
-stars: 615
+stars: 629
 description: |-
     Know how much Claude Code, Codex, Cursor, Copilot and 70+ other AI coding tools you have left — a free, open-source macOS monitor on the edge of your screen.
 url: https://github.com/qunqin24/Pulse
@@ -35,7 +35,7 @@ url: https://github.com/qunqin24/Pulse
 <p align="center">
   <img src="Docs/images/demo.gif" height="400" alt="Pulse floating rail docked against the screen edge">
   &nbsp;&nbsp;
-  <img src="Docs/images/panel.webp" height="400" alt="Hovering a ring opens a card with every limit and its reset">
+  <img src="Docs/images/panel.png" height="400" alt="Hovering a ring opens a card with every limit and its reset">
 </p>
 
 - **Seventy-seven services at a glance** — Claude Code, Codex, Cursor, GitHub Copilot, Antigravity, Kiro, Grok, DeepSeek, Kimi Code and many more, each as its own ring.
@@ -43,11 +43,7 @@ url: https://github.com/qunqin24/Pulse
 - **Real numbers only** — every usage percentage is the one the service itself reported. The few estimates are marked as such, and where a service reports nothing, Pulse says so instead of guessing.
 - **Native and quiet** — Swift and SwiftUI, Liquid Glass on macOS 26. Dock it left, right, along the top or along the bottom beside the Dock, let it fold to a sliver when idle, or keep it in the menu bar.
 
-**Recently added:** usage in the menu bar with a dashboard for each account, starting usage windows after a reset, and animated bot marks. [What's new](https://github.com/qunqin24/Pulse/releases/latest).
-
-<p align="center">
-  <img src="Docs/images/bot-mark.gif" width="300" alt="Pulse animated marks: a bot in each ring reacting to what that account is doing">
-</p>
+**Recently added:** usage in the menu bar with a dashboard for each account and starting usage windows after a reset. [What's new](https://github.com/qunqin24/Pulse/releases/latest).
 
 <p align="center">
   <sub>If Pulse has saved you from a surprise rate limit, a ⭐ helps other people find it.</sub>
@@ -79,7 +75,7 @@ url: https://github.com/qunqin24/Pulse
 ### Rings at a glance
 - **Colours that follow usage** — green through amber to red, or a colour of your own for each account.
 - **Used or left** — `75% used` or `25% left`, with an optional clock arc for how much of the window has passed.
-- **Live activity** — a turning dot while an agent is working, and optional animated bots that react to each account.
+- **Live activity** — a turning dot while an agent is working, and an optional robot (Agent Robot Avatar by CX ArtLab) that reacts to each account.
 
 ### Details when you point at a ring
 - **Every limit and its reset** on one card, in continuous or segmented bars.
@@ -88,7 +84,7 @@ url: https://github.com/qunqin24/Pulse
 - **In the menu bar** — the fullest ring as a figure, a small ring or split limits, with an optional dashboard.
 
 <p align="center">
-  <img src="Docs/images/detailed-card.webp" width="620" alt="The same Codex card, compact and detailed">
+  <img src="Docs/images/detailed-card.png" width="620" alt="The same Codex card, compact and detailed">
 </p>
 
 ### Stays out of the way

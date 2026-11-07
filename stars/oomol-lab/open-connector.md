@@ -1,6 +1,6 @@
 ---
 project: open-connector
-stars: 6152
+stars: 6199
 description: |-
     Open-source auth gateway connecting 1500+ SaaS providers to AI agents through SDK, CLI, MCP, HTTP, and OpenAPI.
 url: https://github.com/oomol-lab/open-connector
@@ -37,7 +37,7 @@ prebuilt Actions to agents and applications.
   <tr>
     <td width="33.33%" valign="top">Managed OAuth and hosted runtime, ready to use. No deployment or OAuth app setup.</td>
     <td width="33.33%" valign="top">Run locally or on your own infrastructure with Docker or Node.js. You manage storage and OAuth apps.</td>
-    <td width="33.33%" valign="top"><strong>Cloudflare</strong>, <strong>Fly.io</strong>, <strong>RepoCloud</strong>, <strong>nibrun</strong>, <strong>NEXUS AI</strong>, <strong>Pethost</strong>, and more.</td>
+    <td width="33.33%" valign="top"><strong>Cloudflare</strong>, <strong>Fly.io</strong>, <strong>RepoCloud</strong>, <strong>nibrun</strong>, <strong>NEXUS AI</strong>, <strong>Pethost</strong>, <strong>ZopDay</strong>, and more.</td>
   </tr>
   <tr>
     <td width="33.33%" align="center">🚀 <a href="https://oomol.com/docs/connector-saas/"><strong>OOMOL Hosted</strong></a></td>
@@ -60,6 +60,8 @@ HTTP/OpenAPI from custom clients, and the Web Console for administration and deb
 - A working connector catalog across products such as GitHub, Gmail, Notion, BigQuery, Google
   Analytics, Supabase, Airtable, Slack, and more.
 - Credential handling for API keys, OAuth2, custom credentials, and no-auth providers.
+- Built-in OAuth 2.1 authorization server so remote MCP clients and other agents can authenticate
+  with dynamically registered clients, PKCE S256, and revocable, policy-scoped access tokens.
 - Inspectable Action contracts: request/response schemas, required scopes, and lazy-loaded executor
   source.
 - Runtime controls for connection identity, scopes, runtime tokens, action allow/block policies,

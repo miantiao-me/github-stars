@@ -1,6 +1,6 @@
 ---
 project: awesome-tuis
-stars: 21014
+stars: 21053
 description: |-
     List of projects that provide terminal user interfaces
 url: https://github.com/rothgar/awesome-tuis
@@ -59,6 +59,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [damon](https://github.com/hashicorp/damon) TUI interface for Hashicorp Nomad
 - [dashbrew](https://github.com/rasjonell/dashbrew) TUI dashboard builder that lets you visualize data from scripts and APIs.
 - [dolphie](https://github.com/charles-001/dolphie) Your single pane of glass for real-time analytics into MySQL/MariaDB & ProxySQL
+- [dynamite](https://github.com/wolfwfr/dynamite) A TUI query engine for Amazon DynamoDB full of quality-of-life features.
 - [flowrs](https://github.com/jvanbuel/flowrs) A TUI for monitoring, inspecting and managing Apache Airflow DAGs
 - [framework-tool-tui](https://github.com/grouzen/framework-tool-tui) TUI for controlling and monitoring Framework Computers hardware built in Rust
 - [fubar](https://github.com/irishmaestro/fubar) Formidable Unix Binary Arsenal & Repository. TUI built for gtfobins power users.
@@ -459,6 +460,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [casciian](https://github.com/crramirez/casciian) A Text User Interface Library for **Java** based on "Jexer" without the AWT/Swing dependencies, tailored for GraalVM AOT native compilation with a focus on performance over remote connections and maximum terminal compatibility.
 - [Jexer](https://gitlab.com/AutumnMeowMeow/jexer) A **Java** library implements a text-based windowing system loosely reminiscent of Borland's Turbo Vision system.
 - [Lanterna](https://github.com/mabe02/lanterna) A **Java** library for creating text-based UIs, very similar to the C library curses but with more functionality.
+- [TamboUI](https://github.com/tamboui/tamboui) A **Java** library for building modern terminal user interfaces. Initial port of Ratatui but have higher level inspiration from Textual providing super effecient immediate mode but also a toolkit with Cascading Style Sheets (CSS) and big library of reusable components.
 - [TUI4J](https://github.com/WilliamAGH/tui4j) A **Java** terminal UI framework with a Bubble Tea (Go) port and additional features inspired by Textual.
 
 <h3>.NET</h3>
@@ -665,6 +667,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [gadacz](https://github.com/rareitems/gadacz) Audiobook player
 - [GopherTube](https://github.com/krishnassh/gophertube) A terminal-based YouTube client that scrapes YouTube search results and uses mpv for video playback
 - [Gorae](https://github.com/Han8931/gorae) TUI librarian for PDFs and EPUBs with Vim-style navigation.
+- [goweeb](https://github.com/EliasLd/goweeb) Download manga as pdf or cbz from multiple providers in multiple languages with a fast TUI and container support.
 - [image-sorter](https://github.com/jgalat/image-sorter) Terminal user interface for sorting images using key bindings written in Rust
 - [invidtui](https://github.com/darkhz/invidtui) A TUI Invidious client for Windows, Linux and MacOS, that fetches and plays audio/video from an invidious instance. Supports viewing and playing from playlists and channels as well.
 - [jellyfin-tui](https://github.com/dhonus/jellyfin-tui) Jellyfin client
@@ -677,6 +680,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [mps-youtube](https://github.com/mps-youtube/mps-youtube) Terminal based YouTube player and downloader
 - [mpv-music](https://github.com/FurqanHun/mpv-music) Cross-platform CLI/TUI music player and library browser written in Rust that lets you filter and select what you want to play and gets out of your way, with no background daemons.
 - [mpvc](https://github.com/gmt4/mpvc) A mpc-like control interface for mpv
+- [MusicTUI](https://github.com/anthonymaley/MusicTUI) Apple Music TUI and CLI for macOS, written in Swift, with multi-room AirPlay routing, library browsing with cover art, playlists, radio and a venue equalizer
 - [nap](https://nap.sourceforge.net/) Linux napster client
 - [ncspot](https://github.com/hrkfdn/ncspot) Cross-platform ncurses Spotify client written in Rust
 - [ostui](https://git.sr.ht/~ser/ostui) CLI client for Subsonic-API servers like gonic and Navidrome

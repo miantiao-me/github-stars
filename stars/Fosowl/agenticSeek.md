@@ -1,6 +1,6 @@
 ---
 project: agenticSeek
-stars: 27596
+stars: 27634
 description: |-
     Fully Local Manus AI. No APIs, No $200 monthly bills. Enjoy an autonomous agent that thinks, browses the web, and code for the sole cost of electricity.
 url: https://github.com/Fosowl/agenticSeek

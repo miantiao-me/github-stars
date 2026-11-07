@@ -1,6 +1,6 @@
 ---
 project: document
-stars: 2013
+stars: 2018
 description: |-
     Local-first browser editor for Word, Excel, PowerPoint and PDF, with an experimental AI assistant. No Office installation or account required.
 url: https://github.com/ranuts/document

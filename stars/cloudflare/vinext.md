@@ -1,6 +1,6 @@
 ---
 project: vinext
-stars: 9283
+stars: 9327
 description: |-
     Vite plugin that reimplements the Next.js API surface — deploy anywhere
 url: https://github.com/cloudflare/vinext
@@ -145,10 +145,13 @@ files to `.cjs`) when an unambiguous default Vite config requires the ESM migrat
 `"type": "commonjs"` is never changed. Direct `vite dev` and `vite build` do not perform these
 wrapper compatibility steps.
 
-`@vinext/cloudflare deploy` options: `--preview`, `--env <name>`, `--name <name>`, `--vite-config <path>`, `--skip-build`, `--dry-run`, `--warm-cache`, `--traffic-aware-warm-cache`.
+`@vinext/cloudflare deploy` options: `--preview`, `--env <name>`, `--name <name>` (Wrangler config projects only), `--vite-config <path>`, `--skip-build`, `--dry-run`, `--warm-cache`, `--traffic-aware-warm-cache`.
 
 `vinext init` prompts for a deployment target, defaulting to Cloudflare. Agents must ask the
 user which target they want, then pass `--platform=cloudflare` or `--platform=node`.
+For Cloudflare, agents and CI must also pass `--cdn-cache`, `--data-cache`, and
+`--image-optimization`; see
+[Run init without prompts](https://vinext.dev/docs/deploying/cloudflare#run-init-without-prompts).
 
 Other options: `--port <port>` (default: 3001), `--skip-check`, `--force`.
 
@@ -667,26 +670,26 @@ Every `next/*` import is shimmed to a Vite-compatible implementation.
 
 ### Server features
 
-| Feature                                    |     | Notes                                                                                       |
-| ------------------------------------------ | --- | ------------------------------------------------------------------------------------------- |
-| SSR (Pages Router)                         | ✅  | Streaming, `_app`/`_document`, `__NEXT_DATA__`, hydration                                   |
-| SSR (App Router)                           | ✅  | RSC pipeline, nested layouts, streaming, nav context for client components                  |
-| `getStaticProps`                           | ✅  | Props, redirect, notFound, revalidate                                                       |
-| `getStaticPaths`                           | ✅  | `fallback: false`, `true`, `"blocking"`                                                     |
-| `getServerSideProps`                       | ✅  | Full context including locale                                                               |
-| ISR                                        | ✅  | Stale-while-revalidate, pluggable `CacheHandler`, background regeneration                   |
-| Server Actions (`"use server"`)            | ✅  | Action execution, FormData, re-render after mutation, `redirect()` in actions               |
-| React Server Components                    | ✅  | Via `@vitejs/plugin-rsc`. `"use client"` boundaries work correctly                          |
-| Streaming SSR                              | ✅  | Both routers                                                                                |
-| Metadata API                               | ✅  | `metadata`, `generateMetadata`, `viewport`, `generateViewport`, title templates             |
-| `generateStaticParams`                     | ✅  | With `dynamicParams` enforcement                                                            |
-| Metadata file routes                       | ✅  | sitemap.xml, robots.txt, manifest, favicon, OG images (static + dynamic)                    |
-| Static export (`output: 'export'`)         | ✅  | Generates static HTML/JSON for all routes                                                   |
-| Standalone output (`output: 'standalone'`) | ✅  | Generates `dist/standalone` with `server.js`, build artifacts, and runtime deps             |
-| `connection()`                             | ✅  | Forces dynamic rendering                                                                    |
-| `"use cache"` directive                    | ✅  | File-level and function-level. `cacheLife()` profiles, `cacheTag()`, stale-while-revalidate |
-| `instrumentation.ts`                       | ✅  | `register()`, `onRequestError()`, and [framework tracing](docs/tracing.mdx)                 |
-| Route segment config                       | 🟡  | `revalidate`, `dynamic`, `dynamicParams`, `runtime` (not placement). No `preferredRegion`   |
+| Feature                                    |     | Notes                                                                                                                                                                      |
+| ------------------------------------------ | --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SSR (Pages Router)                         | ✅  | Streaming, `_app`/`_document`, `__NEXT_DATA__`, hydration                                                                                                                  |
+| SSR (App Router)                           | ✅  | RSC pipeline, nested layouts, streaming, nav context for client components                                                                                                 |
+| `getStaticProps`                           | ✅  | Props, redirect, notFound, revalidate                                                                                                                                      |
+| `getStaticPaths`                           | ✅  | `fallback: false`, `true`, `"blocking"`                                                                                                                                    |
+| `getServerSideProps`                       | ✅  | Full context including locale                                                                                                                                              |
+| ISR                                        | ✅  | Stale-while-revalidate, pluggable `CacheHandler`, background regeneration                                                                                                  |
+| Server Actions (`"use server"`)            | ✅  | Action execution, FormData, re-render after mutation, `redirect()` in actions                                                                                              |
+| React Server Components                    | ✅  | Via `@vitejs/plugin-rsc`. `"use client"` boundaries work correctly                                                                                                         |
+| Streaming SSR                              | ✅  | Both routers                                                                                                                                                               |
+| Metadata API                               | ✅  | `metadata`, `generateMetadata`, `viewport`, `generateViewport`, title templates                                                                                            |
+| `generateStaticParams`                     | ✅  | With `dynamicParams` enforcement                                                                                                                                           |
+| Metadata file routes                       | ✅  | sitemap.xml, robots.txt, manifest, favicon, OG images (static + dynamic)                                                                                                   |
+| Static export (`output: 'export'`)         | ✅  | Generates static HTML/JSON for all routes                                                                                                                                  |
+| Standalone output (`output: 'standalone'`) | ✅  | Generates `dist/standalone` with `server.js`, build artifacts, and runtime deps                                                                                            |
+| `connection()`                             | ✅  | Forces dynamic rendering                                                                                                                                                   |
+| `"use cache"` directive                    | ✅  | File-level and function-level. `cacheLife()` with built-in and next.config `cacheLife` (or legacy `experimental.cacheLife`) profiles, `cacheTag()`, stale-while-revalidate |
+| `instrumentation.ts`                       | ✅  | `register()`, `onRequestError()`, and [framework tracing](docs/tracing.mdx)                                                                                                |
+| Route segment config                       | 🟡  | `revalidate`, `dynamic`, `dynamicParams`, `runtime` (not placement). No `preferredRegion`                                                                                  |
 
 ### Configuration
 
@@ -695,7 +698,7 @@ Every `next/*` import is shimmed to a Vite-compatible implementation.
 | `next.config.js` / `.ts` / `.mjs`                | ✅  | Function configs, phase argument                                                                                                                                                                                                                         |
 | `rewrites` / `redirects` / `headers`             | ✅  | All phases, param interpolation. A source Next.js rejects fails config loading, as it fails the Next.js build: missing, not starting with `/`, over the 4,096-character built-regex limit, or rejected by path-to-regexp, such as a header glob `/api/*` |
 | Environment variables (`.env*`, `NEXT_PUBLIC_*`) | ✅  | Auto-loads Next.js-style dotenv files; only public vars are inlined                                                                                                                                                                                      |
-| `images` config                                  | 🟡  | Parsed but not used for optimization                                                                                                                                                                                                                     |
+| `images` config                                  | 🟡  | Parsed but not used for optimization; the production image endpoint enforces `localPatterns` (dev serves any local source)                                                                                                                               |
 | `experimental.optimizePackageImports`            | ✅  | Rewrites barrel imports to direct sub-module imports in RSC/SSR environments. A default set (lucide-react, date-fns, radix-ui, antd, MUI, and others) are always optimized. Add package names here to extend the list.                                   |
 | `vinext({ nextConfig })`                         | ✅  | Inline Next-style config from `vite.config.*`. Supports object-form and function-form config. When provided, this overrides root `next.config.*`.                                                                                                        |
 | `vinext({ react: { compiler: true } })`          | ✅  | React Compiler auto memoization. Needs `@vitejs/plugin-react` 6.1+ and the optional `oxc-transform-react` package.                                                                                                                                       |
