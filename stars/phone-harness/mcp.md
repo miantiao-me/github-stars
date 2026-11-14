@@ -1,6 +1,6 @@
 ---
 project: mcp
-stars: 746
+stars: 804
 description: |-
     Connect AI agents to real iPhones and Androids
 url: https://github.com/phone-harness/mcp

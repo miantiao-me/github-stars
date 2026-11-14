@@ -1,6 +1,6 @@
 ---
 project: NOIR
-stars: 2894
+stars: 3468
 description: |-
     手机隐私审计：用 adb 扫出 Android 应用的权限、上报端点与数据流向，并给出可回滚的处置。Desktop Android leak audit: permissions, endpoints, data flows, reversible fixes.
 url: https://github.com/Verlintas/NOIR
@@ -22,12 +22,13 @@ url: https://github.com/Verlintas/NOIR
 [![license](https://img.shields.io/github/license/Verlintas/NOIR)](LICENSE)
 ![platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-2ea44f)
 
-[![AtomGit G-Star](https://atomgit.com/Verlintas/NOIR/star/new_badge.svg)](https://atomgit.com/Verlintas/NOIR)
-<a href="https://trendshift.io/repositories/330705?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-330705" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/330705/daily?language=Kotlin" alt="Verlintas/NOIR | Trendshift" width="250" height="55"></a>
+[![AtomGit G-Star](https://atomgit.com/Verlintas/NOIR/star/new_badge.svg)](https://atomgit.com/Verlintas/NOIR)<br>
+<a href="https://trendshift.io/repositories/330705?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-330705" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/330705/weekly?language=Kotlin" alt="Verlintas/NOIR | Trendshift — #1 Kotlin repository of the week" width="250" height="55"></a>
+<a href="https://trendshift.io/repositories/330705?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-330705" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/330705/daily" alt="Verlintas/NOIR | Trendshift — #9 repository of the day" width="250" height="55"></a>
+<a href="https://trendshift.io/repositories/330705?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-330705" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/330705/daily?language=Kotlin" alt="Verlintas/NOIR | Trendshift — #1 Kotlin repository of the day" width="250" height="55"></a><br>
 <a href="https://upstar.dev/r/Verlintas/NOIR"><picture><source media="(prefers-color-scheme: dark)" srcset="https://upstar.dev/badge/Verlintas/NOIR/award/privacy-dark.svg"><img alt="Upstar: #1 Riser Of The Week in Privacy, November 2026" src="https://upstar.dev/badge/Verlintas/NOIR/award/privacy.svg" width="250" height="55"></picture></a>
 <a href="https://upstar.dev/r/Verlintas/NOIR"><picture><source media="(prefers-color-scheme: dark)" srcset="https://upstar.dev/badge/Verlintas/NOIR/award/android-dark.svg"><img alt="Upstar: #1 Riser Of The Week in Android, November 2026" src="https://upstar.dev/badge/Verlintas/NOIR/award/android.svg" width="250" height="55"></picture></a>
-<a href="https://upstar.dev/r/Verlintas/NOIR"><picture><source media="(prefers-color-scheme: dark)" srcset="https://upstar.dev/badge/Verlintas/NOIR/award/cli-tools-dark.svg"><img alt="Upstar: #1 Riser Of The Week in CLI tools, November 2026" src="https://upstar.dev/badge/Verlintas/NOIR/award/cli-tools.svg" width="250" height="55"></picture></a>
-<a href="https://upstar.dev/r/Verlintas/NOIR"><picture><source media="(prefers-color-scheme: dark)" srcset="https://upstar.dev/badge/Verlintas/NOIR/spotted-card-dark.svg"><img alt="Upstar: spotted at 122 stars, now 2.8k" src="https://upstar.dev/badge/Verlintas/NOIR/spotted-card.svg" width="250" height="55"></picture></a>
+<a href="https://upstar.dev/r/Verlintas/NOIR"><picture><source media="(prefers-color-scheme: dark)" srcset="https://upstar.dev/badge/Verlintas/NOIR/spotted-card-dark.svg"><img alt="Upstar: spotted early at 122 stars" src="https://upstar.dev/badge/Verlintas/NOIR/spotted-card.svg" width="250" height="55"></picture></a>
 
 **把「这台手机到底能泄露什么」变成一份可复现的报告。**
 
@@ -85,6 +86,8 @@ noir doctor
 NOIR doctor
   platform  Mac OS X aarch64
   java      17.0.19
+  docker    /usr/local/bin/docker
+            客户端 29.9.2 · 守护进程 29.9.2 运行中
   adb       /opt/homebrew/.../platform-tools/adb
             Version 37.0.1-15733141
   device    178b0d2f  device  2509FPN0BC
@@ -95,6 +98,24 @@ NOIR doctor
 noir setup          # 缺什么下什么
 noir setup --yes    # 不询问，适合脚本
 ```
+
+### Docker 安装 / 运行检测
+
+`docker` 一行回答两个问题：Docker 装了没有，守护进程在不在跑。Docker 是可选项
+（只有想在容器里运行 NOIR 才需要），所以这一行只报告，不影响 `doctor` 的退出码：
+
+| 情况 | `doctor` 显示 |
+|---|---|
+| 没装 | `未安装（可选：…）` |
+| 装了，守护进程在跑 | `客户端 29.9.2 · 守护进程 29.9.2 运行中` |
+| 装了，没启动 | `守护进程未运行`，下一行是启动方法 |
+| 装了，当前用户没权限 | `守护进程拒绝访问`，下一行是解决方法 |
+| 其他错误（例如 TLS 证书校验失败），或 10 秒内没有应答 | `守护进程状态未知`，下一行是原因：Docker 的原始报错，或超时提示 |
+
+检测只调用本机的 `docker --version` 和 `docker version`，不拉镜像，也不启动容器。
+
+NOIR 自己跑在容器里时（Docker / Podman / Kubernetes / LXC），`doctor` 会多一行
+`container docker`。这时找不到设备，提示会换成 USB 透传的做法，而不是让你换数据线。
 
 ## 出现问题时
 
@@ -185,6 +206,55 @@ git clone https://github.com/Verlintas/NOIR
 cd NOIR
 ./gradlew :cli:installDist
 ./cli/build/install/noir/bin/noir --about
+```
+
+**方式三：Docker（Linux 宿主机）**
+
+镜像里带 JRE、adb 和 NOIR 本身，宿主机只需要 Docker。在仓库根目录构建
+（首次会下载 Gradle 和依赖，需要几分钟）：
+
+```bash
+docker build -t noir .
+```
+
+```bash
+docker run --rm -it \
+  --device-cgroup-rule='c 189:* rmw' -v /dev/bus/usb:/dev/bus/usb \
+  -v noir-home:/root -v "$PWD:/work" \
+  noir
+```
+
+| 参数 | 作用 |
+|---|---|
+| `--device-cgroup-rule='c 189:* rmw'`<br>`-v /dev/bus/usb:/dev/bus/usb` | 把 USB 设备透传进容器，重新插拔也有效 |
+| `-v noir-home:/root` | 保存 adb 授权密钥和扫描缓存；不加的话，每次运行手机都要重新点「允许」 |
+| `-v "$PWD:/work"` | 报告写到当前目录的 `noir-out/` |
+
+- 宿主机上如果也装了 adb，先执行 `adb kill-server`，否则它会占住手机。
+- 命令末尾可以接任何子命令，例如 `… noir doctor`、`… noir ui`。
+- `deep` / `deepscan` 需要的 jadx 不在镜像里：执行一次 `… noir setup --yes`，它会下载到 `noir-home`。
+- 在容器里找不到设备时，NOIR 会直接提示上面的透传参数。
+
+> **权限说明**：容器内的 NOIR 和 adb 以 root 运行，这样才能打开透传进来的 USB 设备节点。
+> 上面两个 USB 参数给出的是宿主机上**全部** USB 设备的访问权，不只是手机，所以只运行你自己构建的镜像。
+> 副作用是 `noir-out/` 里的文件属主也是 root。
+
+macOS / Windows 的 Docker Desktop 不能把 USB 设备透传进容器，这两个系统请用方式一的便携包。
+
+不要改成让容器去连宿主机的 adb server：它默认只监听 `127.0.0.1:5037`，容器通常连不上；
+而用 `adb -a` 让它监听所有网卡，会把一个没有认证的端口暴露给整个局域网，任何人都能借它控制手机。
+
+**方式四：Scoop（Windows）**
+
+```powershell
+scoop bucket add verlintas https://github.com/Verlintas/scoop-bucket
+scoop install noir
+```
+
+`noir` 会从官方 GitHub Release 安装，升级用 `scoop update noir`。adb 和 jadx 仍需单独安装：
+
+```powershell
+scoop install adb jadx
 ```
 
 ## 构建
@@ -298,6 +368,7 @@ noir-out/
 ├── report.json               # 结构化结果（应用、权限、端点、建议）
 ├── report.md                 # 人类可读报告
 ├── report.html               # 离线单文件报告，可直接用浏览器打开
+├── report.csv                # 表格导出（每行一个应用，适合 Excel）
 ├── domains-trackers.txt      # 统计/广告/崩溃上报，可整份导入
 ├── domains-other.txt         # 用途不明，导入前逐条判断
 ├── domains-functional.txt    # 推送/登录/更新/支付/商店/云同步，禁止拦截

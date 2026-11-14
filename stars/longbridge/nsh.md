@@ -1,6 +1,6 @@
 ---
 project: nsh
-stars: 2004
+stars: 2815
 description: |-
     Native Shell is a native UI framework for iOS, Android, macOS, Windows, Linux and the web, built in Rust.
 url: https://github.com/longbridge/nsh
@@ -51,7 +51,7 @@ Rust apps, TSX modules and AI-generated UI.
 | Platform | Drawn with | Embed with | Requires |
 |---|---|---|---|
 | iOS | UIKit, CoreText | `NshAppView` (Swift, `NativeShell.xcframework`) | iOS 15+ |
-| Android | Android views, `StaticLayout` | `NshView` (Java / Kotlin, `nsh.aar`) | Android 9 (API 28)+ |
+| Android | Android views, `StaticLayout` | `NshView` (Java / Kotlin, `nsh.aar`) | Android 8 (API 26)+ |
 | macOS | AppKit, Core Animation, CoreText | `AppView` (Rust, `nsh-platform-macos`) | macOS 14+ |
 | Windows | Win32, Direct2D, DirectWrite | `AppView` (Rust, `nsh-platform-windows`) | Windows 10 1809+ |
 | Linux | GTK 4, Pango | `AppView` (Rust, `nsh-platform-linux`) | GTK 4.14+ |
@@ -77,14 +77,11 @@ Install the `nsh` command ([other ways](https://nsh.dev/docs/installation)):
 curl -fsSL https://nsh.dev/install.sh | sh
 ```
 
-Build and install the latest `main` from source (Git, Rust and the
-[platform build dependencies](https://nsh.dev/docs/installation) required):
+The nightly build of the latest `main`, rebuilt every night that it changes:
 
 ```sh
-curl -fsSL https://nsh.dev/install.sh | sh -s -- --source
+curl -fsSL https://nsh.dev/install.sh | sh -s -- --nightly
 ```
-
-Re-run to update. The checkout stays in `~/.nsh/source` for runtime builds.
 
 </details>
 
@@ -103,6 +100,20 @@ brew install longbridge/tap/nsh
 ```powershell
 irm https://nsh.dev/install.ps1 | iex
 ```
+
+</details>
+
+<details>
+<summary>From source (macOS / Linux)</summary>
+
+Build and install the latest `main` from source (Git, Rust and the
+[platform build dependencies](https://nsh.dev/docs/installation) required):
+
+```sh
+curl -fsSL https://nsh.dev/install.sh | sh -s -- --source
+```
+
+Re-run to update. The checkout stays in `~/.nsh/source` for runtime builds.
 
 </details>
 

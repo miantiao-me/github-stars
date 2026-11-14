@@ -1,6 +1,6 @@
 ---
 project: openclaw
-stars: 394143
+stars: 394456
 description: |-
     The AI that really does things. Any OS. Any Platform. The lobster way. 🦞 
 url: https://github.com/openclaw/openclaw

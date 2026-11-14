@@ -1,6 +1,6 @@
 ---
 project: AirShow
-stars: 24
+stars: 27
 description: |-
     Free, open-source, cross-platform screen mirroring receiver — AirPlay, Google Cast, Miracast, DLNA
 url: https://github.com/zitlem/AirShow
@@ -189,5 +189,18 @@ Contributions welcome. The codebase follows these conventions:
 
 ## License
 
-Open source (license TBD).
+AirShow is licensed under the [GNU General Public License v3.0](LICENSE) (GPL-3.0).
+
+You may use, modify and redistribute it, including commercially, provided that
+anything you distribute that includes or is derived from AirShow is also released
+under GPL-3.0 with its complete source code. Bundled third-party code keeps its own
+license (see `vendor/`).
+
+Exceptions:
+
+- The Google Cast receiver module in [`src/cast/`](src/cast/) is licensed under the
+  [Apache License 2.0](src/cast/LICENSE), so it can be reused on its own. Its
+  `cast_channel.proto` stays under Chromium's BSD license.
+- `resources/cast/cast-auth.json` holds third-party Cast authentication data that is
+  not covered by any AirShow license — see [`resources/cast/NOTICE`](resources/cast/NOTICE).
 

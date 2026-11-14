@@ -1,6 +1,6 @@
 ---
 project: sim
-stars: 30070
+stars: 30138
 description: |-
     Sim is the collaborative workspace to build, deploy, and monitor AI agents and workflows. Used by 100,000+ builders.
 url: https://github.com/simstudioai/sim
@@ -55,6 +55,15 @@ macOS 12+, Apple Silicon and Intel. See the [desktop docs](https://docs.sim.ai/d
 - Build agents visually, conversationally, or with code
 - Ingest files, knowledge bases, and structured table data
 - Monitor runs, logs, schedules, and workflow activity
+
+## Security and governance
+
+- SOC 2 Type II, ISO 27001, and GDPR: reports and policies are in the [Trust Center](https://trust.sim.ai/)
+- [Single sign-on](https://docs.sim.ai/platform/enterprise/sso) with SAML 2.0 or OIDC, including Microsoft Entra ID, Okta, and Google Workspace
+- [SCIM directory provisioning](https://docs.sim.ai/platform/enterprise/scim) from Microsoft Entra ID or Okta
+- [Audit logs](https://docs.sim.ai/platform/enterprise/audit-logs) and [permission groups](https://docs.sim.ai/platform/enterprise/access-control) that restrict models, blocks, and tools by workspace and member
+
+These controls are part of the Enterprise plan on Sim Cloud. See the [enterprise docs](https://docs.sim.ai/platform/enterprise) for self-hosted setup.
 
 ## One workspace, every surface
 

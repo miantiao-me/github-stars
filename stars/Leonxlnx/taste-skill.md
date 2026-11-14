@@ -1,6 +1,6 @@
 ---
 project: taste-skill
-stars: 111626
+stars: 115607
 description: |-
     Agent skills that give coding agents taste: art direction, reference images and a browser check instead of generic AI pages
 url: https://github.com/Leonxlnx/taste-skill

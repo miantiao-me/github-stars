@@ -1,6 +1,6 @@
 ---
 project: scandinavian-design
-stars: 412
+stars: 416
 description: |-
     null
 url: https://github.com/ericzakariasson/scandinavian-design

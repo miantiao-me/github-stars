@@ -1,6 +1,6 @@
 ---
 project: CloakBrowser
-stars: 32774
+stars: 32889
 description: |-
     Stealth Chromium that passes every bot detection test. Drop-in Playwright replacement with source-level fingerprint patches. 50+ tests passed.
 url: https://github.com/CloakHQ/CloakBrowser
@@ -160,7 +160,7 @@ page.goto("https://example.com")
 
 ---
 
-## Latest: v0.7.0 — 87 source-level stealth patches (Chromium 156.0.8078.47.1)
+## Latest: v0.7.2 — 87 source-level stealth patches (Chromium 156.0.8078.47.1)
 
 - **CloakBrowser Pro Stable** — Chromium `156.0.8078.47.1` on Linux x64, Linux ARM64, Windows x64, and macOS (Apple Silicon and Intel). Set a `license_key` (`licenseKey` in JS) or the `CLOAKBROWSER_LICENSE_KEY` env var and the wrapper fetches the latest Stable build for your platform automatically. See [CloakBrowser Pro](#cloakbrowser-pro)
 - **.NET 8 / C# client** — CloakBrowser now ships as a NuGet package (`CloakBrowser`), mirroring the Python and JS wrappers.
@@ -1321,7 +1321,7 @@ Other tips for maximizing reCAPTCHA scores:
 A: CloakBrowser is a browser built on open-source Chromium. We do not condone illegal use. Automating systems without authorization, credential stuffing, and account creation abuse are expressly prohibited. See [BINARY-LICENSE.md](https://github.com/CloakHQ/CloakBrowser/blob/main/BINARY-LICENSE.md) for full terms.
 
 **Q: Is CloakBrowser free?**
-A: Yes. The wrappers (Python, JS, .NET) are MIT and free forever. For the binary: the **latest build is free** with your email at one concurrent session ([cloakbrowser.dev/free](https://cloakbrowser.dev/free)); **Pro** adds more concurrent sessions ([cloakbrowser.dev](https://cloakbrowser.dev)).
+A: Yes. The wrappers (Python, JS, .NET) are MIT and free forever. For the binary: the **latest build is free** with your email at one concurrent session ([cloakbrowser.dev/free](https://cloakbrowser.dev/free)); **Pro** adds more concurrent sessions ([cloakbrowser.dev](https://cloakbrowser.dev)). The binary has its own license: [BINARY-LICENSE.md](https://github.com/CloakHQ/CloakBrowser/blob/main/BINARY-LICENSE.md).
 
 **Q: Do I need a license key for the free version?**
 A: Yes, a free one. The first launch in a terminal asks for it and gets it for you by email (or run `cloakbrowser login`, or visit [cloakbrowser.dev/free](https://cloakbrowser.dev/free)). It gives you one concurrent session; a paid key raises the limit.

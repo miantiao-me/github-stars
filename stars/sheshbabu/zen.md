@@ -1,6 +1,6 @@
 ---
 project: zen
-stars: 1194
+stars: 1197
 description: |-
     Selfhosted notes app. Single golang binary, notes stored as markdown within SQLite, full-text search, very low resource usage
 url: https://github.com/sheshbabu/zen

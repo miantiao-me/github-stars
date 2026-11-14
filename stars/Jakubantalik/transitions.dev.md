@@ -1,6 +1,6 @@
 ---
 project: transitions.dev
-stars: 6135
+stars: 6331
 description: |-
     UI motion agent, a library of 43+ crafted transitions, a skill that fits your workflow.
 url: https://github.com/Jakubantalik/transitions.dev

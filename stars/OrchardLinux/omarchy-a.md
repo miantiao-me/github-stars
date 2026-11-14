@@ -1,6 +1,6 @@
 ---
 project: omarchy-a
-stars: 159
+stars: 192
 description: |-
     Experimental Omarchy desktop for Apple A-series devices.
 url: https://github.com/OrchardLinux/omarchy-a
@@ -51,9 +51,24 @@ RAM experiments and device bring-up happen in orchard itself, with its
 A release covers every device orchard describes: one root image, and
 orchard's kernel, device trees and modules for each platform. How well a device
 works is orchard's device data, which the installer shows before it changes
-anything. Today the iPad 6 Wi-Fi (`iPad7,5`, J71b) is supported, without GPU
-acceleration; the others are experimental. See orchard's
+anything. Today the iPad 6 Wi-Fi (`iPad7,5`, J71b) is supported; the others
+are experimental. See orchard's
 [devices](https://github.com/OrchardLinux/orchard/tree/main/devices).
+
+The desktop finds the hardware at login. Where orchard's kernel runs the GPU
+(the iPad 6 and iPad 7, A10; the iPad 5, A9, once its GPU support has landed
+in orchard and in the Mesa fork), the login first draws one test frame on the
+GPU, within 10 s at most. If that works the desktop draws on the GPU; if not,
+and on every other device, it draws in software, as before.
+`journalctl -t omarchy-gpu-probe` shows what a login decided and why. To start
+such a device on the software desktop once, boot with
+`modprobe.blacklist=powervr`. On the iPad 6 and iPad 7 Firefox plays H.264
+video, YouTube included, through the hardware video decoder.
+
+Firefox reaches the video decoder only with its media decoding sandbox
+switched off (`MOZ_DISABLE_RDD_SANDBOX=1`, set by the login session on those
+devices): a video that exploits a decoder bug is then not contained by that
+sandbox. The sandbox around web pages stays on.
 
 This image uses **tethered boot**: starting Linux after a cold restart requires a host computer running `orchard launch`.
 

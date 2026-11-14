@@ -1,6 +1,6 @@
 ---
 project: takumi
-stars: 3181
+stars: 3197
 description: |-
     One layout engine for JSX, HTML, and CSS. Render images, SVG, PDFs, or a paint tree. No headless browser.
 url: https://github.com/kane50613/takumi
@@ -34,6 +34,7 @@ Takumi is a layout engine written in Rust, with text and inline layout ported fr
 | PDF documents                    | [`takumi-pdf`](https://takumi.kane.tw/docs/pdf)     | Paged or single-page PDF with selectable text.                                       |
 | Your own renderer or layout data | [`takumi-paint`](https://takumi.kane.tw/docs/paint) | A paint tree of every box, text run, and image, positioned with CSS values resolved. |
 | Embedding in Rust                | [`takumi`](https://docs.rs/takumi)                  | Images, animations, and SVG from a node tree or HTML.                                |
+| Rendering from a terminal        | [`takumi-cli`](https://takumi.kane.tw/docs/cli)     | Images, SVG, and PDF from an HTML file, reading only the directories you allow.      |
 
 ## Quick Start
 

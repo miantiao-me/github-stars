@@ -1,6 +1,6 @@
 ---
 project: ungh
-stars: 692
+stars: 693
 description: |-
     🐙 Unlimited access to github API
 url: https://github.com/unjs/ungh

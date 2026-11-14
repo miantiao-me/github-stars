@@ -1,6 +1,6 @@
 ---
 project: deepwiki-mcp
-stars: 1388
+stars: 1392
 description: |-
     📖 MCP server for fetch deepwiki.com and get latest knowledge in Cursor and other Code Editors
 url: https://github.com/regenrek/deepwiki-mcp

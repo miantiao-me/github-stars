@@ -1,6 +1,6 @@
 ---
 project: mygo
-stars: 5174
+stars: 6243
 description: |-
     Develop desktop apps with native UI or web frontend in Go
 url: https://github.com/egoist/mygo
@@ -21,6 +21,10 @@ Sponsored by:
       <img width="600" alt="OpenUptime: open-source uptime monitoring and status pages" src="https://openuptime.app/sponsor/banner-light.png">
     </picture>
   </a>
+</p>
+
+<p align="center">
+  <a href="https://mygo.egoist.dev/sponsors">Become a sponsor</a>
 </p>
 
 ---
@@ -52,7 +56,7 @@ memory and CPU use.
   Playing and the media keys, the system accent color and accessibility
   settings, watching files, and more.
 - **Ready to ship**: app bundles and disk images, Windows installers, Debian
-  packages, PKGBUILDs for Arch Linux and a Linux install script, code signing, notarization, and signed
+  and RPM packages, PKGBUILDs for Arch Linux and a Linux install script, code signing, notarization, and signed
   auto-updates with delta updates and an update window in the manner of
   Sparkle.
 

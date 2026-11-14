@@ -1,6 +1,6 @@
 ---
 project: json-render
-stars: 19343
+stars: 19635
 description: |-
     The Generative UI framework
 url: https://github.com/vercel-labs/json-render
@@ -576,7 +576,7 @@ const spec: NextAppSpec = {
   },
 };
 
-// Server: creates Page, generateMetadata, generateStaticParams
+// Server: creates getPageData, generateMetadata, generateStaticParams
 const app = createNextApp({ spec });
 
 // Client: wrap your layout with NextAppProvider

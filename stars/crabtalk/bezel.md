@@ -1,6 +1,6 @@
 ---
 project: bezel
-stars: 197
+stars: 203
 description: |-
     A SwiftUI-lean GPUI component library, style flows through the environment, never through parameters.
 url: https://github.com/crabtalk/bezel

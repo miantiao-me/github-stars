@@ -1,6 +1,6 @@
 ---
 project: overtype
-stars: 3704
+stars: 3708
 description: |-
     The markdown editor that's just a textarea https://overtype.dev
 url: https://github.com/panphora/overtype
@@ -8,7 +8,7 @@ url: https://github.com/panphora/overtype
 
 # OverType
 
-A lightweight markdown editor library with perfect WYSIWYG alignment using an invisible textarea overlay technique. Includes optional toolbar. ~144KB minified with all features.
+A lightweight markdown editor library with perfect WYSIWYG alignment using an invisible textarea overlay technique. Includes optional toolbar. ~154KB minified with all features.
 
 ## Live Examples
 
@@ -27,10 +27,13 @@ A lightweight markdown editor library with perfect WYSIWYG alignment using an in
 - ⌨️ **Keyboard shortcuts** - Common markdown shortcuts (Cmd/Ctrl+B for bold, etc.)
 - 📱 **Mobile optimized** - Responsive design with mobile-specific styles
 - 🔄 **DOM persistence aware** - Recovers from existing DOM (perfect for HyperClay and similar platforms)
-- 🚀 **Lightweight** - ~144KB minified
+- 🚀 **Lightweight** - ~154KB minified
 - 🎯 **Optional toolbar** - Clean, minimal toolbar with all essential formatting
 - ✨ **Smart shortcuts** - Keyboard shortcuts with selection preservation
 - 📝 **Smart list continuation** - GitHub-style automatic list continuation on Enter
+- 🔗 **Link paste** - Paste a URL over selected text to make a link
+- ↔️ **Right-to-left writing** - `dir: 'rtl'` for Hebrew, Arabic and other right-to-left languages, or `dir: 'auto'` to follow the page
+- 🌐 **Translatable toolbar** - Put the toolbar's words in any language with `labels`
 - 🧩 **Custom syntax** - Highlight your own syntax (mentions, footnotes, directives) globally or per editor
 - 🚫 **Disable features per editor** - Render headings, lists, quotes, code blocks or rules as plain text, e.g. for comment boxes
 - 🔧 **Framework agnostic** - Works with React, Vue, vanilla JS, and more
@@ -45,7 +48,7 @@ We overlap an invisible textarea on top of styled output, giving the illusion of
 
 | Feature | OverType | HyperMD | Milkdown | TUI Editor | EasyMDE |
 |---------|----------|---------|----------|------------|---------|
-| **Size** | ~144KB | 364.02 KB | 344.51 KB | 560.99 KB | 323.69 KB |
+| **Size** | ~154KB | 364.02 KB | 344.51 KB | 560.99 KB | 323.69 KB |
 | **Dependencies** | Bundled | CodeMirror | ProseMirror + plugins | Multiple libs | CodeMirror |
 | **Setup** | Single file | Complex config | Build step required | Complex config | Moderate |
 | **Approach** | Invisible textarea | ContentEditable | ContentEditable | ContentEditable | CodeMirror |
@@ -179,8 +182,28 @@ const [editor] = new OverType('#editor', {
   ]
 });
 
-// Available: bold, italic, code, link, h1, h2, h3, bulletList,
-// orderedList, taskList, quote, separator, viewMode
+// Available: bold, italic, strikethrough, code, link, h1, h2, h3, h4, h5, h6,
+// bulletList, orderedList, taskList, outdent, indent, quote, separator, viewMode
+```
+
+`strikethrough`, `h4`, `h5` and `h6` are not in the default toolbar. Add them where you want them:
+
+```javascript
+new OverType('#editor', {
+  toolbar: true,
+  toolbarButtons: [
+    toolbarButtons.bold,
+    toolbarButtons.italic,
+    toolbarButtons.strikethrough,
+    toolbarButtons.separator,
+    toolbarButtons.h1,
+    toolbarButtons.h2,
+    toolbarButtons.h3,
+    toolbarButtons.h4,
+    toolbarButtons.h5,
+    toolbarButtons.h6
+  ]
+});
 ```
 
 Custom buttons that behave like toggle buttons can provide `isActive`. When it returns `true` or `false`, OverType updates the button’s `active` class and `aria-pressed` state:
@@ -196,6 +219,30 @@ Custom buttons that behave like toggle buttons can provide `isActive`. When it r
   }
 }
 ```
+
+**Toolbar in another language:**
+
+The toolbar's words are English. Pass `labels` to translate them. Every word you leave out stays English.
+
+```javascript
+const [editor] = new OverType('#editor', {
+  toolbar: true,
+  labels: {
+    toolbar: 'Formatierung',   // the toolbar's name for screen readers
+    viewModes: { normal: 'Bearbeiten', plain: 'Nur Text', preview: 'Vorschau' },
+    buttons: {                 // titles by button name, custom buttons too
+      bold: 'Fett',
+      italic: 'Kursiv',
+      viewMode: 'Ansicht'      // also names the view mode menu
+    }
+  }
+});
+
+// Switch language on an open editor
+editor.reinit({ labels: { buttons: { bold: 'Gras' } } });
+```
+
+A button's keyboard shortcut is still added to its translated title, so `bold: 'Fett'` shows `Fett (⌘B)`. `OverType.defaultLabels` holds the English words, with the title of every built-in button under `buttons`, so you can see what there is to translate. With `OverType.initFromData()`, pass the labels as JSON in `data-ot-labels`.
 
 **Driving formatting from your own UI:**
 
@@ -213,7 +260,7 @@ document.querySelector('#bold-btn').addEventListener('click', () => {
 });
 ```
 
-Available actions include `toggleBold`, `toggleItalic`, `toggleCode`, `insertLink`, `toggleBulletList`, `toggleNumberedList`, `toggleQuote`, `toggleTaskList`, `insertHeader`, `toggleH1`/`H2`/`H3`, `getActiveFormats`, `hasFormat`, `expandSelection`, and `applyCustomFormat`. The same namespace is available as `window.markdownActions` and `OverType.markdownActions` in script-tag builds.
+Available actions include `toggleBold`, `toggleItalic`, `toggleCode`, `insertLink`, `toggleBulletList`, `toggleNumberedList`, `toggleQuote`, `toggleTaskList`, `insertHeader`, `toggleH1` to `toggleH6`, `toggleStrikethrough`, `getActiveFormats`, `hasFormat`, `expandSelection`, and `applyCustomFormat`. The same namespace is available as `window.markdownActions` and `OverType.markdownActions` in script-tag builds.
 
 See [examples/custom-toolbar.html](examples/custom-toolbar.html) for complete examples.
 
@@ -286,7 +333,7 @@ new OverType('#comment', {
 });
 ```
 
-Names: `h1`, `h2`, `h3`, `headings` (all three), `lists` (also turns off tasks and smart list continuation), `tasks`, `blockquote`, `code` (fenced code blocks), `hr`. Inline formatting (bold, italic, links, inline code) can't be disabled. Change it later with `editor.reinit({ disable: [...] })`.
+Names: `h1` to `h6`, `headings` (all six levels), `lists` (also turns off tasks and smart list continuation), `tasks`, `blockquote`, `code` (fenced code blocks), `hr`. Inline formatting (bold, italic, links, inline code) can't be disabled. Change it later with `editor.reinit({ disable: [...] })`.
 
 ### Markdown Spelling
 
@@ -323,6 +370,34 @@ new OverType('#public-comment', { customSyntax: false });
 
 The processor gets each rendered line's HTML and must only wrap text in tags, never add or remove characters, so the overlay stays aligned. Change it later with `editor.setCustomSyntax(fn)`, `editor.setCustomSyntax(false)`, or `editor.setCustomSyntax(null)` to go back to the global processor.
 
+### Writing Direction
+
+The editor writes left to right. Set `dir` for right-to-left languages such as Hebrew, Arabic, Persian and Urdu:
+
+```javascript
+new OverType('#editor', { dir: 'rtl' });   // right to left
+new OverType('#editor', { dir: 'auto' });  // the direction of the page around the editor
+
+editor.reinit({ dir: 'ltr' });             // the default
+```
+
+- `'ltr'` and `'rtl'` put that direction on the editor's container, textarea and preview, whatever the page around it uses. The toolbar and the stats bar follow.
+- `'auto'` leaves all three to the page: they take the direction the editor's surroundings have, for example from `<html dir="rtl">` or a `dir` attribute on a parent element, and they follow when that direction changes later. It does not look at the text you type, unlike HTML's own `dir="auto"`.
+- The textarea and the preview always share one direction, so the cursor stays on the text.
+- In preview mode, list indents, task boxes and quote bars sit on the side the text starts from. Code blocks stay left to right.
+
+**Arabic needs `proportional: true`**, because Arabic script has no monospace fonts. Use a font that covers it, see [Letter Widths Must Not Change With Style](#letter-widths-must-not-change-with-style):
+
+```javascript
+new OverType('#editor', {
+  dir: 'rtl',
+  proportional: true,
+  fontFamily: '"Noto Naskh Arabic", "Geeza Pro", Tahoma, sans-serif'
+});
+```
+
+Also available as `data-ot-dir="rtl"` and as `dir="rtl"` on the Web Component.
+
 ### Multiple Editors
 
 ```javascript
@@ -357,6 +432,28 @@ document.querySelector('form').addEventListener('submit', (e) => {
   // Form will automatically validate required field
 });
 ```
+
+### Pasting Links
+
+Select some text and paste a URL: OverType replaces the selection with `[selected text](url)`. Undo works as usual. Press Cmd+Shift+V or Option+Shift+Cmd+V on a Mac (Ctrl+Shift+V elsewhere) to paste the URL as plain text instead.
+
+```javascript
+const [editor] = new OverType('#editor', {
+  linkPaste: false  // default: true
+});
+
+editor.reinit({ linkPaste: true });
+```
+
+A paste makes a link only when all of these are true. Any other paste works as it always did.
+
+- The clipboard holds one absolute URL and nothing else, with a protocol the editor already links to: `http`, `https`, `mailto`, `ftp` or `ftps`.
+- The selected text is on one line. Spaces at its edges stay outside the link.
+- The selected text is not a URL itself, and does not touch an existing link. Pasting over the `url` in `[text](url)` replaces it.
+- The result reads as a link. Text inside inline code or a fenced code block pastes normally, and so does a selection with an unmatched `[` or `]`.
+- The clipboard holds no files. File pastes go to [File Uploads](#file-uploads).
+
+Also available as `data-ot-link-paste="false"` and as `link-paste="false"` on the Web Component.
 
 ### File Uploads
 
@@ -402,7 +499,7 @@ const [editor] = new OverType('#editor', {
       text: '#0d3b66',
       h1: '#f95738',
       h2: '#ee964b',
-      h3: '#3d8a51',
+      h3: '#3d8a51',             // also colors h4, h5 and h6, unless you set them
       strong: '#ee964b',
       em: '#f95738',
       link: '#0d3b66',
@@ -572,6 +669,7 @@ new OverType(target, options)
   fontFamily: 'monospace',
   proportional: false,  // Set true with a proportional fontFamily, see "Letter Widths"
   padding: '16px',
+  dir: 'ltr',           // Writing direction: 'ltr', 'rtl' or 'auto' (follow the page), see "Writing Direction"
   
   // Theme - 'solar', 'cave', or custom theme object
   theme: 'solar',
@@ -597,8 +695,8 @@ new OverType(target, options)
   
   // Auto-resize
   autoResize: false,      // Auto-expand height with content
-  minHeight: '100px',     // Minimum height when autoResize is enabled
-  maxHeight: null,        // Maximum height (null = unlimited)
+  minHeight: '100px',     // Minimum height when autoResize is enabled (null = no minimum)
+  maxHeight: null,        // Maximum height, such as 400, '400px' or '60vh' (null = unlimited)
   
   // Native textarea properties
   textareaProps: {
@@ -611,6 +709,7 @@ new OverType(target, options)
   // Toolbar
   toolbar: false,         // Enable/disable toolbar
   toolbarButtons: [],     // Custom button array (v2.0)
+  labels: null,           // Toolbar words in another language: { toolbar, viewModes, buttons }
                           // Defaults to all built-in buttons when toolbar: true
 
   // Syntax highlighting
@@ -623,11 +722,14 @@ new OverType(target, options)
   // Smart lists
   smartLists: true,       // Enable GitHub-style list continuation on Enter
 
+  // Link paste
+  linkPaste: true,        // Paste a URL over selected text to make a link
+
   // Task toggling
   clickToToggleTasks: false,  // Click a task checkbox marker to toggle its state
 
   // Turn off line-level Markdown features (rendered as plain text)
-  disable: [],            // 'h1', 'h2', 'h3', 'headings', 'lists', 'tasks',
+  disable: [],            // 'h1' to 'h6', 'headings', 'lists', 'tasks',
                           // 'blockquote', 'code', 'hr'
 
   // Which spelling the toolbar and shortcuts write (null matches the document)
@@ -665,6 +767,8 @@ new OverType(target, options)
   }
 }
 ```
+
+`minHeight` and `maxHeight` take a number of pixels, or a string in `px`, `rem`, `em`, `vh`, `vw`, `vmin` or `vmax`. The editor converts them to pixels each time it sets its height, so `maxHeight: '60vh'` follows the window as it resizes. `em` is relative to the editor text's font size (the textarea's computed `font-size`), `rem` to the page's root font size, and the viewport units to the window's inner size. A value in any other form, such as `calc(100vh - 50px)` or a percentage, sets no limit and logs one console warning.
 
 ### Instance Methods
 
@@ -776,6 +880,7 @@ OverType.themes.cave
 | Cmd/Ctrl + ] | Indent current line or selection |
 | Cmd/Ctrl + [ | Outdent current line or selection |
 | Tab / Shift+Tab | Indent or outdent selected lines |
+| Cmd/Ctrl + Shift + V (also Option+Shift+Cmd+V on a Mac) | Paste a URL as plain text, see [Pasting Links](#pasting-links) |
 
 When no text is selected, Tab and Shift+Tab use normal browser focus navigation. Indenting and outdenting keep the cursor and selection on the same text.
 
@@ -783,7 +888,7 @@ A toolbar button shows its shortcut in its tooltip. A custom button can do the s
 
 ## Supported Markdown
 
-- **Headers** - `# H1`, `## H2`, `### H3`
+- **Headers** - `# H1` to `###### H6`
 - **Bold** - `**text**` or `__text__`
 - **Italic** - `*text*` or `_text_`
 - **Strikethrough** - `~~text~~` or `~text~` (GFM)
@@ -815,7 +920,7 @@ OverType provides a fully-featured native Web Component `<overtype-editor>` with
 
 Features include:
 - Complete style isolation with Shadow DOM
-- 15 reactive HTML attributes
+- 18 reactive HTML attributes
 - Framework-agnostic (React, Vue, Angular)
 - Built-in themes (Solar, Cave)
 - Custom events API
@@ -1038,7 +1143,7 @@ Both put a real `required`/`name`/etc. attribute on the underlying `<textarea>`,
 
 Any object-valued option can also be passed as JSON (values starting with `{` or `[` are parsed; malformed JSON falls back to the raw string).
 
-**Supported:** `toolbar`, `theme`, `value`, `placeholder`, `autofocus`, `auto-resize`, `min-height`, `max-height`, `font-size`, `line-height`, `show-stats`, `smart-lists`, `show-active-line-raw`, `textarea-props` / `textarea-*`
+**Supported:** `toolbar`, `theme`, `value`, `placeholder`, `autofocus`, `auto-resize`, `min-height`, `max-height`, `font-size`, `line-height`, `show-stats`, `smart-lists`, `link-paste`, `dir`, `show-active-line-raw`, `textarea-props` / `textarea-*`
 
 **Not supported (use JS):** `toolbarButtons`, `onChange`, `onKeydown`, `onFocus`, `onBlur`, `statsFormatter`, `codeHighlighter`, `colors`, `mobile`
 
@@ -1066,10 +1171,11 @@ Special thanks to:
 - [phinnaeus](https://github.com/phinnaeus) - Diagnosed missing fontFamily wiring ([#110](https://github.com/panphora/overtype/issues/110))
 - [Tan Nhu](https://github.com/tnhu) - Fixed onChange feedback loop with async syntax highlighters ([#111](https://github.com/panphora/overtype/pull/111))
 - [pscanf](https://github.com/pscanf) - Re-exported markdown-actions for custom toolbar implementations ([#105](https://github.com/panphora/overtype/issues/105), [#106](https://github.com/panphora/overtype/pull/106))
-- [riasvdv](https://github.com/riasvdv) - Contributed keyboard focus-trap fix ([#115](https://github.com/panphora/overtype/pull/115)) and toolbar accessibility following the W3C APG Toolbar pattern ([#114](https://github.com/panphora/overtype/pull/114))
+- [riasvdv](https://github.com/riasvdv) - Contributed keyboard focus-trap fix ([#115](https://github.com/panphora/overtype/pull/115)) and toolbar accessibility following the W3C APG Toolbar pattern ([#114](https://github.com/panphora/overtype/pull/114)), and proposed link pasting ([#117](https://github.com/panphora/overtype/pull/117)), decorative toolbar icons ([#118](https://github.com/panphora/overtype/pull/118)), H4 to H6 and strikethrough buttons ([#119](https://github.com/panphora/overtype/pull/119)), and the inline code and quote shortcuts ([#120](https://github.com/panphora/overtype/pull/120))
 - [gcamacho079](https://github.com/gcamacho079) - Reported the markdown editor keyboard focus trap ([#113](https://github.com/panphora/overtype/issues/113))
 - [Matt Round](https://mattround.com/) - Reported the Safari stale-glyph caret/wrap desync and supplied the original workaround ([#116](https://github.com/panphora/overtype/issues/116))
 - [maxmin-es](https://github.com/maxmin-es) - Reported and diagnosed the Web Component decoding typed escape sequences on rebuild ([#123](https://github.com/panphora/overtype/issues/123))
+- [Ron Lobo](https://github.com/ronlobo) - Proposed CSS units for autoResize heights ([#127](https://github.com/panphora/overtype/pull/127)), toolbar translation with a labels option ([#128](https://github.com/panphora/overtype/pull/128)), and right-to-left writing with a dir option, checked in Hebrew and Arabic ([#129](https://github.com/panphora/overtype/pull/129))
 
 ### TypeScript & Framework Support
 - [merlinz01](https://github.com/merlinz01) - Contributed TypeScript declaration file ([#20](https://github.com/panphora/overtype/pull/20))

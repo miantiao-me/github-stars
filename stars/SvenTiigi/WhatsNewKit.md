@@ -1,6 +1,6 @@
 ---
 project: WhatsNewKit
-stars: 4438
+stars: 4441
 description: |-
     Showcase your awesome new app features 📱
 url: https://github.com/SvenTiigi/WhatsNewKit

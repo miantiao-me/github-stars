@@ -1,6 +1,6 @@
 ---
 project: comark
-stars: 1092
+stars: 1101
 description: |-
     Comark is an open-source Markdown parser and renderer with components, attributes and plugins. It streams AI output to React, Vue, Svelte, Angular, HTML and the terminal.
 url: https://github.com/comarkdown/comark
@@ -151,11 +151,10 @@ const html = await renderHtml(chatMessage)
 | Package | Description |
 |---|---|
 | [`comark`](https://comark.dev/api/parse) | Core parser, AST utilities, plugins |
-| [`@comark/vue`](https://comark.dev/rendering/vue) | Vue 3 renderer |
+| [`@comark/vue`](https://comark.dev/rendering/vue) | Vue 3 renderer and Nuxt module |
 | [`@comark/react`](https://comark.dev/rendering/react) | React renderer (Next.js, Server Components) |
 | [`@comark/svelte`](https://comark.dev/rendering/svelte) | Svelte 5 renderer |
 | [`@comark/angular`](https://comark.dev/rendering/angular) | Angular renderer |
-| [`@comark/nuxt`](https://comark.dev/rendering/nuxt) | Nuxt module with auto-imports |
 | [`@comark/html`](https://comark.dev/rendering/html) | HTML string renderer |
 | [`@comark/ansi`](https://comark.dev/rendering/ansi) | ANSI terminal renderer |
 

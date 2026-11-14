@@ -1,6 +1,6 @@
 ---
 project: open-appleremote
-stars: 252
+stars: 253
 description: |-
     Use the first-gen Apple Siri Remote (A1513/A1962) on Linux: unlock it, decode touch and buttons, tvOS-style gestures, a virtual keyboard. Pure-stdlib Python.
 url: https://github.com/a-funk/open-appleremote

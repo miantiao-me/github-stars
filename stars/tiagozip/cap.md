@@ -1,8 +1,8 @@
 ---
 project: cap
-stars: 8279
+stars: 8410
 description: |-
-    privacy-first, open-source and self-hosted CAPTCHA alternative with PoW and instrumentation challenges.
+    The open-source, privacy-friendly CAPTCHA you host yourself. Bots and AI agents out, people in.
 url: https://github.com/tiagozip/cap
 ---
 
@@ -30,6 +30,9 @@ cap is a self-hosted and privacy-first captcha alternative that doesn't force yo
 instead, the user's browser quietly solves a few small challenges in the background, such as gpu-resistant proof-of-work and instrumentation, which can also be configured to stop autonomous AI agents from using up your resources.
 
 it has no dependencies by default, is 200x smaller than hCaptcha, and you can run it with docker, on workers or on railway. it's already used in production by large companies like [bunny.net](https://bunny.net) and [adguard](https://adguard.com).
+
+<img src="./assets/shots/overview-light.png" alt="Cap Standalone" width="100%" />
+
 
 ### license
 

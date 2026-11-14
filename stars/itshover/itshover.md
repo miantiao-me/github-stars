@@ -1,6 +1,6 @@
 ---
 project: itshover
-stars: 2713
+stars: 2729
 description: |-
     Icons that move with intent
 url: https://github.com/itshover/itshover
@@ -53,7 +53,7 @@ export default function Example() {
 
 ## Icon Library
 
-186+ animated icons covering:
+260+ animated icons covering:
 
 - UI essentials (arrows, checks, navigation)
 - Social (GitHub, Twitter, Discord, LinkedIn)

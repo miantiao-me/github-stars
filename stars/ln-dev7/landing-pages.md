@@ -1,6 +1,6 @@
 ---
 project: landing-pages
-stars: 219
+stars: 231
 description: |-
     Open-source landing pages with a personality of their own.
 url: https://github.com/ln-dev7/landing-pages

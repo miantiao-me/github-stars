@@ -1,6 +1,6 @@
 ---
 project: LinPad
-stars: 304
+stars: 317
 description: |-
     LinPad — Linux for iPad. A real Linux desktop on the iPad: native windowed desktop with tiling and workspaces, real Linux apps (Firefox, VS Code, Thunar, VLC) as native windows, ARM64 JIT, GPU via Venus/Metal, keyboard + trackpad + touch.
 url: https://github.com/fspecii/LinPad

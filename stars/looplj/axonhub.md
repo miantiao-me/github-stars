@@ -1,6 +1,6 @@
 ---
 project: axonhub
-stars: 5437
+stars: 5456
 description: |-
     ⚡️ Open-source AI Gateway — Use any SDK to call 100+ LLMs. Built-in failover, load balancing, cost control & end-to-end tracing.
 url: https://github.com/looplj/axonhub
@@ -20,7 +20,7 @@ url: https://github.com/looplj/axonhub
 [![测试状态](https://github.com/looplj/axonhub/actions/workflows/test.yml/badge.svg)](https://github.com/looplj/axonhub/actions/workflows/test.yml)
 [![Lint 状态](https://github.com/looplj/axonhub/actions/workflows/lint.yml/badge.svg)](https://github.com/looplj/axonhub/actions/workflows/lint.yml)
 [![Go 版本](https://img.shields.io/github/go-mod/go-version/looplj/axonhub?logo=go&logoColor=white)](https://golang.org/)
-[![Docker Ready](https://img.shields.io/badge/docker-ready-2496ED?logo=docker&logoColor=white)](https://docker.com)
+[![Docker Ready](https://img.shields.io/badge/docker-ready-2496ED?logo=docker&logoColor=white)](https://hub.docker.com/r/looplj/axonhub)
 [![Greptile: The War on Bugs](https://www.greptile.com/badge.svg)](https://www.greptile.com/?utm_source=oss_badge&utm_medium=readme&utm_campaign=greptile_for_open_source)
 
 [English](README.en-US.md) | [中文](README.md) | [日本語](README.ja-JP.md)
@@ -37,7 +37,7 @@ url: https://github.com/looplj/axonhub
 
 <table width="100%">
   <tr>
-    <td width="100%" align="center" valign="top">
+    <td width="50%" align="center" valign="top">
       <a href="https://apikey.fun/register?aff=axonhub" target="_blank">
         <img src="docs/sponsors/apikey-fun.png" alt="APIKEY.FUN" height="50"/>
         <br/>
@@ -52,6 +52,29 @@ url: https://github.com/looplj/axonhub
         APIKEY.FUN 是一家专业的企业级 AI 中转站，致力于为企业和个人开发者提供稳定、高效、低成本的 AI 模型 API 接入服务。<br/>
         平台支持 Claude、OpenAI、Gemini 等主流热门模型，价格低至官方原价的 7%。<br/>
         AxonHub 用户通过<a href="https://apikey.fun/register?aff=axonhub" target="_blank">专属链接注册</a>，还可享受最高充值永久 95 折专属优惠。
+      </div>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <a href="https://lj.s.gy/DUq59H" target="_blank">
+        <img src="https://www.infistar.cc/logo.png" alt="无限星河 Infistar.cc" height="50"/>
+        <br/>
+        <strong>无限星河 Infistar.cc</strong>
+      </a>
+      <div align="center">
+        <a href="https://lj.s.gy/DUq59H" target="_blank">
+          <img src="docs/sponsors/infistar-banner.png" alt="Infistar.cc 无限星河" width="100%"/>
+        </a>
+      </div>
+      <div align="left">
+       <strong>AxonHub × Infistar.cc 无限星河｜高可用全模型 API</strong>
+      </div>
+      <div align="left">
+        ⚡ 企业级高并发稳定调度｜官方 1 折起 · 透明倍率 · 多节点冗余<br/>
+        🧠 全系模型支持｜ChatGPT · Claude · Gemini · DeepSeek<br/>
+        🎨 全模态接入｜文本 · 图像 · 视频 · Embedding / Rerank
+      </div>
+      <div align="left">
+        AxonHub 用户通过<a href="https://lj.s.gy/DUq59H" target="_blank">专属链接</a>注册，可享专属特惠。
       </div>
     </td>
   </tr>
@@ -162,9 +185,9 @@ url: https://github.com/looplj/axonhub
 
 ## 🎯 演示 | Demo
 
-在我们的 [演示实例](https://axonhub.onrender.com) 上体验 AxonHub！
+在我们的 [演示实例](https://axonhub.reveric.app) 上体验 AxonHub！
 
-**注意**：演示网站目前配置了 Zhipu 和 OpenRouter 的免费模型。
+**注意**：演示实例已配置 OpenRouter 免费模型。
 
 ### 演示账号 | Demo Account
 - **邮箱 Email**: demo@example.com
@@ -344,8 +367,6 @@ print(response.choices[0].message.content)
 - 🌐 [gin-gonic/gin](https://github.com/gin-gonic/gin) - HTTP 框架
 - 🗄️ [ent/ent](https://github.com/ent/ent) - ORM 框架
 - 🔧 [air-verse/air](https://github.com/air-verse/air) - 自动重载 Go 服务
-- ☁️ [render](https://render.com) - 免费云部署平台，用于部署 demo
-- 🗄️ [tidbcloud](https://www.pingcap.com/tidb-cloud/) - Serverless 数据库平台，用于部署 demo
 
 ---
 

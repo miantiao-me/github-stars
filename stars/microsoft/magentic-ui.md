@@ -1,6 +1,6 @@
 ---
 project: magentic-ui
-stars: 10109
+stars: 10117
 description: |-
     MagenticLite is an experimental agent that works across the browser and local file system
 url: https://github.com/microsoft/magentic-ui

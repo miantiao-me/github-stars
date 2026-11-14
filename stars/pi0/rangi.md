@@ -1,6 +1,6 @@
 ---
 project: rangi
-stars: 169
+stars: 170
 description: |-
     🎨 Tiny Syntax Highlighter
 url: https://github.com/pi0/rangi

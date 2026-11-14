@@ -1,6 +1,6 @@
 ---
 project: hazel
-stars: 734
+stars: 736
 description: |-
     null
 url: https://github.com/MapleTechLabs/hazel

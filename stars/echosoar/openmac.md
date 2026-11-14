@@ -9,7 +9,7 @@ url: https://github.com/echosoar/openmac
 ![logo](./assets/AppIcon128.png)
 # OpenMac
 
-OpenMac runs a local HTTP server and provides APIs for image OCR recognition, multilingual translation, web page content retrieval, face and facial location recognition, QR code/barcode recognition in images, and text-to-speech (TTS) capabilities. This service is based on the above functions provided by the native macOS system and is completely free without incurring any additional costs.
+OpenMac runs a local HTTP server and provides APIs for image OCR recognition, multilingual translation, web page content retrieval, face and facial location recognition, QR code/barcode recognition in images, image background removal (transparent PNG), and text-to-speech (TTS) capabilities. This service is based on the above functions provided by the native macOS system and is completely free without incurring any additional costs.
 
 OpenMac 运行一个本地 HTTP 服务器，提供图像OCR识别、多语言翻译、网页内容获取、人脸和面部位置识别、图像中的二维码/条形码识别、 文字到语音转换（TTS）能力的 API 接口，该服务基于原生 macOS 系统能力提供的上述功能，完全免费无需消耗额外成本。
 
@@ -26,7 +26,7 @@ By default OpenMac listens on `http://localhost:8080`. Every `/api/*` endpoint r
 }
 ```
 
-On error `success` is `false`, `data` is `{}`, and `message` explains why. `timeCost` is the server processing time in milliseconds. Image-input endpoints (`/api/ocr`, `/api/face`, `/api/qrcode`) accept exactly one of `url`, `base64`, or `file`.
+On error `success` is `false`, `data` is `{}`, and `message` explains why. `timeCost` is the server processing time in milliseconds. Image-input endpoints (`/api/ocr`, `/api/face`, `/api/qrcode`, `/api/remove-bg`) accept exactly one of `url`, `base64`, or `file`.
 
 ### Skill Documentation — `GET /SKILL.md`
 
@@ -314,6 +314,39 @@ Body with exactly one of `url` / `base64` / `file` (same as OCR).
 ```
 
 `data.barcodes` is an array. `payload` is the decoded string (may be `null` if undecodable); `symbology` identifies the code type (e.g. `VNBarcodeSymbologyQR`, `VNBarcodeSymbologyEAN13`).
+
+### Remove Background — `POST|GET /api/remove-bg`
+
+Removes the image background using Vision (`VNGenerateForegroundInstanceMaskRequest`, macOS 14+) and returns a transparent-background PNG as base64.
+
+**GET**
+
+```
+curl "http://localhost:8080/api/remove-bg?url=https://example.com/photo.jpg"
+```
+
+**POST**
+
+```bash
+curl -X POST "http://localhost:8080/api/remove-bg" \
+  -H "Content-Type: application/json" \
+  -d '{"url":"https://example.com/photo.jpg"}'
+```
+
+Body with exactly one of `url` / `base64` / `file` (same as OCR).
+
+**Response**
+
+```json
+{
+  "success": true,
+  "timeCost": 520,
+  "data": { "image": "iVBORw0KGgo..." },
+  "message": ""
+}
+```
+
+`data.image` is a base64-encoded PNG with a transparent background. Returns an error on macOS earlier than 14 or when no foreground subject is found.
 
 ### Text to Speech — `POST|GET /api/tts`
 

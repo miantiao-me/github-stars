@@ -1,6 +1,6 @@
 ---
 project: micromatch
-stars: 3046
+stars: 3045
 description: |-
     Highly optimized wildcard and glob matching library. Faster, drop-in replacement to minimatch and multimatch. Used by square, webpack, babel core, yarn, jest, ract-native, taro, bulma, browser-sync, stylelint, nyc, ava, and many others! Follow micromatch's author: https://github.com/jonschlinkert
 url: https://github.com/micromatch/micromatch

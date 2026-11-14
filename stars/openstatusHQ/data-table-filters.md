@@ -1,6 +1,6 @@
 ---
 project: data-table-filters
-stars: 2288
+stars: 2287
 description: |-
     React data tables for shadcn/ui: faceted filters, sorting, infinite scroll. Filtering, faceted counts and cursor pagination can run in SQL with Drizzle.
 url: https://github.com/openstatusHQ/data-table-filters
@@ -182,6 +182,7 @@ const sheetFields = generateSheetFields<ColumnSchema>(tableSchema.definition);
 - [`/default`](https://data-table.openstatus.dev/default) — client-side pagination (nuqs or zustand)
 - [`/infinite`](https://data-table.openstatus.dev/infinite) — infinite scroll with server-side filtering, live mode, row details
 - [`/drizzle`](https://data-table.openstatus.dev/drizzle) — Drizzle ORM + Supabase PostgreSQL with cursor-based pagination, faceted search, and live data via Vercel cron
+- [`/headless`](https://data-table.openstatus.dev/headless) — a table with no schema of its own: paste a manifest URL and it renders that endpoint
 - [`/light`](https://data-table.openstatus.dev/light) — OpenStatus Light Viewer (UI for [`vercel-edge-ping`](https://github.com/OpenStatusHQ/vercel-edge-ping))
 - [`/builder`](https://data-table.openstatus.dev/builder) — interactive schema builder (paste JSON/CSV, live table preview, export TS)
 

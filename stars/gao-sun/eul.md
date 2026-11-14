@@ -1,6 +1,6 @@
 ---
 project: eul
-stars: 9960
+stars: 9959
 description: |-
     🖥️ macOS status monitoring app written in SwiftUI.
 url: https://github.com/gao-sun/eul

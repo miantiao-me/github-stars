@@ -1,6 +1,6 @@
 ---
 project: rivet
-stars: 6783
+stars: 6916
 description: |-
     The orchestrator for agentic workloads. A fast, high-density and scalable orchestrator for every workload an agent needs.
 url: https://github.com/rivet-dev/rivet

@@ -1,6 +1,6 @@
 ---
 project: nanobrowser
-stars: 14260
+stars: 14307
 description: |-
     Open-source AI agent for web automation. Use your real, logged-in browser to automate daily tasks.
 url: https://github.com/nanobrowser/nanobrowser
@@ -14,7 +14,7 @@ url: https://github.com/nanobrowser/nanobrowser
 
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nanobrowser)
 [![Twitter](https://img.shields.io/badge/Twitter-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/nanobrowser_ai)
-[![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/NN3ABHggMK)
+[![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/Be9BQ6KPdm)
 [![DeepWiki][deepwiki-badge]](https://deepwiki.com/nanobrowser/nanobrowser)
 [![Sponsor](https://img.shields.io/badge/Sponsor-ff69b4?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/alexchenzl)
 
@@ -82,7 +82,7 @@ You can also set a site to **Allow** (go ahead in both modes), **Ask** (ask in b
 
 | Kind | Providers |
 | --- | --- |
-| Cloud | Anthropic, OpenAI, Google Gemini, OpenRouter, xAI Grok, DeepSeek, Mistral, and any OpenAI-compatible endpoint |
+| Cloud | Anthropic, OpenAI, Google Gemini, AWS Bedrock, OpenRouter, xAI Grok, DeepSeek, Mistral, and any OpenAI-compatible endpoint |
 | Local | Ollama and LM Studio, and other servers (llama.cpp, vLLM and others) through the OpenAI-compatible provider |
 
 - **A model must support tool calling.** Test models in Settings checks each model and marks the ones that cannot be used.
@@ -158,7 +158,7 @@ Contributions of all kinds are welcome:
 
 - **Share prompts and use cases** on our [Discord server](https://discord.gg/NN3ABHggMK).
 - **Give feedback** on how Nanobrowser works for you, on [Discord](https://discord.gg/NN3ABHggMK) or in [GitHub Discussions](https://github.com/nanobrowser/nanobrowser/discussions).
-- **Contribute code**: read [CONTRIBUTING.md](CONTRIBUTING.md), then open a pull request for a bug fix, a feature or the documentation.
+- **Contribute code**: read [CONTRIBUTING.md](CONTRIBUTING.md), then open a pull request for a bug fix or a feature. [CONTRIBUTING.md](CONTRIBUTING.md#what-a-pull-request-may-not-change) says which files a pull request may not change; ask for a change to one of them in an issue.
 
 ## 🔒 Security
 
@@ -166,7 +166,7 @@ If you find a security vulnerability, please **do not** disclose it in public is
 
 ## 💬 Community
 
-- [Discord](https://discord.gg/NN3ABHggMK): chat with the team and the community
+- [Discord](https://discord.gg/Be9BQ6KPdm): chat with the team and the community
 - [X](https://x.com/nanobrowser_ai): updates and announcements
 - [GitHub Discussions](https://github.com/nanobrowser/nanobrowser/discussions): ideas and questions
 

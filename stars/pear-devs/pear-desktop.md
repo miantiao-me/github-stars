@@ -1,6 +1,6 @@
 ---
 project: pear-desktop
-stars: 33996
+stars: 34046
 description: |-
     Pear 🍐 is extension for music player
 url: https://github.com/pear-devs/pear-desktop
@@ -124,7 +124,6 @@ winget install pear-devs.pear-desktop
 
 - Download the `*.nsis.7z` file for _your device architecture_ in [release page](https://github.com/pear-devs/pear-desktop/releases/latest).
   - `x64` for 64-bit Windows
-  - `ia32` for 32-bit Windows
   - `arm64` for ARM64 Windows
 - Download installer in release page. (`*-Setup.exe`)
 - Place them in the **same directory**.

@@ -1,6 +1,6 @@
 ---
 project: open-swiftui-animations
-stars: 5688
+stars: 5693
 description: |-
     You don't need an animation library to add a simple effect to your SwiftUI app. Create it yourself with SwiftUI. This repo inspires you to add helpful and expressive SwiftUI animations like loading/progress, looping, on-off, enter, exit, fade, spin, and background animations to your next project. The repo also contains tremendous spring animations.
 url: https://github.com/amosgyamfi/open-swiftui-animations
