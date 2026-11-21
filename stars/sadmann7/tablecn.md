@@ -1,0 +1,125 @@
+---
+project: tablecn
+stars: 6390
+description: |-
+    Data table and data grid components built with shadcn/ui, featuring sorting, filtering, pagination, infinite scrolling, and real-time collaboration.
+url: https://github.com/sadmann7/tablecn
+---
+
+# [tablecn](https://tablecn.com)
+
+Data table and data grid components built with shadcn/ui, featuring sorting, filtering, pagination, infinite scrolling, and real-time collaboration.
+
+[![tablecn](./public/images/screenshot.png)](https://tablecn.com)
+
+## Documentation
+
+See the [documentation](https://diceui.com/docs/components/base/data-table) to get started.
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.com)
+- **Table:** [TanStack Table](https://tanstack.com/table/latest)
+- **Reactive store:** [TanStack DB](https://tanstack.com/db/latest)
+- **Database:** [PostgreSQL](https://www.postgresql.org)
+- **ORM:** [Drizzle ORM](https://orm.drizzle.team)
+- **Validation:** [Zod](https://zod.dev)
+- **Multiplayer:** [PartyServer](https://github.com/cloudflare/partykit/tree/main/packages/partyserver) on Cloudflare Durable Objects
+
+## Features
+
+- [x] Server-side pagination, sorting, and filtering
+- [x] Customizable columns
+- [x] Auto generated filters from column definitions
+- [x] `Notion/Airtable` like advanced filtering
+- [x] `Linear` like filter menu for command palette filtering
+- [x] Action bar on row selection
+- [x] Infinite scrolling with virtualization
+- [x] Real-time collaboration
+
+## Running Locally
+
+### Quick Setup (with Docker)
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/sadmann7/tablecn
+   cd tablecn
+   ```
+
+1. **Copy the environment variables**
+
+   ```bash
+   cp .env.example .env
+   ```
+
+1. **Run the setup**
+
+   ```bash
+   pnpm ollie
+   ```
+
+   This installs dependencies, starts the Docker PostgreSQL instance, pushes the schema, and seeds sample data.
+
+### Manual Setup
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/sadmann7/tablecn
+   cd tablecn
+   ```
+
+1. **Install dependencies**
+
+   ```bash
+   pnpm install
+   ```
+
+1. **Set up environment variables**
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Update `.env` with your database credentials.
+
+1. **Start the database and dev server**
+
+   ```bash
+   pnpm db:start   # start the PostgreSQL container
+   pnpm db:setup   # push schema and seed data
+   pnpm dev        # start the Next.js dev server
+   ```
+
+### Multiplayer
+
+To run the multiplayer demo locally:
+
+```bash
+pnpm dev:multiplayer
+```
+
+This starts the Next.js dev server and the [PartyServer](https://github.com/cloudflare/partykit/tree/main/packages/partyserver) worker (via `wrangler dev`) concurrently. Each room keeps its rows in its Durable Object's storage and seeds them the first time it's opened, so no database is needed.
+
+Rooms are temporary: each one resets to fresh seed rows 10 minutes after its last user leaves. When two people edit the same cell at once, the last write wins.
+
+## Deployment
+
+Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify), and [Docker](https://create.t3.gg/en/deployment/docker).
+
+The multiplayer demo runs on [PartyServer](https://github.com/cloudflare/partykit/tree/main/packages/partyserver) as a Cloudflare Worker with Durable Objects, deployed separately to your Cloudflare account:
+
+```bash
+pnpm deploy:multiplayer
+```
+
+Set `NEXT_PUBLIC_PARTYKIT_HOST` in your deployment environment variables to the worker's host (for example `tablecn.<your-subdomain>.workers.dev`) after deploying.
+
+## Credits
+
+- [shadcn/ui](https://github.com/shadcn-ui/ui/tree/main/apps/v4/app/(app)/examples/tasks) - For the initial implementation of the data table.
+

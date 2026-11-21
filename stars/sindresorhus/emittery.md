@@ -1,0 +1,871 @@
+---
+project: emittery
+stars: 2077
+description: |-
+    Simple and modern async event emitter
+url: https://github.com/sindresorhus/emittery
+---
+
+# <img src="media/header.png" width="1000">
+
+> Simple and modern async event emitter
+
+<!-- [![Coverage Status](https://codecov.io/gh/sindresorhus/emittery/branch/main/graph/badge.svg)](https://codecov.io/gh/sindresorhus/emittery) -->
+[![](https://badgen.net/bundlephobia/minzip/emittery)](https://bundlephobia.com/result?p=emittery)
+
+It works in Node.js and the browser (using a bundler).
+
+**Highlights**
+
+- Async-first — listeners are deferred to the next microtask, keeping your code non-blocking
+- TypeScript support with strongly typed events
+- Async iteration and `for await...of` support
+- [Lifecycle hooks](#initeventname-initfn) (`init`/`deinit`) for lazy resource setup and teardown
+- [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) support for cancellation
+- [`Symbol.dispose`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/dispose) / [`Symbol.asyncDispose`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncDispose) support for automatic cleanup
+- [Meta events](#custom-subscribable-events) for observing listener changes
+- [Debug mode](#debugging) with customizable logging
+- Zero dependencies
+
+Emitting events asynchronously is important for production code where you want the least amount of synchronous operations. Since JavaScript is single-threaded, no other code can run while doing synchronous operations. For Node.js, that means it will block other requests, defeating the strength of the platform, which is scalability through async. In the browser, a synchronous operation could potentially cause lags and block user interaction.
+
+## Install
+
+```sh
+npm install emittery
+```
+
+## Usage
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+emitter.on('🦄', ({data}) => {
+	console.log(data);
+});
+
+const myUnicorn = Symbol('🦄');
+
+emitter.on(myUnicorn, ({data}) => {
+	console.log(`Unicorns love ${data}`);
+});
+
+emitter.emit('🦄', '🌈'); // Will trigger printing '🌈'
+emitter.emit(myUnicorn, '🦋');  // Will trigger printing 'Unicorns love 🦋'
+```
+
+## API
+
+### eventName
+
+Emittery accepts strings, symbols, and numbers as event names.
+
+Symbol event names are preferred given that they can be used to avoid name collisions when your classes are extended, especially for internal events.
+
+### isDebugEnabled
+
+Toggle debug mode for all instances.
+
+Default: `true` if the `DEBUG` environment variable is set to `emittery` or `*`, otherwise `false`.
+
+Example:
+
+```js
+import Emittery from 'emittery';
+
+Emittery.isDebugEnabled = true;
+
+const emitter1 = new Emittery({debug: {name: 'myEmitter1'}});
+const emitter2 = new Emittery({debug: {name: 'myEmitter2'}});
+
+emitter1.on('test', () => {
+	// …
+});
+
+emitter2.on('otherTest', () => {
+	// …
+});
+
+emitter1.emit('test');
+//=> [16:43:20.417][emittery:emit][myEmitter1] Event Name: test
+//	data: undefined
+
+emitter2.emit('otherTest');
+//=> [16:43:20.417][emittery:emit][myEmitter2] Event Name: otherTest
+//	data: undefined
+```
+
+### emitter = new Emittery(options?)
+
+Create a new instance of Emittery.
+
+#### options?
+
+Type: `object`
+
+Configure the new instance of Emittery.
+
+##### debug?
+
+Type: `object`
+
+Configure the debugging options for this instance.
+
+###### name
+
+Type: `string`\
+Default: `undefined`
+
+Define a name for the instance of Emittery to use when outputting debug data.
+
+Example:
+
+```js
+import Emittery from 'emittery';
+
+Emittery.isDebugEnabled = true;
+
+const emitter = new Emittery({debug: {name: 'myEmitter'}});
+
+emitter.on('test', () => {
+	// …
+});
+
+emitter.emit('test');
+//=> [16:43:20.417][emittery:emit][myEmitter] Event Name: test
+//	data: undefined
+```
+
+###### enabled?
+
+Type: `boolean`\
+Default: `false`
+
+Toggle debug logging just for this instance.
+
+Example:
+
+```js
+import Emittery from 'emittery';
+
+const emitter1 = new Emittery({debug: {name: 'emitter1', enabled: true}});
+const emitter2 = new Emittery({debug: {name: 'emitter2'}});
+
+emitter1.on('test', () => {
+	// …
+});
+
+emitter2.on('test', () => {
+	// …
+});
+
+emitter1.emit('test');
+//=> [16:43:20.417][emittery:emit][emitter1] Event Name: test
+//	data: undefined
+
+emitter2.emit('test');
+```
+
+###### logger?
+
+Type: `Function(string, string, EventName?, Record<string, any>?) => void`
+
+Default:
+
+```js
+(type, debugName, eventName, eventData) => {
+	try {
+		eventData = JSON.stringify(eventData);
+	} catch {
+		eventData = `Object with the following keys failed to stringify: ${Object.keys(eventData).join(',')}`;
+	}
+
+	if (typeof eventName === 'symbol' || typeof eventName === 'number') {
+		eventName = eventName.toString();
+	}
+
+	const currentTime = new Date();
+	const logTime = `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}.${currentTime.getMilliseconds()}`;
+	console.log(`[${logTime}][emittery:${type}][${debugName}] Event Name: ${eventName}\n\tdata: ${eventData}`);
+}
+```
+
+Function that handles debug data.
+
+Example:
+
+```js
+import Emittery from 'emittery';
+
+const myLogger = (type, debugName, eventName, eventData) => {
+	console.log(`[${type}]: ${eventName}`);
+};
+
+const emitter = new Emittery({
+	debug: {
+		name: 'myEmitter',
+		enabled: true,
+		logger: myLogger
+	}
+});
+
+emitter.on('test', () => {
+	// …
+});
+
+emitter.emit('test');
+//=> [emit]: test
+```
+
+#### on(eventName | eventName[], listener, options?: {signal?: AbortSignal})
+
+Subscribe to one or more events.
+
+Returns an unsubscribe method (which is also [`Disposable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/dispose), so it can be used with `using`).
+
+Using the same listener multiple times for the same event will result in only one method call per emitted event.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+emitter.on('🦄', ({data}) => {
+	console.log(data);
+});
+
+emitter.on(['🦄', '🐶'], ({name, data}) => {
+	console.log(name, data);
+});
+
+emitter.emit('🦄', '🌈'); // log => '🌈' and '🦄 🌈'
+emitter.emit('🐶', '🍖'); // log => '🐶 🍖'
+```
+
+You can pass an [abort signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) to unsubscribe too:
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+const abortController = new AbortController();
+
+emitter.on('🐗', ({data}) => {
+	console.log(data);
+}, {signal: abortController.signal});
+
+abortController.abort();
+emitter.emit('🐗', '🍞'); // Nothing happens
+```
+
+Or use `using` for automatic cleanup when leaving scope:
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+{
+	using off = emitter.on('🦄', ({data}) => {
+		console.log(data);
+	});
+	await emitter.emit('🦄', '🌈'); // Logs '🌈'
+}
+
+await emitter.emit('🦄', '🌈'); // Nothing happens
+```
+
+##### Custom subscribable events
+
+Emittery exports some symbols which represent "meta" events that can be passed to `Emittery.on` and similar methods.
+
+- `Emittery.listenerAdded` - Fires when an event listener was added.
+- `Emittery.listenerRemoved` - Fires when an event listener was removed.
+
+Errors thrown by listeners of these events cannot be caught by the caller of the method that added or removed the listener. They become an unhandled rejection, which crashes Node.js by default. Catch errors inside the listener if they can happen.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+emitter.on(Emittery.listenerAdded, ({data: {listener, eventName}}) => {
+	console.log(listener);
+	//=> ({data}) => {}
+
+	console.log(eventName);
+	//=> '🦄'
+});
+
+emitter.on('🦄', ({data}) => {
+	// Handle data
+});
+```
+
+###### Listener data
+
+- `listener` - The listener that was added.
+- `eventName` - The name of the event that was added or removed if `.on()` or `.off()` was used, or `undefined` if `.onAny()` or `.offAny()` was used.
+
+Only events that are not of this type are able to trigger these events.
+
+##### listener({name, data?})
+
+#### off(eventName | eventName[], listener)
+
+Remove one or more event subscriptions.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+const listener = ({data}) => {
+	console.log(data);
+};
+
+emitter.on(['🦄', '🐶', '🦊'], listener);
+await emitter.emit('🦄', 'a');
+await emitter.emit('🐶', 'b');
+await emitter.emit('🦊', 'c');
+emitter.off('🦄', listener);
+emitter.off(['🐶', '🦊'], listener);
+await emitter.emit('🦄', 'a'); // Nothing happens
+await emitter.emit('🐶', 'b'); // Nothing happens
+await emitter.emit('🦊', 'c'); // Nothing happens
+```
+
+##### listener({name, data?})
+
+#### once(eventName | eventName[], predicateOrOptions?)
+
+Subscribe to one or more events only once. It will be unsubscribed after the first event that matches the predicate (if provided).
+
+The second argument can be a predicate function or an options object with `predicate` and/or `signal`.
+
+Returns a promise for the event data when `eventName` is emitted and predicate matches (if provided). This promise is extended with an `off` method.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+const {data} = await emitter.once('🦄');
+console.log(data);
+//=> '🌈'
+```
+
+```js
+// With multiple event names
+const {name, data} = await emitter.once(['🦄', '🐶']);
+console.log(name, data);
+```
+
+```js
+// With predicate
+const event = await emitter.once('data', ({data}) => data.ok === true);
+console.log(event.data);
+//=> {ok: true, value: 42}
+```
+
+You can pass an [abort signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) to cancel the subscription. If the signal is aborted before the event fires, the returned promise rejects with the signal's reason. This is useful for timeouts:
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+// Reject if 'ready' doesn't fire within 5 seconds
+await emitter.once('ready', {signal: AbortSignal.timeout(5000)});
+```
+
+The returned promise has an `off` method to cancel the subscription without rejecting:
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+const promise = emitter.once('🦄');
+// Cancel the subscription (the promise will never resolve)
+promise.off();
+```
+
+#### events(eventName, options?: {signal?: AbortSignal})
+
+Get an async iterator which buffers data each time an event is emitted.
+
+Call `return()` on the iterator to remove the subscription. You can also pass an [abort signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) to cancel the subscription externally, or use `await using` for automatic cleanup.
+
+If the event data is a promise, the iterator waits for it. A promise that rejects throws from the iteration and closes the iterator, so a `for await` loop cannot leave the subscription behind.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+for await (const {data} of emitter.events('🦄')) {
+	console.log(data);
+
+	if (data === '🌈2') {
+		break; // Revoke the subscription when we see the value '🌈2'.
+	}
+}
+```
+
+It accepts multiple event names:
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+for await (const {name, data} of emitter.events(['🦄', '🦊'])) {
+	console.log(name, data);
+}
+```
+
+You can use `await using` for automatic cleanup when leaving scope:
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+{
+	await using iterator = emitter.events('🦄');
+	for await (const {data} of iterator) {
+		console.log(data);
+	}
+} // Subscription is automatically revoked
+```
+
+You can combine it with a `for await...of` loop to filter and transform events:
+
+<!-- TODO: When async iterator helpers are available in Node.js, simplify this to: `emitter.events('🦄').filter(event => event.data > 3).take(5)` -->
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+let count = 0;
+
+for await (const {data} of emitter.events('🦄')) {
+	if (data <= 3) {
+		continue;
+	}
+
+	console.log(data);
+
+	if (++count >= 5) {
+		break;
+	}
+}
+```
+
+#### emit(eventName, data?)
+
+Trigger an event asynchronously, optionally with some data. Listeners are called in the order they were added, but executed concurrently.
+
+Returns a promise that resolves when all the event listeners are done. *Done* meaning executed if synchronous or resolved when an async/promise-returning function. You usually wouldn't want to wait for this, but you could for example catch possible errors. If any listeners throw/reject, the returned promise rejects with an `AggregateError` — all listener errors are collected in `error.errors`, so no errors are silently lost. All listeners always run to completion, even if some throw or reject.
+
+#### emitSerial(eventName, data?)
+
+Same as above, but it waits for each listener to resolve before triggering the next one. This can be useful if your events depend on each other. Although ideally they should not. Prefer `emit()` whenever possible.
+
+If any of the listeners throw/reject, the returned promise will be rejected with the error and the remaining listeners will *not* be called.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+emitter.on('🦄', async () => {
+	console.log('listener 1 start');
+	await new Promise(resolve => setTimeout(resolve, 100));
+	console.log('listener 1 done');
+});
+
+emitter.on('🦄', () => {
+	console.log('listener 2'); // Only runs after listener 1 is done
+});
+
+await emitter.emitSerial('🦄');
+```
+
+#### onAny(listener, options?: {signal?: AbortSignal})
+
+Subscribe to be notified about any event.
+
+Returns a method to unsubscribe (which is also [`Disposable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/dispose)). Abort signal is respected too.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+const off = emitter.onAny(({name, data}) => {
+	console.log(name, data);
+});
+
+await emitter.emit('🦄', '🌈'); // log => '🦄 🌈'
+await emitter.emit('🐶', '🍖'); // log => '🐶 🍖'
+
+off();
+```
+
+##### listener({name, data?})
+
+#### offAny(listener)
+
+Remove an `onAny` subscription.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+const listener = ({name, data}) => {
+	console.log(name, data);
+};
+
+emitter.onAny(listener);
+await emitter.emit('🦄', '🌈'); // log => '🦄 🌈'
+emitter.offAny(listener);
+await emitter.emit('🦄', '🌈'); // Nothing happens
+```
+
+#### anyEvent(options?: {signal?: AbortSignal})
+
+Get an async iterator which buffers an event object each time an event is emitted.
+
+Call `return()` on the iterator to remove the subscription. You can also pass an [abort signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) to cancel the subscription externally, or use `await using` for automatic cleanup.
+
+If the event data is a promise, the iterator waits for it. A promise that rejects throws from the iteration and closes the iterator, so a `for await` loop cannot leave the subscription behind.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+for await (const {name, data} of emitter.anyEvent()) {
+	console.log(name, data);
+}
+```
+
+You can use `await using` for automatic cleanup when leaving scope:
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+{
+	await using iterator = emitter.anyEvent();
+	for await (const {name, data} of iterator) {
+		console.log(name, data);
+	}
+} // Subscription is automatically revoked
+```
+
+#### clearListeners(eventNames?)
+
+Clear all event listeners on the instance.
+
+If `eventNames` is given, only the listeners for those events are cleared. Accepts a single event name or an array.
+
+An `undefined` in the array means "everything", the same as calling it without arguments, and any other invalid event name throws a `TypeError` instead of clearing.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+emitter.on('🦄', listener);
+emitter.on('🐶', listener);
+emitter.on('🦊', listener);
+
+// Clear a single event
+emitter.clearListeners('🦄');
+
+// Clear multiple events
+emitter.clearListeners(['🐶', '🦊']);
+
+// Clear all events
+emitter.clearListeners();
+```
+
+#### init(eventName, initFn)
+
+Register a function to be called when the first `.on()` listener subscribes to `eventName`. The `initFn` can optionally return a cleanup (deinit) function, which is called when the last `.on()` listener unsubscribes (or when `clearListeners()` removes all listeners for that event).
+
+If `.on()` listeners already exist when `init()` is called, `initFn` is called immediately.
+
+Returns an unsubscribe function (which is also [`Disposable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/dispose)). Calling it removes the init/deinit hooks, and if the init is currently active, it calls deinit immediately.
+
+> [!NOTE]
+> Lifecycle hooks only apply to `.on()` listeners. Subscriptions via `.events()` async iterators do not trigger the init or deinit functions.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+emitter.init('mouse', () => {
+	terminal.grabInput({mouse: 'button'});
+
+	terminal.on('mouse', (name, data) => {
+		emitter.emit('mouse', data);
+	});
+
+	// Optional: return cleanup (deinit) function
+	return () => {
+		terminal.releaseInput();
+	};
+});
+
+// Init is called when the first listener subscribes
+const off = emitter.on('mouse', handler);
+
+// Adding more listeners does not call init again
+emitter.on('mouse', anotherHandler);
+
+// Removing one listener does not call deinit yet
+off();
+
+// Deinit is called when the last listener unsubscribes
+emitter.off('mouse', anotherHandler);
+```
+
+You can use `using` for automatic cleanup of the init/deinit hooks:
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+{
+	using removeInit = emitter.init('mouse', () => {
+		startListening();
+		return () => stopListening();
+	});
+} // init/deinit hooks are automatically removed
+```
+
+#### listenerCount(eventNames?)
+
+The number of listeners for the `eventNames` or all events if not specified.
+
+An `undefined` in the array means "everything", the same as calling it without arguments. Note that `onAny()` listeners and `events()` iterators are counted for every event name, so an array adds them up more than once.
+
+```js
+import Emittery from 'emittery';
+
+const emitter = new Emittery();
+
+emitter.on('🦄', listener);
+emitter.on('🐶', listener);
+
+emitter.listenerCount('🦄'); // 1
+emitter.listenerCount(); // 2
+```
+
+#### bindMethods(target, methodNames?)
+
+Bind the given `methodNames`, or all `Emittery` methods if `methodNames` is not defined, into the `target` object.
+
+```js
+import Emittery from 'emittery';
+
+const object = {};
+
+new Emittery().bindMethods(object);
+
+object.emit('event');
+```
+
+## TypeScript
+
+The default `Emittery` class has generic types that can be provided by TypeScript users to strongly type the list of events and the data passed to their event listeners.
+
+```ts
+import Emittery from 'emittery';
+
+const emitter = new Emittery<
+	// Pass `{[eventName]: undefined | <eventArg>}` as the first type argument for events that pass data to their listeners.
+	// A value of `undefined` in this map means the event listeners should expect no data, and a type other than `undefined` means the listeners will receive one argument of that type.
+	{
+		open: string,
+		close: undefined
+	}
+>();
+
+// Typechecks just fine because the data type for the `open` event is `string`.
+emitter.emit('open', 'foo\n');
+
+// Typechecks just fine because `close` is present but points to undefined in the event data type map.
+emitter.emit('close');
+
+// TS compilation error because `1` isn't assignable to `string`.
+emitter.emit('open', 1);
+
+// TS compilation error because `other` isn't defined in the event data type map.
+emitter.emit('other');
+```
+
+### Emittery.mixin(emitteryPropertyName, methodNames?)
+
+A decorator which mixins `Emittery` as property `emitteryPropertyName` and `methodNames`, or all `Emittery` methods if `methodNames` is not defined, into the target class.
+
+It throws if the target's prototype already has a property with any of those names, inherited members included, or if `emitteryPropertyName` is also one of `methodNames`, since one prototype property cannot be both. A class field with the same name is not detected and silently shadows the mixin.
+
+```ts
+import Emittery from 'emittery';
+
+const MyClass = Emittery.mixin('emittery')(class {});
+
+const instance = new MyClass();
+
+instance.emit('event');
+```
+
+TypeScript cannot add the mixed in members to a decorated class declaration, so declare them with an interface. Only do this when every method is mixed in: the interface cannot follow `methodNames`, and it compiles either way, so restricting the methods leaves the instance typed with methods it does not have.
+
+```ts
+import Emittery from 'emittery';
+
+@Emittery.mixin('emittery')
+class MyClass {}
+
+interface MyClass extends Emittery {
+	emittery: Emittery;
+}
+
+const instance = new MyClass();
+
+instance.emit('event');
+```
+
+### ReadonlyEmittery
+
+A subscribe-only view of an `Emittery` instance. It has the methods to subscribe, unsubscribe, and count listeners, but not the methods to emit events, clear listeners, or register `init()` hooks.
+
+Use it to expose an emitter to consumers without letting them emit events. An `Emittery` instance is assignable to it.
+
+This is only a type, so a consumer can still emit after a type cast. To also prevent that at runtime, see [below](#runtime-protection).
+
+```ts
+import Emittery, {type ReadonlyEmittery} from 'emittery';
+
+type Events = {
+	open: undefined;
+	message: string;
+};
+
+class Connection {
+	readonly #emitter = new Emittery<Events>();
+
+	get events(): ReadonlyEmittery<Events> {
+		return this.#emitter;
+	}
+}
+
+const connection = new Connection();
+
+connection.events.on('message', ({data}) => {
+	console.log(data);
+});
+
+// TS compilation error because `emit` is not available.
+connection.events.emit('open');
+```
+
+#### Runtime protection
+
+To also prevent emitting at runtime, expose an object with only the subscribe methods instead of the instance. The methods of an `Emittery` instance are bound to it, so they work without the instance, and the object does not give access to it.
+
+```ts
+import Emittery, {type ReadonlyEmittery} from 'emittery';
+
+const emitter = new Emittery<Events>();
+
+const events: ReadonlyEmittery<Events> = Object.freeze({
+	on: emitter.on,
+	off: emitter.off,
+	once: emitter.once,
+	events: emitter.events,
+	onAny: emitter.onAny,
+	offAny: emitter.offAny,
+	anyEvent: emitter.anyEvent,
+	listenerCount: emitter.listenerCount,
+});
+```
+
+This does not isolate consumers from each other. A consumer can get the listeners of other consumers from [`Emittery.listenerAdded`](#custom-subscribable-events), and then call them or remove them with `off()`.
+
+## Scheduling details
+
+Listeners are not invoked for events emitted *before* the listener was added. Removing a listener will prevent that listener from being invoked, even if events are in the process of being (asynchronously!) emitted. This also applies to `.clearListeners()`, which removes all listeners. Listeners will be called in the order they were added. So-called *any* listeners are called *after* event-specific listeners.
+
+Listeners always fire asynchronously — they are deferred to the next microtask, so any synchronous code after an unawaited `emit()` call runs first. If ordering matters, use `await emit()`.
+
+Note that when using `.emitSerial()`, a slow listener will delay invocation of subsequent listeners. It's possible for newer events to overtake older ones.
+
+## Debugging
+
+Emittery can collect and log debug information.
+
+To enable this feature set the DEBUG environment variable to `'emittery'` or `'*'`. Additionally you can set the static `isDebugEnabled` variable to true on the Emittery class, or `myEmitter.debug.enabled` on an instance of it for debugging a single instance.
+
+See [API](#api) for more details on how debugging works.
+
+## FAQ
+
+### How is this different than the built-in `EventEmitter` in Node.js?
+
+There are many things to not like about `EventEmitter`: its huge API surface, synchronous event emitting, magic error event, flawed memory leak detection. Emittery has none of that.
+
+### Isn't `EventEmitter` synchronous for a reason?
+
+Mostly backwards compatibility reasons. The Node.js team can't break the whole ecosystem.
+
+It also allows silly code like this:
+
+```js
+let unicorn = false;
+
+emitter.on('🦄', () => {
+	unicorn = true;
+});
+
+emitter.emit('🦄');
+
+console.log(unicorn);
+//=> true
+```
+
+But I would argue doing that shows a deeper lack of Node.js and async comprehension and is not something we should optimize for. The benefit of async emitting is much greater.
+
+### Can you support synchronous `emit()`?
+
+No. Async emission is Emittery's core design principle. If you need synchronous event emission (for example, proxying DOM events like React's `onChange`), use a synchronous event emitter.
+
+### Can you support multiple arguments for `emit()`?
+
+No, just use [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment):
+
+```js
+emitter.on('🦄', ({data: [foo, bar]}) => {
+	console.log(foo, bar);
+});
+
+emitter.emit('🦄', [foo, bar]);
+```
+
+## Related
+
+- [p-event](https://github.com/sindresorhus/p-event) - Promisify an event by waiting for it to be emitted
+

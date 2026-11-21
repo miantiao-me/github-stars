@@ -1,22 +1,35 @@
 ---
 project: landing-pages
-stars: 231
+stars: 320
 description: |-
     Open-source landing pages with a personality of their own.
 url: https://github.com/ln-dev7/landing-pages
 ---
 
-# Landing pages
+# Shadcn Pages Free
 
-Open-source landing pages with a personality of their own.
-Built with Next.js, Tailwind CSS and fully customized shadcn/ui.
+Open-source **shadcn/ui landing page templates** with a personality of their own.
+Built with Next.js, Tailwind CSS and fully customized shadcn/ui. Free to use, MIT licensed.
 
 **[Explore the collection →](https://lp.lndev.me)**
+
+Shadcn Pages Free is the open-source side of **Shadcn Pages**: every template is a complete Next.js project you can
+clone, run and make your own.
 
 ## Projects
 
 | Preview | Project | Concept |
 | --- | --- | --- |
+| [![Kudo](www/showcase/kudo.jpg)](https://kudo-lndev.vercel.app) | **[Kudo](landing-pages/kudo)** · [Live](https://kudo-lndev.vercel.app) | Six creator apps on one dithered page |
+| [![Mesa](www/showcase/mesa.jpg)](https://mesa-lndev.vercel.app) | **[Mesa](landing-pages/mesa)** · [Live](https://mesa-lndev.vercel.app) | Restaurant apps with a live floor plan |
+| [![Keel](www/showcase/keel.jpg)](https://keel-lndev.vercel.app) | **[Keel](landing-pages/keel)** · [Live](https://keel-lndev.vercel.app) | An issue tracker that lives on the keyboard |
+| [![Folio](www/showcase/folio.jpg)](https://folio-lndev.vercel.app) | **[Folio](landing-pages/folio)** · [Live](https://folio-lndev.vercel.app) | Docs and wikis with an assistant that read every page |
+| [![Hum](www/showcase/hum.jpg)](https://hum-lndev.vercel.app) | **[Hum](landing-pages/hum)** · [Live](https://hum-lndev.vercel.app) | Team chat with a catch-up that reads the backlog |
+| [![Wren](www/showcase/wren.jpg)](https://wren-lndev.vercel.app) | **[Wren](landing-pages/wren)** · [Live](https://wren-lndev.vercel.app) | An AI thinking partner that writes alongside you |
+| [![Murmur](www/showcase/murmur.jpg)](https://murmur-lndev.vercel.app) | **[Murmur](landing-pages/murmur)** · [Live](https://murmur-lndev.vercel.app) | An AI receptionist that answers every call |
+| [![Knot](www/showcase/knot.jpg)](https://knot-lndev.vercel.app) | **[Knot](landing-pages/knot)** · [Live](https://knot-lndev.vercel.app) | Automations built from one sentence |
+| [![Nightshift](www/showcase/nightshift.jpg)](https://nightshift-lndev.vercel.app) | **[Nightshift](landing-pages/nightshift)** · [Live](https://nightshift-lndev.vercel.app) | An AI on-call engineer in a CRT terminal |
+| [![Tally](www/showcase/tally.jpg)](https://tally-lndev.vercel.app) | **[Tally](landing-pages/tally)** · [Live](https://tally-lndev.vercel.app) | An AI bookkeeper on a Swiss grid |
 | [![Plumb](www/showcase/plumb.jpg)](https://plumb-lndev.vercel.app) | **[Plumb](landing-pages/plumb)** · [Live](https://plumb-lndev.vercel.app) | Product analytics you question in plain words |
 | [![Redline](www/showcase/redline.jpg)](https://redline-lndev.vercel.app) | **[Redline](landing-pages/redline)** · [Live](https://redline-lndev.vercel.app) | An AI code reviewer with notes in the margin |
 | [![Hollow](www/showcase/hollow.jpg)](https://hollow-lndev.vercel.app) | **[Hollow](landing-pages/hollow)** · [Live](https://hollow-lndev.vercel.app) | A haunted-house journey through a continuous 3D world |

@@ -1,0 +1,136 @@
+---
+project: ark-pixel-font
+stars: 4997
+description: |-
+    开源的泛拉丁与泛中日韩像素字体，黑体风格
+url: https://github.com/TakWolf/ark-pixel-font
+---
+
+![Banner](docs/readme-banner.png)
+
+# 方舟像素字体 / Ark Pixel Font
+
+[![License OFL](https://img.shields.io/badge/license-OFL--1.1-orange?style=flat-square)](LICENSE-OFL)
+[![License MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE-MIT)
+[![Releases](https://img.shields.io/github/v/release/TakWolf/ark-pixel-font?style=flat-square)](https://github.com/TakWolf/ark-pixel-font/releases)
+[![itch.io](https://img.shields.io/badge/itch.io-ark--pixel--font-FF2449?style=flat-square&logo=itch.io&logoColor=white)](https://takwolf.itch.io/ark-pixel-font)
+[![Discord](https://img.shields.io/badge/discord-像素字体工房-4E5AF0?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/3GKtPKtjdU)
+[![QQ Group](https://img.shields.io/badge/QQ群-像素字体工房-brightgreen?style=flat-square&logo=qq&logoColor=white)](https://qm.qq.com/q/jPk8sSitUI)
+
+开源的泛拉丁与泛中日韩像素字体，黑体风格。
+
+> [!WARNING]
+>
+> 该字体目前处于积极开发阶段，仍然缺少大量字符。
+>
+> 对于 10px、12px 请考虑临时性过渡方案：[缝合像素字体](https://github.com/TakWolf/fusion-pixel-font)
+>
+
+> [!WARNING]
+>
+> 16px 尺寸已废弃，相关构建和素材已经移除。
+>
+> 请参考 [此链接](https://github.com/pixel-font-studio/ark-pixel-font-16px-glyphs-archive) 了解详细情况。
+>
+> 最后一个包含 16px 尺寸的构建版本为 [2026.09.01](https://github.com/TakWolf/ark-pixel-font/releases/tag/2026.09.01)
+>
+> 对于 16px 的替代品，请考虑 [Unifont](https://unifoundry.com/unifont/index.html)
+
+## 预览
+
+[点击此链接](https://ark-pixel-font.takwolf.com/playground.html) 实时预览字体效果。
+
+### 10 像素
+
+![Preview-10px](docs/preview-10px.png)
+
+### 12 像素
+
+![Preview-12px](docs/preview-12px.png)
+
+## 字符统计
+
+通过下面的链接来查看字符统计信息。
+
+| 尺寸 | 等宽模式 | 比例模式 |
+|---|---|---|
+| 10px | [info-10px-monospaced](docs/info-10px-monospaced.md) | [info-10px-proportional](docs/info-10px-proportional.md) |
+| 12px | [info-12px-monospaced](docs/info-12px-monospaced.md) | [info-12px-proportional](docs/info-12px-proportional.md) |
+
+## 宽度模式
+
+目前提供「等宽模式」和「比例模式」两种规格。
+
+### 等宽模式
+
+字符的横向宽度固定为半宽或全宽，字符高度和行高限制在字身框内，因此可以严格对齐。
+
+这种设计确保受支持的字符能够在有限的像素尺寸内完整显示，但也压缩了字形的设计空间。部分复杂字形无法清晰绘制，因此支持的字符数量相对较少，字形的美观性也会有所牺牲。此外，字体基线略微偏高；中西文混排时，西文的视觉重心可能偏上。
+
+### 比例模式
+
+字符宽度根据字形的实际形态分配，字距与行高更加自然，并支持字偶距调整。
+
+字体基线更适合常规排版，整体视觉效果更加协调。
+
+如无特殊需求，建议优先使用「比例模式」。
+
+## 语言特定字形
+
+目前支持以下语言特定字形版本。
+
+| 版本 | 含义 | 说明 |
+|---|---|---|
+| latin | 拉丁文字环境 | 面向以拉丁文字为主的西文排版环境，标点符号的位置、宽度和间距采用西文排版习惯。 |
+| zh-Hans | 简体中文 | 汉字字形主要参考国务院公布的 [《通用规范汉字表》](https://www.gov.cn/zwgk/2013-08/19/content_2469793.htm) 中的写法。 |
+| zh-Hant | 繁体中文 | 汉字字形主要参考 [「传统印刷体」](https://zh.wikipedia.org/wiki/%E8%88%8A%E5%AD%97%E5%BD%A2) 的写法。 |
+| zh-HK | 繁体中文（香港地区） | 汉字字形主要参考香港特区政府 [《香港電腦漢字參考字形》](https://www.ccli.gov.hk/doc/wgcliac2016-16a.pdf) 中的写法。 |
+| zh-TW | 繁体中文（台湾地区） | 汉字字形主要参考台湾教育主管机关 [《常用國字標準字體表》](https://language.moe.gov.tw/material/info?m=9fe3ff5a-5a8c-4817-9e60-6337dd55a509) 中的写法。 |
+| ja | 日语 | 汉字字形主要参考日本文化厅 [《常用漢字表》](https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/kanji/) 和 [《表外漢字字体表》](https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kakuki/22/tosin03/index.html) 中的写法。 |
+| ko | 韩语 | 汉字字形主要参考 [KS X 1001](https://standard.go.kr/KSCI/standardIntro/getStandardSearchView.do?ksNo=KSX1001) 和 [KS X 1002](https://standard.go.kr/KSCI/standardIntro/getStandardSearchView.do?ksNo=KSX1002) 中的写法。 |
+
+## 下载
+
+[点击此链接](https://github.com/TakWolf/ark-pixel-font/releases) 下载最新版本。
+
+## 程序依赖
+
+- [Pixel Font Builder](https://github.com/TakWolf/pixel-font-builder)
+- [Pixel Font Knife](https://github.com/TakWolf/pixel-font-knife)
+- [unicodedata2](https://github.com/fonttools/unicodedata2)
+- [Unidata Blocks](https://github.com/TakWolf/unidata-blocks)
+- [Unicode Block Translations](https://github.com/TakWolf/unicode-block-translations)
+- [Character Encoding Utils](https://github.com/TakWolf/character-encoding-utils)
+- [PyYAML](https://github.com/yaml/pyyaml)
+- [Pillow](https://github.com/python-pillow/Pillow)
+- [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/)
+- [Jinja](https://github.com/pallets/jinja)
+- [Loguru](https://github.com/Delgan/loguru)
+- [Cyclopts](https://github.com/BrianPugh/cyclopts)
+- [pytest](https://github.com/pytest-dev/pytest)
+
+## 官方社区
+
+- [像素字体工房 - Discord 服务器](https://discord.gg/3GKtPKtjdU)
+- [像素字体工房 - QQ 群](https://qm.qq.com/q/jPk8sSitUI)
+
+## 许可证
+
+分为「字体」和「构建程序」两个部分。
+
+### 字体
+
+采用 [SIL Open Font License version 1.1](LICENSE-OFL) 授权。
+
+### 构建程序
+
+采用 [MIT License](LICENSE-MIT) 授权。
+
+## 赞助
+
+如果这个项目对您有帮助，请考虑赞助来支持后续开发。
+
+[![赞赏码](https://raw.githubusercontent.com/TakWolf/TakWolf/master/images/badge-payqr@2x.png)](https://github.com/TakWolf/TakWolf/blob/master/payment-qr-codes.md)
+[![爱发电](https://raw.githubusercontent.com/TakWolf/TakWolf/master/images/badge-afdian@2x.png)](https://afdian.com/a/takwolf)
+[![PayPal](https://raw.githubusercontent.com/TakWolf/TakWolf/master/images/badge-paypal@2x.png)](https://paypal.me/takwolf)
+

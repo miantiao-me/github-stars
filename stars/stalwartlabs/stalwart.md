@@ -1,6 +1,6 @@
 ---
 project: stalwart
-stars: 15937
+stars: 16092
 description: |-
     All-in-one Mail & Collaboration server. Secure, scalable and fluent in every protocol (IMAP, JMAP, SMTP, CalDAV, CardDAV, WebDAV).
 url: https://github.com/stalwartlabs/stalwart

@@ -1,6 +1,6 @@
 ---
 project: mygo
-stars: 6243
+stars: 6708
 description: |-
     Develop desktop apps with native UI or web frontend in Go
 url: https://github.com/egoist/mygo
@@ -42,7 +42,10 @@ window, can mix them:
 Either way, an app is a single Go binary of a few megabytes, focused on low
 memory and CPU use.
 
-- **Pure Go, no cgo**: build for every platform from any machine.
+- **Pure Go, no cgo**: build for every desktop from any machine.
+- **Phones too**: the same app on iOS and Android, pages in their web
+  views and native UI on their GPUs, with live reload on a simulator,
+  an emulator or a device, and builds for the App Store and Google Play.
 - **Typed IPC** for pages: bind Go services, stream values through channels
   and send typed events; the TypeScript client is generated from your Go
   code.

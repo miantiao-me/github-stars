@@ -1,6 +1,6 @@
 ---
 project: animateicons
-stars: 1542
+stars: 1555
 description: |-
     1,500 free, open source animated icons for React, Vue, Angular and plain JavaScript. Every animation is hand-crafted and tuned to feel smooth, and plays the same in every framework.
 url: https://github.com/Avijit07x/animateicons

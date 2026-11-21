@@ -1,6 +1,6 @@
 ---
 project: webdav-js
-stars: 111
+stars: 112
 description: |-
     A simple WebDAV client written in JS for use as a bookmarklet, or integration into a web server.
 url: https://github.com/dom111/webdav-js

@@ -1,6 +1,6 @@
 ---
 project: office-open-xml-viewer
-stars: 877
+stars: 882
 description: |-
     A browser-based viewer for Office Open XML documents that renders to an HTML Canvas element.
 url: https://github.com/yukiyokotani/office-open-xml-viewer
@@ -39,9 +39,9 @@ So I'm building this library with AI coding agents, spec-first, and keeping it f
 
 A browser-based viewer for Office Open XML documents that renders to an HTML Canvas element.
 The parsers are written in Rust and compiled to WebAssembly; the renderers use the Canvas 2D API.
-Each format also exposes a headless engine (`DocxDocument` / `XlsxWorkbook` / `PptxPresentation`) that renders into any caller-supplied canvas, so you can compose your own UI — scroll views, thumbnail grids, master-detail panes — instead of being locked into the built-in viewer. See the [live framework examples](https://ooxml.silurus.dev/frameworks/) for runnable React, Vue, Svelte, and Solid projects.
+Each format also exposes a headless engine (`DocxDocument` / `XlsxWorkbook` / `PptxPresentation`) that renders into any caller-supplied canvas, so you can compose your own UI — scroll views, thumbnail grids, master-detail panes — instead of using the built-in viewer. See the [live framework examples](https://ooxml.silurus.dev/frameworks/) for runnable React, Vue, Svelte, and Solid projects.
 
-Optional, experimental [legacy Office add-on](https://ooxml.silurus.dev/legacy-office/) reads a supported subset of `.doc`, `.xls` and `.ppt` with the same viewers, and an optional, experimental [OpenDocument add-on](docs/opendocument.md) reads `.odt`, `.odp` and `.ods`.
+Optional, experimental [legacy Office add-on](https://ooxml.silurus.dev/legacy-office/) reads a supported subset of `.doc`, `.xls` and `.ppt` with the same viewers, and an optional, experimental [OpenDocument add-on](https://ooxml.silurus.dev/opendocument/) reads `.odt`, `.odp` and `.ods`.
 
 ## Project scope: read-only viewing
 
@@ -62,7 +62,7 @@ pnpm add @silurus/ooxml
 > and fetched (streaming-compiled) at load time. Verified to work with zero
 > config: **webpack 5**, **Next.js** (Turbopack, dev and build), **Vite 8**
 > (dev and build), **Vite 7 production builds**, and a plain
-> `<script type="module">` with no bundler at all. Two setups need a hand:
+> `<script type="module">` with no bundler at all. Two setups need extra configuration:
 >
 > - **Vite 7 dev server**: the dependency optimizer rewrites the asset reference
 >   into its own cache path and the load fails (fixed in Vite 8). Add
@@ -74,7 +74,11 @@ pnpm add @silurus/ooxml
 >   `.wasm` into your served output and point the viewer at it with the
 >   `wasmUrl` load option. For Angular CLI, copy the required
 >   `*_parser_bg.wasm` asset from `node_modules/@silurus/ooxml/dist` into the
->   served output and pass its public URL to the viewer.
+>   served output and pass its public URL to the viewer. PPTX loads with `fonts`
+>   then also miss the `pptx-font-demand.mjs` sidecar and fall back to loading
+>   every unicode-range subset of the demanded families (same faces, more
+>   downloads); serving that file beside the bundled module restores precise
+>   demand.
 >
 > `wasmUrl` also serves the parser WASM from a CDN or any path you control:
 >
@@ -190,7 +194,7 @@ omit it and the engine asset is not fetched or evaluated (equations are simply s
 the on-demand render-worker asset retains a small loader). When you *do* pass it, the ~4 MB engine ships
 as a **standalone asset file** next to the bundle rather than an inline data URL, and is
 fetched **on demand — only the first time a document actually contains an equation**, so
-equation-free documents never pay for it. It is fully self-contained: served from your own
+equation-free documents never download it. It is fully self-contained: served from your own
 origin, no cross-origin requests.
 
 Accented Latin letters use STIX Two Math paths in normal, italic, bold and bold-italic
@@ -545,7 +549,7 @@ contract, resource bounds, PPTX hit-testing semantics, and extension policy.
 **Hyperlinks.** For DOCX/PPTX the link hit regions live on the text-selection
 overlay, so hyperlink interaction requires `enableTextSelection: true`; when that
 overlay is enabled, links are interactive by default. XLSX hit-tests cells
-directly, so links are interactive out of the box. An external link opens in a
+directly, so links are interactive by default. An external link opens in a
 new tab (scheme-sanitized to `http` / `https` / `mailto` / `tel`, `noopener`),
 and an internal target navigates within the document (docx bookmark, pptx slide
 jump, xlsx defined name or cell reference). XLSX references may switch sheets
@@ -687,24 +691,26 @@ mode:
 ```ts
 import { DocxViewer, fontFiles, googleFonts, officeFontSubstitutions } from '@silurus/ooxml/docx';
 
-// Google Fonts, or a Google-compatible mirror via googleFonts({ cssOrigin }) (stylesheet requests only;
+// Google Fonts, or a Google-compatible mirror via googleFonts({ baseUrl }) (stylesheet requests only;
 // the mirror's redirects and the font URLs it returns decide where files load from)
 new DocxViewer(canvas, { fonts: [googleFonts()] });
 
 // Self-hosted files first, then a mirror for whatever they do not serve
 new DocxViewer(canvas, {
   fonts: [
-    fontFiles({ faces: [{ family: 'Carlito', url: '/fonts/Carlito-Regular.woff2' }], substitutes: officeFontSubstitutions }),
-    googleFonts({ cssOrigin: 'https://fonts.internal.example' }),
+    fontFiles({ faces: [{ family: 'Carlito', url: '/fonts/Carlito-Regular.woff2' }], substitutions: officeFontSubstitutions }),
+    googleFonts({ baseUrl: 'https://fonts.internal.example' }),
   ],
 });
 ```
 
-The factories are `googleFonts({ cssOrigin?, substitutes?, families? })`,
+The factories are `googleFonts({ baseUrl?, substitutions?, additionalFamilies? })`,
 `fontCssApi({ urlTemplate, … })`, `fontCss({ url })`, `fontFiles({ faces })`
 and, for authenticated or private services, `fontResolver(fn)`, which runs on
-the main thread (in worker mode the page also fetches the URLs it returns).
-Every source takes `substitutes`; `fontCssApi`, `fontCss` and `fontFiles` also
+the main thread (in worker mode the page also fetches the URLs it returns) and
+receives the missing family names as `demand.authoredFamilies` and
+`demand.fallbackFamilies`.
+Every source takes `substitutions`; `fontCssApi`, `fontCss` and `fontFiles` also
 take `credentials`. They are exported from `@silurus/ooxml` and from
 each format entry. A `FontSource` is opaque: `fonts` accepts only values the
 factories returned.
@@ -728,8 +734,8 @@ factories returned.
   the families concerned, with a `console.warn`.
 
 `useGoogleFonts: true` is deprecated: it still works in 0.90 as
-`fonts: [googleFonts()]`, with a warning. From 0.91 it is ignored with the
-same warning (no web fonts, no error). See the
+`fonts: [googleFonts()]`, with a warning; when `fonts` is also given, `fonts`
+wins. From 0.91 it is ignored with the same warning (no web fonts, no error). See the
 [0.90 migration guide](docs/migration-0.90.md) for every source kind, the
 resolver contract, CSP and CORS requirements, and the limits.
 
@@ -1411,7 +1417,7 @@ from the file, so treat them as untrusted text: put them in the DOM with
 
   ZIP, input, wire, representation, and copy limits remain independent. Raising these budgets does not promise that a whole 251,000-cell selection can be copied to the clipboard. The budgets are logical counters, not physical memory measurements. Increasing them accepts additional out-of-memory risk; the library does not guarantee that an allocation failure can be caught. With unchanged defaults no migration is needed. The one exception: errors from these adjustable guards now report `configurable: true`, whether the default or an override applied. Hard-ceiling errors remain `configurable: false`.
 
-- **No network by default.** The library does not send telemetry or analytics, and does not contact third-party services unless you ask it to. In particular, theme webfonts, Office font metric substitutes (Carlito/Caladea), and the script fallback fonts are **not** loaded from anywhere unless you pass [`fonts`](#font-sources) to the relevant `Viewer` / `load(...)` options, for example `fonts: [googleFonts()]`. This is supported uniformly by `DocxViewer`, `PptxViewer`, `XlsxViewer`, and `XlsxSheetViewer`. With `googleFonts()`, fonts for non-Latin scripts are supplied on demand from Noto families so text does not fall back to tofu: Arabic (Noto Naskh/Sans Arabic), CJK (Noto Sans/Serif KR · SC · TC · JP, plus Noto Sans HK, picked per document language so shared Han glyphs take the right shapes), Cyrillic (Noto Sans/Serif), Hebrew (Noto Sans/Serif Hebrew, RTL), Thai (Noto Sans Thai) and Devanagari (Noto Sans Devanagari). No font binaries ship in the bundle; your application is responsible for the licences of the fonts it serves (Google Fonts' Carlito, Caladea and Noto families are OFL). A hosted source receives the end user's IP address and User-Agent (`fonts.googleapis.com` and `fonts.gstatic.com` for `googleFonts()`), which may have GDPR implications; `googleFonts({ cssOrigin })`, `fontCss` and `fontFiles` let you serve fonts from your own origin instead (with `cssOrigin`, only the stylesheet requests start there: redirects and the font URLs in the returned CSS are the mirror's to control, and your CSP enforces the allowed hosts).
+- **No network by default.** The library does not send telemetry or analytics, and does not contact third-party services unless you ask it to. In particular, theme webfonts, Office font metric substitutes (Carlito/Caladea), and the script fallback fonts are **not** loaded from anywhere unless you pass [`fonts`](#font-sources) to the relevant `Viewer` / `load(...)` options, for example `fonts: [googleFonts()]`. This is supported uniformly by `DocxViewer`, `PptxViewer`, `XlsxViewer`, and `XlsxSheetViewer`. With `googleFonts()`, fonts for non-Latin scripts are supplied on demand from Noto families so text does not fall back to tofu: Arabic (Noto Naskh/Sans Arabic), CJK (Noto Sans/Serif KR · SC · TC · JP, plus Noto Sans HK, picked per document language so shared Han glyphs take the right shapes), Cyrillic (Noto Sans/Serif), Hebrew (Noto Sans/Serif Hebrew, RTL), Thai (Noto Sans Thai) and Devanagari (Noto Sans Devanagari). No font binaries ship in the bundle; your application is responsible for the licences of the fonts it serves (Google Fonts' Carlito, Caladea and Noto families are OFL). A hosted source receives the end user's IP address and User-Agent (`fonts.googleapis.com` and `fonts.gstatic.com` for `googleFonts()`), which may have GDPR implications; `googleFonts({ baseUrl })`, `fontCss` and `fontFiles` let you serve fonts from your own origin instead (with `baseUrl`, only the stylesheet requests start there: redirects and the font URLs in the returned CSS are the mirror's to control, and your CSP enforces the allowed hosts).
 - **XML parsing.** Uses `roxmltree`, which does not resolve external entities (XXE-safe by default).
 - **Encrypted OOXML ([MS-OFFCRYPTO] Agile Encryption).** Password-protected `.docx` / `.xlsx` / `.pptx` files are OLE2/CFB containers, not ZIPs. Pass `password` to `load(...)` and the file is decrypted **client-side** via WebCrypto — no bytes and no password leave the browser:
   ```ts

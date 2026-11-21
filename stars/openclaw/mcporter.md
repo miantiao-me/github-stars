@@ -1,6 +1,6 @@
 ---
 project: mcporter
-stars: 5119
+stars: 5142
 description: |-
     Call MCPs via TypeScript, masquerading as simple TypeScript API. Or package them as cli.
 url: https://github.com/openclaw/mcporter

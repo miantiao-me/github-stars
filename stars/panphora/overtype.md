@@ -1,6 +1,6 @@
 ---
 project: overtype
-stars: 3708
+stars: 3710
 description: |-
     The markdown editor that's just a textarea https://overtype.dev
 url: https://github.com/panphora/overtype

@@ -1,6 +1,6 @@
 ---
 project: tutti
-stars: 112
+stars: 114
 description: |-
     Multi-output audio and display control for Mac — one panel for every output, app, and screen.
 url: https://github.com/BarryBarrywu/tutti
@@ -21,13 +21,24 @@ url: https://github.com/BarryBarrywu/tutti
   <img src="https://img.shields.io/github/v/release/BarryBarrywu/tutti?style=flat-square&color=blue&label=release" alt="Release">
   <img src="https://img.shields.io/badge/macOS-13.0+-000000?style=flat-square&logo=apple&logoColor=white" alt="macOS 13+">
   <img src="https://img.shields.io/github/downloads/BarryBarrywu/tutti/total?style=flat-square&color=orange&label=downloads" alt="Downloads">
-  <img src="https://img.shields.io/badge/Pro-$12.99_one--time-38bdf8?style=flat-square" alt="Pro $12.99 one-time">
+  <img src="https://img.shields.io/badge/Pro-one--time_purchase-38bdf8?style=flat-square" alt="Pro one-time purchase">
 </p>
 <p align="center"><sub>No virtual audio driver or system extension</sub></p>
 
 <p align="center">
-  <img src="docs/screenshots/mac-sound-displays.png" width="720" alt="Tutti in light and dark appearance: audio outputs, per-app volume, microphone controls, display brightness and resolution, and presets">
+  <img src="docs/screenshots/mac-sound-displays.png" width="780" alt="Tutti 2.0 in light and dark appearance: category navigation, multi-output audio with 6-band output EQ, headphone correction and Audio Unit effects, per-app volume, presets, and display brightness controls">
 </p>
+
+## What's new in Tutti 2.0
+
+Existing Pro owners receive 2.0 at no additional charge. [See the full release notes](https://github.com/BarryBarrywu/tutti/releases/tag/v2.0.0).
+
+- **Output processing:** six-band EQ, offline headphone correction profiles and parameter-file import, plus ordered Audio Unit effect chains with plug-in editors and generic controls. Save processing settings and chain order in Presets. Included in existing Pro on macOS 14.4+; per-app EQ stays free. Third-party plug-ins may require their own licenses.
+- **Inputs for recording:** mix microphones, eligible virtual inputs and Apps with independent gain and mute, live meters and clipping history. Tutti Mix Input supplies stereo. Tutti Split Input puts the combined App group on channels 1–2 and the combined microphone/input group on channels 3–4. Your compatible recorder assigns tracks and saves the recording. Input Mix requires Pro and macOS 14.4+.
+- **A more flexible panel:** Favorites, Audio, Displays and Presets share controls and card order. Customize Output, Input and Display icons; edit saved Preset Output members with session Undo; use improved keyboard and VoiceOver controls.
+- **Temporary display disconnection:** disconnect and restore a secondary physical display from its icon. Free on supported Apple Silicon Macs running macOS 15+; the main and last usable display are protected.
+
+[Tutti Remote](https://apps.apple.com/app/tutti-remote/id6788375184) is distributed through the App Store. Version 2.0 brings redesigned navigation and Mac management, refreshed Now Playing, Devices, App Volume and Settings screens, a new app icon, and interactive Home Screen and Lock Screen widgets for a chosen Mac's master or specific Output volume.
 
 ## Why Tutti?
 
@@ -45,9 +56,11 @@ Use [Tutti Remote](https://apps.apple.com/app/tutti-remote/id6788375184) on your
 
 ## One panel for everyday controls
 
+- **Outputs & processing:** multi-output playback, per-output six-band EQ, offline headphone correction, and ordered Audio Unit effect chains.
 - **Apps:** individual volume, six-band EQ and Turbo boost, with per-app output routing.
-- **Displays:** individual or grouped brightness, Follow Built-in, resolution, refresh rate, existing HiDPI modes, and main-display selection. Brightness upscaling is available on eligible screens.
-- **The rest of your desk:** microphone controls, Now Playing for Apple Music and Spotify, and Device Guard for preferred audio devices and volume.
+- **Inputs & recording:** one-click microphone switching plus Input Mix and Split Input for mixing mics, virtual inputs, and Apps into your recorder.
+- **Displays:** individual or grouped brightness, Follow Built-in, resolution, refresh rate, existing HiDPI modes, main-display selection, temporary secondary-display disconnection, and brightness upscaling on eligible screens.
+- **The rest of your desk:** Now Playing for Apple Music and Spotify, custom device icons, and Device Guard for preferred audio devices and volume.
 
 See the [full feature list and interactive demo](https://tutti.barrybarrywu.com/).
 
@@ -93,13 +106,13 @@ Click the menu bar icon and select the outputs you want to use. Select more than
 
 ## Free & Pro
 
-**Free, without a time limit:** multi-output playback, device volume, per-app volume, Turbo and EQ, plus local display brightness and display-mode controls on supported macOS versions.
+**Free, without a time limit:** multi-output playback, device volume, per-app volume, Turbo and EQ, local display brightness and display-mode controls, and temporary secondary-display disconnection on supported Apple Silicon Macs.
 
-**Pro adds:** presets, per-app output routing, stereo pairing, per-device balance and latency tuning, global shortcuts, desktop widgets, Raycast control, iPhone remote control, and eligible display brightness upscaling.
+**Pro adds:** presets, per-output six-band EQ, offline headphone correction, Audio Unit effect chains, Input Mix & Split Input for recording, per-app output routing, stereo pairing, per-device balance and latency tuning, global shortcuts, desktop widgets, Raycast control, iPhone remote control, and eligible display brightness upscaling.
 
 Tutti Remote is free to download on iPhone; controlling your Mac requires Tutti Pro on the Mac.
 
-**$12.99 one-time, no subscription.** Includes a 7-day Pro trial, one active Mac per license, and a 14-day refund policy. When the trial ends, free features keep working. [Compare plans and get Pro](https://tutti.barrybarrywu.com/#pricing).
+**Black Friday launch price: US$8.99 one-time, including tax, through November 30 (Pacific time).** The regular price is US$19.99 from December 1. Includes a 7-day Pro trial, one active Mac per license, and a 14-day refund policy. When the trial ends, free features keep working. [Compare plans and get Pro](https://tutti.barrybarrywu.com/#pricing).
 
 ## Control from anywhere
 
@@ -116,15 +129,17 @@ Choose by the workflow you need. Tutti combines audio and display controls; the 
 |---|---|---|---|---|
 | Multi-output playback | Yes; stereo split, balance and delay tuning | Output groups, including AirPlay | Multi-device routing | Not listed |
 | Per-app volume / EQ / routing | Volume + 6-band EQ + routing | Volume + 10-band EQ + routing | Volume + 10-band EQ + routing | Not listed |
-| Display control | Brightness, existing display modes and upscaling | Not listed | Not listed | Brightness, flexible HiDPI, virtual screens and more |
+| Output processing & effects | 6-band EQ, offline headphone correction, Audio Unit chains | Headphone EQ, Audio Unit effects | AutoEQ headphone correction | Not listed |
+| Recording input mixing | Input Mix (stereo) & Split Input (4-ch) | Not listed | Not listed | Not listed |
+| Display control | Brightness, existing modes, upscaling, temporary disconnect | Not listed | Not listed | Brightness, flexible HiDPI, virtual screens and more |
 | Combined audio + display-brightness presets | Yes | Not listed | Not listed | Not listed |
 | Companion iPhone remote | Tutti Remote | Not listed | Not listed | Not listed |
-| Other strengths | Sound and brightness in one panel | AirPlay groups; Audio Unit effects | AutoEQ headphone correction; open-source | Custom resolutions, virtual displays, PIP and 3D LUTs |
+| Other strengths | Sound, effects, recording inputs, and displays in one panel | AirPlay groups; system-wide Audio Unit routing | Open-source | Custom resolutions, virtual displays, PIP and 3D LUTs |
 | Installation | No virtual audio driver or system extension | ARK plugin + audio permissions | App + audio capture permission | App installation |
 
 “Not listed” means the cited official documentation does not advertise that workflow; it is not a tested claim that the capability is impossible. This is a documentation comparison, not a performance or hardware-compatibility test. Tutti's system and display requirements still apply.
 
-Checked September 19, 2026: [SoundSource features](https://rogueamoeba.com/soundsource/), [installation requirements](https://rogueamoeba.com/support/manuals/soundsource/?page=Permissions), [FineTune features and setup](https://github.com/ronitsingh10/FineTune#readme), and [BetterDisplay features](https://github.com/waydabber/BetterDisplay#readme).
+Tutti capabilities updated for 2.0 on November 21, 2026; third-party columns last checked September 19, 2026: [SoundSource features](https://rogueamoeba.com/soundsource/), [installation requirements](https://rogueamoeba.com/support/manuals/soundsource/?page=Permissions), [FineTune features and setup](https://github.com/ronitsingh10/FineTune#readme), and [BetterDisplay features](https://github.com/waydabber/BetterDisplay#readme).
 
 </details>
 
@@ -134,9 +149,13 @@ Checked September 19, 2026: [SoundSource features](https://rogueamoeba.com/sound
 |---|---|
 | Multi-output audio and device controls | macOS 13+ |
 | Per-app volume, Turbo, EQ and routing | macOS 14.4+ |
+| Output processing (EQ, headphone correction, Audio Units) & Input Mix | macOS 14.4+ (Pro) |
 | Display controls | macOS 15+; available controls depend on the display and connection |
+| Temporary secondary-display disconnection | Apple Silicon Mac, macOS 15+ (Free) |
 
 AirPlay receivers cannot join Tutti's multi-output groups. Bluetooth outputs may need latency tuning; adding delay cannot make a slow output arrive sooner. Keyboard volume- and brightness-key takeover requires Accessibility permission.
+
+Output processing is unavailable in stereo-pairing mode, and shared Audio Unit hosting failures can affect multiple plug-ins and require separate retries. Input Mix recording qualification is currently limited to OBS 33.0.1 with IINA 1.5.0 and Sony ECM-S1 on M2 Max Mac Studio / macOS 27.0.1; Audition and Tencent Meeting remain unqualified, QuickTime may record silence when reopening the same active input, layout changes may require reselecting the input, and continuous recording through sleep is not guaranteed.
 
 Brightness upscaling depends on the display's EDR headroom and connection. It can affect HDR content and color accuracy; Tutti does not detect HDR content or automatically disable gain. Group controls, keys, scrolling, Remote, and automation stay within 100%. Read the [compatibility and setup guide](https://tutti.barrybarrywu.com/docs/#upscaling) before enabling it.
 

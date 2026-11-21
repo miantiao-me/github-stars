@@ -1,6 +1,6 @@
 ---
 project: openchamber
-stars: 12912
+stars: 13136
 description: |-
     Agentic Development Environment based on OpenCode AI agent
 url: https://github.com/openchamber/openchamber

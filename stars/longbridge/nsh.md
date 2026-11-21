@@ -1,6 +1,6 @@
 ---
 project: nsh
-stars: 2815
+stars: 3194
 description: |-
     Native Shell is a native UI framework for iOS, Android, macOS, Windows, Linux and the web, built in Rust.
 url: https://github.com/longbridge/nsh
@@ -95,10 +95,25 @@ brew install longbridge/tap/nsh
 </details>
 
 <details>
+<summary>MacPorts</summary>
+
+```sh
+sudo port install native-shell
+```
+
+</details>
+
+<details>
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
 irm https://nsh.dev/install.ps1 | iex
+```
+
+The nightly build:
+
+```powershell
+$env:NSH_VERSION = 'nightly'; irm https://nsh.dev/install.ps1 | iex
 ```
 
 </details>

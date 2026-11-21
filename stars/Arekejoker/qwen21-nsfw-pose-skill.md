@@ -1,6 +1,6 @@
 ---
 project: qwen21-nsfw-pose-skill
-stars: 4407
+stars: 4533
 description: |-
     Qwen-Image 2.1 NSFW/姿势出图 skill：作者级提示词配方 + NSFW LoRA + 136 姿势 VNCCS 人偶控制；适用 Claude Code / Codex / Cursor / OpenClaw
 url: https://github.com/Arekejoker/qwen21-nsfw-pose-skill

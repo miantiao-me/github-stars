@@ -1,6 +1,6 @@
 ---
 project: xmtr
-stars: 48
+stars: 51
 description: |-
     Meet xmtr, a better alternative to mtr. Run probes against multiple targets in parallel and export clean, easy-to-read MTR visualizations in one-click.
 url: https://github.com/Alice39s/xmtr
@@ -68,7 +68,7 @@ Both scripts pick the build for your system, check it against the release `SHA25
 Pass installer options after `bash -s --`:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Alice39s/xmtr/main/install.sh | bash -s -- --dir ~/bin --version v0.4.0
+curl -fsSL https://raw.githubusercontent.com/Alice39s/xmtr/main/install.sh | bash -s -- --dir ~/bin --version v0.4.4
 ```
 
 `XMTR_INSTALL_DIR` sets the directory, and `XMTR_RELEASES` points both the script and the installer at a mirror of the releases page. On Windows these two variables are the only way to pass options.
@@ -130,9 +130,9 @@ xmtr self update --tag v0.3.3 # install a given release instead
 xmtr self uninstall           # delete this binary
 ```
 
-`--force` reinstalls a release that is already installed. Update packages from a package manager or a Linux repository with that manager instead.
+`--force` reinstalls a release that is already installed. Update packages from a package manager or a Linux repository with that manager instead. On Unix the new binary keeps the permissions of the one it replaces, and an update run as root also keeps its owner and group, so after `sudo xmtr self update` a binary that belongs to another user, such as the Termux app, still runs for that user.
 
-After a run in a terminal, xmtr looks up the latest release, waiting at most 3 seconds. When it is newer, xmtr asks whether to install it and then whether to run the same command again with the new version; Enter answers yes to both. When a package manager owns the binary, or its directory is not writable, xmtr prints the command that updates it instead. Runs with `--json`, `--quiet` or `--no-upload`, and runs without a terminal on stdin and stderr, skip the lookup.
+After a run in a terminal, xmtr looks up the latest release, waiting at most 3 seconds. When it is newer, xmtr asks whether to install it and then whether to run the same command again with the new version; Enter answers yes to both. When a package manager owns the binary, or its directory is not writable, xmtr prints the command that updates it instead. Runs with `--json`, `--quiet`, `--no-upload` or `--mode dn42`, and runs without a terminal on stdin and stderr, skip the lookup.
 
 ### Verify a download
 
@@ -281,6 +281,7 @@ The upload returns a trace ID and a link to its map. The trace ID is a snowflake
 | `--pin 2580` | viewers must enter the four-digit PIN (digits 0-8, no 4) after opening the link |
 | `--hide-origin` | the source address is left out; the first hops may still show the network |
 | `--no-upload` | the routes stay on this machine |
+| `--mode dn42` | the routes stay on this machine; see [DN42](#dn42) |
 
 IPMap starts each route at the public address its probes left from. When their local address is not public (private, CGNAT, ULA, link-local or another reserved range), xmtr takes the address the gateway sees on an HTTPS request sent from that local address straight to the gateway, ignoring proxy settings. The request runs during the trace and waits at most 3 seconds; a route without a public source address is uploaded without one.
 
@@ -288,7 +289,7 @@ The upload carries the source address, the destination and a target given as an 
 
 ### Delete an upload
 
-The upload also returns an admin key, a random UUID, and two links that carry it: the admin link opens the trace in IPMap with the key, and the gateway URL in the delete command deletes the trace.
+The upload also returns an admin key, a random UUID, and two links that carry it: the admin link opens the trace in IPMap with the key, and the gateway URL in the delete command deletes the trace. The command names the gateway the upload went through, `--api` or `XMTR_API`, so after an upload through `https://xmtr.ip-api.dn42` it runs on the same DN42 host.
 
 ```sh
 curl -X DELETE 'https://stage-info-api.xmsl.dev/api/v1/traces/<trace ID>?admin-key=<admin key>'
@@ -313,6 +314,50 @@ xmtr traces delete <TRACE>       # delete the trace from the gateway and from th
 ```
 
 `<TRACE>` is a trace ID, an IPMap link or an admin link. The admin key comes from `--admin-key`, the admin link or the list, in that order, and the gateway from `--api`, the list, `XMTR_API` or the default gateway. `--dns` selects the resolver for the gateway and takes the same values as for a trace. A trace the gateway no longer has, which it answers with HTTP 404 and an `application/problem+json` body, is removed from the list as well; any other 404 keeps the trace in the list.
+
+### DN42
+
+Select `--mode dn42` to annotate hops with the
+[DN42 IPDB Rust SDK](https://github.com/bird-chinese-community/DN42-IPDB-SDK/tree/main/rust).
+The ASN column uses the database's origin ASN. Host names come from PTR
+observations for the exact hop address; missing records remain unnamed.
+DN42 mode keeps routes local and skips public source-address discovery and IPMap upload.
+
+```sh
+sudo xmtr --mode dn42 --dn42-refresh 172.20.0.53
+sudo xmtr --mode dn42 172.20.0.53
+sudo xmtr --mode dn42 --dn42-db /path/to/bundle fd42:1234::1
+```
+
+`--dn42-refresh` explicitly downloads and verifies the latest release before
+tracing, within 5 minutes. Subsequent runs read the verified cache in
+`xmtr/dn42-ipdb/rust/v2` under the cache directory of the user xmtr runs as; under
+`sudo` that is root's, from the user database. Run both commands as the same user
+to reuse that cache. Download failures stop the run. The download comes from the
+[DN42 IPDB releases](https://github.com/bird-chinese-community/DN42-IPDB-Releases/releases)
+on GitHub and uses `HTTPS_PROXY`, `HTTP_PROXY` or `ALL_PROXY` when set. `--dn42-db`
+reads an extracted release directory containing all seven SDK bundle files and does
+not download, for hosts that reach only DN42.
+
+`--dns` still selects the resolver for target hostnames; use a resolver that
+can resolve `.dn42` names. Hop annotations use the local database without DNS
+requests. `--no-rdns` skips annotations and does not require a database.
+`--json` prints the existing route payload, including hop ASNs and host names.
+The default mode is `internet`.
+
+Hosts that reach only DN42 can upload through the gateway at
+`https://xmtr.ip-api.dn42`, which relays the API to the public gateway:
+
+```sh
+XMTR_API=https://xmtr.ip-api.dn42 sudo -E xmtr 172.20.0.53
+```
+
+The links of uploaded traces open on IPMap at xmsl.dev on the public Internet. A
+gateway under `.dn42` must show a certificate of the DN42 root CA, which xmtr carries;
+other hosts keep the Mozilla roots. An `https://` proxy on the way to such a gateway
+is checked against the same root, so reach it directly or through an `http://` or
+SOCKS proxy. Uploads through such a gateway carry no public source address, because
+the gateway would see its own.
 
 ### DNS
 
@@ -349,7 +394,10 @@ Usage: xmtr [OPTIONS] <TARGET>...
 -j, --parallel <N>                   routes traced at the same time (default: all routes, at most 8)
 -u, --unprivileged                   unprivileged sockets (macOS)
     --dns <RESOLVER>                 see DNS above (default auto)
-    --no-rdns                        skip reverse DNS and AS lookups
+    --mode <internet|dn42>           annotation source; DN42 keeps routes local (default internet)
+    --dn42-db <DIRECTORY>            extracted DN42 release bundle
+    --dn42-refresh                   download and verify the latest DN42 bundle
+    --no-rdns                        skip host name and AS annotations
     --no-upload                      print the routes only
     --hide-origin                    upload without the source address of the routes
     --pin <PIN>                      four digits from 0-8 without 4
@@ -372,6 +420,8 @@ Release binaries send reports to the xmtr project on [GlitchTip](https://glitcht
 
 xmtr asks about errors and crashes only when stdin and stderr are a terminal and neither `--json` nor `--quiet` is set. The default answer is no, and without a terminal nothing is sent. Before sending, xmtr replaces IP addresses with `[ip]`; the targets, a resolver or gateway given by hostname, and proxy hosts with `[host]`; the home directory with `~`; user names in paths with `[user]`; and credentials in URLs. Reports do not include the name of your machine or the command line. GlitchTip records the address a report came from, shortened to its network prefix.
 
+With `--mode dn42`, or with `--api` under `.dn42`, reports go through the DN42 gateway, `https://xmtr.ip-api.dn42` or the given one, which relays them to GlitchTip.
+
 `DO_NOT_TRACK=1` turns off every report and question ([Console Do Not Track](https://consoledonottrack.com)).
 
 ## Build from source
@@ -380,7 +430,7 @@ xmtr asks about errors and crashes only when stdin and stderr are a terminal and
 cargo build --release --workspace
 ```
 
-The workspace builds `xmtr` and `xmtr-installer` and needs Rust 1.88 or later. Set `XMTR_TELEMETRY_DSN` to a GlitchTip or Sentry DSN to build with [telemetry](#telemetry). `nix build` builds `xmtr` from the flake.
+The workspace builds `xmtr` and `xmtr-installer` and needs Rust 1.89 or later. Set `XMTR_TELEMETRY_DSN` to a GlitchTip or Sentry DSN to build with [telemetry](#telemetry). `nix build` builds `xmtr` from the flake.
 
 Release builds use [cargo-zigbuild](https://github.com/rust-cross/cargo-zigbuild) for Linux, Windows and macOS, [cross](https://github.com/cross-rs/cross) for FreeBSD, powerpc64 and sparc64, and [cargo-ndk](https://github.com/bbqsrc/cargo-ndk) for Android; see `.github/workflows/release.yml` and [`scripts/ci`](scripts/ci/README.md). The workspace builds against a patched trippy-core in `vendor/` that traces IPv4 on Android; see [vendor/README.md](vendor/README.md).
 

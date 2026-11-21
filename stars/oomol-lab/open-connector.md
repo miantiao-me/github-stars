@@ -1,6 +1,6 @@
 ---
 project: open-connector
-stars: 6243
+stars: 6280
 description: |-
     Open-source auth gateway connecting 1700+ SaaS providers to AI agents through SDK, CLI, MCP, HTTP, and OpenAPI.
 url: https://github.com/oomol-lab/open-connector
@@ -93,6 +93,20 @@ handing provider credentials to the agent process.
 
 Endpoint details, response envelopes, auth headers, MCP tools, and Action guide examples are in
 [docs/runtime-api.md](docs/runtime-api.md).
+
+## Products Built on OpenConnector
+
+### <img src="https://openflow.run/favicon.svg" alt="Open Flow" width="18" height="18" /> Open Flow
+
+[Open Flow](https://openflow.run) ([GitHub](https://github.com/oomol-lab/open-flow)) adds the workflow orchestration layer on top of OpenConnector. When an agent or application needs multi-step automation—combining code, AI, branching, and human approval—Open Flow handles the workflow execution while delegating app integrations and credentials to OpenConnector.
+
+It is a self-hostable AI workflow automation platform where coding agents like Codex and Claude Code can author flows via CLI or MCP, and teams can inspect inputs, step results, and approvals in a visual Workbench.
+
+### <img src="https://leina.ai/favicon-32.png" alt="Leina" width="18" height="18" /> Leina
+
+[Leina](https://leina.ai/) is a ready-to-use AI assistant built on top of OpenConnector for teams that do not want to build their own agent or chat frontend.
+
+Leina connects to 1,000+ SaaS apps and lets you customize agents with your own app connections, skills, and knowledge bases for information lookup, reporting, and daily operations across Slack, Microsoft Teams, Discord, and Telegram.
 
 ## Dashboard Preview
 
@@ -237,12 +251,6 @@ Run OpenConnector from a prebuilt image on GitHub Packages (GHCR): `ghcr.io/oomo
 
 See [docs/docker-ghcr.md](docs/docker-ghcr.md) for tags, pulling, and running.
 
-## A Ready-to-Use AI Bot with Leina
-
-If you want an AI bot you can use out of the box, try [Leina](https://leina.ai/). Leina connects to over 1,500 SaaS apps and lets you customize your own AI agent by choosing its app connections, skills, and knowledge base to fit your team’s workflows.
-
-Use it in Slack, Microsoft Teams, Discord, or Telegram to find information, compile weekly reports, organize customer feedback, and prepare sales follow-ups through the apps you authorize.
-
 ## Documentation
 
 - [Quickstart](docs/quickstart.md)
@@ -252,6 +260,7 @@ Use it in Slack, Microsoft Teams, Discord, or Telegram to find information, comp
 - [Gmail OAuth and SDK tutorial](docs/gmail-oauth-sdk.md)
 - [Instagram OAuth and Actions](docs/instagram-oauth.md)
 - [Runtime API and MCP](docs/runtime-api.md)
+- [Scopes: isolate tenants in one runtime](docs/scopes.md)
 - [Embed the runtime](docs/headless.md) (`@oomol-lab/open-connector`)
 - [Deployment options](docs/deployment-options/)
 - [Fly.io deployment](docs/fly-io.md)

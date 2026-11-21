@@ -1,6 +1,6 @@
 ---
 project: litellm
-stars: 63258
+stars: 63672
 description: |-
     The fastest, litest AI Gateway. Rust core with Python SDK. Call 100+ LLM APIs in OpenAI (or native) format with cost tracking, guardrails, load balancing, and logging [Bedrock, Azure, OpenAI, Anthropic, OpenAI, VertexAI, vLLM, Nvidia NIM]
 url: https://github.com/BerriAI/litellm
@@ -360,6 +360,8 @@ print(result.text, result.cost, [f.path for f in result.files])
 Set `LITELLM_PROXY_API_BASE` and `LITELLM_PROXY_API_KEY` and every model call the agent makes goes through your AI Gateway, tagged `harness,claude_code`. Drop the `litellm_proxy/` prefix to call a provider directly. Install `starlette uvicorn` plus the agent's CLI (`claude`, `codex`, `opencode` or `pi`), or `deepagents langchain-litellm` for Deep Agents.
 
 [**Docs: Agent Harnesses**](https://docs.litellm.ai/docs/harness)
+
+Use `litellm.agent_eval(tasks, targets, trials=3)` to compare harness and model targets with typed tasks and success checks. If your runner already schedules cases, use `await litellm.aagent_eval_attempt(task, target, trial=trial, suite_id=run_id)` for each attempt. It returns the same `EvalRun` used by the suite, including the agent result, check, usage and costs. Both paths prepare a fresh workspace, run setup, execute the agent, grade its output and clean up. Your runner owns concurrency, progress, checkpoint storage and resuming unfinished attempts.
 
 </details>
 

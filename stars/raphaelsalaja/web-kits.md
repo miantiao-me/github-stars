@@ -1,6 +1,6 @@
 ---
 project: web-kits
-stars: 600
+stars: 603
 description: |-
     Interface kits for the web
 url: https://github.com/raphaelsalaja/web-kits

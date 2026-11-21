@@ -1,6 +1,6 @@
 ---
 project: onevra
-stars: 288
+stars: 295
 description: |-
      Native desktop UI components for Go, built on MyGo. Themed controls, window shells, Lucide icons, plus chat, Markdown, code highlighting, charts and a command palette. Also includes a standalone packager for macOS, Windows and Linux.
 url: https://github.com/oneo-me/onevra

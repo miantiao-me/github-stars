@@ -1,6 +1,6 @@
 ---
 project: computer
-stars: 9919
+stars: 9948
 description: |-
     Give your agent a computer 👾
 url: https://github.com/cloudflare/computer

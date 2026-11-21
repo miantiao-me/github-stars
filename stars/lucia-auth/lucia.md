@@ -1,0 +1,18 @@
+---
+project: lucia
+stars: 10443
+description: |-
+    Authentication, simple and clean
+url: https://github.com/lucia-auth/lucia
+---
+
+Lucia was deprecated on March 2025. See code/auth_session.ts for a complete, single-file replacement for the NPM package.
+
+Announcement: https://pilcrowonpaper.com/blog/18
+
+For a deep dive on everything auth, see the Auth Book: https://auth.pilcrowonpaper.com
+
+Website: lucia-auth.com
+Repository: github.com/lucia-auth/lucia
+Maintained by: Pilcrow (pilcrowonpaper.com)
+License: MIT (unless otherwise specified)

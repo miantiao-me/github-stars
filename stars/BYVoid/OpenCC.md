@@ -1,0 +1,616 @@
+---
+project: OpenCC
+stars: 10113
+description: |-
+    Library for conversion between Traditional and Simplified Chinese
+url: https://github.com/BYVoid/OpenCC
+---
+
+# Open Chinese Convert 開放中文轉換
+
+[![CMake](https://github.com/BYVoid/OpenCC/actions/workflows/cmake.yml/badge.svg)](https://github.com/BYVoid/OpenCC/actions/workflows/cmake.yml)
+[![Bazel](https://github.com/BYVoid/OpenCC/actions/workflows/bazel.yml/badge.svg)](https://github.com/BYVoid/OpenCC/actions/workflows/bazel.yml)
+[![MSVC](https://github.com/BYVoid/OpenCC/actions/workflows/msvc.yml/badge.svg)](https://github.com/BYVoid/OpenCC/actions/workflows/msvc.yml)
+[![Node.js CI](https://github.com/BYVoid/OpenCC/actions/workflows/nodejs.yml/badge.svg)](https://github.com/BYVoid/OpenCC/actions/workflows/nodejs.yml)
+[![Python CI](https://github.com/BYVoid/OpenCC/actions/workflows/python.yml/badge.svg)](https://github.com/BYVoid/OpenCC/actions/workflows/python.yml)
+[![AppVeyor](https://img.shields.io/appveyor/ci/Carbo/OpenCC.svg)](https://ci.appveyor.com/project/Carbo/OpenCC)
+
+[![GitHub downloads](https://img.shields.io/github/downloads/BYVoid/OpenCC/total)](https://github.com/BYVoid/OpenCC/releases)
+[![WinGet](https://img.shields.io/winget/v/BYVoid.OpenCC)](https://winstall.app/apps/BYVoid.OpenCC)
+[![npm package badge](https://img.shields.io/npm/v/opencc)](https://www.npmjs.com/package/opencc)
+[![PyPI version](https://img.shields.io/pypi/v/opencc.svg)](https://pypi.org/project/opencc/)
+[![Debian package](https://img.shields.io/debian/v/opencc/unstable)](https://packages.debian.org/search?keywords=opencc)
+[![latest packaged version(s)](https://repology.org/badge/latest-versions/opencc.svg)](https://repology.org/project/opencc/versions)
+
+## Introduction 介紹
+
+![OpenCC](https://opencc.byvoid.com/img/opencc.png)
+
+Open Chinese Convert (OpenCC, 開放中文轉換) is an open source project for high-quality conversion between Traditional Chinese, Simplified Chinese, Japanese Shinjitai, and regional wording across Mainland China, Taiwan, and Hong Kong. It provides dictionaries, a reusable library, conversion tools, and dictionary generation tools.
+
+Open Chinese Convert（OpenCC，開放中文轉換） 是一個開源中文轉換項目，支持繁體中文、簡體中文、日文新字體，以及中國大陸、臺灣、香港等地區習慣用詞之間的高品質轉換，並提供詞典、可重用庫、轉換工具及詞典生成工具。
+
+Discussion (Telegram) 討論區（Telegram）: https://t.me/open_chinese_convert
+
+### Features 特點
+
+* 基於詞庫的確定性轉換，不使用大語言模型，結果穩定可預期，可離線快速運行。
+  Deterministic, dictionary-based conversion without large language models (LLMs): results are stable and predictable, and conversion runs fast and fully offline.
+* 詞庫和函數庫可分離，允許自定義修改和擴展。
+  Dictionaries are decoupled from the library, allowing custom modification and extension.
+* 嚴格區分簡繁對應與異體字對應關係，嚴格審校一簡對多繁詞條，OpenCC標準的用字原則爲「能分則不合」。
+  Strictly distinguishes Simplified-Traditional mappings from character variant mappings, with rigorously reviewed one-to-many Simplified-to-Traditional entries; the OpenCC standard follows the character usage principle of "separate whenever distinguishable".
+* 支持中國大陸、臺灣、香港地區慣用異體字（如「裏」「裡」），以及習慣用詞轉換（如「鼠標」「滑鼠」）。
+  Supports conversion of preferred character variants (such as 「裏」/「裡」) and regional wording (such as 「鼠標」/「滑鼠」) for Mainland China, Taiwan, and Hong Kong.
+* 詞庫內容均以官話（普通話、國語）詞彙爲基準，不支持語言之間的翻譯，例如官話與粵語、閩南語或日語之間的翻譯。
+  Dictionaries are based on Mandarin (Putonghua / Guoyu) vocabulary; translation between languages, such as between Mandarin and Cantonese, Southern Min, or Japanese, is not supported.
+* 另外，有限支持日文新字體與舊字體之間的轉換。
+  In addition, conversion between Japanese Shinjitai (new character forms) and Kyujitai (old character forms) is supported to a limited extent.
+
+詳情參閱 [OpenCC 設計思想](./DESIGN_PRINCIPLES.md)及[地區詞收錄標準](doc/regional-phrase-criteria.md)。
+For details, see [Design Principles](./DESIGN_PRINCIPLES.md) and [Regional Phrase Criteria](doc/regional-phrase-criteria.md).
+
+## Installation 安裝
+
+### Package Managers 包管理器
+
+* [Debian](https://tracker.debian.org/pkg/opencc)
+* [Ubuntu](https://launchpad.net/ubuntu/+source/opencc)
+* [Fedora](https://packages.fedoraproject.org/pkgs/opencc/opencc/)
+* [Arch Linux](https://archlinux.org/packages/extra/x86_64/opencc/)
+* [macOS (Homebrew)](https://formulae.brew.sh/formula/opencc)
+    * 使用 `brew install opencc`
+* [WinGet](https://github.com/microsoft/winget-pkgs/tree/master/manifests/b/BYVoid/OpenCC)
+    * 使用 `winget install opencc`
+* [Bazel](https://registry.bazel.build/modules/opencc)
+* [Node.js](https://npmjs.org/package/opencc)
+    * 使用 `npm install -g opencc` 命令可安裝 OpenCC Node.js CLI
+    * 使用 `npm install -g opencc opencc-jieba` 命令可同時安裝 OpenCC Node.js CLI 及 Jieba 分詞插件
+* [Python](https://pypi.org/project/OpenCC/)
+    * 使用 `pip install opencc` 命令可安裝 Python API 及 Python CLI
+* [Repology](https://repology.org/project/opencc/versions)
+
+### Prebuilt binaries 預編譯二進位檔
+
+OpenCC 1.4.2 大幅加速了轉換熱路徑（純文字語料的整體轉換時間最多降至原本的
+1/7），修復了大端序平台載入 legacy `.ocd` 字典得到空字典的問題，並包含一批詞庫
+修正；C++ ABI 與 1.4.1 相同（SOVERSION 1.4），自 1.4.0／1.4.1 升級的下游 C++
+程式無需重新連結。
+
+* Windows (x86_64): [OpenCC-1.4.2](https://github.com/BYVoid/OpenCC/releases/download/ver.1.4.2/OpenCC-1.4.2-windows-x64-portable.zip) ([SHA-256](https://github.com/BYVoid/OpenCC/releases/download/ver.1.4.2/OpenCC-1.4.2-windows-x64-portable.zip.sha256))
+    * This Windows release is available from WinGet. For details, see [doc/windows-winget-release.md](doc/windows-winget-release.md).
+    * The executables are Authenticode-signed; see [Code Signing 程式碼簽章](#code-signing-程式碼簽章).
+    * Requires Microsoft Visual C++ Redistributable for Visual Studio 2015-2026. Download the latest version from [Microsoft](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-supported-redistributable-version).
+* Debian/Ubuntu:
+    * [opencc-1.4.2-1-deb-amd64.zip](https://github.com/BYVoid/OpenCC/releases/download/ver.1.4.2/opencc-1.4.2-1-deb-amd64.zip)
+    * [opencc-1.4.2-1-deb-arm64.zip](https://github.com/BYVoid/OpenCC/releases/download/ver.1.4.2/opencc-1.4.2-1-deb-arm64.zip)
+    * Each zip bundles the `opencc`, `opencc-jieba`, and `libopencc*` deb packages for one architecture, with a `SHA256SUMS` file.
+
+## Usage 使用
+
+### Online 線上轉換
+
+https://opencc.js.org/converter?config=s2t
+
+### Node.js
+
+`npm install opencc`
+
+The npm package supports Node.js `>=20.17`. The native addon is installed
+through prebuilt `@opencc/opencc-<platform>-<arch>` packages covering macOS
+(x64/arm64), Linux (x64/arm64), and Windows (x64). On platforms without a
+prebuilt binary package, `npm install` builds from source with Bazel —
+compiling the addon and regenerating the dictionaries — which requires a
+C++ toolchain and network access; Bazel is found on PATH (`bazel` or
+`bazelisk`) or fetched automatically via `npx`, and Bazel downloads its own
+hermetic Python toolchain for the dictionary generation.
+
+Bun and Deno can also use the npm package through their npm compatibility
+support.
+
+To install the npm CLI:
+
+```sh
+npm install -g opencc
+opencc -c s2t.json -i input.txt -o output.txt
+```
+
+The npm CLI supports basic text conversion. Plugins, `--inspect`,
+`--segmentation`, and `--ambiguities` require the native OpenCC CLI.
+
+```ts
+import { OpenCC } from 'opencc';
+async function main() {
+  const converter: OpenCC = new OpenCC('s2t.json');
+  const result: string = await converter.convertPromise('汉字');
+  console.log(result);  // 漢字
+}
+```
+
+Inline configurations can be passed with `OpenCC.fromConfig`:
+
+```ts
+import { OpenCC } from 'opencc';
+const converter = OpenCC.fromConfig({
+  name: 'Demo Inline Config',
+  conversion_chain: [{
+    dict: { type: 'inline', entries: { '鼠标': '滑鼠' } },
+  }],
+});
+console.log(converter.convertSync('鼠标'));  // 滑鼠
+```
+
+See [demo.js](https://github.com/BYVoid/OpenCC/blob/master/node/demo.js) and [demo.ts](https://github.com/BYVoid/OpenCC/blob/master/node/demo.ts).
+
+### Python
+
+`pip install opencc` (Windows, Linux, macOS)
+
+```python
+import opencc
+converter = opencc.OpenCC('s2t.json')
+converter.convert('汉字')  # 漢字
+```
+
+The Python package also installs a basic CLI:
+
+```sh
+pip install opencc
+opencc -c s2t.json -i input.txt -o output.txt
+```
+
+The Python CLI supports basic text conversion, `--include-tofu-risk-dictionaries`,
+and `--resource-zip`. Diagnostic modes such as `--inspect`, `--segmentation`,
+and `--ambiguities` still require the native OpenCC CLI.
+
+### C++
+
+```c++
+#include "opencc.h"
+
+int main() {
+  const opencc::SimpleConverter converter("s2t.json");
+  converter.Convert("汉字");  // 漢字
+  return 0;
+}
+```
+
+[Full example with Bazel](https://github.com/BYVoid/opencc-bazel-example)
+
+When OpenCC is embedded in a server binary or self-contained application, the
+JSON config can stay small while dictionary resources are loaded from explicit
+resource directories:
+
+```c++
+#include <memory>
+#include <vector>
+
+#include "SimpleConverter.hpp"
+
+int main() {
+  auto resources = std::make_shared<opencc::FilesystemResourceProvider>(
+      std::vector<std::string>{
+          "/opt/my-app/opencc",
+          "/opt/my-app/plugins/opencc-jieba",
+          "/usr/share/opencc",
+      });
+  const opencc::SimpleConverter converter("s2t.json", resources);
+  converter.Convert("汉字");
+  return 0;
+}
+```
+
+`FilesystemResourceProvider` searches directories in order. Existing
+`SimpleConverter("s2t.json")` and CLI behavior continue to use the config file
+location, current directory, explicit paths, and installed OpenCC data directory
+as before.
+
+### C
+
+```c
+#include "opencc.h"
+
+int main() {
+  opencc_t opencc = opencc_open("s2t.json");
+  const char* input = "汉字";
+  char* converted = opencc_convert_utf8(opencc, input, strlen(input));  // 漢字
+  opencc_convert_utf8_free(converted);
+  opencc_close(opencc);
+  return 0;
+}
+
+```
+
+[Full Document 完整文檔](https://opencc.byvoid.com/docs/)
+
+### Command Line
+
+Unless otherwise noted, this section describes the native OpenCC CLI built from
+the C++ toolchain. The Python and npm CLIs support basic file/stdin conversion
+only, plus `--include-tofu-risk-dictionaries`; the Python CLI also supports
+`--resource-zip`.
+
+* `opencc --help`
+* `opencc_dict --help`
+
+#### Segmentation and Inspection Modes
+
+OpenCC CLI supports two diagnostic modes that output JSON instead of converted text:
+
+**`--segmentation`** — Output segmentation result only (no conversion):
+
+```bash
+echo "他只看了几行日志，就一叶知秋，猜到整个系统是数据库连接池出了问题" | opencc -c s2twp.json --segmentation
+# {"input":"他只看了几行日志，就一叶知秋，猜到整个系统是数据库连接池出了问题","segments":["他","只看","了几行","日志","，就","一叶知秋","，猜到","整个","系统","是","数据库","连接池","出了","问题"]}
+```
+
+**`--inspect`** — Output full inspection result (segmentation + per-stage conversion + final output):
+
+```bash
+echo "他只看了几行日志，就一叶知秋，猜到整个系统是数据库连接池出了问题" | opencc -c s2twp.json --inspect
+# {"input":"他只看了几行日志，就一叶知秋，猜到整个系统是数据库连接池出了问题","segments":["他","只看","了几行","日志","，就","一叶知秋","，猜到","整个","系统","是","数据库","连接池","出了","问题"],"stages":[{"index":1,"segments":["他","只看","了幾行","日誌","，就","一葉知秋","，猜到","整個","系統","是","數據庫","連接池","出了","問題"]},{"index":2,"segments":["他","只看","了幾行","日誌","，就","一葉知秋","，猜到","整個","系統","是","資料庫","連線池","出了","問題"]},{"index":3,"segments":["他","只看","了幾行","日誌","，就","一葉知秋","，猜到","整個","系統","是","資料庫","連線池","出了","問題"]}],"output":"他只看了幾行日誌，就一葉知秋，猜到整個系統是資料庫連線池出了問題"}
+
+# Pretty-print with jq:
+echo "他只看了几行日志，就一叶知秋，猜到整个系统是数据库连接池出了问题" | opencc -c s2twp.json --inspect | jq .
+```
+
+**`--ambiguities`** — Convert while marking every output span whose dictionary
+match is one-to-many (e.g. `文丑` may be either `文丑` or `文醜`), as a stream
+of JSONL records:
+
+```bash
+printf '大战文丑的时候，他的头发很干燥' | opencc -c s2t.json --ambiguities
+# {"def":"文丑"}
+# {"lit":"大戰"}
+# {"amb":{"t":"文丑","s":0}}
+# {"lit":"的時候，他的頭髮很乾燥"}
+# {"end":{"output_bytes":45,"ambiguities":1,"sources":1}}
+```
+
+Record kinds: `{"def"}` defines the next source index (each distinct input
+word is defined once, before its first reference); `{"lit"}` is a literal
+run of unambiguous output; `{"amb":{"t","s"}}` is an ambiguous span whose
+output text `t` (the default candidate) came from the source with index `s`;
+the final `{"end"}` record carries stream totals. Concatenating every `lit`
+and `amb.t` in order reproduces the plain conversion output exactly.
+Streaming is bounded-memory regardless of input size or line length, and
+positions are implicit in record order, so consumers can rebuild offsets in
+their own string-index units. Single-value conversions (e.g. `头发` →
+`頭髮`) are not flagged.
+
+The record stream is a machine-readable contract: every emitted line is
+valid JSON, and the final `{"end"}` record only appears when the whole
+input was processed. Input containing invalid UTF-8 aborts the stream with
+an error (unlike plain conversion, which is byte-transparent), and a
+missing `{"end"}` record means the stream is incomplete.
+
+These modes are useful for diagnosing conversion issues:
+
+1. Use `--segmentation` to verify that the input is segmented as expected.
+2. Use `--inspect` to see which conversion stage produces an unexpected result.
+3. Use `--ambiguities` to locate one-to-many conversions and resolve each
+   deduplicated `def` source to its candidates.
+
+Rules:
+- `--segmentation`, `--inspect`, and `--ambiguities` are mutually exclusive.
+
+### Official / Recommended Ports
+
+The following ports are maintained within the OpenCC ecosystem and are generally up to date with current configuration and dictionary data.
+
+* Data package: [opencc-data](https://www.npmjs.com/package/opencc-data)
+* Pure JavaScript: [opencc-js](https://www.npmjs.com/package/opencc-js)
+    * See [notes about different OpenCC NPM packages](#links-%E7%9B%B8%E9%97%9C%E9%80%A3%E7%B5%90) below.
+* WebAssembly: [opencc-wasm](https://www.npmjs.com/package/opencc-wasm) ([website](https://opencc.js.org/))
+* Pure Python: [opencc-py](https://pypi.org/project/opencc-py/) (pre-release)
+
+### Other Ports (Unofficial)
+
+These ports are community-maintained and may not always track upstream updates.
+
+* Swift (iOS): [SwiftyOpenCC](https://github.com/XQS6LB3A/SwiftyOpenCC)
+* iOSOpenCC (pod): [iOSOpenCC](https://github.com/swiftdo/OpenCC)
+* Java: [opencc4j](https://github.com/houbb/opencc4j)
+* Android: [android-opencc](https://github.com/qichuan/android-opencc)
+* PHP: [opencc4php](https://github.com/nauxliu/opencc4php)
+* WebAssembly: [wasm-opencc](https://github.com/oyyd/wasm-opencc)
+* Browser Extension: [opencc-extension](https://github.com/tnychn/opencc-extension)
+* Go (Pure): [OpenCC for Go](https://github.com/longbridge/opencc)
+* Dart (native-assets): [opencc-dart](https://github.com/lindeer/opencc-dart)
+
+### Configurations 配置文件
+
+#### 預設配置文件
+
+* `s2t.json` **Simplified Chinese** to **Traditional Chinese (OpenCC Standard)** / **簡體** 到 **OpenCC 標準繁體**
+* `t2s.json` **Traditional Chinese (OpenCC Standard)** to **Simplified Chinese** / **OpenCC 標準繁體** 到 **簡體**
+* `s2tw.json` **Simplified Chinese** to **Traditional Chinese (Taiwan Standard)** / **簡體** 到 **台灣正體**
+* `tw2s.json` **Traditional Chinese (Taiwan Standard)** to **Simplified Chinese** / **台灣正體** 到 **簡體**
+* `s2hk.json` **Simplified Chinese** to **Traditional Chinese (Hong Kong variant)** / **簡體** 到 **香港繁體**
+* `hk2s.json` **Traditional Chinese (Hong Kong variant)** to **Simplified Chinese** / **香港繁體** 到 **簡體**
+* `s2twp.json` **Simplified Chinese** to **Traditional Chinese (Taiwan Standard, with Taiwan Phrases)** / **簡體** 到 **台灣正體（含台灣常用詞彙）**
+* `tw2sp.json` **Traditional Chinese (Taiwan Standard)** to **Simplified Chinese (Mainland China Phrases)** / **台灣正體** 到 **簡體（含中國大陸常用詞彙）**
+* `t2tw.json` **Traditional Chinese (OpenCC Standard)** to **Traditional Chinese (Taiwan Standard)** / **OpenCC 標準繁體** 到 **台灣正體**
+* `tw2t.json` **Traditional Chinese (Taiwan Standard)** to **Traditional Chinese (OpenCC Standard)** / **台灣正體** 到 **OpenCC 標準繁體**
+* `t2hk.json` **Traditional Chinese (OpenCC Standard)** to **Traditional Chinese (Hong Kong variant)** / **OpenCC 標準繁體** 到 **香港繁體**
+* `hk2t.json` **Traditional Chinese (Hong Kong variant)** to **Traditional Chinese (OpenCC Standard)** / **香港繁體** 到 **OpenCC 標準繁體**
+
+下列配置文件仍在開發中，歡迎貢獻新詞組：
+
+* `s2hkp.json` **Simplified Chinese** to **Traditional Chinese (Hong Kong variant, with Hong Kong Phrases)** / **簡體** 到 **香港繁體（香港常用詞彙）**
+* `hk2sp.json` **Traditional Chinese (Hong Kong variant)** to **Simplified Chinese (Mainland China Phrases)** / **香港繁體** 到 **簡體（含中國大陸常用詞彙）**
+
+下列配置文件僅供探索性研究，不建議用於生產環境：
+
+* `t2jp.json` **Old Japanese Kanji (Kyūjitai)** to **New Japanese Kanji (Shinjitai)** / **日文舊字體** 到 **日文新字體**
+* `jp2t.json` **New Japanese Kanji (Shinjitai)** to **Old Japanese Kanji (Kyūjitai)** / **日文新字體** 到 **日文舊字體**，並將少量日文詞組轉換爲對應中文
+* `t2seal.json` **Traditional Chinese Characters** to **Small Seal Script (Unicode 18.0 Seal block)** / **繁體漢字** 到 **小篆（Unicode 18.0 篆書區塊 U+3D000..U+3FC3F）**，需搭配支援該區塊的字型顯示
+* `s2seal.json` **Simplified Chinese** to **Small Seal Script (Unicode 18.0 Seal block)** / **簡體** 到 **小篆**，相當於 `s2t` 後接 `t2seal`。反方向（小篆到簡體）請依序執行 `seal2t` 與 `t2s`：分詞只在輸入端進行一次，小篆輸入無法為 `t2s` 的詞組轉換分詞
+* `seal2t.json` **Small Seal Script (Unicode 18.0 Seal block)** to **Traditional Chinese Characters** / **小篆（Unicode 18.0 篆書區塊）** 到 **繁體漢字**，依 Unicode `SealSources.txt` 的 `kSEAL_MCJK` 屬性對應，並以 `SealVariants.txt` 銜接現代標準字與《說文》隸定字（如 `年`／`秊`）；《說文》未收之字（如 `你`、`們`）保持不變
+
+#### 指定配置文件
+
+通过环境变量`OPENCC_DATA_DIR`加载指定路径下的配置文件
+```sh
+OPENCC_DATA_DIR=/path/to/your/config/dir opencc --help
+```
+
+#### 內聯字典（inline dictionary）
+
+配置檔中的字典可使用 `type: "inline"`，直接在 JSON 裡定義小型自訂詞彙，
+不必修改外部字典檔。例如在 `group.dicts` 最前面加入覆寫規則：
+
+```json
+{
+  "conversion_chain": [
+    {
+      "dict": {
+        "type": "group",
+        "dicts": [
+          {
+            "type": "inline",
+            "entries": {
+              "麦旋风": "冰炫風",
+              "服务器": "伺服器"
+            }
+          },
+          {
+            "type": "ocd2",
+            "file": "STPhrases.ocd2"
+          },
+          {
+            "type": "ocd2",
+            "file": "STCharacters.ocd2"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+規則與限制：
+
+- `entries` 必須是 JSON 物件。
+- `entries` 的 key/value 必須是非空字串。
+- 重複 key 不受支援；如包含，載入會直接失敗（拋出錯誤）。
+- key/value 會按解析結果原樣使用，不做 trim、大小寫折疊或 Unicode normalization。
+- 內聯字典與普通字典行為一致，優先級由 `group.dicts` 的順序決定。
+- 內聯字典輸出仍會繼續經過後續 `conversion_chain` 步驟，不提供鎖定最終輸出。
+
+備註：OpenCC 1.3.2+ 解析器支援有限 JSONC 語法（`//`、`/* */` 註解與尾逗號）。
+若需跨實作相容，建議使用嚴格 JSON，不依賴 JSONC 擴充。
+
+更多完整示例可見 `examples/config/`。該目錄僅供學習與自訂參考，不屬於官方內建
+配置列表。
+
+### Experimental Plugins 試驗性插件
+
+OpenCC 現已支援外部 C++ 分詞插件。當前第一個插件為 `opencc-jieba`，
+可通過 `s2t_jieba.json`、`s2tw_jieba.json`、`s2hk_jieba.json`、
+`s2twp_jieba.json`、`tw2sp_jieba.json` 等插件配置啓用。
+
+OpenCC now supports external C++ segmentation plugins. The first plugin is
+`opencc-jieba`, which can be enabled through plugin-backed configs such as
+`s2t_jieba.json`, `s2tw_jieba.json`, `s2hk_jieba.json`,
+`s2twp_jieba.json`, and `tw2sp_jieba.json`.
+
+注意：
+
+- 該插件機制目前仍為試驗性功能。
+- `jieba` 插件是可選組件，Python 套件和 Node.js 套件都不要求它。自 1.4.1 起，macOS 上的頂層 CMake 構建（含 Homebrew）預設啓用該插件（`BUILD_OPENCC_JIEBA_PLUGIN=ON`）；其他平台與以子項目方式引入的構建預設仍為關閉。
+- `opencc-jieba` 額外依賴 `cppjieba` 及其配套詞典資源，這些依賴僅在構建或分發該插件時需要。
+- 在下一次正式發布版本之前，插件 ABI 仍可能發生變化，不應視為穩定介面。
+- 我們預計從下一次正式發布版本開始，將插件 ABI 視為穩定介面。
+- Windows 下插件必須與宿主 OpenCC 二進位使用 ABI 相容的工具鏈／執行時構建；MSVC 與 MinGW 產物不支援混用。
+
+Notes:
+
+- The plugin mechanism is currently experimental.
+- The `jieba` plugin is optional and is not required by the Python package or
+  the Node.js package. Since 1.4.1, top-level CMake builds on macOS (including
+  Homebrew) enable the plugin by default (`BUILD_OPENCC_JIEBA_PLUGIN=ON`);
+  other platforms and subproject builds keep it disabled by default.
+- `opencc-jieba` additionally depends on `cppjieba` and its dictionary
+  resources. These dependencies are only needed when building or distributing
+  the plugin itself.
+- The plugin ABI may still change before the next formal OpenCC release and
+  should not yet be treated as stable.
+- We expect to treat the plugin ABI as stable starting with the next formal
+  OpenCC release.
+- On Windows, plugins must be built with an ABI-compatible toolchain/runtime as
+  the host OpenCC binary. Mixing MSVC-built hosts with MinGW-built plugins, or
+  the reverse, is unsupported.
+
+## Build 編譯
+
+### Build with CMake
+
+#### Linux & macOS
+
+g++ 4.6+ or clang 3.2+ is required.
+
+```bash
+make
+```
+
+#### Windows Visual Studio:
+
+```bash
+build.cmd
+```
+
+### Build with Bazel
+
+```bash
+bazel build //:opencc
+```
+
+### Test 測試
+
+#### Linux & macOS
+
+```
+make test
+```
+
+#### Windows Visual Studio:
+
+```bash
+test.cmd
+```
+
+#### Test with Bazel
+
+```bash
+bazel test --test_output=all //src/... //data/... //python/... //test/...
+```
+
+### Benchmark 基準測試
+
+```
+make benchmark
+```
+
+詳情見 [doc/benchmark.md](doc/benchmark.md) 檔案。
+
+## Projects using OpenCC 使用 OpenCC 的項目
+
+Please update if your project is using OpenCC.
+
+* [ibus-pinyin](https://github.com/ibus/ibus-pinyin)
+* [fcitx](https://github.com/fcitx/fcitx)
+* [rimeime](https://rime.im/)
+* [libgooglepinyin](http://code.google.com/p/libgooglepinyin/)
+* [ibus-libpinyin](https://github.com/libpinyin/ibus-libpinyin)
+* [alfred-chinese-converter](https://github.com/amowu/alfred-chinese-converter)
+* [GoldenDict](https://github.com/goldendict/goldendict)
+* [China Biographical Database Project (CBDB)](https://cbdb.hsites.harvard.edu/)
+* [OpenCC-Traditional Chinese to Traditional Chinese (The Chinese Government Standard)](https://github.com/TerryTian-tech/OpenCC-Traditional-Chinese-characters-according-to-Chinese-government-standards)
+   * 將混雜不同標準的繁體字形轉換為中國《通用規範漢字表》(2013) 中的繁體字形
+   * [展示說明頁面](https://terrytian-tech.github.io/OpenCC-Traditional-Chinese-characters-according-to-Chinese-government-standards/)
+   * [轉換方案設計說明](https://github.com/TerryTian-tech/OpenCC-Traditional-Chinese-characters-according-to-Chinese-government-standards/blob/main/doc/%E3%80%8A%E9%80%9A%E7%94%A8%E8%A7%84%E8%8C%83%E6%B1%89%E5%AD%97%E8%A1%A8%E3%80%8B%E8%A7%84%E8%8C%83%E7%B9%81%E4%BD%93%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E.md)
+
+## License 許可協議
+
+Apache License 2.0
+
+## Third Party Libraries 第三方庫
+
+* [darts-clone](https://github.com/s-yata/darts-clone) BSD License
+* [marisa-trie](https://github.com/s-yata/marisa-trie) BSD License
+* [tclap](http://tclap.sourceforge.net/) MIT License
+* [rapidjson](https://github.com/Tencent/rapidjson) MIT License
+* [Google Test](https://github.com/google/googletest) BSD License
+* [cppjieba](https://github.com/yanyiwu/cppjieba) MIT License
+  - Optional dependency used by the experimental `opencc-jieba` plugin.
+  - 試驗性 `opencc-jieba` 插件使用的可選依賴。
+
+## Code Signing 程式碼簽章
+
+自 1.4.2 起，Windows 發佈的二進位檔（可攜式 CLI 壓縮包中的執行檔，以及 npm
+win32-x64 套件中的 `opencc.node` 與 `opencc-jieba.dll`）皆經過 Authenticode
+簽章。
+
+Since 1.4.2, the Windows binaries — the executables in the portable CLI zip
+and the `opencc.node` / `opencc-jieba.dll` shipped in the win32-x64 npm
+packages — are Authenticode-signed.
+
+This program uses free code signing provided by
+[SignPath.io](https://about.signpath.io/), and a free code signing
+certificate by the [SignPath Foundation](https://signpath.org/).
+
+本項目使用 [SignPath.io](https://about.signpath.io/) 免費提供的程式碼簽章服務，
+憑證由 [SignPath Foundation](https://signpath.org/) 免費提供。
+
+* **Code signing policy 簽章政策**：只有合併進 `master` 的提交會被簽章，簽章請求
+  由 [維護者](#contributors-貢獻者)在發佈流程中透過 GitHub Actions 發起
+  （見 [`release-winget.yml`](.github/workflows/release-winget.yml) 與
+  [`release-npm-binaries.yml`](.github/workflows/release-npm-binaries.yml)）。
+* **Privacy policy 隱私政策**：OpenCC 為離線的文字轉換程式庫與命令列工具，除非
+  使用者、安裝者或操作者明確要求，否則不會將任何資訊傳輸至其他網路系統。
+  This program will not transfer any information to other networked systems
+  unless specifically requested by the user or the person installing or
+  operating it.
+
+## Change History 版本歷史
+
+* [NEWS](https://github.com/BYVoid/OpenCC/blob/master/NEWS.md)
+  - 另見 https://opencc.byvoid.com/news/
+
+## Links 相關連結
+
+* [Publications Using OpenCC](https://github.com/BYVoid/OpenCC/blob/master/PUBLICATIONS.md) - 近年來使用了 OpenCC 的研究論文選錄
+* [現代漢語常用繁簡轉換匹配辨析表](https://github.com/BYVoid/OpenCC/blob/master/doc/characters-easy-to-misuse.md)
+* 關於 [`opencc`](https://www.npmjs.com/package/opencc), [`opencc-js`](https://www.npmjs.com/package/opencc-js) 与 [`opencc-wasm`](https://www.npmjs.com/package/opencc-wasm) 三个 NPM packages 區別的說明
+  https://github.com/nk2028/opencc-js/blob/HEAD/README-zh-TW.md#%E8%88%87-opencc-npm-package-%E7%9A%84%E5%8D%80%E5%88%A5
+* [異寫字表](https://github.com/BYVoid/OpenCC/blob/master/data/dictionary/staging/Allographs.txt) - Unicode 中雖碼位不同，但實屬同一漢字。不收錄已出現在「CJK 相容表意文字」及其補充區段中的字元。
+
+## Contributors 貢獻者
+
+* [BYVoid](http://www.byvoid.com/)
+* [佛振](https://github.com/lotem)
+* [Peng Huang](https://github.com/phuang)
+* [LI Daobing](https://github.com/lidaobing)
+* [Kefu Chai](https://github.com/tchaikov)
+* [Kan-Ru Chen](http://kanru.info/)
+* [Ma Xiaojun](https://twitter.com/damage3025)
+* [Jiang Jiang](http://jjgod.org/)
+* [Ruey-Cheng Chen](https://github.com/rueycheng)
+* [Paul Meng](http://home.mno2.org/)
+* [Lawrence Lau](https://github.com/ktslwy)
+* [瑾昀](https://github.com/kunki)
+* [內木一郎](https://github.com/SyaoranHinata)
+* [Marguerite Su](https://www.marguerite.su/)
+* [Brian White](http://mscdex.net)
+* [Qijiang Fan](https://fqj.me/)
+* [LEOYoon-Tsaw](https://github.com/LEOYoon-Tsaw)
+* [Steven Yao](https://github.com/stevenyao)
+* [Pellaeon Lin](https://github.com/pellaeon)
+* [stony](https://github.com/stony-shixz)
+* [steelywing](https://github.com/steelywing)
+* [吕旭东](https://github.com/lvxudong)
+* [Weng Xuetian](https://github.com/wengxt)
+* [Ma Tao](https://github.com/iwater)
+* [Heinz Wiesinger](https://github.com/pprkut)
+* [J.W](https://github.com/jakwings)
+* [Amo Wu](https://github.com/amowu)
+* [Mark Tsai](https://github.com/mxgit1090)
+* [Zhe Wang](https://github.com/0x1997)
+* [sgqy](https://github.com/sgqy)
+* [Qichuan (Sean) ZHANG](https://github.com/qichuan)
+* [Flandre Scarlet](https://github.com/XadillaX)
+* [宋辰文](https://github.com/songchenwen)
+* [iwater](https://github.com/iwater)
+* [Xpol Wan](https://github.com/xpol)
+* [Weihang Lo](https://github.com/weihanglo)
+* [Cychih](https://github.com/pi314)
+* [kyleskimo](https://github.com/kyleskimo)
+* [Ryuan Choi](https://github.com/bunhere)
+* [Prcuvu](https://github.com/Prcuvu)
+* [Tony Able](https://github.com/TonyAble)
+* [Xiao Liang](https://github.com/yxliang01)
+* [Frank Lin](https://github.com/frankslin)
+
+Please feel free to update this list if you have contributed OpenCC.
+

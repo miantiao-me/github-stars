@@ -1,6 +1,6 @@
 ---
 project: forge
-stars: 1194
+stars: 1202
 description: |-
     null
 url: https://github.com/cloudflare/forge

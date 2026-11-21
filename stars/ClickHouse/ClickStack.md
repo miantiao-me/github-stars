@@ -1,0 +1,196 @@
+---
+project: ClickStack
+stars: 10061
+description: |-
+    Resolve production issues, fast. An open source observability platform unifying session replays, logs, metrics, traces and errors powered by ClickHouse and OpenTelemetry.
+url: https://github.com/ClickHouse/ClickStack
+---
+
+<p align="center">
+  <a href="https://hyperdx.io">
+    <img alt="ClickStack logo" src="./packages/app/public/favicons/clickstack/favicon.svg" width="128">
+  </a>
+</p>
+
+<h1 align="center">ClickStack</h1>
+
+<p align="center">
+  <a href="https://github.com/ClickHouse/ClickStack/stargazers"><img src="https://badgen.net/github/stars/ClickHouse/ClickStack?label=%E2%98%85" alt="GitHub stars" /></a>
+  <img src="https://badgen.net/github/license/ClickHouse/ClickStack" alt="License" />
+  <a href="https://github.com/ClickHouse/ClickStack/actions/workflows/release.yml"><img src="https://github.com/ClickHouse/ClickStack/actions/workflows/release.yml/badge.svg" alt="Release" /></a>
+  <a href="https://hyperdx.io/discord"><img src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=white" alt="Join the ClickStack Discord" /></a>
+</p>
+
+<p align="center">
+  <a href="https://trendshift.io/repositories/2030?utm_source=repository-badge&utm_medium=badge&utm_campaign=badge-repository-2030" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/2030" alt="ClickHouse%2FClickStack | Trendshift" width="250" height="55"/></a>
+</p>
+
+[ClickStack](https://clickhouse.com/use-cases/observability) (formerly HyperDX)
+helps engineers quickly figure out why production is broken by making it easy to
+search & visualize logs and traces on top of any ClickHouse cluster (imagine
+Kibana, for ClickHouse).
+
+<p align="center">
+  <a href="https://clickhouse.com/docs/use-cases/observability/clickstack/overview">Documentation</a> • <a href="https://hyperdx.io/discord">Chat on Discord</a>  • <a href="https://play.hyperdx.io/search">Live Demo</a>  • <a href="https://github.com/ClickHouse/ClickStack/issues/new">Bug Reports</a> • <a href="./CONTRIBUTING.md">Contributing</a> • <a href="https://clickhouse.com/use-cases/observability">Website</a>
+</p>
+
+- 🕵️ Correlate/search logs, metrics, session replays and traces all in one place
+- 📝 Schema agnostic, works on top of your existing ClickHouse schema
+- 🔥 Blazing fast searches & visualizations optimized for ClickHouse
+- 🔍 Intuitive full-text search and property search syntax (ex. `level:err`),
+  SQL optional!
+- 📊 Analyze trends in anomalies with event deltas
+- 🔔 Set up alerts in just a few clicks
+- 📈 Dashboard high cardinality events without a complex query language
+- `{` Native JSON string querying
+- ⚡ Live tail logs and traces to always get the freshest events
+- 🔭 OpenTelemetry supported out of the box
+- ⏱️ Monitor health and performance from HTTP requests to DB queries (APM)
+
+<br/>
+<img alt="Search logs and traces all in one place" src="./.github/images/search_splash.png" title="Search logs and traces all in one place">
+
+## Spinning Up ClickStack
+
+The all-in-one image bundles ClickHouse, the ClickStack UI, the OpenTelemetry
+Collector and MongoDB.
+
+```bash
+docker run -p 8080:8080 -p 4317:4317 -p 4318:4318 docker.clickhouse.com/clickhouse/clickstack-all-in-one
+```
+
+Afterwards, you can visit http://localhost:8080 to access the ClickStack UI.
+
+If you already have an existing ClickHouse instance, want to use a single
+container locally, or are looking for production deployment instructions, you
+can view the different deployment options in our
+[deployment docs](https://clickhouse.com/docs/use-cases/observability/clickstack/deployment).
+
+> If your server is behind a firewall, you'll need to open/forward port 8080,
+> 8000 and 4318 on your firewall for the UI, API and OTel collector
+> respectively.
+
+> We recommend at least 4GB of RAM and 2 cores for testing.
+
+### Hosted ClickHouse Cloud
+
+You can also deploy ClickStack with ClickHouse Cloud, you can
+[sign up for free](https://console.clickhouse.cloud/signUp) and get started in
+just minutes.
+
+## Instrumenting Your App
+
+To get logs, metrics, traces, session replay, etc into ClickStack, you'll need
+to instrument your app to collect and send telemetry data over to your
+ClickStack instance.
+
+We provide a set of SDKs and integration options to make it easier to get
+started with ClickStack, such as
+[Browser](https://clickhouse.com/docs/use-cases/observability/clickstack/sdks/browser),
+[Node.js](https://clickhouse.com/docs/use-cases/observability/clickstack/sdks/nodejs),
+and
+[Python](https://clickhouse.com/docs/use-cases/observability/clickstack/sdks/python)
+
+You can find the full list in
+[our docs](https://clickhouse.com/docs/use-cases/observability/clickstack).
+
+**OpenTelemetry**
+
+Additionally, ClickStack is compatible with
+[OpenTelemetry](https://opentelemetry.io/), a vendor-neutral standard for
+instrumenting your application backed by CNCF. Supported languages/platforms
+include:
+
+- Kubernetes
+- Javascript
+- Python
+- Java
+- Go
+- Ruby
+- PHP
+- .NET
+- Elixir
+- Rust
+
+(Full list [here](https://opentelemetry.io/docs/instrumentation/))
+
+Once ClickStack is running, you can point your OpenTelemetry SDK to the
+OpenTelemetry collector spun up at `http://localhost:4318`.
+
+## ClickStack CLI
+
+Prefer the terminal? [`@hyperdx/cli`](./packages/cli) provides an interactive
+TUI and CLI (`hdx`) for working with your ClickStack data without leaving the
+shell:
+
+```bash
+npm install -g @hyperdx/cli
+hdx auth login
+hdx tui
+```
+
+- 🖥️ Interactive TUI — search, live tail, and trace waterfalls with vim-style
+  keybindings
+- 📊 Render dashboard tiles and ad-hoc charts as ANSI output in the terminal
+- 🤖 Agent-friendly: raw SQL queries, NDJSON output, and Drain log pattern
+  mining for scripts and AI agents
+
+See the [CLI README](./packages/cli#readme) for the full command reference.
+
+## Contributing
+
+We welcome all contributions! There's many ways to contribute to the project,
+including but not limited to:
+
+- Opening a PR ([Contribution Guide](./CONTRIBUTING.md))
+- [Submitting feature requests or bugs](https://github.com/ClickHouse/ClickStack/issues/new)
+- Improving our product or contribution documentation
+- Voting on [open issues](https://github.com/ClickHouse/ClickStack/issues) or
+  contributing use cases to a feature request
+
+**Pull requests.** Issues, bug reports and discussion stay open to everyone. For
+code we now use [Vouch](https://github.com/mitchellh/vouch): a maintainer has to
+vouch for you before your first pull request gets reviewed. AI tools make it
+cheap to open a plausible-looking PR with no understanding behind it, and
+reviewing those crowds out the contributions we want to spend time on. There's
+nothing to request up front: open your first PR and a maintainer vouches for you
+on it. See [Getting vouched](./CONTRIBUTING.md#getting-vouched).
+
+## Motivation
+
+Our mission is to help engineers ship reliable software. To enable that, we
+believe every engineer needs to be able to easily leverage production telemetry
+to quickly solve burning production issues.
+
+However, in our experience, the existing tools we've used tend to fall short in
+a few ways:
+
+1. They're expensive, and the pricing has failed to scale with TBs of telemetry
+   becoming the norm, leading to teams aggressively cutting the amount of data
+   they can collect.
+2. They're hard to use, requiring full-time SREs to set up, and domain experts
+   to use confidently.
+3. They requiring hopping from tool to tool (logs, session replay, APM,
+   exceptions, etc.) to stitch together the clues yourself.
+
+We hope you give ClickStack a try and let us know how we're doing!
+
+## Contact
+
+- [Open an Issue](https://github.com/ClickHouse/ClickStack/issues/new)
+- [Discord](https://discord.gg/FErRRKU78j)
+- [Email](mailto:support@hyperdx.io)
+
+## ClickStack Usage Data
+
+ClickStack collects anonymized usage data for open source deployments. This data
+supports our mission for observability to be available to any team and helps
+support our open source product run in a variety of different environments.
+While we hope you will continue to support our mission in this way, you may opt
+out of usage data collection by setting the `USAGE_STATS_ENABLED` environment
+variable to `false`. Thank you for supporting the development of ClickStack!
+
+## License
+
+[MIT](/LICENSE)
+

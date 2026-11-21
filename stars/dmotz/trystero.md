@@ -1,6 +1,6 @@
 ---
 project: trystero
-stars: 2855
+stars: 2866
 description: |-
     ✨🤝✨ Instant peer-to-peer multiplayer for the web — no server required.
 url: https://github.com/dmotz/trystero

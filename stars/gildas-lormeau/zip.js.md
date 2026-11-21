@@ -1,0 +1,260 @@
+---
+project: zip.js
+stars: 3916
+description: |-
+    JavaScript library to zip and unzip files supporting parallel compression, web streams, pluggable compression engines, zip64, split files, data encryption, and deflate64 decompression.
+url: https://github.com/gildas-lormeau/zip.js
+---
+
+# Introduction
+
+zip.js is a JavaScript open-source library (BSD-3-Clause license) for
+compressing and decompressing zip files. It has been designed to handle large amounts
+of data. It supports notably multi-core compression, native compression with
+compression streams, pluggable compression engines, archives larger than 4GB
+with Zip64, split zip files, data encryption, incremental writing, and
+Deflate64 decompression.
+
+# Demo
+
+See https://gildas-lormeau.github.io/zip-manager
+
+# Documentation
+
+See here for more info: https://gildas-lormeau.github.io/zip.js/
+
+# Examples
+
+## Hello world
+
+```js
+import {
+  BlobReader,
+  BlobWriter,
+  TextReader,
+  TextWriter,
+  ZipReader,
+  ZipWriter
+} from "@zip.js/zip.js";
+// "jsr:@zip-js/zip-js" for Deno
+
+// ----
+// Write the zip file
+// ----
+
+// Creates a BlobWriter object where the zip content will be written.
+const zipFileWriter = new BlobWriter();
+// Creates a TextReader object storing the text of the entry to add in the zip
+// (i.e. "Hello world!").
+const helloWorldReader = new TextReader("Hello world!");
+
+// Creates a ZipWriter object writing data via `zipFileWriter`, adds the entry
+// "hello.txt" containing the text "Hello world!" via `helloWorldReader`, and
+// closes the writer.
+const zipWriter = new ZipWriter(zipFileWriter);
+await zipWriter.add("hello.txt", helloWorldReader);
+await zipWriter.close();
+
+// Retrieves the Blob object containing the zip content into `zipFileBlob`. It
+// is also returned by zipWriter.close() for more convenience.
+const zipFileBlob = await zipFileWriter.getData();
+
+// ----
+// Read the zip file
+// ----
+
+// Creates a BlobReader object used to read `zipFileBlob`.
+const zipFileReader = new BlobReader(zipFileBlob);
+// Creates a TextWriter object where the content of the first entry in the zip
+// will be written.
+const helloWorldWriter = new TextWriter();
+
+// Creates a ZipReader object reading the zip content via `zipFileReader`,
+// retrieves metadata (name, dates, etc.) of the first entry, retrieves its
+// content via `helloWorldWriter`, and closes the reader.
+const zipReader = new ZipReader(zipFileReader);
+const firstEntry = (await zipReader.getEntries()).shift();
+const helloWorldText = await firstEntry.getData(helloWorldWriter);
+await zipReader.close();
+
+// Displays "Hello world!".
+console.log(helloWorldText);
+```
+
+Run the code on JSFiddle: https://jsfiddle.net/tm9fhvab/
+
+## Hello world with the filesystem API
+
+The filesystem API stores the entries in a tree instead of a flat list. It needs
+a single import, it infers the Reader and the Writer from the type of the data,
+and it reaches an entry from its name instead of searching it in an array.
+
+```js
+import { ZipFS } from "@zip.js/zip.js";
+// "jsr:@zip-js/zip-js" for Deno
+
+// ----
+// Write the zip file
+// ----
+
+// Creates a ZipFS object and adds two entries to it. The name of an entry is a
+// path, so the "folder" directory is created by the second call.
+const zipFs = new ZipFS();
+zipFs.addText("hello.txt", "Hello world!");
+zipFs.addText("folder/hello.txt", "Hello world from a directory!");
+
+// Retrieves the Blob object containing the zip content.
+const zipFileBlob = await zipFs.exportBlob();
+
+// ----
+// Read the zip file
+// ----
+
+// Imports the zip content into a new ZipFS object, then retrieves the content
+// of the entries from their full name.
+const importedZipFs = new ZipFS();
+await importedZipFs.importBlob(zipFileBlob);
+const helloWorldText = await importedZipFs.find("hello.txt").getText();
+const nestedText = await importedZipFs.find("folder/hello.txt").getText();
+
+// Displays "Hello world!" and "Hello world from a directory!".
+console.log(helloWorldText, nestedText);
+```
+
+Run the code on JSFiddle: https://jsfiddle.net/gcnret0x/
+
+## Hello world with Streams
+
+```js
+import {
+  BlobReader,
+  ZipReader,
+  ZipWriter
+} from "@zip-js/zip-js";
+// Prefix "@zip-js/zip-js" with "jsr:" for Deno
+
+// ----
+// Write the zip file
+// ----
+
+// Creates a TransformStream object, the zip content will be written in the
+// `writable` property.
+const zipFileStream = new TransformStream();
+// Creates a Promise object resolved to the zip content returned as a Blob
+// object retrieved from `zipFileStream.readable`.
+const zipFileBlobPromise = new Response(zipFileStream.readable).blob();
+// Creates a ReadableStream object storing the text of the entry to add in the
+// zip (i.e. "Hello world!").
+const helloWorldReadable = new Blob(["Hello world!"]).stream();
+
+// Creates a ZipWriter object writing data into `zipFileStream.writable`, adds
+// the entry "hello.txt" containing the text "Hello world!" retrieved from
+// `helloWorldReadable`, and closes the writer.
+const zipWriter = new ZipWriter(zipFileStream.writable);
+await zipWriter.add("hello.txt", helloWorldReadable);
+await zipWriter.close();
+
+// Retrieves the Blob object containing the zip content into `zipFileBlob`.
+const zipFileBlob = await zipFileBlobPromise;
+
+// ----
+// Read the zip file
+// ----
+
+// Creates a BlobReader object used to read `zipFileBlob`.
+const zipFileReader = new BlobReader(zipFileBlob);
+// Creates a TransformStream object, the content of the first entry in the zip
+// will be written in the `writable` property.
+const helloWorldStream = new TransformStream();
+// Creates a Promise object resolved to the content of the first entry returned
+// as text from `helloWorldStream.readable`.
+const helloWorldTextPromise = new Response(helloWorldStream.readable).text();
+
+// Creates a ZipReader object reading the zip content via `zipFileReader`,
+// retrieves metadata (name, dates, etc.) of the first entry, retrieves its
+// content into `helloWorldStream.writable`, and closes the reader.
+const zipReader = new ZipReader(zipFileReader);
+const firstEntry = (await zipReader.getEntries()).shift();
+await firstEntry.getData(helloWorldStream.writable);
+await zipReader.close();
+
+// Displays "Hello world!".
+const helloWorldText = await helloWorldTextPromise;
+console.log(helloWorldText);
+```
+
+Run the code on JSFiddle: https://jsfiddle.net/aw3d6f4o/
+
+## Adding concurrently multiple entries in a zip file
+
+```js
+import {
+  BlobWriter,
+  HttpReader,
+  TextReader,
+  ZipWriter,
+} from "@zip-js/zip-js";
+// Prefix "@zip-js/zip-js" with "jsr:" for Deno
+
+const README_URL = "https://unpkg.com/@zip.js/zip.js/README.md";
+getZipFileBlob()
+  .then(downloadFile);
+
+async function getZipFileBlob() {
+  const zipWriter = new ZipWriter(new BlobWriter("application/zip"));
+  await Promise.all([
+    zipWriter.add("hello.txt", new TextReader("Hello world!")),
+    zipWriter.add("README.md", new HttpReader(README_URL)),
+  ]);
+  return zipWriter.close();
+}
+
+function downloadFile(blob) {
+  document.body.appendChild(Object.assign(document.createElement("a"), {
+    download: "hello.zip",
+    href: URL.createObjectURL(blob),
+    textContent: "Download zip file",
+  }));
+}
+```
+
+Run the code on Plunker: https://plnkr.co/edit/4sVljNIpqSUE9HCA?preview
+
+## Custom web workers and compression engines
+
+zip.js lets you create its web workers yourself by using the
+`new Worker(new URL("./zip-worker.js", import.meta.url))` form. Bundlers like
+Vite, webpack and Rollup detect it and bundle the worker automatically. You can
+also delegate compression and decompression to a custom engine, e.g.
+[fflate](https://github.com/101arrowz/fflate):
+
+```js
+import { configure } from "@zip.js/zip.js/lib/zip-core-custom.js";
+
+configure({
+  createWorker: () => new Worker(
+    new URL("./zip-worker.js", import.meta.url),
+    { type: "module" }
+  )
+});
+```
+
+```js
+// zip-worker.js
+import { initWorker } from "@zip.js/zip.js/worker";
+import { CompressionStreamFallback, DecompressionStreamFallback } from "./fflate-streams.js";
+
+initWorker({ CompressionStreamFallback, DecompressionStreamFallback });
+```
+
+See https://gildas-lormeau.github.io/zip.js/#custom-workers for a complete
+guide.
+
+## Tests
+
+See https://github.com/gildas-lormeau/zip.js/tree/master/tests/all
+
+# Reading untrusted zip files
+
+The sizes declared in a zip file are not verified before the entry is read. A crafted entry can declare a large `uncompressedSize`, and valid deflate data can expand up to 1032 times its compressed size. Before extracting an entry from an untrusted source, check `entry.uncompressedSize` against the limit your application accepts, and avoid extracting all the entries concurrently. `Uint8ArrayWriter` allocates its buffer from the declared size, up to 1032 times `entry.compressedSize`, so this check matters most when the content is read into memory. Writers which deliver the content progressively, e.g. `BlobWriter` or a `WritableStream`, grow with the data actually produced.
+

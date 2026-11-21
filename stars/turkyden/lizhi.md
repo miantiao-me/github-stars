@@ -1,6 +1,6 @@
 ---
 project: lizhi
-stars: 1090
+stars: 1093
 description: |-
     🎸 李志 Agent 音乐播放器，跨平台支持 Web / Mac / Windows / Linux
 url: https://github.com/turkyden/lizhi

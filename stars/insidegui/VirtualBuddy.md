@@ -1,6 +1,6 @@
 ---
 project: VirtualBuddy
-stars: 8972
+stars: 9001
 description: |-
     Virtualize macOS 12 and later on Apple Silicon, VirtualBuddy is a virtual machine GUI for macOS M1, M2, M3, M4
 url: https://github.com/insidegui/VirtualBuddy
@@ -70,6 +70,18 @@ VirtualBuddy automatically mounts a disk image with the VirtualBuddyGuest app wh
 The latest VirtualBuddyGuest app requires macOS 14 or later and supports clipboard sharing and automatic mounting of shared folders. On macOS 13, the legacy guest app only mounts shared folders automatically; clipboard sharing is unavailable. VirtualBuddyGuest is not supported on macOS 12 or earlier.
 
 ![](./assets/GuestApp.jpg)
+
+#### Run a macOS app from Xcode
+
+VirtualBuddy can help you set up an Xcode project so that you can run and debug a Mac app in a virtual machine, similar to how you can build and run an app to an iPhone or iOS Simulator.
+
+On the first launch with this feature, VirtualBuddy turns on developer features if Xcode is installed. You can change this under **VirtualBuddy Settings → Developer → Enable Developer Features**.
+
+In the VirtualBuddy library, right-click a macOS virtual machine and choose **Set Up Xcode Debugging…**. In the setup sheet, choose the app’s project or workspace and its app scheme. Enable **Custom LLDB Commands** if needed, then click **Create Scheme**. If you enabled the setting, relaunch Xcode. Choose the generated **App — VM** scheme with **My Mac** as the destination, then press **⌘R**.
+
+The guest needs the current VirtualBuddyGuest app running in a logged-in desktop session and Apple’s Command Line Tools or Xcode installed. Build a signed arm64 macOS app with the Debug configuration and the `com.apple.security.get-task-allow` entitlement, which is added by default in debug builds with Xcode.
+
+The first run can take a while because it copies and extracts symbols for the guest’s macOS build. Manage disk usage in **VirtualBuddy Settings → Developer → Xcode Debugging Symbols**. Deployment and debugging use the VirtualBuddyGuest connection. The custom Xcode launch style is experimental and has been tested with Xcode 27.3 and macOS 27 guests.
 
 #### Taking Advantage of APFS
 

@@ -1,6 +1,6 @@
 ---
 project: leancast
-stars: 172
+stars: 179
 description: |-
     Ad-free DLNA / UPnP cast receiver for Android TV · 极简无广告投屏接收器
 url: https://github.com/addozhang/leancast
@@ -10,7 +10,7 @@ url: https://github.com/addozhang/leancast
 
 English | [简体中文](README.zh-CN.md)
 
-**[Download APK](https://github.com/addozhang/leancast/releases/latest) · [Supported devices](#supported-devices) · [Report device compatibility](https://github.com/addozhang/leancast/issues/new?template=device-compatibility.yml)**
+**[Download APK](https://github.com/addozhang/leancast/releases/latest) · [Website](https://solocraft.app/leancast) · [Supported devices](#supported-devices) · [Report device compatibility](https://github.com/addozhang/leancast/issues/new?template=device-compatibility.yml)**
 
 <p align="center">
   <img src="docs/screenshots/main-en.png?v=2" width="49%" alt="LeanCast TV dashboard" />

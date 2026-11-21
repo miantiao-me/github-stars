@@ -1,6 +1,6 @@
 ---
 project: microsandbox
-stars: 9063
+stars: 9165
 description: |-
     🧱 easy, fast, programmable and local-first microVM runtime and library
 url: https://github.com/superradcompany/microsandbox
@@ -163,10 +163,9 @@ The `msb` CLI provides a complete interface for managing sandboxes, snapshots, i
 > msb snap restore snapshot.msb --name app3
 > ```
 >
-> Forking duplicates live execution. Restoring starts from saved state; add `--cow-mem` to share unchanged memory from a full snapshot. Snapshot generations describe progression, while branches describe distinct paths through snapshot history. The old `--forked` restore flag remains a deprecated alias. See [forking and snapshots](https://docs.microsandbox.dev/sandboxes/snapshots#forking).
->
 > ```sh
 > # Lifecycle
+> msb ls
 > msb stop app
 > msb start app
 > msb rm app
@@ -180,14 +179,12 @@ The `msb` CLI provides a complete interface for managing sandboxes, snapshots, i
 > msb image rm python       # Remove an image
 > ```
 
-#### <img height="14" src="https://octicons-col.vercel.app/file-code/A770EF">&nbsp;&nbsp;Configuration File
+#### <img height="14" src="https://octicons-col.vercel.app/file-code/A770EF">&nbsp;&nbsp;Sandboxfile
 
-> ```sh
-> msb run --conf sandbox.yaml -- octocat
-> ```
+> Save the sandbox settings in a YAML file named `Sandboxfile`.
 >
 > ```yaml
-> # sandbox.yaml
+> # Sandboxfile
 > image: python:3.12
 > memory: 64M
 > network:
@@ -205,6 +202,10 @@ The `msb` CLI provides a complete interface for managing sandboxes, snapshots, i
 >     with urllib.request.urlopen(request) as response:
 >         print(response.read().decode())
 >     PY
+> ```
+>
+> ```sh
+> msb run --file Sandboxfile -- octocat
 > ```
 
 #### <img height="14" src="https://octicons-col.vercel.app/list-unordered/A770EF">&nbsp;&nbsp;Status & Inspection

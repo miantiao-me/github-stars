@@ -1,6 +1,6 @@
 ---
 project: NOIR
-stars: 3468
+stars: 3674
 description: |-
     手机隐私审计：用 adb 扫出 Android 应用的权限、上报端点与数据流向，并给出可回滚的处置。Desktop Android leak audit: permissions, endpoints, data flows, reversible fixes.
 url: https://github.com/Verlintas/NOIR
@@ -97,7 +97,11 @@ NOIR doctor
 ```bash
 noir setup          # 缺什么下什么
 noir setup --yes    # 不询问，适合脚本
+noir doctor --json  # 机器可读的环境 / 工具 / 设备状态
 ```
+
+`doctor --json` 会输出 `platform`、`java`、`container`、`docker`、`adb`、
+`jadx`、`devices` 和 `ok`，适合 CI 和 bug report；没有可用设备时退出码仍为 1。
 
 ### Docker 安装 / 运行检测
 
@@ -299,8 +303,11 @@ cli/build/install/noir/bin/noir.bat    # Windows
 ```bash
 noir --about              # 它是什么、会写什么、许可
 noir --version
-noir devices
-noir scan                 # 全量扫描，输出 JSON / Markdown / 域名清单
+noir devices              # 列出设备；加 --json 输出机器可读结果
+noir scan                 # 全量扫描，输出 JSON / Markdown / HTML / CSV / 域名清单
+noir apk app.apk          # 不连手机，直接审计 APK 文件
+noir report noir-out      # 从已有 report.json 重新生成 MD / HTML / CSV
+noir explain com.example.app  # 从报告解释某个应用为什么被标记
 noir diff old/report.json new/report.json   # 对比两次扫描
 noir ui                   # 扫描并渲染仪表盘
 noir auto                 # 扫描 + 分类 + 生成处置计划（dry-run）
@@ -321,8 +328,76 @@ noir block com.example.app --apply
 | `--min <score>` | 只保留分数 ≥ N 的应用 |
 | `--limit <n>` | 最多输出 N 条 |
 | `--only <regex>` | 只扫描匹配的包名，例如 `--only 'com\.miui\.'` |
+| `--ignore <file>` | 忽略文件中的包名和上报域名 |
+| `--user-only` | 只保留用户安装的应用，跳过系统应用 |
+| `--format <md,html,csv>` | `report` 命令的输出格式 |
 | `--adb <path>` / `--jadx <path>` | 手动指定工具路径 |
 | `--yes` | 自动化场景下跳过确认 |
+
+### 离线 APK 审计
+
+没有手机，或者想在安装前先看一个 APK：
+
+```bash
+noir apk app.apk --out apk-report
+noir apk ./downloads --out apk-report
+noir apk ./downloads --out apk-report --ignore noir.ignore
+```
+
+- 读取 `AndroidManifest.xml` 的包名、版本、权限、exported 组件、debuggable、targetSdk
+- 直接从 `classes*.dex` 提取端点，不运行应用
+- split APK 按包名合并
+- 生成同样的 `report.json` / `.md` / `.html` / `.csv` 和域名清单
+- 不执行任何 appops 或卸载；只做静态审计
+
+离线模式没有设备的 `uid`、系统应用标记和运行时权限状态，结果会比真机扫描保守。
+
+### 忽略已知项
+
+对已经确认安全和已知上报域名，可以写一个忽略文件，减少重复噪音：
+
+```text
+# noir.ignore
+# 包名也可以不加 package 前缀
+com.example.known
+package com.example.old
+
+# 匹配该域名及其子域
+host example.com
+```
+
+```bash
+noir scan --ignore noir.ignore
+```
+
+被忽略的包不会扫描；命中的上报端点会在评分和报告生成前移除。
+输出目录会保存一份规范化后的 `ignore.txt`，方便复现这次报告使用的过滤规则。
+`auto`、`ui`、`deepscan` 同样支持 `--ignore`。
+
+### 重新生成报告
+
+`noir report` 直接读取已有的 `report.json`，不需要手机或重新扫描：
+
+```bash
+noir report noir-out
+noir report noir-out --format md,html,csv
+noir report old/report.json --out shared-report --format html
+```
+
+默认重写输入目录里的 `report.md` / `report.html` / `report.csv`。适合升级 NOIR 后重新渲染，或把 JSON 分享给别人后再生成 HTML。
+
+### 解释单个应用
+
+```bash
+noir explain                       # 默认前 10 个被标记应用
+noir explain --top 20              # 前 20 个
+noir explain --all                 # 全部被标记应用
+noir explain com.a com.b           # 指定多个包
+noir explain com.example.app --json
+```
+
+会从已有 `report.json` 展示应用的分数、类别、厂商、可读数据、上报路径、权限、端点和建议动作。
+单个应用显示完整证据；批量模式默认显示精简摘要，加 `--full` 可展开完整内容。适合扫描后追问“它们为什么被标红”。
 
 ## 对比两次扫描
 
@@ -369,6 +444,7 @@ noir-out/
 ├── report.md                 # 人类可读报告
 ├── report.html               # 离线单文件报告，可直接用浏览器打开
 ├── report.csv                # 表格导出（每行一个应用，适合 Excel）
+├── ignore.txt                # 本次使用的忽略规则（使用 --ignore 时生成）
 ├── domains-trackers.txt      # 统计/广告/崩溃上报，可整份导入
 ├── domains-other.txt         # 用途不明，导入前逐条判断
 ├── domains-functional.txt    # 推送/登录/更新/支付/商店/云同步，禁止拦截

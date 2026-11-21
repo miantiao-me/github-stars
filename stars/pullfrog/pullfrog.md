@@ -1,6 +1,6 @@
 ---
 project: pullfrog
-stars: 1451
+stars: 1469
 description: |-
     Open-source model-agnostic BYOK GitHub bot that runs in GitHub Actions
 url: https://github.com/pullfrog/pullfrog
@@ -9,7 +9,7 @@ url: https://github.com/pullfrog/pullfrog
 <p align="center">
   <h1 align="center">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://pullfrog.com/frog-white-200px.png">
+      <source media="(prefers-color-scheme: dark)" srcset="https://pullfrog.com/frog-squircle-200px.png">
       <img src="https://pullfrog.com/frog-green-200px.png" width="25px" align="center" alt="Green Pullfrog logo" />
     </picture><br />
     Pullfrog
@@ -20,7 +20,7 @@ url: https://github.com/pullfrog/pullfrog
 </p>
 
 <p align="center">
-  <a href="https://pullfrog.com">pullfrog.com</a> · <a href="https://docs.pullfrog.com">Docs</a> · <a href="https://pullfrog.com/console">Console</a> · <a href="https://discord.gg/8y96raFg8e">Discord</a>
+  <a href="https://pullfrog.com">pullfrog.com</a> · <a href="https://pullfrog.com/docs">Docs</a> · <a href="https://pullfrog.com/console">Console</a> · <a href="https://discord.gg/8y96raFg8e">Discord</a>
 </p>
 
 <br/>
@@ -52,7 +52,7 @@ Run one command in any local repo:
 npx pullfrog init
 ```
 
-Or [install from the browser](https://pullfrog.com/console). Setup takes about two minutes: install the GitHub App, add the `pullfrog.yml` workflow with one click, and pick a model. See [getting started](https://docs.pullfrog.com/getting-started).
+Or [install from the browser](https://pullfrog.com/console). Setup takes about two minutes: install the GitHub App, add the `pullfrog.yml` workflow with one click, and pick a model. See [getting started](https://pullfrog.com/docs/getting-started).
 
 ## Runs on the subscription you already pay for
 
@@ -60,11 +60,11 @@ No API key required. Connect a coding-agent plan once and every run bills agains
 
 | Plan | Connect with |
 | --- | --- |
-| [Claude](https://docs.pullfrog.com/claude-auth) | `npx pullfrog auth claude` |
-| [Codex / ChatGPT](https://docs.pullfrog.com/codex-auth) | `npx pullfrog auth codex` |
-| [Grok](https://docs.pullfrog.com/grok-auth) | `npx pullfrog auth grok` |
-| [Kimi Code](https://docs.pullfrog.com/kimi-code) | a Kimi Code key as `KIMI_API_KEY` |
-| [OpenCode Go](https://docs.pullfrog.com/models#opencode-zen-and-opencode-go) | an OpenCode key as `OPENCODE_API_KEY` |
+| [Claude](https://pullfrog.com/docs/claude) | `npx pullfrog auth claude` |
+| [Codex / ChatGPT](https://pullfrog.com/docs/codex) | `npx pullfrog auth codex` |
+| [Grok](https://pullfrog.com/docs/grok) | `npx pullfrog auth grok` |
+| [Kimi Code](https://pullfrog.com/docs/kimi-code) | a Kimi Code key as `KIMI_API_KEY` |
+| [OpenCode Go](https://pullfrog.com/docs/providers#opencode-zen-and-opencode-go) | an OpenCode key as `OPENCODE_API_KEY` |
 
 ## Or bring your own model
 
@@ -115,7 +115,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 ```
 
-The action also exposes a `result` output that subsequent steps can consume. See [CI integration](https://docs.pullfrog.com/headless-action) for the full guide.
+The action also exposes a `result` output that subsequent steps can consume. See [CI integration](https://pullfrog.com/docs/custom-workflows) for the full guide.
 
 <details>
 <summary><strong>Example: auto-generate release notes on new tags</strong></summary>
@@ -184,7 +184,7 @@ For longer prompts you want to version and reuse, commit the prompt text to the 
 <details>
 <summary><strong>Structured output</strong></summary>
 
-Pass a JSON Schema via the `output_schema` input to make the agent's output required and validated — the bridge between an agent's reasoning and the hard steps that follow it. See [capturing agent output](https://docs.pullfrog.com/headless-action#capturing-agent-output) for the details and a worked example.
+Pass a JSON Schema via the `output_schema` input to make the agent's output required and validated — the bridge between an agent's reasoning and the hard steps that follow it. See [capturing agent output](https://pullfrog.com/docs/custom-workflows#capturing-agent-output) for the details and a worked example.
 
 </details>
 

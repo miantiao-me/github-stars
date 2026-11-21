@@ -1,6 +1,6 @@
 ---
 project: bklit-ui
-stars: 1972
+stars: 1999
 description: |-
     Open-source UI & Charts library
 url: https://github.com/bklit/bklit-ui

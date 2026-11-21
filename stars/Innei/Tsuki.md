@@ -1,6 +1,6 @@
 ---
 project: Tsuki
-stars: 31
+stars: 32
 description: |-
     🌙 TypeScript on Hono: NestJS-style decorators, DI, modules. Tsuki (moon) ↔ Hono (flame).
 url: https://github.com/Innei/Tsuki

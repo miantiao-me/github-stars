@@ -1,12 +1,12 @@
 ---
 project: oar
-stars: 542
+stars: 681
 description: |-
     oar (Open Agent Runtime): programming interface for all agent harnesses
 url: https://github.com/botiverse/oar
 ---
 
-# OAR - *programming interface for all agent harnesses* [![Built with Raft](https://raw.githubusercontent.com/raft-builders/awesome-raft-build/main/badge/built-with-raft.svg)](https://raft.build)
+# OAR - *programming interface for all agent harnesses* [![Built with Raft](https://raw.githubusercontent.com/raft-builders/awesome-raft-build/main/badge/built-with-raft.svg)](https://app.raft.build/s/open-agent-runtime)
 
 <div align="center">
   <img src="assets/logo.png" alt="OAR logo" width="120">
@@ -15,6 +15,8 @@ url: https://github.com/botiverse/oar
 OAR (**O**pen **A**gent **R**untime) is a provider-independent programming interface for coding-agent runtimes: a solid foundation for building agent workspaces and other applications.
 
 **Delete harness logic and focus on outcomes and UX.**
+
+OAR is built in the open: the agents and people working on it talk, review and ship on [Raft](https://app.raft.build/s/open-agent-runtime), where you can follow along.
 
 ## Supported runtimes
 
@@ -36,21 +38,21 @@ OAR (**O**pen **A**gent **R**untime) is a provider-independent programming inter
       </a>
     </td>
     <td align="center" width="112">
-      <a href="docs/runtimes/codex.md">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/codex-on-dark.svg">
-          <img src="packages/oar/assets/brands/codex-on-light.svg" width="32" height="32" alt="">
-        </picture><br>
-        Codex
-      </a>
-    </td>
-    <td align="center" width="112">
       <a href="docs/runtimes/codebuddy.md">
         <picture>
           <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/codebuddy-on-dark.svg">
           <img src="packages/oar/assets/brands/codebuddy-on-light.svg" width="32" height="32" alt="">
         </picture><br>
         CodeBuddy Code
+      </a>
+    </td>
+    <td align="center" width="112">
+      <a href="docs/runtimes/codex.md">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/codex-on-dark.svg">
+          <img src="packages/oar/assets/brands/codex-on-light.svg" width="32" height="32" alt="">
+        </picture><br>
+        Codex
       </a>
     </td>
     <td align="center" width="112">
@@ -63,6 +65,32 @@ OAR (**O**pen **A**gent **R**untime) is a provider-independent programming inter
       </a>
     </td>
     <td align="center" width="112">
+      <a href="docs/runtimes/dsh.md">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/dsh-on-dark.svg">
+          <img src="packages/oar/assets/brands/dsh-on-light.svg" width="32" height="32" alt="">
+        </picture><br>
+        DeepSeek Harness
+      </a>
+    </td>
+    <td align="center" width="112">
+      <a href="docs/runtimes/devin.md">
+        <img src="packages/oar/assets/brands/devin.svg" width="32" height="32" alt=""><br>
+        Devin
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="112">
+      <a href="docs/runtimes/factory.md">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/factory.svg">
+          <img src="packages/oar/assets/brands/factory.svg" width="32" height="32" alt="">
+        </picture><br>
+        Factory Droid
+      </a>
+    </td>
+    <td align="center" width="112">
       <a href="docs/runtimes/grok.md">
         <picture>
           <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/grok-on-dark.svg">
@@ -71,8 +99,6 @@ OAR (**O**pen **A**gent **R**untime) is a provider-independent programming inter
         Grok Build
       </a>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="112">
       <a href="docs/runtimes/kimi.md">
         <picture>
@@ -101,15 +127,6 @@ OAR (**O**pen **A**gent **R**untime) is a provider-independent programming inter
       </a>
     </td>
     <td align="center" width="112">
-      <a href="docs/runtimes/qwen.md">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/qwen-on-dark.svg">
-          <img src="packages/oar/assets/brands/qwen-on-light.svg" width="32" height="32" alt="">
-        </picture><br>
-        Qwen Code
-      </a>
-    </td>
-    <td align="center" width="112">
       <a href="docs/runtimes/qoder.md">
         <picture>
           <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/qoder-on-dark.svg">
@@ -119,12 +136,12 @@ OAR (**O**pen **A**gent **R**untime) is a provider-independent programming inter
       </a>
     </td>
     <td align="center" width="112">
-      <a href="docs/runtimes/dsh.md">
+      <a href="docs/runtimes/qwen.md">
         <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/dsh-on-dark.svg">
-          <img src="packages/oar/assets/brands/dsh-on-light.svg" width="32" height="32" alt="">
+          <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/qwen-on-dark.svg">
+          <img src="packages/oar/assets/brands/qwen-on-light.svg" width="32" height="32" alt="">
         </picture><br>
-        DeepSeek Harness
+        Qwen Code
       </a>
     </td>
   </tr>
@@ -132,6 +149,32 @@ OAR (**O**pen **A**gent **R**untime) is a provider-independent programming inter
 
 [Pi Durable](docs/runtimes/pi-durable.md) also runs through a host-owned Harness,
 including in a browser ([demo](apps/pi-durable/README.md)).
+
+### Community runtimes
+
+Shipped from `@botiverse/oar/community` and maintained outside the core team: a
+host adds one with its own deployment and credentials, so they are not in
+`defaultRuntimes`.
+
+<table>
+  <tr>
+    <td align="center" width="112">
+      <a href="docs/runtimes/morph.md">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="packages/oar/assets/brands/morph-on-dark.svg">
+          <img src="packages/oar/assets/brands/morph.svg" width="32" height="32" alt="">
+        </picture><br>
+        Mister Morph
+      </a>
+    </td>
+    <td align="center" width="112">
+      <a href="docs/runtimes/cybion.md">
+        <img src="packages/oar/assets/brands/cybion.svg" width="32" height="32" alt=""><br>
+        Cybion
+      </a>
+    </td>
+  </tr>
+</table>
 
 ## Library
 
@@ -198,22 +241,73 @@ for (const runtime of defaultRuntimes.list()) {
 }
 ```
 
-- **[Orientation](docs/spec/orientation.md):** one call for what is installed and usable.
-- **[Install](docs/spec/install.md) and [update](docs/spec/update.md):** through the vendor's own installer and updater.
-- **[Login](docs/spec/login.md):** through the runtime's own login, without a terminal. OAR never handles the tokens.
-- **[Account usage](docs/spec/account-usage.md):** plan and quota windows, and Codex limit resets.
+- **Installation:** whether each runtime is installed, its version and where;
+  [install](docs/spec/install.md) and [update](docs/spec/update.md) through the
+  vendor's own installer and updater, and the minimum version OAR supports
+  where a runtime has one.
+- **Account:** [log in, log out and status](docs/spec/login.md) through the
+  runtime's own login, without a terminal (OAR never handles the tokens);
+  [usage](docs/spec/account-usage.md): plan, quota windows and their resets, and
+  Codex and Claude limit resets.
 - **Models:** what the installation can run now, with efforts and service tiers.
 - **[Inventories](docs/spec/inventory.md):** configured skills, commands, MCP servers and tools.
 - **[Setup forms](docs/spec/config-form.md):** settings as data a UI renders.
+- **[Orientation](docs/spec/orientation.md):** all of the above for every runtime in one bounded call.
 
 ## CLI
 
+The same API on the command line: set up runtimes on a machine (install, sign in, check usage and models) and run a turn to see what a runtime does, for setup, debugging and verifying OAR itself. `oar mcp` also lets an agent hand tasks to other runtimes.
+
 ```bash
-npx @botiverse/oar-cli list
+npx @botiverse/oar-cli installation
+oar install codex --plan
+oar account login claude
+oar account usage
 oar run claude "What does this repo do?" --record run.jsonl
 ```
 
 Every command: [packages/cli](packages/cli/README.md) (published as `@botiverse/oar-cli`).
+
+## Projects using OAR
+
+- [Raft](https://raft.build): where people and agents work together; Raft Computers run agent runtimes through OAR.
+- [Kaze](https://kaze.build): a calm, quick browser for macOS and Windows, with an agent that works in your tabs.
+- [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness/tree/master/packages/experimental/subagent-oar): `subagent-oar` hands DeepSeek Harness subagents to other runtimes.
+- [repo-harness](https://github.com/aimpact-inc/repo-harness): file-backed workflow harness for Claude Code and Codex sessions.
+- [Eta](https://github.com/0xfe-project/eta): a self-contained multi-agent loop, runtime and app.
+- [dsh-agent-team](https://github.com/Contexera/dsh-agent-team): agent teams for DeepSeek Harness.
+- [dsh-engine-switch](https://github.com/Goodfun-Studio/dsh-engine-switch): a DeepSeek Harness plugin that hands the main session to another agent runtime.
+- [ducter](https://github.com/wey-gu/ducter): a personal AI that hands work to coding agents on your machines.
+- [tmux-agent-deck](https://github.com/RayzPub/tmux-agent-deck): control tmux sessions and coding agents from a web terminal.
+
+Using OAR in a public project? Open a pull request to add it here.
+
+## Contributing
+
+Issues and pull requests are welcome, from people and from agents, including
+the agents of projects that use OAR. Issues are preferred. AI-written
+contributions are fine without a person checking them by hand, as long as the
+AI verified them in a real environment: the real runtime, a real account, a
+real task.
+
+- **Issues.** Name the `@botiverse/oar` (or `@botiverse/oar-cli`) version, the
+  runtime and its version, and the OS; say what you called, what you expected
+  and what happened; include the session's records that show it
+  (`session.records()`, or a log from `oar run ... --record run.jsonl`),
+  redacted, and how you reproduced it in a real environment. One problem per
+  issue.
+- **Pull requests.** Read [docs/development.md](docs/development.md) first.
+  One change per pull request, rebased on `main`, titled in Conventional
+  Commits (`fix(pi): ...`); a fix comes with a test that fails without it;
+  docs are updated in the same change; `CI=1 pnpm run check` passes (without
+  `CI=1`, snapshot tests rewrite their snapshots instead of failing). Do not
+  bump package versions or push tags: releases are cut by the maintainers.
+  Say in the description how the change was verified in a real environment.
+- Never paste credentials, tokens, account identifiers or emails, or
+  machine-local paths.
+- Projects that use both Raft and OAR can ask
+  contact@raft.build for a joint channel with the OAR team, to take part more
+  directly.
 
 ## Docs
 

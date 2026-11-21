@@ -1,6 +1,6 @@
 ---
 project: solstatus
-stars: 746
+stars: 748
 description: |-
     An uptime monitoring service that is easy and cheap to run at scale. Create endpoint checks for uptime, latency, and status code. Supports OpsGenie for alerts.
 url: https://github.com/SolZeroAI/solstatus
@@ -28,7 +28,7 @@ nub install
 nub run cli --help
 ```
 
-This repository requires Node.js 24.15.0 and Nub 0.10.0.
+This repository requires Node.js 24.15.0 and Nub 0.11.1.
 
 ### Common Commands
 

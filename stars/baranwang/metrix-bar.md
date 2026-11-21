@@ -1,6 +1,6 @@
 ---
 project: metrix-bar
-stars: 18
+stars: 19
 description: |-
     Custom Metrix.Bar dashboards
 url: https://github.com/baranwang/metrix-bar

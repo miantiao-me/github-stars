@@ -1,6 +1,6 @@
 ---
 project: takumi
-stars: 3197
+stars: 3218
 description: |-
     One layout engine for JSX, HTML, and CSS. Render images, SVG, PDFs, or a paint tree. No headless browser.
 url: https://github.com/kane50613/takumi
@@ -189,7 +189,7 @@ const image = await render(
 );
 ```
 
-`render()` registers only the font subsets the content uses. To preload fonts outside the request path, register them on a `Renderer` and pass it as `renderer`. See [Fonts](https://takumi.kane.tw/docs/fonts#preloading-with-registerfont).
+`googleFonts` comes from `takumi-js/helpers`. `render()` registers only the font subsets the content uses, and every render in the process shares the fonts it loaded. See [Fonts](https://takumi.kane.tw/docs/fonts#reusing-fonts-across-renders).
 
 ### API route (`next/og`-compatible)
 

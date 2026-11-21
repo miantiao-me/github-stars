@@ -1,6 +1,6 @@
 ---
 project: mcp
-stars: 804
+stars: 831
 description: |-
     Connect AI agents to real iPhones and Androids
 url: https://github.com/phone-harness/mcp
@@ -203,7 +203,7 @@ Any other client that can add a remote streamable HTTP server uses the URL above
 
 ## Tools
 
-The hosted server registers these tools. Every tool except the first two takes `device`, an id from `phone_list_available_devices`.
+The hosted server registers these tools. Every tool in the first table except its first two takes `device`, an id from `phone_list_available_devices`.
 
 Cloud Android emulators are free to start, then 5¢ per phone-minute, pay as you go. A Cloud iPhone is a flat monthly subscription, not billed by the minute: $80/mo, or $100/mo with an eSIM, with 20% off billed annually ($64/mo, or $80/mo with an eSIM). `minutes` on `phone_start_device` is how long the session runs (default 30), not a billing unit. See [phone-harness.com/pricing](https://phone-harness.com/pricing) for current rates.
 
@@ -212,7 +212,7 @@ Cloud Android emulators are free to start, then 5¢ per phone-minute, pay as you
 | `phone_list_available_devices` | Running phones and their ids, the phones the account can start, and the account balance when the API reports one. |
 | `phone_start_device` | Start a phone and wait until it is ready. With nothing named, a temporary Android emulator starts. `platform` and `kind` go together (`android`/`emulator`, or `ios`/`device` for the account's iPhone). `device_id` picks a particular iPhone or a saved Android phone (apps and logins kept). |
 | `phone_stop_device` | End the session. Anything not saved on the phone is lost. Stopping cloud Android stops the per-minute charge. |
-| `phone_get_screen_size` | Screen size in the coordinate space taps and swipes use. |
+| `phone_get_screen_size` | Screen size in the coordinate space taps and swipes use. It changes when the phone is turned. |
 | `phone_take_screenshot` | JPEG of the screen. Long side at most `max_size` (default 1024), or `scale`. The text before the image converts a point in the image to screen coordinates. |
 | `phone_list_elements_on_screen` | Visible text with tap-ready centers (`text` or `json`). Accessibility tree on Android; text recognition on iPhone. |
 | `phone_click_on_screen_at_coordinates` | Tap `x`, `y`. |
@@ -220,11 +220,26 @@ Cloud Android emulators are free to start, then 5¢ per phone-minute, pay as you
 | `phone_swipe_on_screen` | Swipe. `direction` is the way the finger moves (`up` reveals what is below). From `x`, `y` or the center, for `distance` pixels or 40% of the screen. |
 | `phone_type_keys` | Type `text` into the focused field. `submit` presses Enter. |
 | `phone_press_button` | `HOME`, `BACK` (Android only), `APP_SWITCHER`, or `ENTER`. |
+| `phone_wake` | Wake a cloud iPhone that is asleep, on its lock screen, or showing the StandBy clock, and get it past the lock screen. Cloud iPhones are set up with no passcode, so nothing is typed. iPhone only. |
+| `phone_open_url` | Open an https link in the iPhone's browser, whole, with no typing. `url` must start with `https://`, have no spaces, and be at most 4096 characters. iPhone only; the phone has to be awake. |
+| `phone_set_orientation` | Turn a cloud iPhone to `portrait`, `landscape_left` or `landscape_right`. The result gives the new screen size; coordinates read before the turn are stale. An app that supports only one way up stays that way. The phone has to be awake. If iOS's Portrait Orientation Lock is on, the turn switches it off first, which goes through Settings, takes about a minute and leaves the phone on its Home Screen; the lock then stays off until a turn back to portrait, which puts it on again. iPhone only. |
 | `phone_list_apps` | Installed apps: package ids on Android, bundle ids on an iPhone, when the phone can list them. |
 | `phone_launch_app` | Open an app by the name on its icon, or on Android by package id. |
 | `phone_get_foreground_app` | Which app is in front, when the phone reports it. |
 
-There is no tool that opens a URL. A local stdio server also registers `phone_save_screenshot` (write a PNG or JPEG on that machine). Tool names follow [mobile-mcp](https://github.com/mobile-next/mobile-mcp).
+A cloud iPhone that has been left alone goes to sleep. Taps, typing and app launches are then refused until `phone_wake` is called, and the refusal says so. A local stdio server also registers `phone_save_screenshot` (write a PNG or JPEG on that machine). Tool names follow [mobile-mcp](https://github.com/mobile-next/mobile-mcp).
+
+### Reserving a phone
+
+An account with no cloud iPhone yet, or one that needs more of them, reserves them with a $20 per phone refundable deposit; the quote `phone_reserve` returns is authoritative. Reservations are for iPhones only (with or without eSIM). Cloud Android emulators are on the $20 plan and are not reserved. These tools take no `device`, and none of them pays: `phone_reserve` hands back a Stripe Checkout link, and a person opens it and pays the deposit. Nothing is reserved until they do.
+
+| Tool | Does |
+| --- | --- |
+| `phone_reserve` | Ask for iPhones: `phone_type` (`iphone`, or `iphone_esim` for one with an eSIM), `plan` (`monthly` or `annual`), `use_case`, what the phones are for, and `quantity` (1 to 50, default 1). Returns the quote (the deposit due now, and the plan's first billing period at the intro and standard prices) and the Checkout link for the deposit. `first_name` and `last_name` put a name on the reservation in place of the account's. `idempotency_key` repeats a call that failed part way without starting a second reservation. |
+| `phone_list_reservations` | The account's reservations, newest first: status, place in the queue, deposit, and when it was paid (`text` or `json`). With `reservation_id`, one in full, with its quote and, while it is unpaid, its Checkout link. |
+| `phone_cancel_reservation` | Give up a place in the queue. `confirm` must be `true`: without it nothing is cancelled, and the answer says what would be given up and refunded. The deposit still held is refunded to the card that paid. Refused once every phone has been handed over, because that deposit went onto the first bill. |
+
+A reservation is `pending_payment` until the deposit is paid, then `queued` with a position. Places go in the order deposits were paid; nothing moves one up. A customer's first phone is at the intro price, once, and every other phone at the standard price. Cancelling refunds the deposit still held automatically, to the card that paid. The plan starts when a phone is handed over; the deposit comes off its first bill and is then no longer refundable. An account can have five unpaid reservations an hour, and cancelling one does not free a place. Until the API has reservations, each of these tools says so and changes nothing.
 
 ## FAQ
 

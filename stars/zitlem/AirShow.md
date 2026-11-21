@@ -1,6 +1,6 @@
 ---
 project: AirShow
-stars: 27
+stars: 30
 description: |-
     Free, open-source, cross-platform screen mirroring receiver — AirPlay, Google Cast, Miracast, DLNA
 url: https://github.com/zitlem/AirShow

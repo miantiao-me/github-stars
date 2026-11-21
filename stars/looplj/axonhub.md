@@ -1,6 +1,6 @@
 ---
 project: axonhub
-stars: 5456
+stars: 5482
 description: |-
     ⚡️ Open-source AI Gateway — Use any SDK to call 100+ LLMs. Built-in failover, load balancing, cost control & end-to-end tracing.
 url: https://github.com/looplj/axonhub
@@ -55,26 +55,20 @@ url: https://github.com/looplj/axonhub
       </div>
     </td>
     <td width="50%" align="center" valign="top">
-      <a href="https://lj.s.gy/DUq59H" target="_blank">
-        <img src="https://www.infistar.cc/logo.png" alt="无限星河 Infistar.cc" height="50"/>
+      <a href="https://noonoo.ai/login?aff=Y3u6" target="_blank">
+        <img src="docs/sponsors/noonoo-logo.png" alt="noonoo.ai" height="50"/>
         <br/>
-        <strong>无限星河 Infistar.cc</strong>
+        <strong>noonoo.ai</strong>
       </a>
       <div align="center">
-        <a href="https://lj.s.gy/DUq59H" target="_blank">
-          <img src="docs/sponsors/infistar-banner.png" alt="Infistar.cc 无限星河" width="100%"/>
+        <a href="https://noonoo.ai/login?aff=Y3u6" target="_blank">
+          <img src="docs/sponsors/noonoo-banner.png" alt="noonoo.ai" width="100%"/>
         </a>
       </div>
       <div align="left">
-       <strong>AxonHub × Infistar.cc 无限星河｜高可用全模型 API</strong>
-      </div>
-      <div align="left">
-        ⚡ 企业级高并发稳定调度｜官方 1 折起 · 透明倍率 · 多节点冗余<br/>
-        🧠 全系模型支持｜ChatGPT · Claude · Gemini · DeepSeek<br/>
-        🎨 全模态接入｜文本 · 图像 · 视频 · Embedding / Rerank
-      </div>
-      <div align="left">
-        AxonHub 用户通过<a href="https://lj.s.gy/DUq59H" target="_blank">专属链接</a>注册，可享专属特惠。
+        noonoo.ai 提供高性价比、稳定可靠的 AI API 服务，一个账户即可接入 Claude、GPT、Gemini 等模型，覆盖文本、编程与图像生成场景。<br/>
+        兼容 OpenAI、Anthropic 与 Gemini API，方便接入现有应用与开发工作流，无需为不同模型分别订阅。<br/>
+        通过<a href="https://noonoo.ai/login?aff=Y3u6" target="_blank">专属链接注册</a>，开始使用一站式 AI API 服务。
       </div>
     </td>
   </tr>
@@ -289,6 +283,10 @@ url: https://github.com/looplj/axonhub
 ## 🚀 部署指南 | Deployment Guide
 
 让你的 Agent 读取并遵循 [`deploy-axonhub`](https://github.com/looplj/axonhub-skills/blob/main/deploy-axonhub/SKILL.md) 来部署 AxonHub。
+
+如需在子路径部署，请设置 `server.base_path: /axonhub`（或环境变量 `AXONHUB_SERVER_BASE_PATH=/axonhub`），重启后让反向代理保留完整请求路径。网页地址为 `/axonhub/`，OpenAI 兼容 API 地址为 `/axonhub/v1`，健康检查使用 `/axonhub/health`。
+
+To serve AxonHub under a URL prefix, set `server.base_path: /axonhub` (or `AXONHUB_SERVER_BASE_PATH=/axonhub`) and restart. Configure your reverse proxy to forward the full request path. The dashboard is at `/axonhub/`, the OpenAI-compatible API base is `/axonhub/v1`, and health probes use `/axonhub/health`.
 
 ---
 

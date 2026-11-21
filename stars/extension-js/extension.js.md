@@ -1,0 +1,241 @@
+---
+project: extension.js
+stars: 5220
+description: |-
+    The cross-browser extension framework.
+url: https://github.com/extension-js/extension.js
+---
+
+[npm-version-image]: https://img.shields.io/npm/v/extension.svg?color=0065e6
+[npm-version-url]: https://www.npmjs.com/package/extension
+[npm-downloads-image]: https://img.shields.io/npm/dm/extension.svg?color=0065e6
+[npm-downloads-url]: https://www.npmjs.com/package/extension
+[action-image]: https://github.com/extension-js/extension.js/actions/workflows/ci.yml/badge.svg?branch=main&color=0065e6
+[action-url]: https://github.com/extension-js/extension.js/actions
+[discord-image]: https://img.shields.io/discord/1253608412890271755?label=Discord&logo=discord&style=flat&color=0065e6
+[discord-url]: https://discord.gg/BRqbPDfPxb
+[bestpractices-image]: https://img.shields.io/cii/level/14662?label=Best%20Practices&style=flat&color=0065e6
+[bestpractices-url]: https://www.bestpractices.dev/projects/14662
+
+# Extension.js [![Version][npm-version-image]][npm-version-url] [![Downloads][npm-downloads-image]][npm-downloads-url] [![CI][action-image]][action-url] [![Discord][discord-image]][discord-url] [![Best Practices][bestpractices-image]][bestpractices-url]
+
+> The cross-browser extension framework. Build for Chrome, Edge, Firefox, and Safari with no build config required.
+
+<img alt="Logo" align="right" src="https://media.extension.land/track/extension-js.png" width="20.25%" />
+
+```bash
+npx extension@latest create my-extension
+cd my-extension
+npm run dev
+```
+
+Works with `npm`, `pnpm`, `yarn`, `bun`, and `deno`.
+
+The CLI itself runs on Node.js 22.12+, Deno 2.5+, and Bun 1.2+.
+
+[Documentation](https://extension.js.org/docs) · [Examples](https://github.com/extension-js/templates) · [YouTube](https://www.youtube.com/@BrowserExtension) · [Showcase](https://extension.js.org/showcase) · [Blog](https://extension.js.org/blog)
+
+## Why Extension.js
+
+Browser extensions ship with the worst dev experience in modern web. Manifest V3 fragmentation, browser-specific quirks, no hot reload for content scripts, and a separate build pipeline for every target. Extension.js fixes that.
+
+- **Hot Module Replacement** for popup, options, devtools and other extension pages, including React, Vue, Svelte, and Preact components, with targeted reloads for content scripts and the service worker so one save never reloads the whole extension
+- **Manifest V3 by default**, with automatic adapters for Chrome, Edge, Firefox, and Safari targets
+- **One CLI** for Chrome, Edge, Firefox, Safari, and any Chromium or Gecko binary
+- **Zero config**, no webpack, no rollup, no plugins to maintain
+- **First-class** TypeScript, React, Vue, Svelte, and Preact support
+- **Production builds** with `extension build --zip`, ready for the Chrome Web Store, Edge Add-ons and Firefox Add-ons, and a Safari app built through Xcode on macOS
+- **Drop-in** for existing extensions with one `devDependency`
+
+## Watch it work
+
+[![One command, and the extension is running in a real browser](https://media.extension.land/video/extension-js/sixty-second-demo.gif)](https://extension.js.org/docs)
+
+## How is this different
+
+If you have used [Plasmo](https://www.plasmo.com), [WXT](https://wxt.dev), or [CRXJS](https://crxjs.dev), here is what Extension.js does that the others do not:
+
+| Capability | Extension.js |
+| :--------- | :----------- |
+| Run any GitHub sample directly | `extension dev https://github.com/.../sample` |
+| Managed browser binaries | `extension install firefox` downloads an isolated build |
+| Targeted content-script reload across browsers | Built in, only the changed entries re-inject, no plugin glue |
+| Production zip for the stores | `extension build --zip` |
+| Framework agnostic | [Vanilla](https://github.com/extension-js/templates/tree/main/examples/javascript), [TS](https://github.com/extension-js/templates/tree/main/examples/typescript), [React](https://github.com/extension-js/templates/tree/main/examples/react), [Vue](https://github.com/extension-js/templates/tree/main/examples/vue), [Svelte](https://github.com/extension-js/templates/tree/main/examples/svelte), [Preact](https://github.com/extension-js/templates/tree/main/examples/preact), no lock-in |
+| Custom Chromium and Gecko binaries | `--chromium-binary`, `--gecko-binary` |
+
+## Frameworks
+
+<div align="center">
+
+| <img alt="ESNext" src="https://github.com/cezaraugusto/extension.js/assets/4672033/a9e2541a-96f0-4caa-9fc9-5fc5c3e901c8" width="70"> | <img alt="TypeScript" src="https://github.com/cezaraugusto/extension.js/assets/4672033/b42c5330-9e2a-4045-99c3-1f7d264dfaf4" width="70"> | <img alt="WASM" src="https://github.com/cezaraugusto/extension.js/assets/4672033/f19edff3-9005-4f50-b05c-fba615896a7f" width="70"> | <img alt="React" src="https://github.com/cezaraugusto/extension.js/assets/4672033/ff64721d-d145-4213-930d-e70193f8d57e" width="70"> | <img alt="Vue" src="https://github.com/cezaraugusto/extension.js/assets/4672033/15f1314a-aa65-4ce2-a3f3-cf53c4f730cf" width="70"> | <img alt="Svelte" src="https://github.com/cezaraugusto/extension.js/assets/4672033/de1082fd-7cf6-4202-8c12-a5c3cd3e5b42" width="70"> | <img alt="Preact" src="https://github.com/cezaraugusto/extension.js/assets/4672033/8807efd9-93e5-4db5-a1d2-9ac524f7ecc2" width="70"> |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ESNext<br>[Try out](https://github.com/extension-js/templates/tree/main/examples/javascript) | TypeScript<br>[Try out](https://github.com/extension-js/templates/tree/main/examples/typescript) | WASM<br>[Try out](https://github.com/extension-js/templates/tree/main/examples/transformers-js) | React<br>[Try out](https://github.com/extension-js/templates/tree/main/examples/react) | Vue<br>[Try out](https://github.com/extension-js/templates/tree/main/examples/vue) | Svelte<br>[Try out](https://github.com/extension-js/templates/tree/main/examples/svelte) | Preact<br>[Try out](https://github.com/extension-js/templates/tree/main/examples/preact) |
+
+</div>
+
+## Browsers
+
+Use these flags with `extension dev`, `extension start`, or `extension preview`:
+
+- Select a browser: `--browser <chrome | edge | firefox | safari>`
+- Custom Chromium binary: `--chromium-binary <path-to-binary>`
+- Custom Gecko (Firefox) binary: `--gecko-binary <path-to-binary>`
+
+Every browser picks its binary in the same order: the flag above, then the browser's variable (`CHROME_FOR_TESTING_PATH`, `CHROMIUM_BINARY`, `CHROME_BINARY`, `EDGE_BINARY` or `FIREFOX_BINARY`), then the copy `extension install` downloaded, then the system install. A flag or variable that names a path that does not exist stops the command and names the path.
+
+```bash
+# Chrome for Testing (the managed copy, offered on the first run)
+npx extension@latest dev --browser=chrome
+
+# Edge
+npx extension@latest dev --browser=edge
+
+# Safari, on macOS with Xcode
+npx extension@latest dev --browser=safari
+
+# Custom Chromium path
+npx extension@latest dev --chromium-binary "/Applications/Chromium.app/Contents/MacOS/Chromium"
+
+# Custom Firefox path
+npx extension@latest dev --gecko-binary "/Applications/Firefox.app/Contents/MacOS/firefox"
+```
+
+<div align="center">
+
+| <img alt="Chrome" src="https://media.extension.land/logos/browsers/chrome.svg" width="70"> | <img alt="Edge" src="https://media.extension.land/logos/browsers/edge.svg" width="70"> | <img alt="Firefox" src="https://media.extension.land/logos/browsers/firefox.svg" width="70"> | <img alt="Safari" src="https://media.extension.land/logos/browsers/safari.svg" width="70"> | <img alt="Chromium" src="https://media.extension.land/logos/browsers/chromium.svg" width="70"> | <img alt="Gecko" src="https://media.extension.land/logos/browsers/firefox.svg" width="70"> |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| <sup>Google Chrome<br>✅ Supported</sup> | <sup>Microsoft Edge<br>✅ Supported</sup> | <sup>Mozilla Firefox<br>✅ Supported</sup> | <sup>Apple Safari<br>✅ Supported</sup> | <sup>Chromium-based<br>✅ Supported</sup> | <sup>Gecko-based<br>✅ Supported</sup> |
+
+</div>
+
+## Ship to the store
+
+Build a production-ready bundle and zip it for submission to the Chrome Web Store, Edge Add-ons, or Firefox AMO. A Safari build produces a macOS app through Xcode instead of a ZIP file:
+
+```bash
+# Production build
+npx extension@latest build
+
+# Production build packaged as a ZIP
+npx extension@latest build --zip
+
+# Per-browser builds
+npx extension@latest build --browser=firefox --zip
+
+# Safari app, on macOS with Xcode
+npx extension@latest build --browser=safari
+```
+
+Useful flags:
+
+- `--zip` packages the build into a ZIP ready for store upload
+- `--zip-source` includes source files for store source-code review
+- `--zip-filename <name>` controls the output filename, written as `dist/<name>-<browser>.zip`
+- `--zip-dir <path>` writes the ZIP files to that folder instead of `dist`, relative to the project root or absolute
+- `--source-maps` writes a source map beside each script and stylesheet of a production build. The maps stay out of the ZIP file, and the build total counts them apart
+- `--out-dir <path>` writes the build to `<path>/<browser>` instead of `dist/<browser>`. A build into the folder a live dev session serves is refused, so this is how a build runs beside a dev session
+- `--polyfill` bundles the cross-browser webextension polyfill, off by default in every command. It is for a Chromium older than 148, or older than 152 when the manifest declares a `devtools_page`
+
+## Manage browser binaries
+
+Skip the system-install dance. Extension.js can download and manage isolated browser binaries for clean dev sessions:
+
+```bash
+# Install a managed Firefox build
+npx extension@latest install firefox
+
+# Install Chrome and Edge in one go
+npx extension@latest install --browser=all
+
+# Print where managed browsers live
+npx extension@latest install --where
+```
+
+## Add to an existing extension
+
+Install Extension.js as a dev dependency and wire up your scripts.
+
+```bash
+npm install extension@latest --save-dev
+```
+
+```json
+{
+  "scripts": {
+    "build": "extension build",
+    "dev": "extension dev",
+    "preview": "extension preview"
+  }
+}
+```
+
+Run `npm run dev` to develop, and watch the browser open with your extension already loaded:
+
+[![extension dev: the browser opens with the extension loaded](https://media.extension.land/video/extension-js/dev-build-preview.gif)](https://extension.js.org/docs/commands/dev)
+
+Use `npm run build` for production, and `npm run preview` to inspect the production output.
+
+## Start from a Chrome sample
+
+Pull any sample from [Chrome Extension Samples](https://github.com/GoogleChrome/chrome-extensions-samples) and run it directly:
+
+```bash
+npx extension@latest dev https://github.com/GoogleChrome/chrome-extensions-samples/tree/main/functional-samples/sample.page-redder --browser=edge
+```
+
+[![Running a Chrome sample straight from its GitHub URL](https://media.extension.land/video/extension-js/run-chrome-sample.gif)](https://extension.js.org/docs/getting-started/immediately)
+
+## Package managers
+
+Add Extension.js to a project, or run it once without installing, with the package manager you already use.
+
+| Package manager | Add to a project | Run without installing |
+| :-- | :-- | :-- |
+| npm | `npm install extension@latest --save-dev` | `npx extension@latest create my-extension` |
+| pnpm | `pnpm add extension@latest --save-dev` | `pnpm dlx extension@latest create my-extension` |
+| Yarn | `yarn add extension@latest --dev` | `yarn dlx extension@latest create my-extension` |
+| Bun | `bun add --dev extension@latest` | `bunx extension@latest create my-extension` |
+| Deno | `deno add npm:extension@latest` | `deno run -A npm:extension@latest create my-extension` |
+
+Which runtime the CLI then executes on is a separate question, answered below.
+
+## Runtimes
+
+| | Runtime | Status | Notes |
+| :-: | :-- | :-- | :-- |
+| <img alt="Node.js" src="https://media.extension.land/logos/package-managers/node.svg" width="64"> | Node.js | ✅&nbsp;22.12&nbsp;and&nbsp;newer | The default. `npx`, `pnpm dlx`, `yarn dlx` and `bunx` all land here through the published bin |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="https://media.extension.land/logos/package-managers/deno-dark.svg"><img alt="Deno" src="https://media.extension.land/logos/package-managers/deno.svg" width="64"></picture> | Deno | ✅&nbsp;2.5&nbsp;and&nbsp;newer | `deno run -A npm:extension@latest`. Deno 2.8.0 is refused because it cannot load `node:querystring`, fixed in 2.8.1 |
+| <img alt="Bun" src="https://media.extension.land/logos/package-managers/bun.svg" width="64"> | Bun | ✅&nbsp;1.2&nbsp;and&nbsp;newer | `bunx --bun extension` and `bun run --bun`. Plain `bunx` runs the CLI on Node.js instead, through the published bin |
+
+## Telemetry
+
+Extension.js collects a tiny amount of anonymous telemetry to understand which commands are used and which fail, and never source code, file paths, URLs or project content. Turn it off with `EXTENSION_TELEMETRY_DISABLED=1`, `DO_NOT_TRACK=1` or `extension telemetry disable`. The full list is in [docs/TELEMETRY.md](https://github.com/extension-js/extension.js/blob/main/docs/TELEMETRY.md).
+
+## Community
+
+- Star the repo if Extension.js helped you ship faster
+- Join the [Discord](https://discord.gg/BRqbPDfPxb) for help and feedback
+- Open issues and feature requests on [GitHub](https://github.com/extension-js/extension.js/issues)
+- Browse production-ready [examples](https://github.com/extension-js/templates)
+
+## Sponsors
+
+Sponsors help the project ship faster releases, better developer experience, and long-term reliability for extension teams.
+
+<div align="center">
+  <p>
+    <a href="https://github.com/sponsors/cezaraugusto">Become a sponsor</a>
+  </p>
+</div>
+
+Documentation is hosted by [Mintlify](https://mintlify.com/) through its open source program. Tiers and placement are listed in [BACKERS.md](https://github.com/extension-js/extension.js/blob/main/BACKERS.md).
+
+## Contributing
+
+Bug reports and pull requests are welcome. Read [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for the dev setup, the test commands, and what a pull request needs to carry.
+
+## License
+
+MIT (c) Cezar Augusto and the Extension.js authors.
+

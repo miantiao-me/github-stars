@@ -1,6 +1,6 @@
 ---
 project: omarchy-a
-stars: 192
+stars: 223
 description: |-
     Experimental Omarchy desktop for Apple A-series devices.
 url: https://github.com/OrchardLinux/omarchy-a
@@ -10,119 +10,23 @@ url: https://github.com/OrchardLinux/omarchy-a
 
 An experimental, [Omarchy](https://omarchy.org/)-inspired desktop for Apple A-series devices. Built on Arch Linux ARM, with Omarchy's look and feel reworked for touch.
 
-Includes a device-aware CLI and release format for installation, diagnostics, and bringing Omarchy A to more hardware.
-
-## Development checkout
-
-This repository is the distribution: desktop, root filesystem and release. The
-hardware support and the `orchard` tool live in
-[orchard](https://github.com/OrchardLinux/orchard); put its launcher on your PATH
-once (see its [README](https://github.com/OrchardLinux/orchard#develop)). Here,
-`orchard` runs orchard's newest nightly, whose kernels, m1n1, Pongo and tools this
-build then takes as they are. To work against your own orchard checkout, e.g. a
-branch with a driver you need, run that checkout's launcher instead
-(`../orchard-installer/bin/orchard build`). A gitignored `orchard.local.toml` may
-hold your board:
-
-```toml
-device = "j71b"
-```
-
-`orchard.toml` (its `[release]` table) makes this checkout an orchard distribution:
-
-```sh
-orchard build        # every component that changed, then a release in out/releases/dev-DATE-TIME
-orchard run          # build, then start that release's recovery on the attached iPad, from RAM
-orchard install      # install the last build
-orchard python -m unittest discover -s tests
-```
-
-`orchard build` runs `tools/build.py`, which keeps each component (desktop,
-Labwc, base, loader, …) in `out/components/` and rebuilds it only when its files
-change; orchard brings Pongo, the recovery tools and the kernels.
-[BUILD.md](BUILD.md) describes the steps one by one.
-
-RAM experiments and device bring-up happen in orchard itself, with its
-[examples](https://github.com/OrchardLinux/orchard/tree/main/examples) and
-[bring-up guide](https://github.com/OrchardLinux/orchard/blob/main/docs/device-bring-up.md).
-
-## Supported devices
-
-A release covers every device orchard describes: one root image, and
-orchard's kernel, device trees and modules for each platform. How well a device
-works is orchard's device data, which the installer shows before it changes
-anything. Today the iPad 6 Wi-Fi (`iPad7,5`, J71b) is supported; the others
-are experimental. See orchard's
-[devices](https://github.com/OrchardLinux/orchard/tree/main/devices).
-
-The desktop finds the hardware at login. Where orchard's kernel runs the GPU
-(the iPad 6 and iPad 7, A10; the iPad 5, A9, once its GPU support has landed
-in orchard and in the Mesa fork), the login first draws one test frame on the
-GPU, within 10 s at most. If that works the desktop draws on the GPU; if not,
-and on every other device, it draws in software, as before.
-`journalctl -t omarchy-gpu-probe` shows what a login decided and why. To start
-such a device on the software desktop once, boot with
-`modprobe.blacklist=powervr`. On the iPad 6 and iPad 7 Firefox plays H.264
-video, YouTube included, through the hardware video decoder.
-
-Firefox reaches the video decoder only with its media decoding sandbox
-switched off (`MOZ_DISABLE_RDD_SANDBOX=1`, set by the login session on those
-devices): a video that exploits a decoder bug is then not contained by that
-sandbox. The sandbox around web pages stays on.
-
-This image uses **tethered boot**: starting Linux after a cold restart requires a host computer running `orchard launch`.
-
-> **Security:** this experimental image logs in as `tablet` automatically at boot. `sudo` asks for the password chosen at install, and the screen lock takes a 6-digit PIN. There is no disk encryption, and the boot ROM exploit used to start Linux gives anyone holding the device full access. Use a dedicated test device; do not store sensitive data on it.
-
-Contributions for additional devices are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
-
 ## Install
 
-Use a computer running **Linux or macOS** with curl, libusb and OpenSSH installed, a USB data cable, and a supported iPad running iPadOS 16 or later. Allow several GB of free host storage for firmware downloads and extraction. You need no Python or other tools: the installer brings its own.
+You need a Mac or Linux computer, a USB cable, and a [compatible device](https://github.com/OrchardLinux/orchard/blob/main/docs/compatibility.md) (iPad Air 2, iPad 5–7, iPhone 7–X) on iOS or iPadOS 15 or later.
 
-### 1. Back up your iPad
+1. **Back up your device.**
+2. **Make room for Linux (at least 9 GB):**
+   - Install [palera1n 3.0 beta 3](https://github.com/palera1n/palera1n/releases/tag/v3.0.0-beta.3). On a Mac, run `export RA1N_CLI=1 PALERA1N=/Applications/palera1n.app/Contents/MacOS/palera1n` before the next step.
+   - Download and unzip [Resize APFS](https://github.com/OrchardLinux/resize-apfs/releases/latest), then run `./resize-apfs boot` in its folder and follow the prompts.
+   - When the device has started, open the **Resize APFS** app, choose **Adjust size**, and wait for **Completed and verified**.
+3. **Put the device in [DFU mode](https://support.apple.com/en-us/108900)**; the screen stays black.
+4. **Install:**
+   ```sh
+   curl -fsSL https://github.com/OrchardLinux/omarchy-a/releases/latest/download/install.sh | sh
+   ```
+5. **After a restart**, start it again from your computer: DFU mode, then `orchard launch`.
 
-Storage changes can permanently erase data. Back up before continuing.
-
-### 2. Make room for Linux
-
-The installer needs at least 9 GiB that iPadOS doesn't use: free space, or an earlier Linux install to replace. It never resizes iPadOS itself. Skip this step if you already have that.
-
-1. Download and extract [Resize APFS](https://github.com/OrchardLinux/resize-apfs/releases/latest). It uses [palera1n](https://github.com/palera1n/palera1n/releases); the installer below puts palera1n into `~/.local/bin` if you don't have it yet, and stops without changing the iPad when there isn't enough room.
-2. Run `./resize-apfs boot` from its extracted folder and follow the prompts.
-3. Once iPadOS starts, unlock the iPad and open **Resize APFS** when its icon appears.
-4. Choose **Adjust size** and reserve space for Linux.
-5. Wait for **Completed and verified** before restarting. Do not interrupt the operation; see the [resize safety instructions](https://github.com/OrchardLinux/resize-apfs#while-resizing) if status becomes unavailable.
-
-### 3. Install Omarchy A
-
-Connect only the target iPad. Enter DFU: hold Home + Power for about 8 seconds, release Power, then keep holding Home for about 10 seconds. The screen should remain black. Then run:
-
-```sh
-curl -fsSL https://github.com/OrchardLinux/omarchy-a/releases/latest/download/install.sh | sh
-```
-
-The installer of the latest release downloads its own Python and checks it, then the release. Choose where Omarchy A goes, then set a password (for `sudo` and system changes) and a 6-digit PIN (for the lock screen). It boots recovery, writes a boot partition and the system next to iPadOS, adds the device's firmware, and starts Omarchy A, all in one DFU boot. Keep USB connected until it says Omarchy A is starting. On Linux, it installs USB permissions with `sudo`; reconnect the device if it asks.
-
-It also leaves `orchard` in `~/.local/bin` for starting Omarchy A again (below); add that directory to your `PATH` if it isn't. `orchard update` updates it.
-
-### Coming from the previous installer
-
-Installs from the previous installer (one Linux partition, no boot partition) can't be started or converted by this one. The installer offers that partition as a target and says so before erasing it. To keep files, copy them off first: start the old system with the previous CLI release, then copy them over the network (for example with `scp`).
-
-## Start Linux after a restart
-
-Connect the iPad in DFU mode and run:
-
-```sh
-orchard launch
-```
-
-The bootloader reads the boot entries from the iPad's boot partition and starts the one you choose (or the only one). It works from any computer with Orchard installed: nothing is downloaded, formatted or reinstalled. See [orchard](https://github.com/OrchardLinux/orchard#install-a-system).
-
-## More than an installer
-
-Hardware work before and after installation (recovery boot, device-tree capture, firmware preparation, RAM experiments, bringing up a new device) happens with [orchard](https://github.com/OrchardLinux/orchard) from a checkout; see its [device bring-up guide](https://github.com/OrchardLinux/orchard/blob/main/docs/device-bring-up.md).
+Update from the device with **Update > Omarchy** in the menu. The Linux storage is not encrypted. For problems, see [Troubleshooting](docs/troubleshooting.md).
 
 ## How it works
 
@@ -135,6 +39,51 @@ An iPad cannot boot a Linux installer like a PC boots an ISO. [How Omarchy A get
 - **Create your own remix:** customize the desktop, root filesystem, and image policy using the same release format; [minimal-linux](https://github.com/OrchardLinux/minimal-linux) provides a smaller, Alpine-based example.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for bring-up guidance and [BUILD.md](BUILD.md) for image assembly and validation.
+
+## Development
+
+This repository is the distribution: desktop, root filesystem and release. The
+hardware support and the `orchard` tool live in
+[orchard](https://github.com/OrchardLinux/orchard); put its launcher on your PATH
+once (see its [README](https://github.com/OrchardLinux/orchard#develop)). Here,
+`orchard` runs orchard's newest nightly, whose kernels, m1n1, Pongo and tools this
+build then takes as they are. To work against your own orchard checkout, e.g. a
+branch with a driver you need, run that checkout's launcher instead
+(`../orchard-installer/bin/orchard build`). To test package changes (Labwc,
+wlroots, Mesa, …) before they are published, keep a checkout of
+[OrchardLinux/packages](https://github.com/OrchardLinux/packages) beside this one
+(`../packages`): `orchard build` then builds every package of the image whose
+recipe there differs from the published one, caches it by recipe, installs it in
+place of `[orchard]`'s, and prints which packages it built. A checkout elsewhere
+is `--packages DIR`. A gitignored `orchard.local.toml` may hold your board and
+that choice:
+
+```toml
+device = "j71b"
+# packages = "../somewhere/packages"   # another checkout; false: published packages only
+```
+
+`orchard.toml` (its `[release]` table) makes this checkout an orchard distribution:
+
+```sh
+orchard build        # every component that changed, then a release in out/releases/dev-DATE-TIME
+orchard run          # build, then start that release's recovery on the attached iPad, from RAM
+orchard install      # install the last build
+orchard python -m unittest discover -s tests
+```
+
+`orchard build` runs `tools/build.py`, which keeps each component (desktop,
+base, artwork, …) in `out/components/` and rebuilds it only when its files
+change; orchard brings Pongo, the recovery tools and the kernels.
+[BUILD.md](BUILD.md) describes the steps one by one.
+
+RAM experiments and device bring-up happen in orchard itself, with its
+[examples](https://github.com/OrchardLinux/orchard/tree/main/examples) and
+[bring-up guide](https://github.com/OrchardLinux/orchard/blob/main/docs/device-bring-up.md).
+
+## More than an installer
+
+Hardware work before and after installation (recovery boot, device-tree capture, firmware preparation, RAM experiments, bringing up a new device) happens with [orchard](https://github.com/OrchardLinux/orchard) from a checkout; see its [device bring-up guide](https://github.com/OrchardLinux/orchard/blob/main/docs/device-bring-up.md).
 
 ## Troubleshooting
 

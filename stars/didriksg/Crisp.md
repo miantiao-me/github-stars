@@ -1,6 +1,6 @@
 ---
 project: Crisp
-stars: 2407
+stars: 2461
 description: |-
     Every display control macOS hides, in one menu bar app: sharp HiDPI/Retina scaling (no more blurry or tiny text), DDC brightness and volume, Extra Brightness past 100%, presets, virtual displays. Free and open source, a no-cost alternative to BetterDisplay and Lunar.
 url: https://github.com/didriksg/Crisp

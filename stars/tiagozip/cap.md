@@ -1,6 +1,6 @@
 ---
 project: cap
-stars: 8410
+stars: 8512
 description: |-
     The open-source, privacy-friendly CAPTCHA you host yourself. Bots and AI agents out, people in.
 url: https://github.com/tiagozip/cap

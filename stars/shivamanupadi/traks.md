@@ -1,6 +1,6 @@
 ---
 project: traks
-stars: 348
+stars: 351
 description: |-
     Self-hosted, privacy-friendly web analytics that deploys into your own Cloudflare account in two minutes. Free forever, MIT.
 url: https://github.com/shivamanupadi/traks

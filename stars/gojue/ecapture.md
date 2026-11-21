@@ -1,0 +1,383 @@
+---
+project: ecapture
+stars: 15578
+description: |-
+    Capture SSL/TLS plaintext with eBPF—no MITM proxy or custom CA installation. Supports Linux and Android on x86_64\arm64 and loong64.
+url: https://github.com/gojue/ecapture
+---
+
+<p align="center">
+  <img src="./images/ecapture-logo.svg" alt="eCapture logo" width="180" />
+</p>
+
+<p align="center">
+  <strong>eCapture (旁观者)</strong><br />
+  Capture SSL/TLS plaintext with eBPF—no MITM proxy or custom CA installation.
+</p>
+
+<p align="center">
+  <strong>English</strong> · <a href="./README-zh_Hans.md">汉字</a><br />
+  <a href="https://github.com/gojue/ecapture/actions/workflows/codeql-analysis.yml"><img alt="CodeQL" src="https://github.com/gojue/ecapture/actions/workflows/codeql-analysis.yml/badge.svg" /></a>
+  <a href="https://github.com/gojue/ecapture/releases"><img alt="Latest release" src="https://img.shields.io/github/v/release/gojue/ecapture?display_name=tag&amp;include_prereleases&amp;sort=semver" /></a>
+  <a href="https://ecapture.cc"><img alt="HomePage" src="https://img.shields.io/badge/Home_Page-e0ad15" /></a>
+</p>
+
+<p align="center">
+  <a href="https://www.star-history.com/gojue/ecapture">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=gojue/ecapture&amp;type=rank&amp;theme=dark" />
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=gojue/ecapture&amp;type=rank" />
+      <img alt="Star History Rank" src="https://api.star-history.com/badge?repo=gojue/ecapture&amp;type=rank" />
+    </picture>
+  </a>
+  <a href="https://www.star-history.com/gojue/ecapture">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=gojue/ecapture&amp;type=trending&amp;theme=dark" />
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=gojue/ecapture&amp;type=trending" />
+      <img alt="GitHub Trending Repository of the Day" src="https://api.star-history.com/badge?repo=gojue/ecapture&amp;type=trending" />
+    </picture>
+  </a>
+</p>
+
+> [!IMPORTANT]
+> Supports Linux on x86_64 (kernel 4.18+), aarch64 (kernel **5.5+**), and LoongArch64 `loong64` (kernel **6.6+**). Android supports x86_64 and aarch64 with the existing kernel minimums.
+> Capturing data requires root privileges or specific [Linux capabilities](docs/minimum-privileges.md).
+> Does not support Windows or macOS.
+
+----
+
+<!-- MarkdownTOC autolink="true" -->
+- [Introduction](#introduction)
+- [Getting started](#getting-started)
+  - [Download](#download)
+    - [ELF binary file](#elf-binary-file)
+    - [Docker image](#docker-image)
+  - [Capture OpenSSL plaintext data](#capture-openssl-plaintext-data)
+  - [Modules](#modules)
+    - [OpenSSL module](#openssl-module)
+    - [GoTLS module](#gotls-module)
+    - [Other modules](#other-modules)
+  - [Videos](#videos)
+- [Star History](#star-history)
+- [Security & operations](#security--operations)
+- [Contributing](#contributing)
+- [Compilation](#compilation)
+<!-- /MarkdownTOC -->
+
+# Introduction
+
+* Captures TLS plaintext from applications using OpenSSL, BoringSSL, or GnuTLS, and data read or written through NSPR.
+* Supports plaintext capture for Go TLS programs, including HTTPS/TLS traffic in Go applications.
+* Captures commands entered in interactive Bash and Zsh sessions.
+* Audits MySQL queries and supports MySQL 5.6/5.7/8.0 and MariaDB.
+
+Run `ecapture --help` to list commands and global options. Use `ecapture tls --help` or `ecapture help tls` for TLS options and examples. You can view help as a regular user.
+
+# Getting started
+
+## Download
+
+### ELF binary file
+
+> [!TIP]
+> Supports Linux on x86_64, aarch64, and LoongArch64; Android supports x86_64 and aarch64.
+
+Download the ELF binary package from the [releases page](https://github.com/gojue/ecapture/releases), extract it, and run:
+
+```shell
+ecapture --help
+```
+
+### Docker image
+
+> [!TIP]
+> Linux only.
+
+```shell
+# Pull the Docker image
+docker pull gojue/ecapture:latest
+
+# Run it
+docker run --rm --privileged=true --net=host -v ${HOST_PATH}:${CONTAINER_PATH} gojue/ecapture ARGS
+```
+
+> **⚠️ Security note**: `--privileged=true` grants full host access. For production use, prefer specific capabilities instead. See the [Minimum Privileges Guide](docs/minimum-privileges.md#method-3-docker-with-specific-capabilities).
+
+See [Docker Hub](https://hub.docker.com/r/gojue/ecapture) for more information.
+
+## Capture OpenSSL plaintext data
+
+```shell
+sudo ecapture tls
+```
+
+eCapture automatically detects the system's OpenSSL library and selects a capture interface: it prefers an up Ethernet interface on the lowest-metric IPv4/IPv6 default route, then falls back to interface traffic counters or an up interface. A startup warning names the selected interface and explains how to override it with `-i eth0` or `--ifname eth0`. Only that interface is captured; use `-i lo` for loopback traffic. Generate an HTTPS request with an OpenSSL-linked client to see the reconstructed request and response. This synthetic HTTP/1.1 example illustrates the text format:
+
+```text
+[2026-01-01T12:00:00.000000000Z] http/1.1 request 192.0.2.1:43210 -> 192.0.2.2:443 host="example.com" domain_source="Host" connection="17-4-client/192.0.2.1:43210--192.0.2.2:443/tcp#2"
+GET / HTTP/1.1
+Host: example.com
+
+```
+
+> 📄 For output formats and verification examples, see [docs/example-outputs.md](docs/example-outputs.md).
+
+## Modules
+
+Linux builds include all eight modules below. Android builds include `tls`, `gotls`, and `bash`.
+
+* bash: captures bash commands
+* zsh: captures zsh commands
+* gnutls: captures plaintext from GnuTLS libraries without needing a CA certificate
+* gotls: captures plaintext communication from Go programs using TLS/HTTPS
+* mysqld: captures SQL queries from MySQL 5.6/5.7/8.0 and MariaDB
+* nspr (alias `nss`): captures data read and written through NSPR
+* postgres: captures SQL sent through the simple query protocol on PostgreSQL 10 and later
+* tls: captures TLS plaintext from applications using OpenSSL or BoringSSL
+
+You can use `ecapture -h` to view the full list of subcommands.
+
+### OpenSSL module
+
+eCapture searches standard library paths for `libssl`. Use `--libssl` to select a specific library.
+
+If the target program is statically linked, you can set the program path directly as the value of the `--libssl` flag.
+
+The OpenSSL module supports three output modes:
+
+- `pcap`/`pcapng` mode stores encrypted network packets and TLS secrets in `pcap-NG` format.
+- `keylog`/`key` mode saves TLS handshake keys to a file.
+- `text` mode defaults to `--text-source=pcapng`, reconstructing complete HTTP/1.1 and HTTP/2 messages from live pcapng and DSB data. The capture interface is selected automatically; use `-i eth0` to override it. Use `--text-source=hook` to capture plaintext through function hooks instead (no interface required).
+
+For OpenSSL, GoTLS, and GnuTLS, repeat `--output` to choose multiple destinations.
+The default is `stdout`; explicit destinations replace that default. `stdout`
+and `stderr` render readable records with `log_type`/`module` labels. In
+`-m pcapng` mode, the terminal shows only operational logs. Files and
+`tcp://host:port` use Protobuf v2 JSON Lines. In text mode they carry both
+operational logs and captured events; in keylog/pcapng mode an output **file
+contains only operational logs**, while TCP carries both record types.
+Use `--keylogfile`/`--pcapfile` for native artifacts, with explicit filenames
+required in the corresponding mode and no default native files.
+
+`--stream-listen ws://127.0.0.1:28257/` starts a separate Protobuf v2 subscription
+listener requiring the `ecapture.v2` subprotocol. `--config-listen 127.0.0.1:28256`
+starts the HTTP configuration service. Both listeners are disabled by default.
+The old `--listen`, `--eventaddr`, `--logaddr`, `--ecaptureq` and event rotation
+flags are removed without compatibility aliases. See the
+[output API](docs/event-forward-api.md) for the complete mode matrix and receiver migration.
+
+#### Live decryption for text output
+
+`tls`, `gotls`, and `gnutls` default to the `pcapng` text source and automatically
+select a capture interface when `-i` is omitted. All three accept `--text-source hook`
+for function-hook capture. GoTLS still requires `--elfpath` to identify the target binary.
+
+Use `-m text --text-source=pcapng` with `tls`, `gotls`, or `gnutls` to reconstruct complete
+HTTP/1.1 and HTTP/2 messages from the captured network stream. Each message
+includes direction, timestamp, IP/port tuple, connection identity, and an
+HTTP/2 stream ID when applicable. `host` comes from the HTTP `Host` header or
+HTTP/2 `:authority`; `domain_source="server_ip"` marks a fallback to the
+server IP. Output goes to `--output` (stdout by default). Raw pcapng and a
+standalone keylog are disabled by default; specify `--pcapfile` or
+`--keylogfile` to save either artifact.
+
+```shell
+sudo ecapture tls -m text --text-source=pcapng -i eth0 --output stdout --output /tmp/http.jsonl 'tcp port 443'
+sudo ecapture gotls -m text --text-source=pcapng --elfpath /path/to/go-client -i eth0 --pcapfile /tmp/raw.pcapng 'tcp port 443'
+sudo ecapture gnutls -m text --text-source=pcapng --gnutls /path/to/libgnutls.so -i eth0 'tcp port 443'
+```
+
+The decryptor waits for TLS secrets that may appear in a DSB after the
+corresponding packets. HTTP/3 over QUIC v1/v2 has GoTLS test fixtures;
+support depends on the TLS backend supplying the required secrets.
+The following options require text mode with the pcapng source:
+
+| Option | Output / selection |
+| --- | --- |
+| `--text-raw` | Authenticated TLS/QUIC STREAM bytes and QUIC DATAGRAM messages |
+| `--text-http-events` | Incremental HTTP/1.x, HTTP/2, HTTP/3, SSE and HTTP/2 gRPC events |
+| `--text-max-decoded-body N` | Per-message gzip expansion limit in bytes; requires HTTP events; zero keeps content encoding |
+| `--text-protocol dot\|doh\|doq\|mqtt\|redis` | Explicit application parser; MQTT 3.1.1 and fixed-length RESP2/RESP3 |
+| `--text-tls-upgrade smtp\|imap\|pop3\|ldap\|postgres\|mysql\|connect\|https-connect` | One explicit STARTTLS/SSLRequest/CONNECT negotiation; HTTPS CONNECT includes one inner TLS layer |
+| `--text-udp-protocol dtls` | DTLS 1.2 ECDHE-RSA AES-128/256-GCM records; the default UDP protocol is QUIC |
+
+Structured events use lossless hex plus `metadata` JSON, preserving headers,
+trailers, message/stream IDs, early-data status and TLS depth, including events
+with no payload. Stream chunks carry offsets/end markers; datagrams retain
+message boundaries without invented stream offsets. Application selection is
+explicit, not automatic ALPN routing. Raw, HTTP-event and explicit application
+modes are mutually exclusive. HTTP reload uses the corresponding underscore
+JSON keys; omitted module options reset to their zero defaults.
+Mail/database upgrades negotiate TLS; use `--text-raw` for application bytes
+without a supported parser. gRPC events preserve schema-free Protobuf bytes.
+Operational logs contain payload-free diagnostics. ECH still requires
+`ECH_SECRET`/`ECH_CONFIG` material that current probes do not capture; upgrading
+the decryptor alone does not enable live ECH. DTLS/DATAGRAM do not imply
+WebRTC, WebTransport or MASQUE decoding.
+With v1.4.0, some zero-length-client-CID QUIC loopback captures still fail
+connection routing; the maintained DoQ/DATAGRAM baseline uses 8-byte client CIDs.
+
+To verify the source independently, add `--pcapfile /tmp/raw.pcapng` to the
+capture command and send a request with a unique path or response token. After
+stopping eCapture, preload only its embedded secrets with Wireshark >= 4.4
+to handle DSBs arriving after their packets, then compare TLS stream 0:
+
+```shell
+keys=$(mktemp)
+editcap --extract-secrets /tmp/raw.pcapng - >"$keys"
+tshark -n -r /tmp/raw.pcapng -o "tls.keylog_file:$keys" -q -z follow,tls,ascii,0
+rm -f -- "$keys"
+```
+
+The optional file receives the same pcapng bytes as the live SDK stream.
+
+Terminal records and JSON files distinguish operational logs from captured events.
+JSON and Protobuf share the v2 schema; receivers must preserve TEXT metadata and
+save native KEYLOG/PCAPNG bytes by format. Subscriptions receive future events;
+a late pcapng connection starts an independent fragment without historical
+packets or keys. See the [v2 protocol](protobuf/PROTOCOLS.md) and
+[receiver example](examples/ecaptureq_client/README.md).
+
+#### Pcap mode
+
+Supports TLS-encrypted HTTP `1.0/1.1/2.0` over TCP and HTTP/3 (QUIC) over UDP.
+
+Use `-m pcapng` (alias `-m pcap`) with `--pcapfile` to name the required local capture file. Use `-i` to override the automatically selected interface.
+
+```shell
+sudo ecapture tls -m pcap -i eth0 --pcapfile=ecapture.pcapng tcp port 443
+```
+
+This command saves captured network packets and TLS secrets in a pcapng file. Wireshark uses its embedded secrets to decrypt supported TLS traffic.
+
+> 📄 For pcapng verification, see [docs/example-outputs.md](docs/example-outputs.md#tls-module--pcapng-mode).
+
+#### Keylog mode
+
+You can specify `-m keylog` or `-m key` together with the `--keylogfile` option. `--keylogfile` must name an explicit local artifact file; there is no default filename.
+
+The captured OpenSSL TLS master secret is saved to `--keylogfile`. You can also enable `tcpdump` capture and then open the file in Wireshark, setting the master secret path to view plaintext packets.
+
+```shell
+sudo ecapture tls -m keylog --keylogfile=openssl_keylog.log
+```
+
+You can also use `tshark` for real-time decryption and display:
+
+```shell
+tshark -o tls.keylog_file:openssl_keylog.log -Y http -T fields -e http.file_data -f "port 443" -i eth0
+```
+
+#### Text mode
+
+```shell
+sudo ecapture tls -m text
+```
+
+This reconstructs HTTP messages using the default `pcapng` text source. To capture plaintext bytes from TLS function hooks, use `sudo ecapture tls -m text --text-source hook` (no interface required).
+
+### GoTLS module
+
+Similar to the OpenSSL module.
+
+#### `gotls` command
+
+Capture TLS plaintext data.
+
+Step 1:
+
+```shell
+sudo ecapture gotls --elfpath=/path/to/go-client
+```
+
+Step 2:
+
+```shell
+/path/to/go-client
+```
+
+#### More help
+
+```shell
+ecapture gotls -h
+```
+
+### Other modules
+
+Modules such as `bash`, `mysqld`, and `postgres` can also be used. You can view the full list with `ecapture -h`.
+
+## Videos
+
+* YouTube video: [How to use eCapture v0.1.0](https://www.youtube.com/watch?v=CoDIjEQCvvA "eCapture User Manual")
+* [eCapture: supports capturing plaintext of Go TLS/HTTPS traffic](https://medium.com/@cfc4ncs/ecapture-supports-capturing-plaintext-of-golang-tls-https-traffic-f16874048269)
+
+## eCaptureQ GUI application
+
+[eCaptureQ](https://github.com/gojue/ecaptureq) is a cross-platform graphical client for eCapture that visualizes eBPF-based TLS capture capabilities. It provides an interface for analyzing encrypted traffic without needing a CA certificate.
+
+It supports two modes:
+
+* Integrated mode: unified Linux/Android execution
+* Remote mode: Windows/macOS/Linux clients connect to a remote eCapture service
+
+This eCapture version requires a client with Protobuf v2 support and the
+`ecapture.v2` WebSocket subprotocol. Check the selected client release against
+the [receiver contract](docs/event-forward-api.md#receiving-v2); older v1
+clients cannot connect without an update.
+
+### Event forwarding
+
+[Event forwarding projects](./docs/event-forward.md)
+
+### Video demonstration
+
+https://github.com/user-attachments/assets/c8b7a84d-58eb-4fdb-9843-f775c97bdbfb
+
+🔗 [GitHub repository](https://github.com/gojue/ecaptureq)
+
+### Protobuf protocols
+
+For details of the Protobuf log schema used by eCapture/eCaptureQ, see:
+
+- [protobuf/PROTOCOLS.md](./protobuf/PROTOCOLS.md)
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=gojue%2Fecapture&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=gojue/ecapture&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=gojue/ecapture&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=gojue/ecapture&type=date&legend=top-left" />
+ </picture>
+</a>
+
+# Security & operations
+
+- [**Security policy**](SECURITY.md) — vulnerability reporting and supported versions
+- [**Minimum privileges**](docs/minimum-privileges.md) — required Linux capabilities and least-privilege configuration
+- [**Defense & detection**](docs/defense-detection.md) — how to detect and defend against unauthorized usage
+- [**Performance benchmarks**](docs/performance-benchmarks.md) — repeatable overhead and event-loss measurements
+- [**Release verification**](docs/release-verification.md) — how to verify the integrity of release artifacts
+
+# Contributing
+
+See [CONTRIBUTING](./CONTRIBUTING.md) for details on submitting patches and the contribution workflow.
+
+# Compilation
+
+## Custom compilation
+
+You can customize the features you want, such as setting the `uprobe` offset address to support statically linked OpenSSL libraries. Refer to the [compilation guide](./docs/compilation.md) for detailed instructions.
+
+Loong64 releases are cross-built on Ubuntu 24.04 x86_64 with LLVM 22.1.8. Use
+`TARGET_ARCH=loong64`; the sysroot, BTF, verification steps, and current runtime
+validation limits are documented in [Loong64 build and validation](./docs/loong64-support.md).
+
+## Remote configuration updates
+
+After eCapture is running, you can dynamically modify configurations through HTTP interfaces. Refer to the [HTTP API documentation](./docs/remote-config-update-api.md).
+
+## Event forwarding
+
+eCapture supports multiple event-forwarding methods. You can forward events to packet capture software such as Burp Suite. For details, refer to the [Event Forwarding API documentation](./docs/event-forward-api.md).
+

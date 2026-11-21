@@ -1,6 +1,6 @@
 ---
 project: hucre
-stars: 2265
+stars: 2268
 description: |-
     Zero-dependency spreadsheet engine. Read & write XLSX, CSV, ODS. Pure TypeScript, works everywhere.
 url: https://github.com/productdevbook/hucre

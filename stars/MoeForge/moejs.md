@@ -1,6 +1,6 @@
 ---
 project: moejs
-stars: 690
+stars: 728
 description: |-
     A pure-Go JavaScript runtime built for running many small plugin sandboxes fast.
 url: https://github.com/MoeForge/moejs

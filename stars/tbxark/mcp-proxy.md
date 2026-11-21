@@ -1,6 +1,6 @@
 ---
 project: mcp-proxy
-stars: 745
+stars: 746
 description: |-
     An MCP proxy server that aggregates and serves multiple MCP resource servers through a single HTTP server.
 url: https://github.com/tbxark/mcp-proxy
@@ -19,9 +19,9 @@ An MCP proxy that aggregates multiple MCP servers behind a single HTTP entrypoin
 
 ## Documentation
 
-- Configuration: [docs/configuration.md](docs/CONFIGURATION.md)
-- Usage: [docs/usage.md](docs/USAGE.md)
-- Deployment: [docs/deployment.md](docs/DEPLOYMENT.md)
+- Configuration: [docs/CONFIGURATION.md](docs/CONFIGURATION.md)
+- Usage: [docs/USAGE.md](docs/USAGE.md)
+- Deployment: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 - Claude config converter: https://tbxark.github.io/mcp-proxy
 
 ## Quick Start
@@ -51,17 +51,21 @@ docker run -d -p 9090:9090 -v /path/to/config.json:/config/config.json ghcr.io/t
 docker run -d -p 9090:9090 ghcr.io/tbxark/mcp-proxy:latest --config https://example.com/config.json
 ```
 
-More deployment options (including docker‑compose) are in [docs/deployment.md](docs/DEPLOYMENT.md).
+More deployment options (including docker‑compose) are in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ## Configuration
 
-See full configuration reference and examples in [docs/configuration.md](docs/CONFIGURATION.md).
+See full configuration reference and examples in [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
 An online Claude config converter is available at: https://tbxark.github.io/mcp-proxy
 
 
 ## Usage
 
-Command‑line flags, endpoints, and auth examples are documented in [docs/usage.md](docs/USAGE.md).
+Command‑line flags, endpoints, and auth examples are documented in [docs/USAGE.md](docs/USAGE.md).
+
+## Contributing
+
+Examples for individual third-party or commercial MCP services are not accepted; generic examples live in [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
 
 ## Thanks
 

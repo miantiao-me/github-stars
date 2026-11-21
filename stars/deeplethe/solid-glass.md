@@ -1,6 +1,6 @@
 ---
 project: solid-glass
-stars: 2071
+stars: 2406
 description: |-
     A design system for AI applications. Material, physical, tactile, technical.
 url: https://github.com/deeplethe/solid-glass

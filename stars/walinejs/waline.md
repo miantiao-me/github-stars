@@ -1,0 +1,98 @@
+---
+project: waline
+stars: 3157
+description: |-
+    💬 A Simple, Safe Comment System
+url: https://github.com/walinejs/waline
+---
+
+<!-- markdownlint-disable MD033 MD041 -->
+
+<img src="./assets/logo.png" width="200" align="right" alt="Waline logo" />
+
+# Waline
+
+![Author](https://img.shields.io/badge/author-lizheming,%20Mr.Hope-blue?style=for-the-badge) ![License](https://img.shields.io/github/license/walinejs/waline?style=for-the-badge) [![qq](https://img.shields.io/badge/qq-waline交流群-f75137?logo=TencentQQ&style=for-the-badge)](https://jq.qq.com/?_wv=1027&k=bKoVBppG) [![telegram](https://img.shields.io/badge/telegram-walinejs-2ca5e0?logo=telegram&style=for-the-badge)](https://t.me/walinejs)
+
+![npm version](https://img.shields.io/npm/v/@waline/client?color=critical&logo=npm&style=flat-square&label=@waline/client) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@waline/client?style=flat-square&label=@waline/client%20size) ![downloads](https://img.shields.io/npm/dm/@waline/vercel?style=flat-square&label=@waline/vercel%20downloads) [![jsDelivr hits](https://data.jsdelivr.com/v1/package/npm/@waline/client/badge)](https://www.jsdelivr.com/package/npm/@waline/client)
+
+![npm version](https://img.shields.io/npm/v/@waline/vercel?color=critical&logo=npm&style=flat-square&label=@waline/vercel)
+
+A simple comment system with backend support.
+
+---
+
+> [中文 README](https://github.com/walinejs/waline/blob/main/README_CN.md) | [日本語 README](https://github.com/walinejs/waline/blob/main/README_JA.md)
+
+## Documentation
+
+### [English](https://waline.js.org/en/) | [简体中文](https://waline.js.org/)
+
+## Feature
+
+- Fast
+- **Really** Safe
+- Support full markdown syntax
+- Simple and lightweight
+- Deploy free!
+- Multiple deployment and storage service support, at least 243 deployment choice!
+
+- |                                                 | Waline                                                               |                                    |
+  | ----------------------------------------------- | -------------------------------------------------------------------- | ---------------------------------- |
+  | **Client**                                      | **Server**                                                           | **Storage**                        |
+  | [@waline/client](https://waline.js.org)         | [Vercel](https://vercel.com)                                         | PostgreSQL                         |
+  | [MiniValine](https://minivaline.js.org/)        | [CloudBase](https://cloudbase.net/)                                  | MySQL                              |
+  | [sodesu](https://github.com/BeiyanYunyi/sodesu) | [Baidu Cloud CFC](https://console.bce.baidu.com/cfc/#/cfc/functions) | SQLite                             |
+  |                                                 | [Alibaba Cloud FC](https://fc.console.aliyun.com/)                   | [TiDB](https://tidbcloud.com/)     |
+  |                                                 | [Alibaba Cloud ComputeNest](https://computenest.console.aliyun.com)  | [MongoDB](https://mongodb.com)     |
+  |                                                 | [Railway](https://railway.app)                                       | [CloudBase](https://cloudbase.net) |
+  |                                                 | [Render](https://render.com)                                         | [GitHub](https://github.com)       |
+  |                                                 | [Zeabur](https://zeabur.com)                                         |                                    |
+  |                                                 | [Netlify](https://netlify.com)                                       |                                    |
+  |                                                 | Docker                                                               |                                    |
+  |                                                 | self host                                                            |                                    |
+
+## Todo
+
+- [x] Email notification
+- [x] Wechat notification
+- [x] QQ notification
+- [x] Telegram notification
+- [x] Akismet
+- [x] Article counter
+- [x] i18n
+- [x] Custom language
+- [x] Login support
+- [x] Comment management
+- [x] Support delete comment
+- [x] More database support
+- [x] Limit the frequency of comments posted by IP
+- [x] Comment keyword restrictions
+- [x] IP disallow list
+- [x] Duplicate content check
+- [x] CloudBase deploy support
+- [x] Social account login
+- [x] Sticky Comment
+- [x] Comment Like
+- [ ] AWS, GCP, Azure deploy support
+
+We **really** welcome you to contribute to waline!
+
+## Contact
+
+You can contact me through [discussions](https://github.com/walinejs/waline/discussions). Join our [telegram](https://t.me/walinejs) group or scan [QQ group](https://qm.qq.com/cgi-bin/qm/qr?k=rPZvq_EBfwQa6QZX7sToVlhH49c6ed0R&jump_from=webapi) qrcode to communicate about waline!
+
+<a href="https://qm.qq.com/cgi-bin/qm/qr?k=rPZvq_EBfwQa6QZX7sToVlhH49c6ed0R&jump_from=webapi" target="_blank">
+  <img src="./assets/qqgroup.jpg" width="300" alt="qq group qrcode" />
+</a>
+
+## Contributors
+
+Your contributions enrich the open-source community, fostering learning, inspiration, and innovation. We deeply value your involvement. Thank you for being a vital part of our community! 🥰
+
+[![Contributors](https://contrib.rocks/image?repo=walinejs/waline)](https://github.com/walinejs/waline/graphs/contributors)
+
+## License
+
+[GPL-2.0](https://github.com/walinejs/waline/blob/main/LICENSE)
+

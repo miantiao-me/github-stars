@@ -1,6 +1,6 @@
 ---
 project: MiracastReceiver
-stars: 329
+stars: 364
 description: |-
     安卓TV投屏工具，支持bilibili、优酷、爱奇艺、emby的投屏
 url: https://github.com/weekdayjast/MiracastReceiver
@@ -34,14 +34,6 @@ url: https://github.com/weekdayjast/MiracastReceiver
 ---
 
 ## 中文
-
-### UxPlay 回归版本
-
-ARM32 / ARM64 UxPlay 整理版保留已验证的 YouTube 播放、换片、字幕和镜像修复，清理临时协议日志并补齐现有语言资源。广告自动衔接与手机画质同步仍待验证。[详情](MiracastReceiver/AIRPLAY-UXPLAY.md)
-
-v1.2.15 的 UxPlay 安装包要求 Android 6 及以上，应用 ID 为 `top.jast.miracastreceiver`。可覆盖安装 v1.2.14 并保留设置；更早使用不同包名的应用需先退出，避免端口冲突。
-
-v1.2.15 修复小米相册 DLNA 连接、AirPlay 竖屏视频旋转后画面过小，以及 UxPlay 未应用旋转后分辨率声明的问题。改变接收端旋转方向后，需在 iPhone 停止投屏并重新连接，才会协商新的实际码流分辨率。
 
 ### ✨ 功能特性
 

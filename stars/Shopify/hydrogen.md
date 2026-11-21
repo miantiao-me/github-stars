@@ -1,6 +1,6 @@
 ---
 project: hydrogen
-stars: 2178
+stars: 2183
 description: |-
     Shopify commerce primitives in your framework
 url: https://github.com/Shopify/hydrogen

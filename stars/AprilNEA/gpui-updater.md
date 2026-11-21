@@ -1,6 +1,6 @@
 ---
 project: gpui-updater
-stars: 24
+stars: 25
 description: |-
     Cross-platform self-update for GPUI desktop apps, hosted on GitHub Releases.
 url: https://github.com/AprilNEA/gpui-updater

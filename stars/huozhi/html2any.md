@@ -1,6 +1,6 @@
 ---
 project: html2any
-stars: 94
+stars: 95
 description: |-
     🌀 convert html to anything
 url: https://github.com/huozhi/html2any
@@ -69,6 +69,38 @@ Or you can just call html2any directly
 ```js
 const vdom = html2any(html, rule)
 ```
+
+### Streaming parser: `html2any/stream`
+
+A browser-compatible HTML parser for markup that is still arriving, such as an LLM response.
+Every prefix of the input gives a tree that is safe to render, and the final tree does not
+depend on how the input was split.
+
+```js
+import { parse, html, content, fill, outline, apply } from 'html2any/stream'
+
+// The text received so far; calls that extend earlier text continue incrementally.
+const tree = parse(message.content)
+const final = parse(message.content, { done: true })
+
+// Or a stream (AsyncIterable, ReadableStream or Response).
+for await (const tree of parse(response)) render(tree)
+
+// Content as typed JSON, separate from the template, and back.
+const { schema, data } = content(final)
+data.hero.title = 'New title'
+html(fill(final, data), { document: true })
+
+// The block structure as an editable text file.
+const { root } = apply(final, editedOutline)
+```
+
+- **Spec compliant**: tree construction follows the WHATWG algorithm (adoption agency, foster
+  parenting, tables, select, template, SVG/MathML). It passes 1620 of 1629 html5lib tree
+  construction tests from web-platform-tests, with identical results for any chunk size.
+- **Streaming friendly**: nodes have stable ids and an `open` flag; once a node is closed it never
+  changes, and unchanged subtrees keep their identity between updates.
+- **Zero dependencies**, runs in browsers, Node, Bun and edge runtimes.
 
 ### CLI
 

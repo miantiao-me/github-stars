@@ -1,6 +1,6 @@
 ---
 project: awesome-tuis
-stars: 21097
+stars: 21123
 description: |-
     List of projects that provide terminal user interfaces
 url: https://github.com/rothgar/awesome-tuis
@@ -37,6 +37,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 <details open><summary><h2>Dashboards</h2></summary>
 
 - [AdGuardian-Term](https://github.com/lissy93/AdGuardian-Term) A TUI dashboard for monitoring real-time traffic from an AdGuard Home instance
+- [ADSB-TUI](https://github.com/WPTK/ADSB-TUI) Watch planes from your own readsb or dump1090-fa receiver, sortable table next to a radar scope
 - [apachetop](https://github.com/tessus/apachetop) display information from a running copy of Apache.
 - [atop](https://github.com/Atoptool/atop/) root level system and process monitor for Linux
 - [Backlog.md](https://github.com/MrLesk/Backlog.md) A tool for managing project collaboration between humans and AI Agents in a git ecosystem
@@ -261,6 +262,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [kftui](https://github.com/hcavarsan/kftray) A TUI to manage multiple kubectl port-forward commands, with support for UDP and K8s proxy.
 - [ktop](https://github.com/vladimirvivien/ktop) A top-like tool for your Kubernetes clusters
 - [kubetui](https://github.com/sarub0b0/kubetui) A TUI tool designed for monitoring Kubernetes resources.
+- [layerx](https://github.com/deveshctl/layerx) Inspect container image layers in an interactive TUI with filesystem diffs, inline file viewing, and file extraction; supports Docker, Podman, and OCI archives
 - [lazycontainer](https://github.com/andreybleme/lazycontainer) TUI for managing Apple containers
 - [lazydocker](https://github.com/jesseduffield/lazydocker) The lazier way to manage everything docker
 - [lazytrivy](https://github.com/owenrumney/lazytrivy) The lazier way to scan images, k8s and the filesytem with Trivy
@@ -410,6 +412,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [Argenta](https://github.com/koloideal/Argenta) Library for building modular applications **Python**
 - [blessed](https://github.com/jquast/blessed) Blessed is an easy, practical library for making **Python** terminal apps
 - [blessings](https://github.com/erikrose/blessings) A **Python** wrapper lib for ncurses that makes your code pretty to look at
+- [flexablelib](https://github.com/Opus-Perpetuus/flexablelib) Dependency-free **Python** library for terminal tables with 56 border styles, colours, cell merges and decimal alignment.
 - [notcurses](https://github.com/dankamongmen/notcurses) blingful character graphics/TUI library for **C** and **Python**. definitely not curses.
 - [py_cui](https://github.com/jwlodek/py_cui) **Python** library aimed at making widget based TUI/CUI interfaces as simple as possible. Supports standard widgets and popups like menus, textboxes, forms, file explorers etc.
 - [pytermgui](https://github.com/bczsalba/pytermgui) A simple yet powerful TUI framework for your **Python** (3.7+) applications.
@@ -447,6 +450,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [FTXUI](https://github.com/ArthurSonzogni/FTXUI) 💻 **C++** Functional Terminal User Interface. ❤️
 - [GGUI](https://github.com/Gabidal/GGUI) **C++17** Structured Terminal User Interface. 🐧/🪟
 - [imtui](https://github.com/ggerganov/imtui) An immediate mode text-based user interface **C++** library, supporting 256 ANSI colors and mouse/keyboard input.
+- [koto](https://github.com/saber-88/koto) A modern, zero dependency immediate mode **C++23** TUI library. 
 - [rang](https://github.com/agauniyal/rang) A Minimal, Header only Modern **C++** library for terminal goodies.
 - [termdb](https://github.com/agauniyal/termdb) Terminfo parser for modern **C++**
 - [Tui Widgets](https://github.com/tuiwidgets/tuiwidgets) A high-level widget based toolkit for terminal applications in **C++**
@@ -487,6 +491,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [Ashen](https://github.com/colinta/Ashen) An Elm inspired framework written in **Swift**
 - [blessed](https://github.com/chjj/blessed) A high-level terminal interface library for **Node.js**
   stateful TUI apps.
+- [dart_tui](https://github.com/codenameakshay/dart_tui) Elm-style terminal UI framework for **Dart**: components, forms, Lip Gloss-style styling.
 - [gum](https://github.com/charmbracelet/gum) A tool for glamorous **shell** scripts
 - [ink](https://github.com/vadimdemedes/ink) React for **Node.js** interactive command-line apps
 - [ink-web](https://github.com/cjroth/ink-web) A browser-based runtime for Ink that renders React TUI apps in the browser using xterm.js.
@@ -602,6 +607,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [moribito](https://github.com/ericschmar/moribito) Browse LDAP directory trees, viewing records, and executing custom queries.
 - [mqttui](https://github.com/EdJoPaTo/mqttui) MQTT Client written in rust
 - [NanoCore](https://github.com/AfaanBilal/NanoCore) An 8-bit CPU emulator TUI written in Rust with an assembler and a custom ISA.
+- [nbtui](https://codeberg.org/ItsZariep/nbtui) Ncurses Bluetooth TUI Manager for Linux
 - [ncdu](https://dev.yorhel.nl/ncdu) disk usage analyzer with an ncurses interface
 - [nemu](https://github.com/nemuTUI/nemu) A TUI for QEMU
 - [neoss](https://github.com/PabloLec/neoss) Socket statistics visualization and explanation tool for Unix systems.
@@ -688,6 +694,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [pyradio](https://github.com/coderholic/pyradio) TUI web radio player with thousands of stations from around the world
 - [RadioGoGo](https://github.com/Zi0P4tch0/RadioGoGo) Go-powered CLI to surf global radio waves via a sleek TUI.
 - [Relax-player](https://github.com/ebithril/relax-player) A lightweight, distraction-free alternative to web-based ambient players.
+- [retro-amp](https://github.com/michaelblaess/retro-amp) Retro-styled music player with real-time spectrum visualizer, synced lyrics, playlists and 38 themes
 - [rmpc](https://rmpc.mierak.dev/) A configurable MPD client inspired by ncmpcpp and ranger with album art support via various graphics protocols.
 - [roku-cli](https://github.com/winsbe01/roku-cli) A command line TUI remote for Roku
 - [rusty-pipes](https://github.com/dividebysandwich/rusty-pipes) A sample-based, MIDI-controlled virtual pipe organ instrument compatible with GrandOrgue and Hauptwerk sample sets.
@@ -734,6 +741,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [budget-tracker-tui](https://github.com/Feromond/budget-tracker-tui) A TUI budget tracker app designed to track income, expenses, investments, budget goals and visualize / gather insights.
 - [calcure](https://github.com/anufrievroman/calcure) Modern TUI calendar and task manager with minimal and customizable UI.
 - [calcurse](https://calcurse.org/) calendar and scheduling application for the command line
+- [christophorus](https://github.com/michaelblaess/christophorus) Vehicle logbook with trips, odometer chain, plausibility checks and export to Excel, PDF, JSON or Markdown
 - [Chronos](https://github.com/samuelstranges/chronos) A Vimlike Calendar TUI
 - [clipse](https://github.com/savedra1/clipse) TUI-based clipboard manager application
 - [Desktop-TUI](https://github.com/Julien-cpsn/desktop-tui) A desktop environment without graphics
@@ -846,6 +854,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [CatenaVetus](https://github.com/jimbob88/CatenaVetus) A TUI for reading the Church Fathers
 - [Chawan](https://chawan.net) A TUI web (and (S)FTP, Gopher, Gemini) browser with CSS, inline image and JavaScript support.
 - [cloudflare-speed-cli](https://github.com/kavehtehrani/cloudflare-speed-cli) Internet speed test via Cloudflare
+- [console-error-scanner](https://github.com/michaelblaess/console-error-scanner) Scans websites from a URL or sitemap for JavaScript console errors and HTTP failures (404, 5xx), with HTML and JSON reports
 - [eilmeldung](https://github.com/christo-auer/eilmeldung) RSS reader, supporting many RSS providers, bulk-operations and configuration options.
 - [elinks](https://github.com/rkd77/elinks) ELinks (HTTP/FTP/..) brower with mujs javascript support.
 - [hackernews-TUI](https://github.com/aome510/hackernews-TUI) A Terminal UI to browse Hacker News
@@ -860,6 +869,7 @@ There's a lot of cool projects here that I have no association with. Run them at
 - [rtorrent](https://github.com/rakshasa/rtorrent) A text-based BitTorrent client written in C++
 - [rttt](https://gitlab.com/BlackEdder/rttt) A Hackernews, RSS and Reddit reader for the terminal written in C++.
 - [searxngr](https://github.com/scross01/searxngr) Web search TUI for SearXNG
+- [sitemap-tracker](https://github.com/michaelblaess/sitemap-tracker) Crawls websites and generates sitemap.xml files, with sitemap tree view and crawl history
 - [Slumber](https://github.com/LucasPickering/slumber) Terminal-based HTTP/REST client
 - [stegodon](https://github.com/deemkeen/stegodon) SSH-first federated microblog with ActivityPub, web UI, and RSS feeds
 - [surge](https://github.com/surge-downloader/surge) A blazing fast, beautiful TUI download manager built in Go.

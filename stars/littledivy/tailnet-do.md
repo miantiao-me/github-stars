@@ -1,6 +1,6 @@
 ---
 project: tailnet-do
-stars: 215
+stars: 273
 description: |-
     Put a Cloudflare Durable Object on your Tailscale tailnet
 url: https://github.com/littledivy/tailnet-do
